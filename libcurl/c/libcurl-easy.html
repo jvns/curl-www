@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - easy interface overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>Easy interface</b></div>
+<h1> Easy interface overview </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="allfuncs.html">All functions</a>
+<br><a href="./">API</a>
+<br><a href="easy_setopt_options.html">curl_easy_setopt options</a>
+<br><a href="easy_getinfo_options.html">curl_easy_getinfo options</a>
+<br><a href="example.html">Examples</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">libcurl-easy - easy interface overview </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">When using libcurl&apos;s &quot;easy&quot; interface you init your session and get a handle (often referred to as an &quot;easy handle&quot;), which you use as input to the easy interface functions you use. Use <a Class="emphasis" href="./curl_easy_init.html">curl_easy_init</a> to get the handle. </p>
+<p class="level0">You continue by setting all the options you want in the upcoming transfer, the most important among them is the URL itself (you cannot transfer anything without a specified URL). You might want to set some callbacks as well that are called from the library when data is available etc. For example <a Class="emphasis" href="./CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>. <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> is used for all this. </p>
+<p class="level0"><a Class="emphasis" href="./CURLOPT_URL.html">CURLOPT_URL</a> is the only option you really must set, as otherwise there can be no transfer. Another commonly used option is <a Class="emphasis" href="./CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a> that helps you see what libcurl is doing under the hood, which is useful when debugging for example. The <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> man page has a full index of the over 300 available options. </p>
+<p class="level0">If you at any point would like to blank all previously set options for a single easy handle, you can call <a Class="emphasis" href="./curl_easy_reset.html">curl_easy_reset</a> and you can also make a clone of an easy handle (with all its set options) using <a Class="emphasis" href="./curl_easy_duphandle.html">curl_easy_duphandle</a>. </p>
+<p class="level0">When all is setup, you tell libcurl to perform the transfer using <a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a>. It performs the entire transfer operation and does not return until it is done (successfully or not). </p>
+<p class="level0">After the transfer has been made, you can set new options and make another transfer, or if you are done, cleanup the session by calling <a Class="emphasis" href="./curl_easy_cleanup.html">curl_easy_cleanup</a>. If you want persistent connections, you do not cleanup immediately, but instead run ahead and perform other transfers using the same easy handle. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_cleanup.html">curl_easy_cleanup</a>(3), <a Class="bold" href="./curl_easy_init.html">curl_easy_init</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3), <a Class="bold" href="./libcurl.html">libcurl</a>(3), <a Class="bold" href="./libcurl-errors.html">libcurl-errors</a>(3), <a Class="bold" href="./libcurl-multi.html">libcurl-multi</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

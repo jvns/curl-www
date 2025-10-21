@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLMOPT_TIMERFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a> / <b>CURLMOPT_TIMERFUNCTION</b></div>
+<h1> CURLMOPT_TIMERFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=@template%20manpage:@&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLMOPT_TIMERFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLMOPT_TIMERFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLMOPT_TIMERFUNCTION - callback to receive timeout values </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+int timer_callback(CURLM &#x2a;multi,    /&#x2a; multi handle &#x2a;/
+&nbsp;                  long timeout_ms, /&#x2a; timeout in number of ms &#x2a;/
+&nbsp;                  void &#x2a;clientp);  /&#x2a; private callback pointer &#x2a;/
+&nbsp;
+CURLMcode <a href="curl_multi_setopt.html">curl_multi_setopt</a>(CURLM &#x2a;handle, <a href="CURLMOPT_TIMERFUNCTION.html">CURLMOPT_TIMERFUNCTION</a>, timer_callback);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to your callback function, which should match the prototype shown above. </p>
+<p class="level0">Certain features, such as timeouts and retries, require you to call libcurl even when there is no activity on the file descriptors. </p>
+<p class="level0">Your callback function <span Class="bold">timer_callback</span> should install a single non-repeating timer with an expire time of <span Class="bold">timeout_ms</span> milliseconds. When that timer fires, call either <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> or <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a>, depending on which interface you use. </p>
+<p class="level0">If this callback is called when a timer is already running, this new expire time <span Class="emphasis">replaces</span> the former timeout. The application should then effectively cancel the old timeout and set a new timeout using this new expire time. </p>
+<p class="level0">A <span Class="bold">timeout_ms</span> value of -1 passed to this callback means you should delete the timer. All other values are valid expire times in number of milliseconds - including zero milliseconds. </p>
+<p class="level0">The <span Class="bold">timer_callback</span> is called when the timeout expire time is changed. </p>
+<p class="level0">The <span Class="bold">clientp</span> pointer is set with <a Class="emphasis" href="./CURLMOPT_TIMERDATA.html">CURLMOPT_TIMERDATA</a>. </p>
+<p class="level0">The timer callback should return 0 on success, and -1 on error. If this callback returns error, <span Class="bold">all</span> transfers currently in progress in this multi handle are aborted and made to fail. </p>
+<p class="level0">This callback can be used instead of, or in addition to, <a Class="emphasis" href="./curl_multi_timeout.html">curl_multi_timeout</a>. </p>
+<p class="level0"><span Class="bold">WARNING:</span> do not call libcurl directly from within the callback itself when the <span Class="bold">timeout_ms</span> value is zero, since it risks triggering an unpleasant recursive behavior that immediately calls another call to the callback with a zero timeout... </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+struct priv {
+&nbsp; void &#x2a;custom;
+};
+&nbsp;
+static int timerfunc(CURLM &#x2a;multi, long timeout_ms, void &#x2a;clientp)
+{
+&nbsp; struct priv &#x2a;mydata = clientp;
+&nbsp; printf(&quot;our ptr: %p&bsol;n&quot;, mydata-&gt;custom);
+&nbsp;
+&nbsp; if(timeout_ms &gt;= 0) {
+&nbsp;   /&#x2a; this is the new single timeout to wait for, including zero &#x2a;/
+&nbsp; }
+&nbsp; else {
+&nbsp;   /&#x2a; delete the timeout, nothing to wait for now &#x2a;/
+&nbsp; }
+&nbsp; return 0;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; struct priv mydata;
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_TIMERFUNCTION.html">CURLMOPT_TIMERFUNCTION</a>, timerfunc);
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_TIMERDATA.html">CURLMOPT_TIMERDATA</a>, &amp;mydata);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.16.0.html">7.16.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_multi_setopt.html">curl_multi_setopt</a> returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLMOPT_SOCKETFUNCTION.html">CURLMOPT_SOCKETFUNCTION</a>(3), <a Class="bold" href="./CURLMOPT_TIMERDATA.html">CURLMOPT_TIMERDATA</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

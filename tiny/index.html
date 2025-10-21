@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head> <title>tiny-curl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <b>tiny-curl</b></div>
+<h1> tiny-curl </h1>
+<p>
+  <b>tiny-curl is curl for smaller systems</b>.
+  <ul>
+    <li> focused on providing a library for HTTP(S) GET
+    <li> provides the familiar and known libcurl API
+    <li> targets RTOSes and systems "too small to run regular Linux"
+    <li> provides ports to RTOSes that "real curl" do not support: FreeRTOS and Micrium so far
+    <li> GPLv3 licensed
+  </ul>
+<p>
+  All features that tiny-curl disable by default are possible to enable,
+  piecemeal, but might increase footprint and memory requirements.
+<p>
+  As many as possible of the mechanisms that are done to shrink the footprint
+  for tiny-curl are backported and merged into real curl.
+<h2> Size requirements </h2>
+<p>
+  The goal of tiny-curl is to offer HTTPS GET powers within <b>100K of storage
+  size</b> (on a 32 bit system), and that includes wolfSSL.
+<p>
+  tiny-curl itself requires about <b>20K of dynamic memory</b> (but using more
+  may speed up transfers).
+<h2> License </h2>
+<p>
+  tiny-curl is licensed under GPLv3. Note that this is different than the
+  regular curl, which is MIT licensed.
+<p>
+  You can also get <a href="https://www.wolfssl.com/contact/">tiny-curl under
+  a commercial license from wolfSSL</a>.
+<h2> Download tiny-curl </h2>
+<ul>
+  <li> 8.4.0 <a href="tiny-curl-8.4.0.tar.gz">tar.gz</a> (<a href="tiny-curl-8.4.0.tar.gz.asc">pgp</a>)
+  <li> 8.4.0 <a href="tiny-curl-8.4.0.zip">zip</a> (<a href="tiny-curl-8.4.0.zip.asc">pgp</a>)
+</ul>
+ <p>
+  tiny-curl 8.4.0 was released on October 30, 2023.
+<h2> Older </h2>
+<p>
+  <a href="tiny-curl-7.79.1.tar.gz">tiny-curl 7.79.1</a>
+  (<a href="tiny-curl-7.79.1.tar.gz.asc">pgp</a>) - October 1, 2021.
+<p>
+  <a href="tiny-curl-7.72.0.tar.gz">tiny-curl 7.72.0</a>
+  (<a href="tiny-curl-7.72.0.tar.gz.asc">pgp</a>) - August 27, 2020.
+</div>
+</div>
+</body>
+</html>

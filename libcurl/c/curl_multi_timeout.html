@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl_multi_timeout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>libcurl</b></div>
+<h1> curl_multi_timeout - how long to wait for action before proceeding </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_multi_timeout%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_multi_timeout.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_multi_timeout.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_multi_timeout - how long to wait for action before proceeding </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_timeout.html">curl_multi_timeout</a>(CURLM &#x2a;multi_handle, long &#x2a;timeout);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">An application using the libcurl multi interface should call <a Class="emphasis" href="./curl_multi_timeout.html">curl_multi_timeout</a> to figure out how long it should wait for socket actions - at most - before proceeding. </p>
+<p class="level0">Proceeding means either doing the socket-style timeout action: call the <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> function with the <span Class="bold">sockfd</span> argument set to CURL_SOCKET_TIMEOUT, or call <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a> if you are using the simpler and older multi interface approach. </p>
+<p class="level0">The timeout value returned in the long <span Class="bold">timeout</span> points to, is in number of milliseconds at this moment. If 0, it means you should proceed immediately without waiting for anything. If it returns -1, there is no timeout at all set. </p>
+<p class="level0">An application that uses the <span Class="emphasis">multi_socket</span> API should not use this function. It should instead use the <a Class="emphasis" href="./CURLMOPT_TIMERFUNCTION.html">CURLMOPT_TIMERFUNCTION</a> option for proper and desired behavior. </p>
+<p class="level0">Note: if libcurl returns a -1 timeout here, it just means that libcurl currently has no stored timeout value. You must not wait too long (more than a few seconds perhaps) before you call <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a> again. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; struct timeval timeout;
+&nbsp; long timeo;
+&nbsp; fd_set fdread;
+&nbsp; fd_set fdwrite;
+&nbsp; fd_set fdexcep;
+&nbsp; int maxfd = 2;
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp;
+&nbsp; <a href="curl_multi_timeout.html">curl_multi_timeout</a>(multi, &amp;timeo);
+&nbsp; if(timeo &lt; 0)
+&nbsp;   /&#x2a; no set timeout, use a default &#x2a;/
+&nbsp;   timeo = 980;
+&nbsp;
+&nbsp; timeout.tv_sec = timeo / 1000;
+&nbsp; timeout.tv_usec = (timeo % 1000) &#x2a; 1000;
+&nbsp;
+&nbsp; /&#x2a; wait for activities no longer than the set timeout &#x2a;/
+&nbsp; select(maxfd + 1, &amp;fdread, &amp;fdwrite, &amp;fdexcep, &amp;timeout);
+}
+</pre>
+<a name="TYPICAL"></a><h2 class="nroffsh">Typical usage</h2>
+<p class="level0">Call <a Class="emphasis" href="./curl_multi_timeout.html">curl_multi_timeout</a>, then wait for action on the sockets. Figure out which sockets to wait for by calling <a Class="emphasis" href="./curl_multi_fdset.html">curl_multi_fdset</a>. </p>
+<p class="level0">When there is activity or timeout, call <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a> and then loop - until all transfers are complete. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.15.4.html">7.15.4</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_multi_fdset.html">curl_multi_fdset</a>(3), <a Class="bold" href="./curl_multi_info_read.html">curl_multi_info_read</a>(3), <a Class="bold" href="./curl_multi_setopt.html">curl_multi_setopt</a>(3), <a Class="bold" href="./curl_multi_socket.html">curl_multi_socket</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

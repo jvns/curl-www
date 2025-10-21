@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 5.7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 5.7</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="5.5.1.html">🠰 5.5.1</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="5.7.1.html">5.7.1 🠲</a>
+</span>
+<h1> Changes in 5.7 - April 20 1999 </h1>
+<div class="vulnbox"><a href=/docs/vuln-5.7.html>5.7</a></div> <div style="clear: both;">&nbsp;</div>
+<ul class="changes">
+ <li> I&#39;ve separated the version number of libcurl and curl now.
+ <li> Removed the &#39;enable-no-pass&#39; from configure, I doubt anyone wanted
+   that.
+ <li> -D or --dump-header is now storing HTTP headers separately in the specified
+   file.
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> Made curl support any-length HTTP headers. The destination buffer is now
+   simply enlarged every time it turns out to be too small!
+ <li> Added the FAQ file to the archive. Still a bit smallish, but it is a
+   start.
+ <li> Made -D accept &#39;-&#39; instead of filename to write to stdout.
+ <li> Changed two #ifdef WIN32 to better #ifdef &lt;errorcode&gt; when connect()ing
+   in url.c and ftp.c. Makes cygwin32 deal with them better too.
+ <li> The old -3/--crlf option is now ONLY --crlf!
+ <li> I changed the "SSL fix" to a more lame one, but that doesn&#39;t remove as
+   much functionality. Now I&#39;ve enabled the lib to select what SSL version it
+   should try first.
+ <li> Corrected the math for the "Curr.Speed" progress meter.
+ <li> Made &#39;-K -&#39; read a config file from stdin.
+ <li> I found out we didn&#39;t close the file properly before so I added it!
+ <li> FTP download resume didn&#39;t work at all!
+ <li> Corrected the version string part generated for the SSL version.
+ <li> I found a way to make some other SSL page work with openssl 0.9.1+ that
+   previously didn&#39;t (ssleay 0.8.0 works with it though!).
+ <li> Finally have curl more cookie "aware".
+ <li> Added a paragraph in the TODO file about the SSL problems recently
+   reported.
+ <li> Better "Location:" following.
+ <li> A subsecond display patch.
+ <li> Made lots of tiny adjustments to compile smoothly with cygwin under
+   win32.
+ <li> Beginning experiments with downloading multiple document from a http
+   server while remaining connected.
+ <li> Added new text to INSTALL on what to do to build this on win32 now.
+ <li> Prefix the shared #include files in the sources with "../include/" to
+   please VC++...
+ <li> Split the url.c source into many tiny sources for better readability
+   and smaller size.
+ <li> Started to change stuff for a move to make libcurl and a more separate
+   curl application that uses the libcurl. Made the libcurl sources into
+   the new lib directory while the curl application will remain in src as
+   before. New makefiles, adjusted configure script and so.
+ <li> Finally made configure accept --with-ssl to look for SSL libs and includes
+   in the "standard" place /usr/local/ssl...
+ <li> Verified that curl linked fine with OpenSSL 0.9.1c which seems to be
+   the most recent.
+</ul>
+<h2> Further </h2>
+The previous release was 5.5.1.
+The next release was 5.7.1.

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.75.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.75.0</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.74.0.html">🠰 7.74.0</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.76.0.html">7.76.0 🠲</a>
+</span>
+<h1> Changes in 7.75.0 - February 3 2021 </h1>
+<div class="video"><a href="https://youtu.be/pjqd-r7hAjI">7.75.0</a> </div><div class="vulnbox"><a href=/docs/vuln-7.75.0.html>7.75.0</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+ <li> <a href="https://curl.se/bug/?i=6244">curl: add --create-file-mode [mode]</a>
+ <li> <a href="https://curl.se/bug/?i=6199">curl: add new variables to --write-out</a>
+ <li> <a href="https://curl.se/bug/?i=6294">dns: extend CURLOPT_RESOLVE syntax for adding non-permanent entries</a>
+ <li> <a href="https://curl.se/bug/?i=6208">gopher: implement secure gopher protocol</a>
+ <li> <a href="https://curl.se/bug/?i=6110">http: add Hyper as new optional HTTP backend</a>
+ <li> <a href="https://curl.se/bug/?i=5703">http: introduce AWS HTTP v4 Signature support</a>
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> <a href="https://curl.se/bug/?i=6349">badsymbols.pl: add verbose mode -v</a>
+ <li> <a href="https://curl.se/mail/lib-2020-12/0084.html">badsymbols.pl: ignore stand-alone single hash lines</a>
+ <li> <a href="https://curl.se/bug/?i=6318">BUG-BOUNTY: minor language updates</a>
+ <li> <a href="https://curl.se/bug/?i=6382">build: fix djgpp builds</a>
+ <li> cleanup: fix empty expression statement has no effect
+ <li> <a href="https://curl.se/bug/?i=6361">cmake: Add an option to disable libidn2</a>
+ <li> <a href="https://curl.se/bug/?i=6336">cmake: enable gophers correctly in curl-config</a>
+ <li> <a href="https://curl.se/bug/?i=6435">cmake: expose CURL_DISABLE_OPENSSL_AUTO_LOAD_CONFIG</a>
+ <li> <a href="https://curl.se/bug/?i=6354">cmdline-opts/gen.pl: return hard on errors</a>
+ <li> <a href="https://curl.se/mail/archive-2020-12/0018.html">cmdline-opts/retry.d: mention response code 429 as well</a>
+ <li> <a href="https://curl.se/bug/?i=6378">configure: set -Wextra-semi-stmt for clang with --enable-debug</a>
+ <li> <a href="https://curl.se/bug/?i=6295">connect: defer port selection until connect() time</a>
+ <li> <a href="https://curl.se/bug/?i=6431">connect: mark intentional ignores of setsockopt return values</a>
+ <li> <a href="https://curl.se/bug/?i=6341">connect: on linux, enable reporting of all ICMP errors on UDP sockets</a>
+ <li> <a href="https://curl.se/bug/?i=6289">connect: zero variable on stack to silence valgrind complaint</a>
+ <li> <a href="https://curl.se/bug/?i=6112">cookie: avoid the C1001 internal compiler error with MSVC 14</a>
+ <li> <a href="https://curl.se/bug/?i=6380">curl.1: fix typo microsft -&gt; microsoft</a>
+ <li> <a href="https://curl.se/bug/?i=6364">curl: fix handling of -q option</a>
+ <li> curl: include the filename in --xattr/--remote-time error msgs
+ <li> <a href="https://curl.se/bug/?i=6533">curl: move fprintf outputs to warnf</a>
+ <li> <a href="https://curl.se/bug/?i=6527">Curl_chunker: shrink the struct</a>
+ <li> <a href="https://curl.se/bug/?i=6360">curl_easy_pause.3: add multiplexed pause effects</a>
+ <li> <a href="https://curl.se/bug/?i=6453">CURLINFO_PRETRANSFER_TIME.3: clarify</a>
+ <li> <a href="https://curl.se/bug/?i=6307">CURLOPT_URL.3: remove scheme specific details</a>
+ <li> <a href="https://curl.se/bug/?i=6315">digest_sspi: Show InitializeSecurityContext errors in verbose mode</a>
+ <li> <a href="https://curl.se/bug/?i=6392">docs/examples: adjust prototypes for CURLOPT_READFUNCTION</a>
+ <li> <a href="https://curl.se/bug/?i=6285">docs/URL-SYNTAX: the URL syntax curl accepts and works with</a>
+ <li> <a href="https://curl.se/bug/?i=6286">docs: enable syntax highlighting in several docs files</a>
+ <li> <a href="https://curl.se/bug/?i=6438">docs: fix line length bug in gen.pl</a>
+ <li> <a href="https://curl.se/bug/?i=6471">docs: fix typos in NEW-PROTOCOL.md</a>
+ <li> <a href="https://curl.se/bug/?i=6436">docs: fix wrong documentation in help.d</a>
+ <li> <a href="https://curl.se/bug/?i=6385">docs: remove redundant &quot;better&quot; in --fail help</a>
+ <li> <a href="https://curl.se/bug/?i=6492">doh: allocate state struct on demand</a>
+ <li> <a href="https://curl.se/bug/?i=6176">examples/libtest: add .checksrc to dist</a>
+ <li> examples: remove superfluous asterisk uses
+ <li> <a href="https://curl.se/bug/?i=6365">failf: remove newline from formatting strings</a>
+ <li> <a href="https://curl.se/bug/?i=6421">file: don&apos;t provide content-length for directories</a>
+ <li> getinfo: build with disabled HTTP support
+ <li> <a href="https://github.com/curl/curl/discussions/6427">gitattributes: Set batch files to CRLF line endings on checkout</a>
+ <li> <a href="https://curl.se/bug/?i=6356">h2: do not wait for RECV on paused transfers</a>
+ <li> HISTORY: added dates to early history
+ <li> <a href="https://twitter.com/mholt6/status/1352130240265375744">http: empty reply connection are not left intact</a>
+ <li> <a href="https://curl.se/bug/?i=6490">http: get CURLOPT_REQUEST_TARGET working with an HTTP proxy</a>
+ <li> <a href="https://curl.se/bug/?i=6408">http: have CURLOPT_FAILONERROR fail after all headers</a>
+ <li> <a href="https://curl.se/mail/lib-2021-01/0095.html">http: make providing Proxy-Connection header not cause duplicated headers</a>
+ <li> <a href="https://curl.se/bug/?i=6328">http: show the request as headers even when split-sending</a>
+ <li> <a href="https://curl.se/bug/?i=6489">http_chunks: correct and clarify a comment on hexnumber length</a>
+ <li> <a href="https://curl.se/mail/lib-2021-01/0033.html">http_proxy: Fix CONNECT chunked encoding race condition</a>
+ <li> <a href="https://curl.se/bug/?i=6397">httpauth: make multi-request auth work with custom port</a>
+ <li> INSTALL: now at 85 operating systems
+ <li> <a href="https://curl.se/bug/?i=6366">INSTALL: update the list known OSes and CPU archs curl has run on</a>
+ <li> lib/unit tests: add missing curl_global_cleanup() calls
+ <li> lib1564/5: verify that curl_multi_wakeup returns OK
+ <li> <a href="https://curl.se/bug/?i=6425">lib: pass in &apos;struct Curl_easy *&apos; to most functions</a>
+ <li> <a href="https://curl.se/bug/?i=6443">lib: remove Curl_ prefix from many static functions</a>
+ <li> <a href="https://curl.se/bug/?i=6483">lib: save a bit of space with some structure packing</a>
+ <li> libssh2: fix &quot;Value stored to &apos;readdir_len&apos; is never read&quot;
+ <li> <a href="https://curl.se/bug/?i=6519">libssh2: move data from connection object to transfer object</a>
+ <li> <a href="https://curl.se/bug/?i=6481">libssh: avoid plain free() of libssh-memory</a>
+ <li> <a href="https://curl.se/bug/?i=6455">mime: make sure setting MIMEPOST to NULL resets properly</a>
+ <li> <a href="https://curl.se/bug/?i=6375">misc: assorted typo fixes</a>
+ <li> <a href="https://github.com/curl/curl/commit/08e8455dddc5e48e58a12ade3815c01ae3da3b64#commitcomment-45433279">misc: fix &quot;warning: empty expression statement has no effect&quot;</a>
+ <li> <a href="https://curl.se/mail/lib-2021-01/0063.html">misc: fix typos</a>
+ <li> <a href="https://curl.se/bug/?i=6413">mk-ca-bundle.pl: deterministic output when using -t</a>
+ <li> <a href="https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=28676">mqtt: deal with 0 byte reads correctly</a>
+ <li> <a href="https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=28735">mqtt: handle POST/PUBLISH without a set POSTFIELDSIZE</a>
+ <li> <a href="https://curl.se/bug/?i=6454">multi: set the PRETRANSFER time-stamp when we switch to PERFORM</a>
+ <li> multi: skip DONE state if there&apos;s no connection left for ftp wildcard
+ <li> <a href="https://curl.se/bug/?i=6333">multi: when erroring in TOOFAST state, act as for PERFORM</a>
+ <li> <a href="https://curl.se/bug/?i=6433">multi_runsingle: bail out early on data-&gt;conn == NULL</a>
+ <li> <a href="https://curl.se/bug/?i=6521">ngtcp2: Fix http3 upload stall</a>
+ <li> <a href="https://curl.se/bug/?i=6521">ngtcp2: Fix stack buffer overflow</a>
+ <li> <a href="https://curl.se/bug/?i=6296">ngtcp2: make it build it current master again</a>
+ <li> <a href="https://curl.se/bug/?i=6445">nss: get the runtime version instead of build-time</a>
+ <li> <a href="https://curl.se/bug/?i=6540">openssl: lowercase the hostname before using it for SNI</a>
+ <li> <a href="https://curl.se/bug/?i=6292">OS400: update ccsidcurl.c</a>
+ <li> <a href="https://curl.se/bug/?i=6312">pretransfer: setup the User-Agent header here</a>
+ <li> quiche: remove fprintf() leftover
+ <li> <a href="https://curl.se/bug/?i=6332">Revert &quot;CI/github: work-around for brew breakage on macOS&quot;</a>
+ <li> runtests: add &apos;wakeup&apos; as a feature
+ <li> <a href="https://curl.se/bug/?i=6304">runtests: add support for %if [feature] conditions</a>
+ <li> <a href="https://curl.se/bug/?i=6477">runtests: preprocess DISABLED to allow conditionals</a>
+ <li> <a href="https://curl.se/bug/?i=6457">schannel: plug a memory-leak</a>
+ <li> <a href="https://curl.se/bug/?i=6459">schannel_verify: fix safefree call typo</a>
+ <li> <a href="https://curl.se/bug/?i=6531">select: convert Curl_select() to private static function</a>
+ <li> <a href="https://curl.se/bug/?i=6491">socks: use the download buffer instead</a>
+ <li> <a href="https://curl.se/bug/?i=6358">speedcheck: exclude paused transfers</a>
+ <li> <a href="https://curl.se/bug/?i=6504">strerror: skip errnum &gt;= 0 assertion on windows</a>
+ <li> <a href="https://curl.se/bug/?i=6331">test1522: add debug tracing</a>
+ <li> test1633: set appropriate name
+ <li> test179: use consistent header line endings
+ <li> test410: verify HTTPS GET with a 49K request header
+ <li> <a href="https://curl.se/bug/?i=6334">tests/mqttd: extract the client id from the correct offset</a>
+ <li> <a href="https://curl.se/bug/?i=6303">tests: make --libcurl tests only test FTP options if ftp enabled</a>
+ <li> <a href="https://curl.se/bug/?i=6226">tool_doswin: Restore original console settings on CTRL signal</a>
+ <li> <a href="https://curl.se/mail/archive-2020-12/0017.html">tool_operate: fix the suppression logic of some error messages</a>
+ <li> tool_operate: spellfix a comment
+ <li> <a href="https://curl.se/bug/?i=6321">tooĺ_writeout: fix the -w time output units</a>
+ <li> <a href="https://curl.se/bug/?i=6537">transfer: fix GCC 10 warning with flag &apos;-Wint-in-bool-context&apos;</a>
+ <li> <a href="https://curl.se/bug/?i=6493">travis: build ngtcp2 --with-gnutls</a>
+ <li> <a href="https://curl.se/bug/?i=6403">travis: limit the tests with quiche builds to HTTPS and FTPS only</a>
+ <li> <a href="https://curl.se/bug/?i=6345">travis: restrict the openssl3 job to only run https and ftps tests</a>
+ <li> <a href="https://curl.se/bug/?i=6423">url: if IDNA conversion fails, fallback to Transitional</a>
+ <li> <a href="https://curl.se/bug/?i=6484">urldata: make magic be the first struct field</a>
+ <li> <a href="https://curl.se/bug/?i=6534">urldata: remove &apos;local_ip&apos; from the connectdata struct</a>
+ <li> <a href="https://curl.se/bug/?i=6534">urldata: remove duplicate &apos;upkeep_interval_ms&apos; from connectdata</a>
+ <li> <a href="https://curl.se/bug/?i=6534">urldata: remove duplicate port number storage</a>
+ <li> <a href="https://curl.se/bug/?i=6534">urldata: remove the duplicate &apos;ip_addr_str&apos; field</a>
+ <li> <a href="https://curl.se/bug/?i=6534">urldata: store ip version in a single byte</a>
+ <li> <a href="https://curl.se/bug/?i=6557">vtls: remove md5sum</a>
+ <li> <a href="https://curl.se/bug/?i=6530">warnless: remove curlx_ultosi</a>
+ <li> <a href="https://curl.se/bug/?i=6411">wolfssl: add SECURE_RENEGOTIATION support</a>
+ <li> <a href="https://curl.se/mail/lib-2020-12/0121.html">wolfssl: Support wolfSSL builds missing TLS 1.1</a>
+</ul>
+<h2> Further </h2>
+The previous release was 7.74.0.
+The next release was 7.76.0.

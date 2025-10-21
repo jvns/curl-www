@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 5.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 5.0</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="4.10.html">🠰 4.10</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="5.2.html">5.2 🠲</a>
+</span>
+<h1> Changes in 5.0 - December 1 1998 </h1>
+<div class="vulnbox"><a href=/docs/vuln-5.0.html>5.0</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+ <li> Introducing the new -F flag for HTTP POST. It supports multipart/form-data
+   which means it is gonna be possible to upload files etc through HTTP POST.
+ <li> Added a &#39;configure&#39; script
+ <li> Use -H/--header for custom HTTP-headers. Lets you pass on your own
+   specified headers to the remote server.
+ <li> Use -B/--ftp-ascii to force ftp to use ASCII mode when transfering files.
+ <li> Use -q AS THE FIRST OPTION specified to prevent .curlrc from being read.
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> Corrected getpass.c and main.c to compile warning and error free with the
+   Win32 VC++ crap.
+ <li> I changed the TAG-system. If you ever used urlget() from this package in
+   another product, you need to recompile with the new headers.
+ <li> Win32 compiled with a silly error. Corrected now.
+ <li> Yet another problem in multiline FTP responses.
+ <li> Improved the &#39;maketgz&#39; to create a temporary directory tree which it makes
+   an archive from instead of the previous renaming of the current one.
+ <li> Mailing list opened (see README).
+ <li> Made -v more verbose on the PASV section of ftp transfers. Now it tells
+   hostname and IP of the new host (and port number). I also added a section
+   about PORT vs PASV in the README.
+ <li> Introduced automake stuff.
+ <li> Just made a successful GET of a document from an SSL-server using my own
+   private certificate for authentication!
+ <li> Corrected another bug in the long parameter name parser.
+ <li> Modified getpass.c
+ <li> We may have removed the silly warnings from url.c when compiled under IRIX.
+ <li> Wrote formfind.pl which is a new perl script intended to help you find out
+   how a FORM submission should be done.
+ <li> Made the HTTP header-checker accept white spaces before the HTTP/1.? line.
+   Appearantly some proxies/sites add such at times (my test proxy did when I
+   downloaded a gopher page with it)!
+ <li> Moved the former -h to -M and made -h show the short help text instead. I
+   had to enable a forced help text option. Now an even shorter help text will
+   be presented when an unknown option and similar, is used.
+ <li> stdcheaders.h didn&#39;t work with IRIX 6.4 native cc compiler. I hope my
+   changes don&#39;t make other versions go nuts instead.
+ <li> Added a check in the configure script to check for the silly AIX
+   warnings about my #define strcasecmp() stuff. I do that define to prevent
+   me and other contributors to accidentaly use that function name instead
+   of strequal()...
+ <li> I bugfixed Angus&#39;s getpass.c very little.
+ <li> Fixed the verbose flag names to getopt-style, i.e &#39;curl --loc&#39; will be
+   sufficient instead of --location as "loc" is a unique prefix.
+ <li> Another getopt-adjust; curl now accepts flags after the URL on the command
+   line. &#39;curl www.foo.com -O&#39; is perfectly valid.
+ <li> Corrected the .curlrc parser so that strtok() is no longer used and I
+   believe it works better. Even URLs can be specified in it now.
+ <li> Replaced getpass.c with a newly written one, not under GPL license
+ <li> Changed OS to a #define in config.h instead of compiler flag
+ <li> Makefile now uses -DHAVE_CONFIG_H
+ <li> Expanded the tgz-target to update the version string on each occation
+   I build a release archive!
+ <li> Remade the parameter parser to be more getopt compliant. Curl now supports "merged"
+   flags as in "curl -lsv ftp.site.com"
+ <li> I&#39;ve changed the headers in all files that are subject to the MozPL
+   license, as they are supposed to look like when conforming.
+ <li> Made the configure script make the config.h. The former config.h is now
+   setup.h.
+ <li> The RESOURCES and TODO files have been added to the archive.
+ <li> Fixed getpass.c and various configure stuff
+ <li> Corrected the &#39;getlinks.pl&#39; script
+ <li> SSLeay versions prior to 0.8 will *not* work with curl!
+ <li> Fixed a bug that occurred since curl did not properly use CRLF when issuing ftp
+   commands.
+ <li> Rearranged the order config files are read. .curlrc is now *always* read
+   first and before the command line flags. -K config files then act as
+   additional config items.
+ <li> You can now disable a proxy by using -x "". Useful if the .curlrc file
+   specifies a proxy and you wanna fetch something without going through
+   that.
+ <li> I&#39;m thinking of dropping the -p support. Its really not useful since ports
+   could (and should?) be specified as :&lt;port&gt; appended on the hostname
+   instead, both in URLs and to proxy hostnames.
+ <li> curl -L bugs under Windows NT (test with URL http://come.to/scsde).
+   This bug is not present in this version anymore.
+ <li> Added support for the weird FTP URL type= thing. You can download a file
+   using ASCII transfer by appending ";type=A" to the right of it. Other
+   available types are type=D for dir-list (NLST) and type=I for binary
+   transfer.
+ <li> A bug in my getenv("HOME") usage for win32 systems.
+ <li> Building curl with SSL under FreeBSD should work better and automatically now.
+ <li> Cleaned up in the port number mess in the source. No longer stores and uses
+   proxy port number separate from normal port number.
+ <li> The 5beta (and 4.10) under win32 failed if the HOME variable wasn&#39;t set.
+ <li> When using a proxy, curl now guesses and uses the protocol part in cases
+   like: "curl -x proxy:80 www.site.com". Proxies normally go nuts unless
+   http:// is prepended to the hostname, so if curl is used like this, it
+   guesses protocol and appends the protocol string before passing it to the
+   proxy. It already did this when used without proxy.
+ <li> Better port usage with SSL through proxy now. If you specified a different
+   https-port when accessing through a proxy, it didn&#39;t use that number
+   correctly. I also rewrote the code that parses the stuff read from the
+   proxy when you wanna connect through it with SSL.
+ <li> Work-around one of the compiler warnings on IRIX native cc compiles.
+</ul>
+<h2> Further </h2>
+The previous release was 4.10.
+The next release was 5.2.

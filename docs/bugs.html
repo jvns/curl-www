@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Report Bugs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/projdocs.html">Project</a> / <b>Report Bugs</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="manpage.html">curl man page</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=BUGS&amp;labels=documentation&amp;template=docs.yml&amp;source=docs/bugs.html" target="_new">File a bug about this page</a>
+<br><a href="knownbugs.html">Known bugs</a>
+<br><a href="tutorial.html">Tutorial</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="bugs">BUGS</h1>
+<h2 id="there-are-still-bugs">There are still bugs</h2>
+<p>curl and libcurl keep being developed. Adding features and changing
+code means that bugs sneak in, no matter how hard we try to keep them
+out.</p>
+<p>Of course there are lots of bugs left. Not to mention
+misfeatures.</p>
+<p>To help us make curl the stable and solid product we want it to be,
+we need bug reports and bug fixes.</p>
+<h2 id="where-to-report">Where to report</h2>
+<p>If you cannot fix a bug yourself and submit a fix for it, try to
+report an as detailed report as possible to a curl mailing list to allow
+one of us to have a go at a solution. You can optionally also submit
+your problem in <a href="https://github.com/curl/curl/issues">curl's bug
+tracking system</a>.</p>
+<p>Please read the rest of this document below first before doing
+that.</p>
+<p>If you feel you need to ask around first, find a suitable <a
+href="https://curl.se/mail/">mailing list</a> and post your questions
+there.</p>
+<h2 id="security-bugs">Security bugs</h2>
+<p>If you find a bug or problem in curl or libcurl that you think has a
+security impact, for example a bug that can put users in danger or make
+them vulnerable if the bug becomes public knowledge, then please report
+that bug using our security development process.</p>
+<p>Security related bugs or bugs that are suspected to have a security
+impact, should be reported on the <a
+href="https://hackerone.com/curl">curl security tracker at
+HackerOne</a>.</p>
+<p>This ensures that the report reaches the curl security team so that
+they first can deal with the report away from the public to minimize the
+harm and impact it has on existing users out there who might be using
+the vulnerable versions.</p>
+<p>The curl project's process for handling security related issues is <a
+href="https://curl.se/dev/secprocess.html">documented
+separately</a>.</p>
+<h2 id="what-to-report">What to report</h2>
+<p>When reporting a bug, you should include all information to help us
+understand what is wrong, what you expected to happen and how to repeat
+the bad behavior. You therefore need to tell us:</p>
+<ul>
+<li><p>your operating system's name and version number</p></li>
+<li><p>what version of curl you are using (<code>curl -V</code> is
+fine)</p></li>
+<li><p>versions of the used libraries that libcurl is built to
+use</p></li>
+<li><p>what URL you were working with (if possible), at least which
+protocol</p></li>
+</ul>
+<p>and anything and everything else you think matters. Tell us what you
+expected to happen, tell us what did happen, tell us how you could make
+it work another way. Dig around, try out, test. Then include all the
+tiny bits and pieces in your report. You benefit from this yourself, as
+it enables us to help you quicker and more accurately.</p>
+<p>Since curl deals with networks, it often helps us if you include a
+protocol debug dump with your bug report. The output you get by using
+the <code>-v</code> or <code>--trace</code> options.</p>
+<p>If curl crashed, causing a core dump (in Unix), there is hardly any
+use to send that huge file to anyone of us. Unless we have the same
+system setup as you, we cannot do much with it. Instead, we ask you to
+get a stack trace and send that (much smaller) output to us instead.</p>
+<p>The address and how to subscribe to the mailing lists are detailed in
+the <code>MANUAL.md</code> file.</p>
+<h2 id="libcurl-problems">libcurl problems</h2>
+<p>When you have written your own application with libcurl to perform
+transfers, it is even more important to be specific and detailed when
+reporting bugs.</p>
+<p>Tell us the libcurl version and your operating system. Tell us the
+name and version of all relevant sub-components like for example the SSL
+library you are using and what name resolving your libcurl uses. If you
+use SFTP or SCP, the libssh2 version is relevant etc.</p>
+<p>Showing us a real source code example repeating your problem is the
+best way to get our attention and it greatly increases our chances to
+understand your problem and to work on a fix (if we agree it truly is a
+problem).</p>
+<p>Lots of problems that appear to be libcurl problems are actually just
+abuses of the libcurl API or other malfunctions in your applications. It
+is advised that you run your problematic program using a memory debug
+tool like valgrind or similar before you post memory-related or
+"crashing" problems to us.</p>
+<h2 id="who-fixes-the-problems">Who fixes the problems</h2>
+<p>If the problems or bugs you describe are considered to be bugs, we
+want to have the problems fixed.</p>
+<p>There are no developers in the curl project that are paid to work on
+bugs. All developers that take on reported bugs do this on a voluntary
+basis. We do it out of an ambition to keep curl and libcurl excellent
+products and out of pride.</p>
+<p>Please do not assume that you can just lump over something to us and
+it then magically gets fixed after some given time. Most often we need
+feedback and help to understand what you have experienced and how to
+repeat a problem. Then we may only be able to assist YOU to debug the
+problem and to track down the proper fix.</p>
+<p>We get reports from many people every month and each report can take
+a considerable amount of time to really go to the bottom with.</p>
+<h2 id="how-to-get-a-stack-trace">How to get a stack trace</h2>
+<p>First, you must make sure that you compile all sources with
+<code>-g</code> and that you do not 'strip' the final executable. Try to
+avoid optimizing the code as well, remove <code>-O</code>,
+<code>-O2</code> etc from the compiler options.</p>
+<p>Run the program until it cores.</p>
+<p>Run your debugger on the core file, like
+<code>&lt;debugger&gt; curl core</code>. <code>&lt;debugger&gt;</code>
+should be replaced with the name of your debugger, in most cases that is
+<code>gdb</code>, but <code>dbx</code> and others also occur.</p>
+<p>When the debugger has finished loading the core file and presents you
+a prompt, enter <code>where</code> (without quotes) and press
+return.</p>
+<p>The list that is presented is the stack trace. If everything worked,
+it is supposed to contain the chain of functions that were called when
+curl crashed. Include the stack trace with your detailed bug report, it
+helps a lot.</p>
+<h2 id="bugs-in-libcurl-bindings">Bugs in libcurl bindings</h2>
+<p>There are of course bugs in libcurl bindings. You should then
+primarily approach the team that works on that particular binding and
+see what you can do to help them fix the problem.</p>
+<p>If you suspect that the problem exists in the underlying libcurl,
+then please convert your program over to plain C and follow the steps
+outlined above.</p>
+<h2 id="bugs-in-old-versions">Bugs in old versions</h2>
+<p>The curl project typically releases new versions every other month,
+and we fix several hundred bugs per year. For a huge table of releases,
+number of bug fixes and more, see: <a
+href="https://curl.se/docs/releases.html">https://curl.se/docs/releases.html</a></p>
+<p>The developers in the curl project do not have bandwidth or energy
+enough to maintain several branches or to spend much time on hunting
+down problems in old versions when chances are we already fixed them or
+at least that they have changed nature and appearance in later
+versions.</p>
+<p>When you experience a problem and want to report it, you really
+SHOULD include the version number of the curl you are using when you
+experience the issue. If that version number shows us that you are using
+an out-of-date curl, you should also try out a modern curl version to
+see if the problem persists or how/if it has changed in appearance.</p>
+<p>Even if you cannot immediately upgrade your application/system to run
+the latest curl version, you can most often at least run a test version
+or experimental build or similar, to get this confirmed or not.</p>
+<p>At times people insist that they cannot upgrade to a modern curl
+version, but instead, they "just want the bug fixed". That is fine, just
+do not count on us spending many cycles on trying to identify which
+single commit, if that is even possible, that at some point in the past
+fixed the problem you are now experiencing.</p>
+<p>Security wise, it is almost always a bad idea to lag behind the
+current curl versions by a lot. We keep discovering and reporting
+security problems over time see you can see in <a
+href="https://curl.se/docs/vulnerabilities.html">this table</a></p>
+<h1 id="bug-fixing-procedure">Bug fixing procedure</h1>
+<h2 id="what-happens-on-first-filing">What happens on first filing</h2>
+<p>When a new issue is posted in the issue tracker or on the mailing
+list, the team of developers first needs to see the report. Maybe they
+took the day off, maybe they are off in the woods hunting. Have
+patience. Allow at least a few days before expecting someone to have
+responded.</p>
+<p>In the issue tracker, you can expect that some labels are set on the
+issue to help categorize it.</p>
+<h2 id="first-response">First response</h2>
+<p>If your issue/bug report was not perfect at once (and few are),
+chances are that someone asks follow-up questions. Which version did you
+use? Which options did you use? How often does the problem occur? How
+can we reproduce this problem? Which protocols does it involve? Or
+perhaps much more specific and deep diving questions. It all depends on
+your specific issue.</p>
+<p>You should then respond to these follow-up questions and provide more
+info about the problem, so that we can help you figure it out. Or maybe
+you can help us figure it out. An active back-and-forth communication is
+important and the key for finding a cure and landing a fix.</p>
+<h2 id="not-reproducible">Not reproducible</h2>
+<p>We may require further work from you who actually see or experience
+the problem if we cannot reproduce it and cannot understand it even
+after having gotten all the info we need and having studied the source
+code over again.</p>
+<h2 id="unresponsive">Unresponsive</h2>
+<p>If the problem have not been understood or reproduced, and there is
+nobody responding to follow-up questions or questions asking for
+clarifications or for discussing possible ways to move forward with the
+task, we take that as a strong suggestion that the bug is
+unimportant.</p>
+<p>Unimportant issues are closed as inactive sooner or later as they
+cannot be fixed. The inactivity period (waiting for responses) should
+not be shorter than two weeks but may extend months.</p>
+<h2 id="lack-of-timeinterest">Lack of time/interest</h2>
+<p>Bugs that are filed and are understood can unfortunately end up in
+the "nobody cares enough about it to work on it" category. Such bugs are
+perfectly valid problems that <em>should</em> get fixed but apparently
+are not. We try to mark such bugs as <code>KNOWN_BUGS material</code>
+after a time of inactivity and if no activity is noticed after yet some
+time those bugs are added to the <code>KNOWN_BUGS</code> document and
+are closed in the issue tracker.</p>
+<h2 id="known_bugs"><code>KNOWN_BUGS</code></h2>
+<p>This is a list of known bugs. Bugs we know exist and that have been
+pointed out but that have not yet been fixed. The reasons for why they
+have not been fixed can involve anything really, but the primary reason
+is that nobody has considered these problems to be important enough to
+spend the necessary time and effort to have them fixed.</p>
+<p>The <code>KNOWN_BUGS</code> items are always up for grabs and we love
+the ones who bring one of them back to life and offer solutions to
+them.</p>
+<p>The <code>KNOWN_BUGS</code> document has a sibling document known as
+<code>TODO</code>.</p>
+<h2 id="todo"><code>TODO</code></h2>
+<p>Issues that are filed or reported that are not really bugs but more
+missing features or ideas for future improvements and so on are marked
+as <em>enhancement</em> or <em>feature-request</em> and get added to the
+<code>TODO</code> document and the issues are closed. We do not keep
+TODO items open in the issue tracker.</p>
+<p>The <code>TODO</code> document is full of ideas and suggestions of
+what we can add or fix one day. You are always encouraged and free to
+grab one of those items and take up a discussion with the curl
+development team on how that could be implemented or provided in the
+project so that you can work on ticking it odd that document.</p>
+<p>If an issue is rather a bug and not a missing feature or
+functionality, it is listed in <code>KNOWN_BUGS</code> instead.</p>
+<h2 id="closing-off-stalled-bugs">Closing off stalled bugs</h2>
+<p>The <a href="https://github.com/curl/curl">issue and pull request
+trackers</a> only hold "active" entries open (using a non-precise
+definition of what active actually is, but they are at least not
+completely dead). Those that are abandoned or in other ways dormant are
+closed and sometimes added to <code>TODO</code> and
+<code>KNOWN_BUGS</code> instead.</p>
+<p>This way, we only have "active" issues open on GitHub. Irrelevant
+issues and pull requests do not distract developers or casual
+visitors.</p>
+</div>
+</div>
+</body>
+</html>

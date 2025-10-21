@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_HEADEROPT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_HEADEROPT</b></div>
+<h1> CURLOPT_HEADEROPT explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_HEADEROPT%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_HEADEROPT.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_HEADEROPT.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_HEADEROPT - send HTTP headers to both proxy and host or separately </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_HEADEROPT.html">CURLOPT_HEADEROPT</a>, long bitmask);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a long that is a bitmask of options of how to deal with headers. The two mutually exclusive options are: </p>
+<p class="level0"><span Class="bold">CURLHEADER_UNIFIED</span> - the headers specified in <a Class="emphasis" href="./CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a> are used in requests both to servers and proxies. With this option enabled, <a Class="emphasis" href="./CURLOPT_PROXYHEADER.html">CURLOPT_PROXYHEADER</a> does not have any effect. </p>
+<p class="level0"><span Class="bold">CURLHEADER_SEPARATE</span> - makes <a Class="emphasis" href="./CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a> headers only get sent to a server and not to a proxy. Proxy headers must be set with <a Class="emphasis" href="./CURLOPT_PROXYHEADER.html">CURLOPT_PROXYHEADER</a> to get used. Note that if a non-CONNECT request is sent to a proxy, libcurl sends both server headers and proxy headers. When doing CONNECT, libcurl sends <a Class="emphasis" href="./CURLOPT_PROXYHEADER.html">CURLOPT_PROXYHEADER</a> headers only to the proxy and then <a Class="emphasis" href="./CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a> headers only to the server. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">CURLHEADER_SEPARATE (changed in <a href="/ch/7.42.1.html">7.42.1</a>, used CURLHEADER_UNIFIED before then) </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode ret;
+&nbsp;   struct curl_slist &#x2a;list;
+&nbsp;   list = <a href="curl_slist_append.html">curl_slist_append</a>(NULL, &quot;Shoesize: 10&quot;);
+&nbsp;   list = <a href="curl_slist_append.html">curl_slist_append</a>(list, &quot;Accept:&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROXY.html">CURLOPT_PROXY</a>, &quot;http://localhost:8080&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a>, list);
+&nbsp;
+&nbsp;   /&#x2a; HTTPS over a proxy makes a separate CONNECT to the proxy, so tell
+&nbsp;      libcurl to not send the custom headers to the proxy. Keep them
+&nbsp;      separate. &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_HEADEROPT.html">CURLOPT_HEADEROPT</a>, CURLHEADER_SEPARATE);
+&nbsp;   ret = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;   <a href="curl_slist_free_all.html">curl_slist_free_all</a>(list);
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0"><span Class="bold">CURLHEADER_</span>&#x2a; macros became <span Class="emphasis">long</span> types in <a href="/ch/8.16.0.html">8.16.0</a>, prior to this version a <span Class="emphasis">long</span> cast was necessary when passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.37.0.html">7.37.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a>(3), <a Class="bold" href="./CURLOPT_PROXYHEADER.html">CURLOPT_PROXYHEADER</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.16.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.16.0</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.15.5.html">🠰 7.15.5</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.16.1.html">7.16.1 🠲</a>
+</span>
+<h1> Changes in 7.16.0 - October 30 2006 </h1>
+<div class="vulnbox"><a href=/docs/vuln-7.16.0.html>7.16.0</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+ <li> the SONAME on the shared library was bumped from 3 to 4
+ <li> Added CURLE_SSL_CACERT_BADFILE
+ <li> Added CURLMOPT_TIMERFUNCTION and CURLMOPT_TIMERDATA
+ <li> (FTP) the CURLOPT_SOURCE_* options are removed and so are the --3p* command
+   line options
+ <li> curl_multi_socket() and family are suitable to start using
+ <li> uses WSAPoll() on Windows Vista
+ <li> (FTP) --ftp-ssl-control was added
+ <li> CURLOPT_SSL_SESSIONID_CACHE and --no-sessionid added
+ <li> CURLMOPT_PIPELINING added for enabling HTTP pipelined transfers
+ <li> multi handles now have a shared connection cache
+ <li> Added support for other MS-DOS compilers (besides djgpp)
+ <li> CURLOPT_SOCKOPTFUNCTION and CURLOPT_SOCKOPTDATA were added
+ <li> (FTP) libcurl avoids sending TYPE if the desired type was already set
+ <li> (FTP) CURLOPT_PREQUOTE works even when CURLOPT_NOBODY is set true
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> (HTTP) CURLOPT_FAILONERROR (-f) covers a few more response cases
+ <li> curl_multi_socket() and the LOW_SPEED options
+ <li> curl_multi_socket() expire timer during c-ares name resolves
+ <li> curl_multi_add_handle on an already added handle now fails gracefully
+ <li> multi interface crash if bad function call order was used for cleanup
+ <li> put a new URL in saved cookie jar files
+ <li> configure --with-gssapi-libs
+ <li> SOCKS proxy connection fixes
+ <li> (FTP) a failed upload does not invalidate the control connection
+ <li> proxy URL with username and empty password or no password at all now work
+ <li> fixed a socket state problem with *multi_socket()
+ <li> (HTTP) NTLM hostname fix
+ <li> getsockname usage fixes
+ <li> SOCKS5 proxy connects can now time-out
+ <li> SOCKS5 connects that require auth no longer segfaults when auth not given
+ <li> multi interface using asynch resolves could get stuck in wrong state
+ <li> the &#39;running_handles&#39; counter wasn&#39;t always updated properly when
+   curl_multi_remove_handle() was used
+ <li> (FTP) EPRT transfers with IPv6 didn&#39;t work properly
+ <li> (FTP) SINGLECWD mode and using files in the root dir
+ <li> (HTTP) Expect: header disabling work better
+ <li> (HTTP) "Expect: 100-continue" disable on second POST on re-used connection
+ <li> src/config.h.in is fixed
+ <li> (HTTP) POST data logged to the debug callback function is now correctly
+   tagged as data, not header
+</ul>
+<h2> Further </h2>
+The previous release was 7.15.5.
+The next release was 7.16.1.

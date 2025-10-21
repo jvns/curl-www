@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_IPRESOLVE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_IPRESOLVE</b></div>
+<h1> CURLOPT_IPRESOLVE explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_IPRESOLVE%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_IPRESOLVE.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_IPRESOLVE.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_IPRESOLVE - IP protocol version to use </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_IPRESOLVE.html">CURLOPT_IPRESOLVE</a>, long resolve);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Allows an application to select what kind of IP addresses to use when establishing a connection or choosing one from the connection pool. This is interesting when using hostnames that resolve to more than one IP family. </p>
+<p class="level0">If the URL provided for a transfer contains a numerical IP version as a host name, this option does not override or prohibit libcurl from using that IP version. </p>
+<p class="level0">Available values for this option are: </p>
+<p class="level0"><a name="CURLIPRESOLVEWHATEVER"></a><span class="nroffip">CURL_IPRESOLVE_WHATEVER</span> </p>
+<p class="level1">Default, can use addresses of all IP versions that your system allows. </p>
+<p class="level0"><a name="CURLIPRESOLVEV4"></a><span class="nroffip">CURL_IPRESOLVE_V4</span> </p>
+<p class="level1">Uses only IPv4 addresses. </p>
+<p class="level0"><a name="CURLIPRESOLVEV6"></a><span class="nroffip">CURL_IPRESOLVE_V6</span> </p>
+<p class="level1">Uses only IPv6 addresses. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">CURL_IPRESOLVE_WHATEVER </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/foo.bin&quot;);
+&nbsp;
+&nbsp;   /&#x2a; of all addresses example.com resolves to, only IPv6 ones are used &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_IPRESOLVE.html">CURLOPT_IPRESOLVE</a>, CURL_IPRESOLVE_V6);
+&nbsp;
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0"><span Class="bold">CURL_IPRESOLVE_</span>&#x2a; macros became <span Class="emphasis">long</span> types in <a href="/ch/8.15.0.html">8.15.0</a>, before this version a <span Class="emphasis">long</span> cast was necessary when passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.10.8.html">7.10.8</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_HTTP_VERSION.html">CURLOPT_HTTP_VERSION</a>(3), <a Class="bold" href="./CURLOPT_RESOLVE.html">CURLOPT_RESOLVE</a>(3), <a Class="bold" href="./CURLOPT_SSLVERSION.html">CURLOPT_SSLVERSION</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

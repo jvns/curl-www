@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_pushheader_bynum()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_pushheader_bynum</b></div>
+<h1> curl_pushheader_bynum - get a push header by index </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_pushheader_bynum%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_pushheader_bynum.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_pushheader_bynum.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_pushheader_bynum - get a push header by index </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+char &#x2a;<a href="curl_pushheader_bynum.html">curl_pushheader_bynum</a>(struct curl_pushheaders &#x2a;h, size_t num);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This is a function that is only functional within a <a Class="emphasis" href="./CURLMOPT_PUSHFUNCTION.html">CURLMOPT_PUSHFUNCTION</a> callback. It makes no sense to try to use it elsewhere and it has no function then. </p>
+<p class="level0">It returns the value for the header field at the given index <span Class="bold">num</span>, for the incoming server push request or NULL. The data pointed to is freed by libcurl when this callback returns. The returned pointer points to a &quot;name:value&quot; string that gets freed when this callback returns. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+/&#x2a; output all the incoming push request headers &#x2a;/
+static int push_cb(CURL &#x2a;parent,
+&nbsp;                  CURL &#x2a;easy,
+&nbsp;                  size_t num_headers,
+&nbsp;                  struct curl_pushheaders &#x2a;headers,
+&nbsp;                  void &#x2a;clientp)
+{
+&nbsp; int i = 0;
+&nbsp; char &#x2a;field;
+&nbsp; do {
+&nbsp;    field = <a href="curl_pushheader_bynum.html">curl_pushheader_bynum</a>(headers, i);
+&nbsp;    if(field)
+&nbsp;      fprintf(stderr, &quot;Push header: %s&bsol;n&quot;, field);
+&nbsp;    i++;
+&nbsp; } while(field);
+&nbsp; return CURL_PUSH_OK; /&#x2a; permission granted &#x2a;/
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_PUSHFUNCTION.html">CURLMOPT_PUSHFUNCTION</a>, push_cb);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.44.0.html">7.44.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">Returns a pointer to the header field content or NULL. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLMOPT_PUSHFUNCTION.html">CURLMOPT_PUSHFUNCTION</a>(3), <a Class="bold" href="./curl_pushheader_byname.html">curl_pushheader_byname</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

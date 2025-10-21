@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl_multi_socket_action</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>libcurl</b></div>
+<h1> curl_multi_socket_action - reads/writes available data given an action </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_multi_socket_action%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_multi_socket_action.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_multi_socket_action.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_multi_socket_action - read/write available data given an action </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_socket_action.html">curl_multi_socket_action</a>(CURLM &#x2a;multi_handle,
+&nbsp;                                  curl_socket_t sockfd,
+&nbsp;                                  int ev_bitmask,
+&nbsp;                                  int &#x2a;running_handles);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">When the application has detected action on a socket handled by libcurl, it should call <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> with the <span Class="bold">sockfd</span> argument set to the socket with the action. When the events on a socket are known, they can be passed as an events bitmask <span Class="bold">ev_bitmask</span> by first setting <span Class="bold">ev_bitmask</span> to 0, and then adding using bitwise OR (|) any combination of events to be chosen from CURL_CSELECT_IN, CURL_CSELECT_OUT or CURL_CSELECT_ERR. When the events on a socket are unknown, pass 0 instead, and libcurl tests the descriptor internally. It is also permissible to pass CURL_SOCKET_TIMEOUT to the <span Class="bold">sockfd</span> parameter in order to initiate the whole process or when a timeout occurs. </p>
+<p class="level0">At return, <span Class="bold">running_handles</span> points to the number of running easy handles within the multi handle. When this number reaches zero, all transfers are complete/done. When you call <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> on a specific socket and the counter decreases by one, it DOES NOT necessarily mean that this exact socket/transfer is the one that completed. Use <a Class="emphasis" href="./curl_multi_info_read.html">curl_multi_info_read</a> to figure out which easy handle that completed. </p>
+<p class="level0">The <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> function informs the application about updates in the socket (file descriptor) status by doing none, one, or multiple calls to the socket callback function set with the <a Class="emphasis" href="./CURLMOPT_SOCKETFUNCTION.html">CURLMOPT_SOCKETFUNCTION</a> option to <a Class="emphasis" href="./curl_multi_setopt.html">curl_multi_setopt</a>. They update the status with changes since the previous time the callback was called. </p>
+<p class="level0">Get the timeout time by setting the <a Class="emphasis" href="./CURLMOPT_TIMERFUNCTION.html">CURLMOPT_TIMERFUNCTION</a> option with <a Class="emphasis" href="./curl_multi_setopt.html">curl_multi_setopt</a>. Your application then gets called with information on how long to wait for socket actions at most before doing the timeout action: call the <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> function with the <span Class="bold">sockfd</span> argument set to CURL_SOCKET_TIMEOUT. You can also use the <a Class="emphasis" href="./curl_multi_timeout.html">curl_multi_timeout</a> function to poll the value at any given time, but for an event-based system using the callback is far better than relying on polling the timeout value. </p>
+<p class="level0">When this function returns error, the state of all transfers are uncertain and they cannot be continued. <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> should not be called again on the same multi handle after an error has been returned, unless first removing all the handles and adding new ones. </p><a name="TYPICAL"></a><h2 class="nroffsh">Typical usage</h2>
+<p class="level0">1. Create a multi handle </p>
+<p class="level0">2. Set the socket callback with <a Class="emphasis" href="./CURLMOPT_SOCKETFUNCTION.html">CURLMOPT_SOCKETFUNCTION</a> </p>
+<p class="level0">3. Set the timeout callback with <a Class="emphasis" href="./CURLMOPT_TIMERFUNCTION.html">CURLMOPT_TIMERFUNCTION</a>, to get to know what timeout value to use when waiting for socket activities. </p>
+<p class="level0">4. Add easy handles with <a href="curl_multi_add_handle.html">curl_multi_add_handle</a>() </p>
+<p class="level0">5. Provide some means to manage the sockets libcurl is using, so you can check them for activity. This can be done through your application code, or by way of an external library such as libevent or glib. </p>
+<p class="level0">6. Call <a href="curl_multi_socket_action.html">curl_multi_socket_action</a>(..., CURL_SOCKET_TIMEOUT, 0, ...) to kickstart everything. To get one or more callbacks called. </p>
+<p class="level0">7. Wait for activity on any of libcurl&apos;s sockets, use the timeout value your callback has been told. </p>
+<p class="level0">8, When activity is detected, call <a href="curl_multi_socket_action.html">curl_multi_socket_action</a>() for the socket(s) that got action. If no activity is detected and the timeout expires, call <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> with <span Class="emphasis">CURL_SOCKET_TIMEOUT</span>. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; /&#x2a; the event-library gets told when there activity on the socket &#39;fd&#39;,
+&nbsp;    which we translate to a call to <a href="curl_multi_socket_action.html">curl_multi_socket_action</a>() &#x2a;/
+&nbsp; int running = 0;
+&nbsp; int fd = 3; /&#x2a; the descriptor that had action &#x2a;/
+&nbsp; int bitmask = 2; /&#x2a; what activity that happened &#x2a;/
+&nbsp;
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp;
+&nbsp; CURLMcode mc = <a href="curl_multi_socket_action.html">curl_multi_socket_action</a>(multi, fd, bitmask, &amp;running);
+&nbsp; if(mc)
+&nbsp;   printf(&quot;error: %s&bsol;n&quot;, <a href="curl_multi_strerror.html">curl_multi_strerror</a>(mc));
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.15.4.html">7.15.4</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_multi_cleanup.html">curl_multi_cleanup</a>(3), <a Class="bold" href="./curl_multi_fdset.html">curl_multi_fdset</a>(3), <a Class="bold" href="./curl_multi_info_read.html">curl_multi_info_read</a>(3), <a Class="bold" href="./curl_multi_init.html">curl_multi_init</a>(3), <span Class="bold">the</span>hiperfifo.c<span Class="bold">example</span> </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

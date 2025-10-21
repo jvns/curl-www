@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_HTTPGET</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_HTTPGET</b></div>
+<h1> CURLOPT_HTTPGET explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_HTTPGET%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_HTTPGET.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_HTTPGET.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_HTTPGET - ask for an HTTP GET request </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_HTTPGET.html">CURLOPT_HTTPGET</a>, long useget);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a long. If <span Class="emphasis">useget</span> is 1, this forces the HTTP request to get back to using GET. Usable if a POST, HEAD, PUT, etc has been used previously using the same curl <span Class="emphasis">handle</span>. </p>
+<p class="level0">When setting <a Class="emphasis" href="./CURLOPT_HTTPGET.html">CURLOPT_HTTPGET</a> to 1, libcurl automatically sets <a Class="emphasis" href="./CURLOPT_NOBODY.html">CURLOPT_NOBODY</a> to 0 and <a Class="emphasis" href="./CURLOPT_UPLOAD.html">CURLOPT_UPLOAD</a> to 0. </p>
+<p class="level0">Setting this option to zero has no effect. Applications need to explicitly select which HTTP request method to use, they cannot deselect a method. To reset a handle to default method, consider <a Class="emphasis" href="./curl_easy_reset.html">curl_easy_reset</a>. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">0 </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   /&#x2a; use a GET to fetch this &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_HTTPGET.html">CURLOPT_HTTPGET</a>, 1L);
+&nbsp;
+&nbsp;   /&#x2a; Perform the request &#x2a;/
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.8.1.html">7.8.1</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_NOBODY.html">CURLOPT_NOBODY</a>(3), <a Class="bold" href="./CURLOPT_POST.html">CURLOPT_POST</a>(3), <a Class="bold" href="./CURLOPT_UPLOAD.html">CURLOPT_UPLOAD</a>(3), <a Class="bold" href="./curl_easy_reset.html">curl_easy_reset</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

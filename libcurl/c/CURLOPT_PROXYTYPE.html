@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_PROXYTYPE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_PROXYTYPE</b></div>
+<h1> CURLOPT_PROXYTYPE explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_PROXYTYPE%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_PROXYTYPE.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_PROXYTYPE.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_PROXYTYPE - proxy protocol type </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_PROXYTYPE.html">CURLOPT_PROXYTYPE</a>, long type);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass one of the values below to set the type of the proxy. </p>
+<p class="level0"><a name="CURLPROXYHTTP"></a><span class="nroffip">CURLPROXY_HTTP</span> </p>
+<p class="level1">HTTP Proxy. Default. </p>
+<p class="level0"><a name="CURLPROXYHTTPS"></a><span class="nroffip">CURLPROXY_HTTPS</span> </p>
+<p class="level1">HTTPS Proxy using HTTP/1. (Added in <a href="/ch/7.52.0.html">7.52.0</a> for OpenSSL and GnuTLS. Since <a href="/ch/7.87.0.html">7.87.0</a>, it also works for mbedTLS, Rustls, Schannel and wolfSSL.) </p>
+<p class="level0"><a name="CURLPROXYHTTPS2"></a><span class="nroffip">CURLPROXY_HTTPS2</span> </p>
+<p class="level1">HTTPS Proxy and attempt to speak HTTP/2 over it. (Added in <a href="/ch/8.1.0.html">8.1.0</a>) </p>
+<p class="level0"><a name="CURLPROXYHTTP10"></a><span class="nroffip">CURLPROXY_HTTP_1_0</span> </p>
+<p class="level1">HTTP 1.0 Proxy. This is similar to CURLPROXY_HTTP except it uses HTTP/1.0 for any CONNECT tunneling. It does not change the HTTP version of the actual HTTP requests, controlled by <a Class="emphasis" href="./CURLOPT_HTTP_VERSION.html">CURLOPT_HTTP_VERSION</a>. </p>
+<p class="level0"><a name="CURLPROXYSOCKS4"></a><span class="nroffip">CURLPROXY_SOCKS4</span> </p>
+<p class="level1">SOCKS4 Proxy. </p>
+<p class="level0"><a name="CURLPROXYSOCKS4A"></a><span class="nroffip">CURLPROXY_SOCKS4A</span> </p>
+<p class="level1">SOCKS4a Proxy. Proxy resolves URL hostname. </p>
+<p class="level0"><a name="CURLPROXYSOCKS5"></a><span class="nroffip">CURLPROXY_SOCKS5</span> </p>
+<p class="level1">SOCKS5 Proxy. </p>
+<p class="level0"><a name="CURLPROXYSOCKS5HOSTNAME"></a><span class="nroffip">CURLPROXY_SOCKS5_HOSTNAME</span> </p>
+<p class="level1">SOCKS5 Proxy. Proxy resolves URL hostname. </p>
+<p class="level0">Often it is more convenient to specify the proxy type with the scheme part of the <a Class="emphasis" href="./CURLOPT_PROXY.html">CURLOPT_PROXY</a> string. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">CURLPROXY_HTTP </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode ret;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROXY.html">CURLOPT_PROXY</a>, &quot;local.example.com:1080&quot;);
+&nbsp;   /&#x2a; set the proxy type &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROXYTYPE.html">CURLOPT_PROXYTYPE</a>, CURLPROXY_SOCKS5);
+&nbsp;   ret = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0"><span Class="bold">CURLPROXY_</span>&#x2a; enums became <span Class="emphasis">long</span> types in <a href="/ch/8.16.0.html">8.16.0</a>, prior to this version a <span Class="emphasis">long</span> cast was necessary when passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.10.html">7.10</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_PROXY.html">CURLOPT_PROXY</a>(3), <a Class="bold" href="./CURLOPT_PROXYPORT.html">CURLOPT_PROXYPORT</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

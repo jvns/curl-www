@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.24.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.24.0</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.23.1.html">🠰 7.23.1</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.25.0.html">7.25.0 🠲</a>
+</span>
+<h1> Changes in 7.24.0 - January 24 2012 </h1>
+<div class="vulnbox"><a href=/docs/vuln-7.24.0.html>7.24.0</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+ <li> <a href="https://curl.se/mail/lib-2011-11/0205.html">CURLOPT_QUOTE: SFTP supports the &#39;*&#39;-prefix now</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0067.html">CURLOPT_DNS_SERVERS: set name servers if possible</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0164.html">Add support for using nettle instead of gcrypt as gnutls backend</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0107.html">CURLOPT_INTERFACE: avoid resolving interfaces names with magic prefixes</a>
+ <li> <a href="https://curl.se/libcurl/c/curl_easy_setopt.html#CURLOPTACCEPTTIMOUTMS">Added CURLOPT_ACCEPTTIMEOUT_MS</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0133.html">configure: add symbols versioning option --enable-versioned-symbols</a>
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> <a href="https://curl.se/docs/CVE-2012-0036.html">curl was vulnerable to a data injection attack for certain protocols</a> <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0036">CVE-2012-0036</a>
+ <li> <a href="https://curl.se/docs/CVE-2011-3389.html">curl was vulnerable to a SSL CBC IV vulnerability when built to use OpenSSL</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0116.html">SSL session share: move the age counter to the share object</a>
+ <li> <a href="https://curl.se/mail/archive-2011-11/0030.htm">-J -O: use -O name if no Content-Disposition header comes!</a>
+ <li> <a href="https://curl.se/mail/archive-2011-11/0035.html">protocol_connect: show verbose connect and set connect time</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0218.html">query-part: ignore the URI part for given protocols</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0267.html">gnutls: only translate winsock errors for old versions</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0279.html">POP3: fix end of body detection</a>
+ <li> POP3: detect when LIST returns no mails
+ <li> <a href="https://curl.se/mail/lib-2011-11/0247.html">TELNET: improved treatment of options</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0294.html">configure: add support for pkg-config detection of libidn</a>
+ <li> <a href="https://curl.se/bug/view.cgi?id=3442068">CyaSSL 2.0+ library initialization adjustment</a>
+ <li> multi interface: only use non-NULL socker function pointer
+ <li> call opensocket callback properly for active FTP
+ <li> <a href="https://curl.se/mail/lib-2011-12/0018.html">don&#39;t call close socket callback for sockets created with accept()</a>
+ <li> <a href="https://curl.se/mail/archive-2011-12/0010.html">differentiate better between host/proxy errors</a>
+ <li> <a href="https://curl.se/bug/view.cgi?id=3451592">SSH: fix CURLOPT_SSH_HOST_PUBLIC_KEY_MD5 and --hostpubmd5</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0371.html">multi: handle timeouts on DNS servers by checking for new sockets</a>
+ <li> CURLOPT_DNS_SERVERS: fix return code
+ <li> <a href="https://curl.se/mail/lib-2011-11/0368.html">POP3: fixed escaped dot not being stripped out</a>
+ <li> <a href="https://curl.se/mail/archive-2011-12/0012.html">OpenSSL: check for the SSLv2 function in configure</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0063.html">MakefileBuild: fix the static build</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0010.html">create_conn: don&#39;t switch to HTTP protocol if tunneling is enabled</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0070.html">multi interface: fix block when CONNECT_ONLY option is used</a>
+ <li> <a href="https://curl.se/mail/lib-2011-11/0022.html">Fix connection reuse for TLS upgraded connections</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0121.html">multiple file upload with -F and custom type</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0179.html">multi interface: active FTP connections are no longer blocking</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0215.html">Android build fix</a>
+ <li> <a href="https://curl.se/mail/archive-2011-12/0022.html">timer: restore PRETRANSFER timing</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0218.html">libcurl.m4: Fix quoting arguments of AC_LANG_PROGRAM</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0211.html">appconnect time fixed for non-blocking connect ssl backends</a>
+ <li> <a href="https://bugzilla.redhat.com/767490">do not include SSL handshake into time spent waiting for 100-continue</a>
+ <li> handle dns cache case insensitive
+ <li> <a href="https://curl.se/mail/lib-2011-12/0314.html">use new hostname casing for subsequent HTTP requests</a>
+ <li> CURLOPT_RESOLVE: avoid adding already present hostnames
+ <li> <a href="https://curl.se/mail/lib-2011-12/0249.html">SFTP mkdir: use correct permission</a>
+ <li> <a href="https://curl.se/bug/view.cgi?id=3463121">resolve: don&#39;t leak pre-populated dns entries</a>
+ <li> --retry: Retry transfers on timeout and DNS errors
+ <li> <a href="https://curl.se/bug/view.cgi?id=3466497">negotiate with SSPI backend: use the correct buffer for input</a>
+ <li> <a href="https://curl.se/mail/lib-2011-12/0249.html">SFTP dir: increase buffer size counter to avoid cut off filenames</a>
+ <li> <a href="https://curl.se/mail/lib-2012-01/0146.html">TFTP: fix resending (again)</a>
+ <li> <a href="https://curl.se/mail/lib-2012-01/0160.html">c-ares: don&#39;t include getaddrinfo-using code</a>
+ <li> <a href="https://curl.se/mail/lib-2012-01/0096.html">FTP: CURLE_PARTIAL_FILE will not close the control channel</a>
+ <li> win32-threaded-resolver: stop using a dummy socket
+ <li> <a href="https://curl.se/mail/lib-2012-01/0049.html">OpenSSL: remove reference to openssl internal struct</a>
+ <li> OpenSSL: SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG option no longer enabled
+ <li> OpenSSL: fix PKCS#12 certificate parsing related memory leak
+ <li> <a href="https://curl.se/bug/view.cgi?id=3474308">OpenLDAP: fix LDAP connection phase memory leak</a>
+ <li> Telnet: Use correct file descriptor for telnet upload
+ <li> Telnet: Remove bogus optimisation of telnet upload
+ <li> URL parse: username with ipv6 numerical address
+ <li> polarssl: show cipher suite name correctly with 1.1.0
+ <li> polarssl: havege_rand is not present in version 1.1.0 WARNING, we still use the <a href="https://tls.mbed.org/tech-updates/security-advisories/polarssl-security-advisory-2011-02">old API which is said to be insecure</a>
+ <li> <a href="https://curl.se/mail/lib-2012-01/0225.html">gnutls: enforced use of SSLv3</a>
+</ul>
+<h2> Further </h2>
+The previous release was 7.23.1.
+The next release was 7.25.0.

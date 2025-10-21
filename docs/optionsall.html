@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - When command line options were introduced</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/tooldocs.html">Tool</a> / <b>Options when</b></div>
+<h1> When command line options were introduced </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="faq.html">FAQ</a>
+<br><a href="httpscripting.html">HTTP Scripting</a>
+<br><a href="manpage.html">man page</a>
+</div>
+curl is continuously developed and new command line options are added over
+time. This list shows which options that were added in which version.
+<p>
+[<b> <a href="optionswhen.html">sort on version</a> | <b>sort on option name</b> ]
+<p>
+<table>
+<tr><td><a href="manpage.html#--abstract-unix-socket">--abstract-unix-socket</a></td><td><a href="/ch/7.53.0.html">7.53.0</a></td></tr>
+<tr><td><a href="manpage.html#--alt-svc">--alt-svc</a></td><td><a href="/ch/7.64.1.html">7.64.1</a></td></tr>
+<tr><td><a href="manpage.html#--anyauth">--anyauth</a></td><td><a href="/ch/7.10.6.html">7.10.6</a></td></tr>
+<tr><td><a href="manpage.html#-a">--append</a></td><td><a href="/ch/4.8.html">4.8</a></td></tr>
+<tr><td><a href="manpage.html#--aws-sigv4">--aws-sigv4</a></td><td><a href="/ch/7.75.0.html">7.75.0</a></td></tr>
+<tr><td><a href="manpage.html#--basic">--basic</a></td><td><a href="/ch/7.10.6.html">7.10.6</a></td></tr>
+<tr><td><a href="manpage.html#--ca-native">--ca-native</a></td><td><a href="/ch/8.2.0.html">8.2.0</a></td></tr>
+<tr><td><a href="manpage.html#--cacert">--cacert</a></td><td><a href="/ch/7.5.html">7.5</a></td></tr>
+<tr><td><a href="manpage.html#--capath">--capath</a></td><td><a href="/ch/7.9.8.html">7.9.8</a></td></tr>
+<tr><td><a href="manpage.html#-E">--cert</a></td><td><a href="/ch/5.0.html">5.0</a></td></tr>
+<tr><td><a href="manpage.html#--cert-status">--cert-status</a></td><td><a href="/ch/7.41.0.html">7.41.0</a></td></tr>
+<tr><td><a href="manpage.html#--cert-type">--cert-type</a></td><td><a href="/ch/7.9.3.html">7.9.3</a></td></tr>
+<tr><td><a href="manpage.html#--ciphers">--ciphers</a></td><td><a href="/ch/7.9.html">7.9</a></td></tr>
+<tr><td><a href="manpage.html#--compressed">--compressed</a></td><td><a href="/ch/7.10.html">7.10</a></td></tr>
+<tr><td><a href="manpage.html#--compressed-ssh">--compressed-ssh</a></td><td><a href="/ch/7.56.0.html">7.56.0</a></td></tr>
+<tr><td><a href="manpage.html#-K">--config</a></td><td><a href="/ch/4.10.html">4.10</a></td></tr>
+<tr><td><a href="manpage.html#--connect-timeout">--connect-timeout</a></td><td><a href="/ch/7.7.html">7.7</a></td></tr>
+<tr><td><a href="manpage.html#--connect-to">--connect-to</a></td><td><a href="/ch/7.49.0.html">7.49.0</a></td></tr>
+<tr><td><a href="manpage.html#-C">--continue-at</a></td><td><a href="/ch/4.8.html">4.8</a></td></tr>
+<tr><td><a href="manpage.html#-b">--cookie</a></td><td><a href="/ch/4.9.html">4.9</a></td></tr>
+<tr><td><a href="manpage.html#-c">--cookie-jar</a></td><td><a href="/ch/7.9.html">7.9</a></td></tr>
+<tr><td><a href="manpage.html#--create-dirs">--create-dirs</a></td><td><a href="/ch/7.10.3.html">7.10.3</a></td></tr>
+<tr><td><a href="manpage.html#--create-file-mode">--create-file-mode</a></td><td><a href="/ch/7.75.0.html">7.75.0</a></td></tr>
+<tr><td><a href="manpage.html#--crlf">--crlf</a></td><td><a href="/ch/5.7.html">5.7</a></td></tr>
+<tr><td><a href="manpage.html#--crlfile">--crlfile</a></td><td><a href="/ch/7.19.7.html">7.19.7</a></td></tr>
+<tr><td><a href="manpage.html#--curves">--curves</a></td><td><a href="/ch/7.73.0.html">7.73.0</a></td></tr>
+<tr><td><a href="manpage.html#-d">--data</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--data-ascii">--data-ascii</a></td><td><a href="/ch/7.2.html">7.2</a></td></tr>
+<tr><td><a href="manpage.html#--data-binary">--data-binary</a></td><td><a href="/ch/7.2.html">7.2</a></td></tr>
+<tr><td><a href="manpage.html#--data-raw">--data-raw</a></td><td><a href="/ch/7.43.0.html">7.43.0</a></td></tr>
+<tr><td><a href="manpage.html#--data-urlencode">--data-urlencode</a></td><td><a href="/ch/7.18.0.html">7.18.0</a></td></tr>
+<tr><td><a href="manpage.html#--delegation">--delegation</a></td><td><a href="/ch/7.22.0.html">7.22.0</a></td></tr>
+<tr><td><a href="manpage.html#--digest">--digest</a></td><td><a href="/ch/7.10.6.html">7.10.6</a></td></tr>
+<tr><td><a href="manpage.html#-q">--disable</a></td><td><a href="/ch/5.0.html">5.0</a></td></tr>
+<tr><td><a href="manpage.html#--disable-eprt">--disable-eprt</a></td><td><a href="/ch/7.10.5.html">7.10.5</a></td></tr>
+<tr><td><a href="manpage.html#--disable-epsv">--disable-epsv</a></td><td><a href="/ch/7.9.2.html">7.9.2</a></td></tr>
+<tr><td><a href="manpage.html#--disallow-username-in-url">--disallow-username-in-url</a></td><td><a href="/ch/7.61.0.html">7.61.0</a></td></tr>
+<tr><td><a href="manpage.html#--dns-interface">--dns-interface</a></td><td><a href="/ch/7.33.0.html">7.33.0</a></td></tr>
+<tr><td><a href="manpage.html#--dns-ipv4-addr">--dns-ipv4-addr</a></td><td><a href="/ch/7.33.0.html">7.33.0</a></td></tr>
+<tr><td><a href="manpage.html#--dns-ipv6-addr">--dns-ipv6-addr</a></td><td><a href="/ch/7.33.0.html">7.33.0</a></td></tr>
+<tr><td><a href="manpage.html#--dns-servers">--dns-servers</a></td><td><a href="/ch/7.33.0.html">7.33.0</a></td></tr>
+<tr><td><a href="manpage.html#--doh-cert-status">--doh-cert-status</a></td><td><a href="/ch/7.76.0.html">7.76.0</a></td></tr>
+<tr><td><a href="manpage.html#--doh-insecure">--doh-insecure</a></td><td><a href="/ch/7.76.0.html">7.76.0</a></td></tr>
+<tr><td><a href="manpage.html#--doh-url">--doh-url</a></td><td><a href="/ch/7.62.0.html">7.62.0</a></td></tr>
+<tr><td><a href="manpage.html#--dump-ca-embed">--dump-ca-embed</a></td><td><a href="/ch/8.10.0.html">8.10.0</a></td></tr>
+<tr><td><a href="manpage.html#-D">--dump-header</a></td><td><a href="/ch/5.7.html">5.7</a></td></tr>
+<tr><td><a href="manpage.html#--ech">--ech</a></td><td><a href="/ch/8.8.0.html">8.8.0</a></td></tr>
+<tr><td><a href="manpage.html#--egd-file">--egd-file</a></td><td><a href="/ch/7.7.html">7.7</a></td></tr>
+<tr><td><a href="manpage.html#--engine">--engine</a></td><td><a href="/ch/7.9.3.html">7.9.3</a></td></tr>
+<tr><td><a href="manpage.html#--etag-compare">--etag-compare</a></td><td><a href="/ch/7.68.0.html">7.68.0</a></td></tr>
+<tr><td><a href="manpage.html#--etag-save">--etag-save</a></td><td><a href="/ch/7.68.0.html">7.68.0</a></td></tr>
+<tr><td><a href="manpage.html#--expect100-timeout">--expect100-timeout</a></td><td><a href="/ch/7.47.0.html">7.47.0</a></td></tr>
+<tr><td><a href="manpage.html#-f">--fail</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--fail-early">--fail-early</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--fail-with-body">--fail-with-body</a></td><td><a href="/ch/7.76.0.html">7.76.0</a></td></tr>
+<tr><td><a href="manpage.html#--false-start">--false-start</a></td><td><a href="/ch/7.42.0.html">7.42.0</a></td></tr>
+<tr><td><a href="manpage.html#--follow">--follow</a></td><td><a href="/ch/8.16.0.html">8.16.0</a></td></tr>
+<tr><td><a href="manpage.html#-F">--form</a></td><td><a href="/ch/5.0.html">5.0</a></td></tr>
+<tr><td><a href="manpage.html#--form-escape">--form-escape</a></td><td><a href="/ch/7.81.0.html">7.81.0</a></td></tr>
+<tr><td><a href="manpage.html#--form-string">--form-string</a></td><td><a href="/ch/7.13.2.html">7.13.2</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-account">--ftp-account</a></td><td><a href="/ch/7.13.0.html">7.13.0</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-alternative-to-user">--ftp-alternative-to-user</a></td><td><a href="/ch/7.15.5.html">7.15.5</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-create-dirs">--ftp-create-dirs</a></td><td><a href="/ch/7.10.7.html">7.10.7</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-method">--ftp-method</a></td><td><a href="/ch/7.15.1.html">7.15.1</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-pasv">--ftp-pasv</a></td><td><a href="/ch/7.11.0.html">7.11.0</a></td></tr>
+<tr><td><a href="manpage.html#-P">--ftp-port</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-pret">--ftp-pret</a></td><td><a href="/ch/7.20.0.html">7.20.0</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-skip-pasv-ip">--ftp-skip-pasv-ip</a></td><td><a href="/ch/7.15.0.html">7.15.0</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-ssl-ccc">--ftp-ssl-ccc</a></td><td><a href="/ch/7.16.1.html">7.16.1</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-ssl-ccc-mode">--ftp-ssl-ccc-mode</a></td><td><a href="/ch/7.16.2.html">7.16.2</a></td></tr>
+<tr><td><a href="manpage.html#--ftp-ssl-control">--ftp-ssl-control</a></td><td><a href="/ch/7.16.0.html">7.16.0</a></td></tr>
+<tr><td><a href="manpage.html#-G">--get</a></td><td><a href="/ch/7.8.1.html">7.8.1</a></td></tr>
+<tr><td><a href="manpage.html#-g">--globoff</a></td><td><a href="/ch/7.6.html">7.6</a></td></tr>
+<tr><td><a href="manpage.html#--happy-eyeballs-timeout-ms">--happy-eyeballs-timeout-ms</a></td><td><a href="/ch/7.59.0.html">7.59.0</a></td></tr>
+<tr><td><a href="manpage.html#--haproxy-clientip">--haproxy-clientip</a></td><td><a href="/ch/8.2.0.html">8.2.0</a></td></tr>
+<tr><td><a href="manpage.html#--haproxy-protocol">--haproxy-protocol</a></td><td><a href="/ch/7.60.0.html">7.60.0</a></td></tr>
+<tr><td><a href="manpage.html#-I">--head</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#-H">--header</a></td><td><a href="/ch/5.0.html">5.0</a></td></tr>
+<tr><td><a href="manpage.html#-h">--help</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--hostpubmd5">--hostpubmd5</a></td><td><a href="/ch/7.17.1.html">7.17.1</a></td></tr>
+<tr><td><a href="manpage.html#--hostpubsha256">--hostpubsha256</a></td><td><a href="/ch/7.80.0.html">7.80.0</a></td></tr>
+<tr><td><a href="manpage.html#--hsts">--hsts</a></td><td><a href="/ch/7.74.0.html">7.74.0</a></td></tr>
+<tr><td><a href="manpage.html#--http0.9">--http0.9</a></td><td><a href="/ch/7.64.0.html">7.64.0</a></td></tr>
+<tr><td><a href="manpage.html#-0">--http1.0</a></td><td><a href="/ch/7.9.1.html">7.9.1</a></td></tr>
+<tr><td><a href="manpage.html#--http1.1">--http1.1</a></td><td><a href="/ch/7.33.0.html">7.33.0</a></td></tr>
+<tr><td><a href="manpage.html#--http2">--http2</a></td><td><a href="/ch/7.33.0.html">7.33.0</a></td></tr>
+<tr><td><a href="manpage.html#--http2-prior-knowledge">--http2-prior-knowledge</a></td><td><a href="/ch/7.49.0.html">7.49.0</a></td></tr>
+<tr><td><a href="manpage.html#--http3">--http3</a></td><td><a href="/ch/7.66.0.html">7.66.0</a></td></tr>
+<tr><td><a href="manpage.html#--http3-only">--http3-only</a></td><td><a href="/ch/7.88.0.html">7.88.0</a></td></tr>
+<tr><td><a href="manpage.html#--ignore-content-length">--ignore-content-length</a></td><td><a href="/ch/7.14.1.html">7.14.1</a></td></tr>
+<tr><td><a href="manpage.html#-k">--insecure</a></td><td><a href="/ch/7.10.html">7.10</a></td></tr>
+<tr><td><a href="manpage.html#--interface">--interface</a></td><td><a href="/ch/7.3.html">7.3</a></td></tr>
+<tr><td><a href="manpage.html#--ip-tos">--ip-tos</a></td><td><a href="/ch/8.9.0.html">8.9.0</a></td></tr>
+<tr><td><a href="manpage.html#--ipfs-gateway">--ipfs-gateway</a></td><td><a href="/ch/8.4.0.html">8.4.0</a></td></tr>
+<tr><td><a href="manpage.html#-4">--ipv4</a></td><td><a href="/ch/7.10.8.html">7.10.8</a></td></tr>
+<tr><td><a href="manpage.html#-6">--ipv6</a></td><td><a href="/ch/7.10.8.html">7.10.8</a></td></tr>
+<tr><td><a href="manpage.html#--json">--json</a></td><td><a href="/ch/7.82.0.html">7.82.0</a></td></tr>
+<tr><td><a href="manpage.html#-j">--junk-session-cookies</a></td><td><a href="/ch/7.9.7.html">7.9.7</a></td></tr>
+<tr><td><a href="manpage.html#--keepalive-cnt">--keepalive-cnt</a></td><td><a href="/ch/8.9.0.html">8.9.0</a></td></tr>
+<tr><td><a href="manpage.html#--keepalive-time">--keepalive-time</a></td><td><a href="/ch/7.18.0.html">7.18.0</a></td></tr>
+<tr><td><a href="manpage.html#--key">--key</a></td><td><a href="/ch/7.9.3.html">7.9.3</a></td></tr>
+<tr><td><a href="manpage.html#--key-type">--key-type</a></td><td><a href="/ch/7.9.3.html">7.9.3</a></td></tr>
+<tr><td><a href="manpage.html#--knownhosts">--knownhosts</a></td><td><a href="/ch/8.17.0.html">8.17.0</a></td></tr>
+<tr><td><a href="manpage.html#--krb">--krb</a></td><td><a href="/ch/7.3.html">7.3</a></td></tr>
+<tr><td><a href="manpage.html#--libcurl">--libcurl</a></td><td><a href="/ch/7.16.1.html">7.16.1</a></td></tr>
+<tr><td><a href="manpage.html#--limit-rate">--limit-rate</a></td><td><a href="/ch/7.10.html">7.10</a></td></tr>
+<tr><td><a href="manpage.html#-l">--list-only</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--local-port">--local-port</a></td><td><a href="/ch/7.15.2.html">7.15.2</a></td></tr>
+<tr><td><a href="manpage.html#-L">--location</a></td><td><a href="/ch/4.9.html">4.9</a></td></tr>
+<tr><td><a href="manpage.html#--location-trusted">--location-trusted</a></td><td><a href="/ch/7.10.4.html">7.10.4</a></td></tr>
+<tr><td><a href="manpage.html#--login-options">--login-options</a></td><td><a href="/ch/7.34.0.html">7.34.0</a></td></tr>
+<tr><td><a href="manpage.html#--mail-auth">--mail-auth</a></td><td><a href="/ch/7.25.0.html">7.25.0</a></td></tr>
+<tr><td><a href="manpage.html#--mail-from">--mail-from</a></td><td><a href="/ch/7.20.0.html">7.20.0</a></td></tr>
+<tr><td><a href="manpage.html#--mail-rcpt">--mail-rcpt</a></td><td><a href="/ch/7.20.0.html">7.20.0</a></td></tr>
+<tr><td><a href="manpage.html#--mail-rcpt-allowfails">--mail-rcpt-allowfails</a></td><td><a href="/ch/7.69.0.html">7.69.0</a></td></tr>
+<tr><td><a href="manpage.html#-M">--manual</a></td><td><a href="/ch/5.2.html">5.2</a></td></tr>
+<tr><td><a href="manpage.html#--max-filesize">--max-filesize</a></td><td><a href="/ch/7.10.8.html">7.10.8</a></td></tr>
+<tr><td><a href="manpage.html#--max-redirs">--max-redirs</a></td><td><a href="/ch/7.5.html">7.5</a></td></tr>
+<tr><td><a href="manpage.html#-m">--max-time</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--metalink">--metalink</a></td><td><a href="/ch/7.27.0.html">7.27.0</a></td></tr>
+<tr><td><a href="manpage.html#--mptcp">--mptcp</a></td><td><a href="/ch/8.9.0.html">8.9.0</a></td></tr>
+<tr><td><a href="manpage.html#--negotiate">--negotiate</a></td><td><a href="/ch/7.10.6.html">7.10.6</a></td></tr>
+<tr><td><a href="manpage.html#-n">--netrc</a></td><td><a href="/ch/4.6.html">4.6</a></td></tr>
+<tr><td><a href="manpage.html#--netrc-file">--netrc-file</a></td><td><a href="/ch/7.21.5.html">7.21.5</a></td></tr>
+<tr><td><a href="manpage.html#--netrc-optional">--netrc-optional</a></td><td><a href="/ch/7.9.8.html">7.9.8</a></td></tr>
+<tr><td><a href="manpage.html#-:">--next</a></td><td><a href="/ch/7.36.0.html">7.36.0</a></td></tr>
+<tr><td><a href="manpage.html#--no-alpn">--no-alpn</a></td><td><a href="/ch/7.36.0.html">7.36.0</a></td></tr>
+<tr><td><a href="manpage.html#-N">--no-buffer</a></td><td><a href="/ch/6.5.html">6.5</a></td></tr>
+<tr><td><a href="manpage.html#--no-clobber">--no-clobber</a></td><td><a href="/ch/7.83.0.html">7.83.0</a></td></tr>
+<tr><td><a href="manpage.html#--no-keepalive">--no-keepalive</a></td><td><a href="/ch/7.18.0.html">7.18.0</a></td></tr>
+<tr><td><a href="manpage.html#--no-npn">--no-npn</a></td><td><a href="/ch/7.36.0.html">7.36.0</a></td></tr>
+<tr><td><a href="manpage.html#--no-progress-meter">--no-progress-meter</a></td><td><a href="/ch/7.67.0.html">7.67.0</a></td></tr>
+<tr><td><a href="manpage.html#--no-sessionid">--no-sessionid</a></td><td><a href="/ch/7.16.0.html">7.16.0</a></td></tr>
+<tr><td><a href="manpage.html#--noproxy">--noproxy</a></td><td><a href="/ch/7.19.4.html">7.19.4</a></td></tr>
+<tr><td><a href="manpage.html#--ntlm">--ntlm</a></td><td><a href="/ch/7.10.6.html">7.10.6</a></td></tr>
+<tr><td><a href="manpage.html#--ntlm-wb">--ntlm-wb</a></td><td><a href="/ch/7.22.0.html">7.22.0</a></td></tr>
+<tr><td><a href="manpage.html#--oauth2-bearer">--oauth2-bearer</a></td><td><a href="/ch/7.33.0.html">7.33.0</a></td></tr>
+<tr><td><a href="manpage.html#--out-null">--out-null</a></td><td><a href="/ch/8.16.0.html">8.16.0</a></td></tr>
+<tr><td><a href="manpage.html#-o">--output</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--output-dir">--output-dir</a></td><td><a href="/ch/7.73.0.html">7.73.0</a></td></tr>
+<tr><td><a href="manpage.html#-Z">--parallel</a></td><td><a href="/ch/7.66.0.html">7.66.0</a></td></tr>
+<tr><td><a href="manpage.html#--parallel-immediate">--parallel-immediate</a></td><td><a href="/ch/7.68.0.html">7.68.0</a></td></tr>
+<tr><td><a href="manpage.html#--parallel-max">--parallel-max</a></td><td><a href="/ch/7.66.0.html">7.66.0</a></td></tr>
+<tr><td><a href="manpage.html#--parallel-max-host">--parallel-max-host</a></td><td><a href="/ch/8.16.0.html">8.16.0</a></td></tr>
+<tr><td><a href="manpage.html#--pass">--pass</a></td><td><a href="/ch/7.9.3.html">7.9.3</a></td></tr>
+<tr><td><a href="manpage.html#--path-as-is">--path-as-is</a></td><td><a href="/ch/7.42.0.html">7.42.0</a></td></tr>
+<tr><td><a href="manpage.html#--pinnedpubkey">--pinnedpubkey</a></td><td><a href="/ch/7.39.0.html">7.39.0</a></td></tr>
+<tr><td><a href="manpage.html#--post301">--post301</a></td><td><a href="/ch/7.17.1.html">7.17.1</a></td></tr>
+<tr><td><a href="manpage.html#--post302">--post302</a></td><td><a href="/ch/7.19.1.html">7.19.1</a></td></tr>
+<tr><td><a href="manpage.html#--post303">--post303</a></td><td><a href="/ch/7.26.0.html">7.26.0</a></td></tr>
+<tr><td><a href="manpage.html#--preproxy">--preproxy</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#-#">--progress-bar</a></td><td><a href="/ch/5.10.html">5.10</a></td></tr>
+<tr><td><a href="manpage.html#--proto">--proto</a></td><td><a href="/ch/7.21.0.html">7.21.0</a></td></tr>
+<tr><td><a href="manpage.html#--proto-default">--proto-default</a></td><td><a href="/ch/7.45.0.html">7.45.0</a></td></tr>
+<tr><td><a href="manpage.html#--proto-redir">--proto-redir</a></td><td><a href="/ch/7.21.0.html">7.21.0</a></td></tr>
+<tr><td><a href="manpage.html#-x">--proxy</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-anyauth">--proxy-anyauth</a></td><td><a href="/ch/7.13.2.html">7.13.2</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-basic">--proxy-basic</a></td><td><a href="/ch/7.12.0.html">7.12.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-ca-native">--proxy-ca-native</a></td><td><a href="/ch/8.2.0.html">8.2.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-cacert">--proxy-cacert</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-capath">--proxy-capath</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-cert">--proxy-cert</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-cert-type">--proxy-cert-type</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-ciphers">--proxy-ciphers</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-crlfile">--proxy-crlfile</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-digest">--proxy-digest</a></td><td><a href="/ch/7.12.0.html">7.12.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-header">--proxy-header</a></td><td><a href="/ch/7.37.0.html">7.37.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-http2">--proxy-http2</a></td><td><a href="/ch/8.1.0.html">8.1.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-insecure">--proxy-insecure</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-key">--proxy-key</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-key-type">--proxy-key-type</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-negotiate">--proxy-negotiate</a></td><td><a href="/ch/7.17.1.html">7.17.1</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-ntlm">--proxy-ntlm</a></td><td><a href="/ch/7.10.7.html">7.10.7</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-pass">--proxy-pass</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-pinnedpubkey">--proxy-pinnedpubkey</a></td><td><a href="/ch/7.59.0.html">7.59.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-service-name">--proxy-service-name</a></td><td><a href="/ch/7.43.0.html">7.43.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-ssl-allow-beast">--proxy-ssl-allow-beast</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-ssl-auto-client-cert">--proxy-ssl-auto-client-cert</a></td><td><a href="/ch/7.77.0.html">7.77.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-tls13-ciphers">--proxy-tls13-ciphers</a></td><td><a href="/ch/7.61.0.html">7.61.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-tlsauthtype">--proxy-tlsauthtype</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-tlspassword">--proxy-tlspassword</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-tlsuser">--proxy-tlsuser</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy-tlsv1">--proxy-tlsv1</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#-U">--proxy-user</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--proxy1.0">--proxy1.0</a></td><td><a href="/ch/7.19.4.html">7.19.4</a></td></tr>
+<tr><td><a href="manpage.html#-p">--proxytunnel</a></td><td><a href="/ch/7.3.html">7.3</a></td></tr>
+<tr><td><a href="manpage.html#--pubkey">--pubkey</a></td><td><a href="/ch/7.16.2.html">7.16.2</a></td></tr>
+<tr><td><a href="manpage.html#-Q">--quote</a></td><td><a href="/ch/5.3.html">5.3</a></td></tr>
+<tr><td><a href="manpage.html#--random-file">--random-file</a></td><td><a href="/ch/7.7.html">7.7</a></td></tr>
+<tr><td><a href="manpage.html#-r">--range</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--rate">--rate</a></td><td><a href="/ch/7.84.0.html">7.84.0</a></td></tr>
+<tr><td><a href="manpage.html#--raw">--raw</a></td><td><a href="/ch/7.16.2.html">7.16.2</a></td></tr>
+<tr><td><a href="manpage.html#-e">--referer</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#-J">--remote-header-name</a></td><td><a href="/ch/7.20.0.html">7.20.0</a></td></tr>
+<tr><td><a href="manpage.html#-O">--remote-name</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--remote-name-all">--remote-name-all</a></td><td><a href="/ch/7.19.0.html">7.19.0</a></td></tr>
+<tr><td><a href="manpage.html#-R">--remote-time</a></td><td><a href="/ch/7.9.html">7.9</a></td></tr>
+<tr><td><a href="manpage.html#--remove-on-error">--remove-on-error</a></td><td><a href="/ch/7.83.0.html">7.83.0</a></td></tr>
+<tr><td><a href="manpage.html#-X">--request</a></td><td><a href="/ch/6.0.html">6.0</a></td></tr>
+<tr><td><a href="manpage.html#--request-target">--request-target</a></td><td><a href="/ch/7.55.0.html">7.55.0</a></td></tr>
+<tr><td><a href="manpage.html#--resolve">--resolve</a></td><td><a href="/ch/7.21.3.html">7.21.3</a></td></tr>
+<tr><td><a href="manpage.html#--retry">--retry</a></td><td><a href="/ch/7.12.3.html">7.12.3</a></td></tr>
+<tr><td><a href="manpage.html#--retry-all-errors">--retry-all-errors</a></td><td><a href="/ch/7.71.0.html">7.71.0</a></td></tr>
+<tr><td><a href="manpage.html#--retry-connrefused">--retry-connrefused</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--retry-delay">--retry-delay</a></td><td><a href="/ch/7.12.3.html">7.12.3</a></td></tr>
+<tr><td><a href="manpage.html#--retry-max-time">--retry-max-time</a></td><td><a href="/ch/7.12.3.html">7.12.3</a></td></tr>
+<tr><td><a href="manpage.html#--sasl-authzid">--sasl-authzid</a></td><td><a href="/ch/7.66.0.html">7.66.0</a></td></tr>
+<tr><td><a href="manpage.html#--sasl-ir">--sasl-ir</a></td><td><a href="/ch/7.31.0.html">7.31.0</a></td></tr>
+<tr><td><a href="manpage.html#--service-name">--service-name</a></td><td><a href="/ch/7.43.0.html">7.43.0</a></td></tr>
+<tr><td><a href="manpage.html#-S">--show-error</a></td><td><a href="/ch/5.9.html">5.9</a></td></tr>
+<tr><td><a href="manpage.html#-i">--show-headers</a></td><td><a href="/ch/4.8.html">4.8</a></td></tr>
+<tr><td><a href="manpage.html#--sigalgs">--sigalgs</a></td><td><a href="/ch/8.14.0.html">8.14.0</a></td></tr>
+<tr><td><a href="manpage.html#-s">--silent</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--skip-existing">--skip-existing</a></td><td><a href="/ch/8.10.0.html">8.10.0</a></td></tr>
+<tr><td><a href="manpage.html#--socks4">--socks4</a></td><td><a href="/ch/7.15.2.html">7.15.2</a></td></tr>
+<tr><td><a href="manpage.html#--socks4a">--socks4a</a></td><td><a href="/ch/7.18.0.html">7.18.0</a></td></tr>
+<tr><td><a href="manpage.html#--socks5">--socks5</a></td><td><a href="/ch/7.18.0.html">7.18.0</a></td></tr>
+<tr><td><a href="manpage.html#--socks5-basic">--socks5-basic</a></td><td><a href="/ch/7.55.0.html">7.55.0</a></td></tr>
+<tr><td><a href="manpage.html#--socks5-gssapi">--socks5-gssapi</a></td><td><a href="/ch/7.55.0.html">7.55.0</a></td></tr>
+<tr><td><a href="manpage.html#--socks5-gssapi-nec">--socks5-gssapi-nec</a></td><td><a href="/ch/7.19.4.html">7.19.4</a></td></tr>
+<tr><td><a href="manpage.html#--socks5-gssapi-service">--socks5-gssapi-service</a></td><td><a href="/ch/7.19.4.html">7.19.4</a></td></tr>
+<tr><td><a href="manpage.html#--socks5-hostname">--socks5-hostname</a></td><td><a href="/ch/7.18.0.html">7.18.0</a></td></tr>
+<tr><td><a href="manpage.html#-Y">--speed-limit</a></td><td><a href="/ch/4.7.html">4.7</a></td></tr>
+<tr><td><a href="manpage.html#-y">--speed-time</a></td><td><a href="/ch/4.7.html">4.7</a></td></tr>
+<tr><td><a href="manpage.html#--ssl">--ssl</a></td><td><a href="/ch/7.20.0.html">7.20.0</a></td></tr>
+<tr><td><a href="manpage.html#--ssl-allow-beast">--ssl-allow-beast</a></td><td><a href="/ch/7.25.0.html">7.25.0</a></td></tr>
+<tr><td><a href="manpage.html#--ssl-auto-client-cert">--ssl-auto-client-cert</a></td><td><a href="/ch/7.77.0.html">7.77.0</a></td></tr>
+<tr><td><a href="manpage.html#--ssl-no-revoke">--ssl-no-revoke</a></td><td><a href="/ch/7.44.0.html">7.44.0</a></td></tr>
+<tr><td><a href="manpage.html#--ssl-reqd">--ssl-reqd</a></td><td><a href="/ch/7.20.0.html">7.20.0</a></td></tr>
+<tr><td><a href="manpage.html#--ssl-revoke-best-effort">--ssl-revoke-best-effort</a></td><td><a href="/ch/7.70.0.html">7.70.0</a></td></tr>
+<tr><td><a href="manpage.html#--ssl-sessions">--ssl-sessions</a></td><td><a href="/ch/8.12.0.html">8.12.0</a></td></tr>
+<tr><td><a href="manpage.html#-2">--sslv2</a></td><td><a href="/ch/5.9.html">5.9</a></td></tr>
+<tr><td><a href="manpage.html#-3">--sslv3</a></td><td><a href="/ch/5.9.html">5.9</a></td></tr>
+<tr><td><a href="manpage.html#--stderr">--stderr</a></td><td><a href="/ch/6.2.html">6.2</a></td></tr>
+<tr><td><a href="manpage.html#--styled-output">--styled-output</a></td><td><a href="/ch/7.61.0.html">7.61.0</a></td></tr>
+<tr><td><a href="manpage.html#--suppress-connect-headers">--suppress-connect-headers</a></td><td><a href="/ch/7.54.0.html">7.54.0</a></td></tr>
+<tr><td><a href="manpage.html#--tcp-fastopen">--tcp-fastopen</a></td><td><a href="/ch/7.49.0.html">7.49.0</a></td></tr>
+<tr><td><a href="manpage.html#--tcp-nodelay">--tcp-nodelay</a></td><td><a href="/ch/7.11.2.html">7.11.2</a></td></tr>
+<tr><td><a href="manpage.html#-t">--telnet-option</a></td><td><a href="/ch/7.7.html">7.7</a></td></tr>
+<tr><td><a href="manpage.html#--tftp-blksize">--tftp-blksize</a></td><td><a href="/ch/7.20.0.html">7.20.0</a></td></tr>
+<tr><td><a href="manpage.html#--tftp-no-options">--tftp-no-options</a></td><td><a href="/ch/7.48.0.html">7.48.0</a></td></tr>
+<tr><td><a href="manpage.html#-z">--time-cond</a></td><td><a href="/ch/5.8.html">5.8</a></td></tr>
+<tr><td><a href="manpage.html#--tls-earlydata">--tls-earlydata</a></td><td><a href="/ch/8.11.0.html">8.11.0</a></td></tr>
+<tr><td><a href="manpage.html#--tls-max">--tls-max</a></td><td><a href="/ch/7.54.0.html">7.54.0</a></td></tr>
+<tr><td><a href="manpage.html#--tls13-ciphers">--tls13-ciphers</a></td><td><a href="/ch/7.61.0.html">7.61.0</a></td></tr>
+<tr><td><a href="manpage.html#--tlsauthtype">--tlsauthtype</a></td><td><a href="/ch/7.21.4.html">7.21.4</a></td></tr>
+<tr><td><a href="manpage.html#--tlspassword">--tlspassword</a></td><td><a href="/ch/7.21.4.html">7.21.4</a></td></tr>
+<tr><td><a href="manpage.html#--tlsuser">--tlsuser</a></td><td><a href="/ch/7.21.4.html">7.21.4</a></td></tr>
+<tr><td><a href="manpage.html#-1">--tlsv1</a></td><td><a href="/ch/7.9.2.html">7.9.2</a></td></tr>
+<tr><td><a href="manpage.html#--tlsv1.0">--tlsv1.0</a></td><td><a href="/ch/7.34.0.html">7.34.0</a></td></tr>
+<tr><td><a href="manpage.html#--tlsv1.1">--tlsv1.1</a></td><td><a href="/ch/7.34.0.html">7.34.0</a></td></tr>
+<tr><td><a href="manpage.html#--tlsv1.2">--tlsv1.2</a></td><td><a href="/ch/7.34.0.html">7.34.0</a></td></tr>
+<tr><td><a href="manpage.html#--tlsv1.3">--tlsv1.3</a></td><td><a href="/ch/7.52.0.html">7.52.0</a></td></tr>
+<tr><td><a href="manpage.html#--tr-encoding">--tr-encoding</a></td><td><a href="/ch/7.21.6.html">7.21.6</a></td></tr>
+<tr><td><a href="manpage.html#--trace">--trace</a></td><td><a href="/ch/7.9.7.html">7.9.7</a></td></tr>
+<tr><td><a href="manpage.html#--trace-ascii">--trace-ascii</a></td><td><a href="/ch/7.9.7.html">7.9.7</a></td></tr>
+<tr><td><a href="manpage.html#--trace-config">--trace-config</a></td><td><a href="/ch/8.3.0.html">8.3.0</a></td></tr>
+<tr><td><a href="manpage.html#--trace-ids">--trace-ids</a></td><td><a href="/ch/8.2.0.html">8.2.0</a></td></tr>
+<tr><td><a href="manpage.html#--trace-time">--trace-time</a></td><td><a href="/ch/7.14.0.html">7.14.0</a></td></tr>
+<tr><td><a href="manpage.html#--unix-socket">--unix-socket</a></td><td><a href="/ch/7.40.0.html">7.40.0</a></td></tr>
+<tr><td><a href="manpage.html#-T">--upload-file</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--upload-flags">--upload-flags</a></td><td><a href="/ch/8.13.0.html">8.13.0</a></td></tr>
+<tr><td><a href="manpage.html#--url">--url</a></td><td><a href="/ch/7.5.html">7.5</a></td></tr>
+<tr><td><a href="manpage.html#--url-query">--url-query</a></td><td><a href="/ch/7.87.0.html">7.87.0</a></td></tr>
+<tr><td><a href="manpage.html#-B">--use-ascii</a></td><td><a href="/ch/5.0.html">5.0</a></td></tr>
+<tr><td><a href="manpage.html#-u">--user</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#-A">--user-agent</a></td><td><a href="/ch/4.5.1.html">4.5.1</a></td></tr>
+<tr><td><a href="manpage.html#--variable">--variable</a></td><td><a href="/ch/8.3.0.html">8.3.0</a></td></tr>
+<tr><td><a href="manpage.html#-v">--verbose</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#-V">--version</a></td><td><a href="/ch/4.0.html">4.0</a></td></tr>
+<tr><td><a href="manpage.html#--vlan-priority">--vlan-priority</a></td><td><a href="/ch/8.9.0.html">8.9.0</a></td></tr>
+<tr><td><a href="manpage.html#-w">--write-out</a></td><td><a href="/ch/6.5.html">6.5</a></td></tr>
+<tr><td><a href="manpage.html#--xattr">--xattr</a></td><td><a href="/ch/7.21.3.html">7.21.3</a></td></tr>
+</table>
+</div>
+</div>
+</body>
+</html>

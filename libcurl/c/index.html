@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - API</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <b>API</b></div>
+<h1> The libcurl API </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="allfuncs.html">All functions</a>
+<br><a href="libcurl-errors.html">Errors</a>
+<br><a href="example.html">Examples</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+</div>
+<p>
+ Read <a href="libcurl.html">the libcurl API overview</a> and
+ <a href="libcurl-tutorial.html">the libcurl tutorial</a> to get a general
+ idea of what libcurl programming is all about. Also, check out
+ the <a href="example.html">examples</a>.
+<p>
+ Dig into the <a href="symbols-in-versions.html">Symbols In Versions</a>
+ document to learn in which libcurl releases symbols were added or removed.
+<p>
+ Every libcurl release is backwards compatible with the previous release. We
+ do not break API nor ABI. Ever.
+</ul>
+<h1> Easy or Multi </h1>
+<p>
+ The easy interface is a synchronous, efficient, quickly used and... yes, easy
+ interface for Internet transfers. Numerous applications have been built using
+ this.
+<p>
+ The multi interface is the asynchronous brother in the family and it also
+ offers multiple transfers using a single thread and more. Get a grip of how
+ to work with it in <a href="libcurl-multi.html">the multi interface
+ overview</a>.
+<h1> The Easy interface </h1>
+<p>
+ 1. <a href="curl_easy_init.html">init</a> your easy-session and get a handle,
+ which you use as input to the following interface functions you use.
+<p>
+ 2. Set all the <a href="curl_easy_setopt.html">options</a> you want in the
+ upcoming transfer, most important among them is the URL itself. You might
+ want to set some callbacks as well that will be called from the library when
+ data is available etc.
+<p>
+ 3. When all is setup, tell libcurl
+ to <a href="curl_easy_perform.html">perform</a> the transfer. It will then do
+ the entire operation and will not return until it is done or failed.
+<p>
+ 4. After the transfer is completed, you may <a href="curl_easy_getinfo.html">get
+ information</a> about it and then you
+<p>
+ 5. <a href="curl_easy_cleanup.html">cleanup</a> the easy-session's handle and
+ libcurl is entirely off the hook!
+<p>
+ See also the <a href="libcurl-easy.html">easy interface overview</a>.
+<p>
+ Manpages for all functions are included in every release archive.
+</div>
+</div>
+</body>
+</html>

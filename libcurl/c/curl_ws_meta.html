@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_ws_meta()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_init</b></div>
+<h1> curl_ws_meta - meta data websocket information </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_ws_meta%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_ws_meta.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_ws_meta.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_ws_meta - meta data WebSocket information </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+const struct curl_ws_frame &#x2a;<a href="curl_ws_meta.html">curl_ws_meta</a>(CURL &#x2a;curl);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">When the write callback (<a Class="emphasis" href="./CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>) is invoked on received WebSocket traffic, <a Class="emphasis" href="./curl_ws_meta.html">curl_ws_meta</a> can be called from within the callback to provide additional information about the current frame. </p>
+<p class="level0">This function only works from within the callback, and only when receiving WebSocket data. </p>
+<p class="level0">This function requires an easy handle as input argument for libcurl to know what transfer the question is about, but as there is no such pointer provided to the callback by libcurl itself, applications that want to use <a Class="emphasis" href="./curl_ws_meta.html">curl_ws_meta</a> need to pass it on to the callback on its own. </p><a name="struct"></a><h2 class="nroffsh">Struct curl_ws_frame</h2><pre class="level0">
+struct curl_ws_frame {
+&nbsp; int age;
+&nbsp; int flags;
+&nbsp; curl_off_t offset;
+&nbsp; curl_off_t bytesleft;
+&nbsp; size_t len;
+};
+</pre>
+<p class="level0"><a name="age"></a><span class="nroffip">age</span> </p>
+<p class="level1">This field specify the age of this struct. It is always zero for now. </p>
+<p class="level0"><a name="flags"></a><span class="nroffip">flags</span> </p>
+<p class="level1">This is a bitmask with individual bits set that describes the WebSocket data. See the list below. </p>
+<p class="level0"><a name="offset"></a><span class="nroffip">offset</span> </p>
+<p class="level1">When this chunk is a continuation of frame data already delivered, this is the offset into the final frame data where this piece belongs to. </p>
+<p class="level0"><a name="bytesleft"></a><span class="nroffip">bytesleft</span> </p>
+<p class="level1">If this is not a complete fragment, the <a class="emphasis" href="#bytesleft">bytesleft</a> field informs about how many additional bytes are expected to arrive before this fragment is complete. </p>
+<p class="level0"><a name="len"></a><span class="nroffip">len</span> </p>
+<p class="level1">The length of the current data chunk. </p><a name="FLAGS"></a><h2 class="nroffsh">Flags</h2>
+<p class="level0">The <span Class="emphasis">message type</span> flags (CURLWS_TEXT/BINARY/CLOSE/PING/PONG) are mutually exclusive. </p>
+<p class="level0"><a name="CURLWSTEXT"></a><span class="nroffip">CURLWS_TEXT</span> </p>
+<p class="level1">This is a message with text data. Note that this makes a difference to WebSocket but libcurl itself does not make any verification of the content or precautions that you actually receive valid UTF-8 content. </p>
+<p class="level0"><a name="CURLWSBINARY"></a><span class="nroffip">CURLWS_BINARY</span> </p>
+<p class="level1">This is a message with binary data. </p>
+<p class="level0"><a name="CURLWSCLOSE"></a><span class="nroffip">CURLWS_CLOSE</span> </p>
+<p class="level1">This is a close message. No more data follows. </p>
+<p class="level1">It may contain a 2-byte unsigned integer in network byte order that indicates the close reason and may additionally contain up to 123 bytes of further textual payload for a total of at most 125 bytes. libcurl does not verify that the textual description is valid UTF-8. </p>
+<p class="level0"><a name="CURLWSPING"></a><span class="nroffip">CURLWS_PING</span> </p>
+<p class="level1">This is a ping message. It may contain up to 125 bytes of payload text. libcurl does not verify that the payload is valid UTF-8. </p>
+<p class="level1">Upon receiving a ping message, libcurl automatically responds with a pong message unless the <span Class="bold">CURLWS_NOAUTOPONG</span> or <span Class="bold">CURLWS_RAW_MODE</span> bit of <a Class="emphasis" href="./CURLOPT_WS_OPTIONS.html">CURLOPT_WS_OPTIONS</a> is set. </p>
+<p class="level0"><a name="CURLWSPONG"></a><span class="nroffip">CURLWS_PONG</span> </p>
+<p class="level1">This is a pong message. It may contain up to 125 bytes of payload text. libcurl does not verify that the payload is valid UTF-8. </p>
+<p class="level0"><a name="CURLWSCONT"></a><span class="nroffip">CURLWS_CONT</span> </p>
+<p class="level1">Can only occur in conjunction with CURLWS_TEXT or CURLWS_BINARY. </p>
+<p class="level1">This is not the final fragment of the message, it implies that there is another fragment coming as part of the same message. The application must reassemble the fragments to receive the complete message. </p>
+<p class="level1">Only a single fragmented message can be transmitted at a time, but it may be interrupted by CURLWS_CLOSE, CURLWS_PING or CURLWS_PONG frames. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects ws only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+&nbsp;
+/&#x2a; we pass a pointer to this struct to the callback &#x2a;/
+struct customdata {
+&nbsp; CURL &#x2a;easy;
+&nbsp; void &#x2a;ptr;
+};
+&nbsp;
+static size_t writecb(char &#x2a;buffer,
+&nbsp;                     size_t size, size_t nitems, void &#x2a;p)
+{
+&nbsp; struct customdata &#x2a;c = (struct customdata &#x2a;)p;
+&nbsp; const struct curl_ws_frame &#x2a;m = <a href="curl_ws_meta.html">curl_ws_meta</a>(c-&gt;easy);
+&nbsp;
+&nbsp; printf(&quot;flags: %x&bsol;n&quot;, m-&gt;flags);
+&nbsp; return 0;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   struct customdata custom;
+&nbsp;   custom.easy = curl;
+&nbsp;   custom.ptr = NULL;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>, writecb);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_WRITEDATA.html">CURLOPT_WRITEDATA</a>, &amp;custom);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp; }
+&nbsp; return 0;
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.86.0.html">7.86.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a pointer to a <span Class="emphasis">curl_ws_frame</span> struct with read-only information that is valid for this specific callback invocation. If it cannot return this information, or if the function is called in the wrong context, it returns NULL. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_getinfo.html">curl_easy_getinfo</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3), <a Class="bold" href="./curl_ws_recv.html">curl_ws_recv</a>(3), <a Class="bold" href="./curl_ws_send.html">curl_ws_send</a>(3), <a Class="bold" href="./libcurl-ws.html">libcurl-ws</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

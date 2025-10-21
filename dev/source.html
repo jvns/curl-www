@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head> <title>curl - Source Code</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>Source Code</b></div>
+<h1> Sources code control </h1>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="https://curl.se/snapshots/">Daily Snapshots</a>
+<br><a href="/docs/install.html">Build Instructions</a>
+</div>
+<p>
+ In the curl project we use git for source code control.
+<h1> <b>Browse</b> the Sources </h1>
+<p>
+  <a href="https://github.com/curl/curl">Browse the source repository</a> (on github.com)
+<h1> <b>Get</b> the Sources </h1>
+<p>
+  The curl sources are kept in a git repository. You can get the most recent
+  curl source files from there at any time. git is the version control system
+  we use for the curl project. All files in the release archive that are not
+  generated from other files are kept there, to allow full backtracking of
+  older versions. To use git you need a git client, get yours
+  from <a href="https://git-scm.com/">git-scm.com</a>. Windows users might
+  fancy <a href="https://gitforwindows.org/">git for Windows</a>.
+<p>
+  This is mostly a feature for you who really want to have a peek in how the
+  current development version looks like, and not if you just want to download
+  a version to run. If you just want to download a tar or binary
+  archive, <a href="/download.html">go here</a>.
+<p>
+  If you want to use the git server, run:
+<pre>
+  git clone https://github.com/curl/curl.git
+</pre>
+ <b>Note</b> that this will create a curl subdirectory.
+<p>
+  If you at a later time want to get the updated set of files, just cd into
+  this directory and run
+<pre>
+  git pull
+</pre>
+ You can also opt to download a <a
+ href="https://curl.se/snapshots/">daily snapshot</a>.
+<h1> <b>Compile and Build</b> the Sources </h1>
+<p>
+ When you checkout the sources, you get a file
+ named <a href="https://github.com/curl/curl/blob/master/GIT-INFO.md">GIT-INFO.md</a>
+ in the source root that describes how to proceed to compile and build them.
+<h1> <b>Change</b> the Sources </h1>
+<p>
+ If you are about to do a lot of modifications, discuss it on the curl or
+ libcurl mailing list in advance and please consider to use git directly to do
+ the changes and provide the necessary patches back to the project!
+<p>
+ When you do your changes, commit them properly with git using appropriate
+ commit messages and all. Then when you have something to show (and do show us
+ early and often) generate either a pull-request on github or plain old
+ patches and send to the mailing list.
+</div>
+</div>
+</body>
+</html>

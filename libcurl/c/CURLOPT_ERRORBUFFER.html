@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_ERRORBUFFER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_ERRORBUFFER</b></div>
+<h1> CURLOPT_ERRORBUFFER explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_ERRORBUFFER%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_ERRORBUFFER.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_ERRORBUFFER.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_ERRORBUFFER - error buffer for error messages </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a>, char &#x2a;buf);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a char pointer to a buffer that libcurl may use to store human readable error messages on failures or problems. This may be more helpful than just the return code from <a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a> and related functions. The buffer must be at least <span Class="bold">CURL_ERROR_SIZE</span> bytes big. </p>
+<p class="level0">You must keep the associated buffer available until libcurl no longer needs it. Failing to do so might cause odd behavior or even crashes. libcurl might need it until you call <a Class="emphasis" href="./curl_easy_cleanup.html">curl_easy_cleanup</a> or you set the same option again to use a different pointer. </p>
+<p class="level0">Do not rely on the contents of the buffer unless an error code was returned. Since <a href="/ch/7.60.0.html">7.60.0</a> libcurl initializes the contents of the error buffer to an empty string before performing the transfer. For earlier versions if an error code was returned but there was no error detail then the buffer was untouched. </p>
+<p class="level0">Do not attempt to set the contents of the buffer yourself, including in any callbacks you write that may be called by libcurl. The library may overwrite the buffer after your callback returns. </p>
+<p class="level0">Consider <a Class="emphasis" href="./CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a> and <a Class="emphasis" href="./CURLOPT_DEBUGFUNCTION.html">CURLOPT_DEBUGFUNCTION</a> to better debug and trace why errors happen. </p>
+<p class="level0">Using this option multiple times makes the last set pointer override the previous ones. Set it to NULL to disable its use again. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+&#35;include &lt;string.h&gt; /&#x2a; for strlen() &#x2a;/
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   char errbuf[CURL_ERROR_SIZE];
+&nbsp;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   /&#x2a; provide a buffer to store errors in &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a>, errbuf);
+&nbsp;
+&nbsp;   /&#x2a; set the error buffer as empty before performing a request &#x2a;/
+&nbsp;   errbuf[0] = 0;
+&nbsp;
+&nbsp;   /&#x2a; perform the request &#x2a;/
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   /&#x2a; if the request did not complete correctly, show the error
+&nbsp;   information. if no detailed error information was written to errbuf
+&nbsp;   show the more generic information from curl_easy_strerror instead.
+&nbsp;   &#x2a;/
+&nbsp;   if(res != <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>) {
+&nbsp;     size_t len = strlen(errbuf);
+&nbsp;     fprintf(stderr, &quot;&bsol;nlibcurl: (%d) &quot;, res);
+&nbsp;     if(len)
+&nbsp;       fprintf(stderr, &quot;%s%s&quot;, errbuf,
+&nbsp;               ((errbuf[len - 1] != &#39;&bsol;n&#39;) ? &quot;&bsol;n&quot; : &quot;&quot;));
+&nbsp;     else
+&nbsp;       fprintf(stderr, &quot;%s&bsol;n&quot;, <a href="curl_easy_strerror.html">curl_easy_strerror</a>(res));
+&nbsp;   }
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_DEBUGFUNCTION.html">CURLOPT_DEBUGFUNCTION</a>(3), <a Class="bold" href="./CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a>(3), <a Class="bold" href="./curl_easy_strerror.html">curl_easy_strerror</a>(3), <a Class="bold" href="./curl_multi_strerror.html">curl_multi_strerror</a>(3), <a Class="bold" href="./curl_share_strerror.html">curl_share_strerror</a>(3), <a Class="bold" href="./curl_url_strerror.html">curl_url_strerror</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

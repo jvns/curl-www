@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Vulnerabilities in curl 5.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/vulnerabilities.html">Vulnerability table</a> / <b>5.0 vulnerabilities</b></div>
+<h1> Vulnerabilities in curl 5.0 </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="audits.html">Audits</a>
+<br><a href="/docs/bugbounty.html">Bug Bounty</a>
+<br><a href="/ch/">Changelog</a>
+<br><a href="security.html">curl CVEs</a>
+<br><a href="/dev/vuln-disclosure.html">Vulnerability Disclosure</a>
+<br><a href="vulnerabilities.html">Vulnerabilities Table</a>
+</div>
+<p> curl version <b>5.0</b> was released on <b>December 1 1998</b>
+<p> It has the following <b>11</b> published security problems.
+<table><tr class="tabletop"><th>Flaw</th><th>From version</th><th>To and including</th></tr><tr class="odd"><td><a href="CVE-2022-35252.html">control code in cookie denial of service</a></td><td><a href="vuln-4.9.html">4.9</a></td><td><a href="vuln-7.84.0.html">7.84.0</a></td></tr>
+<tr class="even"><td><a href="CVE-2022-27776.html">Auth/cookie leak on redirect</a></td><td><a href="vuln-4.9.html">4.9</a></td><td><a href="vuln-7.82.0.html">7.82.0</a></td></tr>
+<tr class="odd"><td><a href="CVE-2022-27774.html">Credential leak on redirect</a></td><td><a href="vuln-4.9.html">4.9</a></td><td><a href="vuln-7.82.0.html">7.82.0</a></td></tr>
+<tr class="even"><td><a href="CVE-2020-8284.html">trusting FTP PASV responses</a></td><td><a href="vuln-4.0.html">4.0</a></td><td><a href="vuln-7.73.0.html">7.73.0</a></td></tr>
+<tr class="odd"><td><a href="CVE-2016-8615.html">cookie injection for other servers</a></td><td><a href="vuln-4.9.html">4.9</a></td><td><a href="vuln-7.50.3.html">7.50.3</a></td></tr>
+<tr class="even"><td><a href="CVE-2016-5419.html">TLS session resumption client cert bypass</a></td><td><a href="vuln-5.0.html">5.0</a></td><td><a href="vuln-7.50.0.html">7.50.0</a></td></tr>
+<tr class="odd"><td><a href="CVE-2016-0754.html">remote filename path traversal in curl tool for Windows</a></td><td><a href="vuln-4.0.html">4.0</a></td><td><a href="vuln-7.46.0.html">7.46.0</a></td></tr>
+<tr class="even"><td><a href="CVE-2015-3153.html">sensitive HTTP server headers also sent to proxies</a></td><td><a href="vuln-4.0.html">4.0</a></td><td><a href="vuln-7.42.0.html">7.42.0</a></td></tr>
+<tr class="odd"><td><a href="CVE-2014-3613.html">cookie leak with IP address as domain</a></td><td><a href="vuln-4.0.html">4.0</a></td><td><a href="vuln-7.37.1.html">7.37.1</a></td></tr>
+<tr class="even"><td><a href="CVE-2013-1944.html">cookie domain tailmatch</a></td><td><a href="vuln-4.7.html">4.7</a></td><td><a href="vuln-7.29.0.html">7.29.0</a></td></tr>
+<tr class="odd"><td><a href="CVE-2003-1605.html">Proxy Authentication Header Information Leakage</a></td><td><a href="vuln-4.5.html">4.5</a></td><td><a href="vuln-7.10.6.html">7.10.6</a></td></tr>
+</table>
+<h2> Futher details </h2>
+<p>
+ CVE data for 5.0 provided as <a href="vuln-5.0.json">JSON</a>.
+<p>
+ <a href="/ch/5.0.html">Changelog for curl 5.0</a>
+<p>  See vulnerability summary for <a href="vuln-4.10.html">the previous release: 4.10</a>  or <a href="vuln-5.2.html">the subsequent release: 5.2</a>
+</div>
+</div>
+</body> </html>

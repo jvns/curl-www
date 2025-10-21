@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Release procedure and release schedule</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>Release Procedure</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/ch/">changelog</a>
+<br><a href="/docs/manpage.html">curl manpage</a>
+<br><a href="/docs/tutorial.html">Tutorial</a>
+<br><a href="/docs/faq.html">FAQ</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="curl-release-procedure---how-to-do-a-release">curl release
+procedure - how to do a release</h1>
+<h2 id="in-the-source-code-repo">in the source code repo</h2>
+<ul>
+<li><p>edit <code>RELEASE-NOTES</code> to be accurate</p></li>
+<li><p>update <code>docs/THANKS</code></p></li>
+<li><p>update the "past releases" section in
+<code>docs/VERSIONS.md</code></p></li>
+<li><p>make sure all relevant changes are committed on the master
+branch</p></li>
+<li><p>tag the git repo in this style:
+<code>git tag -a curl-7_34_0</code>. -a annotates the tag and we use
+underscores instead of dots in the version number. Make sure the tag is
+GPG signed (using -s).</p></li>
+<li><p>run <code>./scripts/dmaketgz 7.34.0</code> to build the release
+tarballs.</p></li>
+<li><p>push the git commits and the new tag</p></li>
+<li><p>GPG sign the 4 tarballs as <code>maketgz</code> suggests</p></li>
+<li><p>upload the 8 resulting files to the primary download
+directory</p></li>
+</ul>
+<h2 id="in-the-curl-www-repo">in the curl-www repo</h2>
+<ul>
+<li><p>edit <code>Makefile</code> (version number and date),</p></li>
+<li><p>edit <code>_changes.html</code> (insert changes+bugfixes from
+RELEASE-NOTES)</p></li>
+<li><p>commit all local changes</p></li>
+<li><p>tag the repo with the same name as used for the source
+repo.</p></li>
+<li><p>make sure all relevant changes are committed and pushed on the
+master branch</p>
+<p>(the website then updates its contents automatically)</p></li>
+</ul>
+<h2 id="on-github">on GitHub</h2>
+<ul>
+<li>edit the newly made release tag so that it is listed as the latest
+release</li>
+</ul>
+<h2 id="inform">inform</h2>
+<ul>
+<li><p>send an email to curl-users, curl-announce and curl-library.
+Insert the RELEASE-NOTES into the mail.</p></li>
+<li><p>if there are any advisories associated with the release, send
+each markdown file to the above lists as well as to
+<code>oss-security@lists.openwall.com</code> (unless the problem is
+unique to the non-open operating systems)</p></li>
+</ul>
+<h2 id="celebrate">celebrate</h2>
+<ul>
+<li>suitable beverage intake is encouraged for the festivities</li>
+</ul>
+<h1 id="curl-release-scheduling">curl release scheduling</h1>
+<h2 id="release-cycle">Release Cycle</h2>
+<p>We normally do releases every 8 weeks on Wednesdays. If important
+problems arise, we can insert releases outside the schedule or we can
+move the release date.</p>
+<p>Each 8 week (56 days) release cycle is divided into three distinct
+periods:</p>
+<ul>
+<li><p>During the first 10 calendar days after a release, we are in
+"cool down". We do not merge features but only bug-fixes. If a
+regression is reported, we might do a follow-up patch release.</p></li>
+<li><p>During the following 3 weeks (21 days) there is a feature window:
+we allow new features and changes to curl and libcurl. If we accept any
+such changes, we bump the minor number used for the next
+release.</p></li>
+<li><p>During the next 25 days we are in feature freeze. We do not merge
+any features or changes, and we only focus on fixing bugs and polishing
+things to make the pending release a solid one.</p></li>
+</ul>
+<p>If a future release date happens to end up on a "bad date", like in
+the middle of common public holidays or when the lead release manager is
+unavailable, the release date can be moved forwards or backwards a full
+week. This is then advertised well in advance.</p>
+<h2 id="release-candidates">Release Candidates</h2>
+<p>We ship release candidate tarballs on three occasions in preparation
+for the pending release:</p>
+<ul>
+<li><p>Release candidate one (<strong>rc1</strong>) ships the same
+Saturday the feature freeze starts. Twenty-five days before the release.
+Tagged like <code>rc-7_34_0-1</code>.</p></li>
+<li><p>Release candidate two (<strong>rc2</strong>) ships nine days
+later, sixteen days before the release. On a Monday. Tagged like
+<code>rc-7_34_0-2</code>.</p></li>
+<li><p>Release candidate tree (<strong>rc3</strong>) ships nine days
+later, seven days before the release. On a Wednesday. Tagged like
+<code>rc-7_34_0-3</code>.</p></li>
+</ul>
+<p>Release candidate tarballs are ephemeral and each such tarball is
+only kept around for a few weeks. They are provided on their dedicated
+webpage at: <a href="https://curl.se/rc/">https://curl.se/rc/</a></p>
+<p>The git tags for release candidate are temporary and remain set only
+for a limited period of time.</p>
+<p><strong>Do not use release candidates in production</strong>. They
+are work in progress. Use them for testing and verification only. Use
+actual releases in production.</p>
+<h2 id="critical-problems">Critical problems</h2>
+<p>We can break the release cycle and do a patch release at any point if
+a critical enough problem is reported. There is no exact definition of
+how to assess such criticality, but if an issue is highly disturbing or
+has a security impact on a large enough share of the user population it
+might qualify.</p>
+<p>If you think an issue qualifies, bring it to the curl-library mailing
+list and push for it.</p>
+<h2 id="coming-dates">Coming dates</h2>
+<p>Based on the description above, here are some planned future release
+dates:</p>
+<ul>
+<li>September 10, 2025</li>
+<li>November 5, 2025</li>
+<li>January 7, 2026</li>
+<li>March 4, 2026</li>
+<li>April 29, 2026</li>
+<li>June 24, 2026</li>
+<li>August 19, 2026</li>
+<li>October 14, 2026</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head> <title>wcurl - How To Use</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/">curl.se</a>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">wcurl</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/wcurl">GitHub repo</a>
+    <a href="/wcurl/code-review.html">manpage</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/trurl/">trurl</a>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/wcurl/">wcurl</a> / <b>Manpage</b></div>
+<h1> wcurl manpage </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="https://github.com/curl/wcurl">GitHub repo</a>
+<br><a href="/wcurl/">wcurl</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0"><span Class="bold">wcurl</span> - a simple wrapper around curl to easily download files. </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
+<p class="level0"><span Class="bold">wcurl &lt;URL&gt;...</span> </p>
+<p class="level0"><span Class="bold">wcurl [--curl-options &lt;CURL_OPTIONS&gt;]... [--dry-run] [--no-decode-filename] [-o|-O|--output &lt;PATH&gt;] [--] &lt;URL&gt;...</span> </p>
+<p class="level0"><span Class="bold">wcurl [--curl-options=&lt;CURL_OPTIONS&gt;]... [--dry-run] [--no-decode-filename] [--output=&lt;PATH&gt;] [--] &lt;URL&gt;...</span> </p>
+<p class="level0"><span Class="bold">wcurl -V|--version</span> </p>
+<p class="level0"><span Class="bold">wcurl -h|--help</span> </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><span Class="bold">wcurl</span> is a simple curl wrapper which lets you use curl to download files without having to remember any parameters. </p>
+<p class="level0">Simply call <span Class="bold">wcurl</span> with a list of URLs you want to download and <span Class="bold">wcurl</span> picks sane defaults. </p>
+<p class="level0">If you need anything more complex, you can provide any of curl&apos;s supported parameters via the <a class="bold" href="#--curl-options">--curl-options</a> option. Just beware that you likely should be using curl directly if your use case is not covered. </p>
+<p class="level0">By default, <span Class="bold">wcurl</span> does: </p>
+<p class="level0"><a name=""></a><span class="nroffip">* Percent-encode whitespaces in URLs;</span> </p>
+<p class="level0"><a name=""></a><span class="nroffip">* Download multiple URLs in parallel</span> </p><pre class="level1">
+if the installed curl&#39;s version is &gt;= 7.66.0 (--parallel);
+</pre>
+<p class="level0"><a name=""></a><span class="nroffip">* Follow redirects;</span> </p>
+<p class="level0"><a name=""></a><span class="nroffip">* Automatically choose a filename as output;</span> </p>
+<p class="level0"><a name=""></a><span class="nroffip">* Avoid overwriting files</span> </p><pre class="level1">
+&nbsp;if the installed curl&#39;s version is &gt;= 7.83.0 (--no-clobber);
+</pre>
+<p class="level0"><a name=""></a><span class="nroffip">* Perform retries;</span> </p>
+<p class="level0"><a name=""></a><span class="nroffip">* Set the downloaded file timestamp</span> </p><pre class="level1">
+to the value provided by the server, if available;
+</pre>
+<p class="level0"><a name=""></a><span class="nroffip">* Default to https</span> </p><pre class="level1">
+if the URL does not contain any scheme;
+</pre>
+<p class="level0"><a name=""></a><span class="nroffip">* Disable curl&#39;s URL globbing parser</span> </p><pre class="level1">
+so {} and [] characters in URLs are not treated specially;
+</pre>
+<p class="level0"><a name=""></a><span class="nroffip">* Percent-decode the resulting filename;</span> </p>
+<p class="level0"><a name=""></a><span class="nroffip">* Use &#39;index.html&#39; as the default filename</span> </p><pre class="level1">
+if there is none in the URL.
+</pre>
+<a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
+<p class="level0"><a name="--curl-options"></a><a name="--curl-optionsCURLOPTIONS"></a><span class="nroffip">--curl-options, --curl-options=\&lt;CURL_OPTIONS\&gt;...</span> </p>
+<p class="level1">Specify extra options to be passed when invoking curl. May be specified more than once. </p>
+<p class="level0"><a name="-o"></a><a name="-O"></a><a name="--output"></a><a name="--outputPATH"></a><span class="nroffip">-o, -O, --output, --output=\&lt;PATH\&gt;</span> </p>
+<p class="level1">Use the provided output path instead of getting it from the URL. If multiple URLs are provided, resulting files share the same name with a number appended to the end (curl &gt;= 7.83.0). If this option is provided multiple times, only the last value is considered. </p>
+<p class="level0"><a name="--no-decode-filename"></a><span class="nroffip">--no-decode-filename</span> </p>
+<p class="level1">Don&apos;t percent-decode the output filename, even if the percent-encoding in the URL was done by <span Class="bold">wcurl</span>, e.g.: The URL contained whitespaces. </p>
+<p class="level0"><a name="--dry-run"></a><span class="nroffip">--dry-run</span> </p>
+<p class="level1">Do not actually execute curl, just print what would be invoked. </p>
+<p class="level0"><a name="-V"></a><a name="--version"></a><span class="nroffip">-V, --version</span> </p>
+<p class="level1">Print version information. </p>
+<p class="level0"><a name="-h"></a><a name="--help"></a><span class="nroffip">-h, --help</span> </p>
+<p class="level1">Print help message. </p><a name="CURLOPTIONS"></a><h2 class="nroffsh">Curl_options</h2>
+<p class="level0">Any option supported by curl can be set here. This is not used by <span Class="bold">wcurl</span>; it is instead forwarded to the curl invocation. </p><a name="URL"></a><h2 class="nroffsh">Url</h2>
+<p class="level0">URL to be downloaded. Anything that is not a parameter is considered an URL. Whitespaces are percent-encoded and the URL is passed to curl, which then performs the parsing. May be specified more than once. </p><a name="EXAMPLES"></a><h2 class="nroffsh">Examples</h2>
+<p class="level0">Download a single file: </p>
+<p class="level0"><span Class="bold">wcurl example.com/filename.txt</span> </p>
+<p class="level0">Download two files in parallel: </p>
+<p class="level0"><span Class="bold">wcurl example.com/filename1.txt example.com/filename2.txt</span> </p>
+<p class="level0">Download a file passing the <span Class="bold">--progress-bar</span> and <span Class="bold">--http2</span> flags to curl: </p>
+<p class="level0"><span Class="bold">wcurl --curl-options=&quot;--progress-bar --http2&quot; example.com/filename.txt</span> </p>
+<p class="level0">Resume from an interrupted download (if more options are used, this needs to be the last one in the list): </p>
+<p class="level0"><span Class="bold">wcurl --curl-options=&quot;--continue-at -&quot; example.com/filename.txt</span> </p><a name="AUTHORS"></a><h2 class="nroffsh">Authors</h2><pre class="level0">
+Samuel Henrique &lt;samueloph@debian.org&gt;
+Sergio Durigan Junior &lt;sergiodj@debian.org&gt;
+and many contributors, see the AUTHORS file.
+</pre>
+<a name="REPORTING"></a><h2 class="nroffsh">Reporting bugs</h2>
+<p class="level0">If you experience any problems with <span Class="bold">wcurl</span> that you do not experience with curl, submit an issue on Github: <a href="https://github.com/curl/wcurl">https://github.com/curl/wcurl</a> </p><a name="COPYRIGHT"></a><h2 class="nroffsh">Copyright</h2>
+<p class="level0"><span Class="bold">wcurl</span> is licensed under the curl license </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><span Class="bold">curl</span>(1), <span Class="bold">trurl</span>(1) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

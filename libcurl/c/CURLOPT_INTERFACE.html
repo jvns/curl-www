@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_INTERFACE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_INTERFACE</b></div>
+<h1> CURLOPT_INTERFACE explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_INTERFACE%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_INTERFACE.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_INTERFACE.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_INTERFACE - source interface for outgoing traffic </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_INTERFACE.html">CURLOPT_INTERFACE</a>, char &#x2a;interface);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a char pointer as parameter. This sets the <span Class="emphasis">interface</span> name to use as outgoing network interface. The name can be an interface name, an IP address, or a hostname. If you prefer one of these, you can use the following special prefixes: </p>
+<p class="level0">&#x2a; <span Class="emphasis">if!&lt;name&gt;</span> - Interface name &#x2a; <span Class="emphasis">host!&lt;name&gt;</span> - IP address or hostname &#x2a; <span Class="emphasis">ifhost!&lt;interface&gt;!&lt;host&gt;</span> - Interface name and IP address or hostname </p>
+<p class="level0">If <span Class="emphasis">if!</span> or <span Class="emphasis">ifhost!</span> is specified but the parameter does not match an existing interface, <span Class="emphasis"><a href="libcurl-errors.html#CURLEINTERFACEFAILED">CURLE_INTERFACE_FAILED</a></span> is returned from the libcurl function used to perform the transfer. </p>
+<p class="level0">libcurl does not support using network interface names for this option on Windows. </p>
+<p class="level0">We strongly advise against specifying the interface with a hostname, as it causes libcurl to do a blocking name resolve call to retrieve the IP address. That name resolve operation does <span Class="bold">not</span> use DNS-over-HTTPS even if <a Class="emphasis" href="./CURLOPT_DOH_URL.html">CURLOPT_DOH_URL</a> is set. </p>
+<p class="level0">The application does not have to keep the string around after setting this option. </p>
+<p class="level0">Using this option multiple times makes the last set string override the previous ones. Set it to NULL to disable its use again. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL, use whatever the TCP stack finds suitable </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/foo.bin&quot;);
+&nbsp;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_INTERFACE.html">CURLOPT_INTERFACE</a>, &quot;eth0&quot;);
+&nbsp;
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">The <span Class="emphasis">if!</span> and <span Class="emphasis">host!</span> syntax was added in <a href="/ch/7.24.0.html">7.24.0</a>. </p>
+<p class="level0">The <span Class="emphasis">ifhost!</span> syntax was added in <a href="/ch/8.9.0.html">8.9.0</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.3 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_LOCALPORT.html">CURLOPT_LOCALPORT</a>(3), <a Class="bold" href="./CURLOPT_SOCKOPTFUNCTION.html">CURLOPT_SOCKOPTFUNCTION</a>(3), <a Class="bold" href="./CURLOPT_TCP_NODELAY.html">CURLOPT_TCP_NODELAY</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

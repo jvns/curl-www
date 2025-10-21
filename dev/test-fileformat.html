@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - test case file format</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>test-fileformat.pl</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/docs/manpage.html">manpage</a>
+<br><a href="runtests.html">runtests manpage</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="curl-test-suite-file-format">curl test suite file format</h1>
+<p>The curl test suite's file format is simple and extendable, closely
+resembling XML. All data for a single test case resides in a single
+ASCII file. Labels mark the beginning and the end of all sections, and
+each label must be written in its own line. Comments are either
+XML-style (enclosed with <code>&lt;!--</code> and <code>--&gt;</code>)
+or shell script style (beginning with <code>#</code>) and must appear on
+their own lines and not alongside actual test data. Most test data files
+are syntactically valid XML, although a few files are not (lack of
+support for character entities and the preservation of CR/LF characters
+at the end of lines are the biggest differences).</p>
+<p>Each test case source exists as a file matching the format
+<code>tests/data/testNUM</code>, where <code>NUM</code> is the unique
+test number, and must begin with a <code>testcase</code> tag, which
+encompasses the remainder of the file.</p>
+<h1 id="preprocessing">Preprocessing</h1>
+<p>When a test is to be executed, the source file is first preprocessed
+and variables are substituted by their respective contents and the
+output version of the test file is stored as
+<code>%LOGDIR/testNUM</code>. That version is what is read and used by
+the test servers.</p>
+<h2 id="base64-encoding">Base64 Encoding</h2>
+<p>In the preprocess stage, a special instruction can be used to have
+runtests.pl base64 encode a certain section and insert in the generated
+output file. This is in particular good for test cases where the test
+tool is expected to pass in base64 encoded content that might use
+dynamic information that is unique for this particular test invocation,
+like the server port number.</p>
+<p>To insert a base64 encoded string into the output, use this
+syntax:</p>
+<pre><code>%b64[ data to encode ]b64%</code></pre>
+<p>The data to encode can then use any of the existing variables
+mentioned below, or even percent-encoded individual bytes. As an
+example, insert the HTTP server's port number (in ASCII) followed by a
+space and the hexadecimal byte 9a:</p>
+<pre><code>%b64[%HTTPPORT %9a]b64%</code></pre>
+<h2 id="hexadecimal-decoding">Hexadecimal decoding</h2>
+<p>In the preprocess stage, a special instruction can be used to have
+runtests.pl generate a sequence of binary bytes.</p>
+<p>To insert a sequence of bytes from a hex encoded string, use this
+syntax:</p>
+<pre><code>%hex[ %XX-encoded data to decode ]hex%</code></pre>
+<p>Other bytes within the brackets that not percent encoded are inserted
+as-is.</p>
+<p>For example, to insert the binary octets 0, 1 and 255 into the test
+file:</p>
+<pre><code>%hex[%00%01%FF]hex%</code></pre>
+<h2 id="repeat-content">Repeat content</h2>
+<p>In the preprocess stage, a special instruction can be used to have
+runtests.pl generate a repetitive sequence of bytes.</p>
+<p>To insert a sequence of repeat bytes, use this syntax to make the
+<code>&lt;string&gt;</code> get repeated <code>&lt;number&gt;</code> of
+times. The number has to be 1 or larger and the string may contain
+<code>%HH</code> hexadecimal codes:</p>
+<pre><code>%repeat[&lt;number&gt; x &lt;string&gt;]%</code></pre>
+<p>For example, to insert the word hello 100 times:</p>
+<pre><code>%repeat[100 x hello]%</code></pre>
+<h2 id="insert-capped-epoch-days">Insert capped epoch days</h2>
+<p>Mostly to test capped cookie expire dates: <code>%days[NUM]</code>
+inserts the number of seconds for the given number of days into the
+future, aligned to the nearest minute. That is the same calculation the
+cookie engine uses to cap expiration dates.</p>
+<h2 id="include-file">Include file</h2>
+<p>This instruction allows a test case to include another file. It is
+helpful to remember that the ordinary variables are expanded before the
+include happens so <code>%LOGDIR</code> and the others can be used in
+the include line.</p>
+<p>The filename cannot contain <code>%</code> as that letter is used to
+end the name for the include instruction:</p>
+<pre><code>%include filename%</code></pre>
+<h2 id="conditional-lines">Conditional lines</h2>
+<p>Lines in the test file can be made to appear conditionally on a
+specific feature (see the "features" section below) being set or not
+set. If the specific feature is present, the following lines are output,
+otherwise it outputs nothing, until a following else or
+<code>endif</code> clause. Like this:</p>
+<pre><code>%if brotli
+Accept-Encoding
+%endif</code></pre>
+<p>It can also check for the inverse condition, so if the feature is
+<em>not</em> set by the use of an exclamation mark:</p>
+<pre><code>%if !brotli
+Accept-Encoding: not-brotli
+%endif</code></pre>
+<p>You can also make an "else" clause to get output for the opposite
+condition, like:</p>
+<pre><code>%if brotli
+Accept-Encoding: brotli
+%else
+Accept-Encoding: nothing
+%endif</code></pre>
+<p>Nested conditions are supported.</p>
+<h1 id="variables">Variables</h1>
+<p>When the test is preprocessed, a range of "variables" in the test
+file is replaced by their content at that time.</p>
+<p>Available substitute variables include:</p>
+<ul>
+<li><code>%CLIENT6IP</code> - IPv6 address of the client running curl
+(including brackets)</li>
+<li><code>%CLIENT6IP-NB</code> - IPv6 address of the client running curl
+(no brackets)</li>
+<li><code>%CLIENTIP</code> - IPv4 address of the client running
+curl</li>
+<li><code>%CURL</code> - Path to the curl executable</li>
+<li><code>%DATE</code> - current YYYY-MM-DD date</li>
+<li><code>%DEV_NULL</code> - Null device (e.g. /dev/null)</li>
+<li><code>%FILE_PWD</code> - Current directory, on Windows prefixed with
+a slash</li>
+<li><code>%FTP6PORT</code> - IPv6 port number of the FTP server</li>
+<li><code>%FTPPORT</code> - Port number of the FTP server</li>
+<li><code>%FTPSPORT</code> - Port number of the FTPS server</li>
+<li><code>%FTPTIME2</code> - Timeout in seconds that should be just
+sufficient to receive a response from the test FTP server</li>
+<li><code>%GOPHER6PORT</code> - IPv6 port number of the Gopher
+server</li>
+<li><code>%GOPHERPORT</code> - Port number of the Gopher server</li>
+<li><code>%GOPHERSPORT</code> - Port number of the Gophers server</li>
+<li><code>%HOST6IP</code> - IPv6 address of the host running this
+test</li>
+<li><code>%HOSTIP</code> - IPv4 address of the host running this
+test</li>
+<li><code>%HTTP2PORT</code> - Port number of the HTTP/2 server</li>
+<li><code>%HTTP6PORT</code> - IPv6 port number of the HTTP server</li>
+<li><code>%HTTPPORT</code> - Port number of the HTTP server</li>
+<li><code>%HTTPSPORT</code> - Port number of the HTTPS server</li>
+<li><code>%HTTPSPROXYPORT</code> - Port number of the HTTPS-proxy</li>
+<li><code>%HTTPTLS6PORT</code> - IPv6 port number of the HTTP TLS
+server</li>
+<li><code>%HTTPTLSPORT</code> - Port number of the HTTP TLS server</li>
+<li><code>%HTTPUNIXPATH</code> - Path to the Unix socket of the HTTP
+server</li>
+<li><code>%IMAP6PORT</code> - IPv6 port number of the IMAP server</li>
+<li><code>%IMAPPORT</code> - Port number of the IMAP server</li>
+<li><code>%LOGDIR</code> - Log directory relative to %PWD</li>
+<li><code>%MQTTPORT</code> - Port number of the MQTT server</li>
+<li><code>%NOLISTENPORT</code> - Port number where no service is
+listening</li>
+<li><code>%POP36PORT</code> - IPv6 port number of the POP3 server</li>
+<li><code>%POP3PORT</code> - Port number of the POP3 server</li>
+<li><code>%PROXYPORT</code> - Port number of the HTTP proxy</li>
+<li><code>%PWD</code> - Current directory</li>
+<li><code>%RESOLVE</code> - server/resolve command</li>
+<li><code>%RTSP6PORT</code> - IPv6 port number of the RTSP server</li>
+<li><code>%RTSPPORT</code> - Port number of the RTSP server</li>
+<li><code>%SMBPORT</code> - Port number of the SMB server</li>
+<li><code>%SMBSPORT</code> - Port number of the SMBS server</li>
+<li><code>%SMTP6PORT</code> - IPv6 port number of the SMTP server</li>
+<li><code>%SMTPPORT</code> - Port number of the SMTP server</li>
+<li><code>%SOCKSPORT</code> - Port number of the SOCKS4/5 server</li>
+<li><code>%SOCKSUNIXPATH</code> - Path to the Unix socket of the SOCKS
+server</li>
+<li><code>%SRCDIR</code> - Full path to the source dir</li>
+<li><code>%SCP_PWD</code> - Current directory friendly for the SSH
+server for the scp:// protocol</li>
+<li><code>%SFTP_PWD</code> - Current directory friendly for the SSH
+server for the sftp:// protocol</li>
+<li><code>%SSHPORT</code> - Port number of the SCP/SFTP server</li>
+<li><code>%SSHSRVMD5</code> - MD5 of SSH server's public key</li>
+<li><code>%SSHSRVSHA256</code> - SHA256 of SSH server's public key</li>
+<li><code>%TELNETPORT</code> - Port number of the telnet server</li>
+<li><code>%TESTNUMBER</code> - Number of the test case</li>
+<li><code>%TFTP6PORT</code> - IPv6 port number of the TFTP server</li>
+<li><code>%TFTPPORT</code> - Port number of the TFTP server</li>
+<li><code>%USER</code> - Login ID of the user running the test</li>
+<li><code>%VERNUM</code> - the version number of the tested curl
+(without -DEV)</li>
+<li><code>%VERSION</code> - the full version number of the tested
+curl</li>
+</ul>
+<h1 id="testcase"><code>&lt;testcase&gt;</code></h1>
+<p>Each test is always specified entirely within the
+<code>testcase</code> tag. Each test case is split up in four main
+sections: <code>info</code>, <code>reply</code>, <code>client</code> and
+<code>verify</code>.</p>
+<ul>
+<li><p><strong>info</strong> provides information about the test
+case</p></li>
+<li><p><strong>reply</strong> is used for the server to know what to
+send as a reply for the requests curl sends</p></li>
+<li><p><strong>client</strong> defines how the client should
+behave</p></li>
+<li><p><strong>verify</strong> defines how to verify that the data
+stored after a command has been run ended up correct</p></li>
+</ul>
+<p>Each main section has a number of available subsections that can be
+specified, that are checked/used if specified.</p>
+<h2 id="info"><code>&lt;info&gt;</code></h2>
+<h3 id="keywords"><code>&lt;keywords&gt;</code></h3>
+<p>A newline-separated list of keywords describing what this test case
+uses and tests. Try to use already used keywords. These keywords are
+used for statistical/informational purposes and for choosing or skipping
+classes of tests. Keywords must begin with an alphabetic character,
+<code>-</code>, <code>[</code> or <code>{</code> and may actually
+consist of multiple words separated by spaces which are treated together
+as a single identifier. Most keywords are only there to provide a way
+for users to skip certain classes of tests, if desired, but a few are
+treated specially by the test harness or build system.</p>
+<p>When running a unit test and the keywords include
+<code>unittest</code>, the <code>&lt;tool&gt;</code> section can be left
+empty to use the standard unit test tool name <code>unitN</code> where
+<code>N</code> is the test number.</p>
+<p>The <code>text-ci</code> make target automatically skips test with
+the <code>flaky</code> keyword.</p>
+<p>Tests that have strict timing dependencies have the
+<code>timing-dependent</code> keyword. These are intended to eventually
+be treated specially on CI builds which are often run on overloaded
+machines with unpredictable timing.</p>
+<p>Tests using non-7-bit-ASCII characters must provide them with
+<code>%hex[]</code> or similar.</p>
+<h2 id="reply"><code>&lt;reply&gt;</code></h2>
+<h3
+id="data-nocheckyes-sendzeroyes-hexyes-nonewlineyes-crlfyes"><code>&lt;data [nocheck="yes"] [sendzero="yes"] [hex="yes"] [nonewline="yes"] [crlf="yes"]&gt;</code></h3>
+<p>data to be sent to the client on its request and later verified that
+it arrived safely. Set <code>nocheck="yes"</code> to prevent the test
+script from verifying the arrival of this data.</p>
+<p>If the data contains <code>swsclose</code> anywhere within the start
+and end tag, and this is an HTTP test, then the connection is closed by
+the server after this response is sent. If not, the connection is kept
+persistent.</p>
+<p>If the data contains <code>swsbounce</code> anywhere within the start
+and end tag, then the HTTP server overrides the part number response
+returned for a subsequent request made by the same test to
+<code>previous part number + 1</code>. For example, if a test makes a
+request which causes the server to return <code>&lt;data&gt;</code> that
+contains keyword <code>swsbounce</code> then for the next response it
+ignores the requested part number and instead returns
+<code>&lt;data1&gt;</code>. And if <code>&lt;data1&gt;</code> contains
+keyword <code>swsbounce</code> then the next response is
+<code>&lt;data2&gt;</code> and so on. This is useful for auth tests and
+similar.</p>
+<p><code>sendzero=yes</code> means that the (FTP) server "sends" the
+data even if the size is zero bytes. Used to verify curl's behavior on
+zero bytes transfers.</p>
+<p><code>hex=yes</code> means that the data is a sequence of hex pairs.
+It gets decoded and used as "raw" data.</p>
+<p><code>nonewline=yes</code> means that the last byte (the trailing
+newline character) should be cut off from the data before sending or
+comparing it.</p>
+<p><code>crlf=yes</code> forces <em>header</em> newlines to become CRLF
+even if not written so in the source file. Note that this makes
+runtests.pl parse and "guess" what is a header and what is not in order
+to apply the CRLF line endings appropriately.</p>
+<p>For FTP file listings, the <code>&lt;data&gt;</code> section is be
+used <em>only</em> if you make sure that there has been a CWD done first
+to a directory named <code>test-[NUM]</code> where <code>NUM</code> is
+the test case number. Otherwise the ftp server cannot know from which
+test file to load the list content.</p>
+<h3 id="datanum-crlfyes"><code>&lt;dataNUM [crlf="yes"]&gt;</code></h3>
+<p>Send back this contents instead of the <code>&lt;data&gt;</code> one.
+The <code>NUM</code> is set by:</p>
+<ul>
+<li>The test number in the request line is &gt;10000 and this is the
+remainder of [test case number]%10000.</li>
+<li>The request was HTTP and included digest details, which adds 1000 to
+<code>NUM</code></li>
+<li>If an HTTP request is NTLM type-1, it adds 1001 to
+<code>NUM</code></li>
+<li>If an HTTP request is NTLM type-3, it adds 1002 to
+<code>NUM</code></li>
+<li>If an HTTP request is Basic and <code>NUM</code> is already
+&gt;=1000, it adds 1 to <code>NUM</code></li>
+<li>If an HTTP request is Negotiate, <code>NUM</code> gets incremented
+by one for each request with Negotiate authorization header on the same
+test case.</li>
+</ul>
+<p>Dynamically changing <code>NUM</code> in this way allows the test
+harness to be used to test authentication negotiation where several
+different requests must be sent to complete a transfer. The response to
+each request is found in its own data section. Validating the entire
+negotiation sequence can be done by specifying a <code>datacheck</code>
+section.</p>
+<h3 id="connect"><code>&lt;connect&gt;</code></h3>
+<p>The connect section is used instead of the 'data' for all CONNECT
+requests. The remainder of the rules for the data section then apply but
+with a connect prefix.</p>
+<h3 id="socks"><code>&lt;socks&gt;</code></h3>
+<p>Address type and address details as logged by the SOCKS proxy.</p>
+<h3
+id="datacheck-modetext-nonewlineyes-crlfyes"><code>&lt;datacheck [mode="text"] [nonewline="yes"] [crlf="yes"]&gt;</code></h3>
+<p>if the data is sent but this is what should be checked afterwards. If
+<code>nonewline=yes</code> is set, runtests cuts off the trailing
+newline from the data before comparing with the one actually received by
+the client.</p>
+<p>Use the <code>mode="text"</code> attribute if the output is in text
+mode on platforms that have a text/binary difference.</p>
+<h3
+id="datachecknum-nonewlineyes-modetext-crlfyes"><code>&lt;datacheckNUM [nonewline="yes"] [mode="text"] [crlf="yes"]&gt;</code></h3>
+<p>The contents of numbered <code>datacheck</code> sections are appended
+to the non-numbered one.</p>
+<h3 id="size"><code>&lt;size&gt;</code></h3>
+<p>number to return on an ftp SIZE command (set to -1 to make this
+command fail)</p>
+<h3 id="mdtm"><code>&lt;mdtm&gt;</code></h3>
+<p>what to send back if the client sends a (FTP) <code>MDTM</code>
+command, set to -1 to have it return that the file does not exist</p>
+<h3 id="postcmd"><code>&lt;postcmd&gt;</code></h3>
+<p>special purpose server-command to control its behavior <em>after</em>
+the reply is sent For HTTP/HTTPS, these are supported:</p>
+<p><code>wait [secs]</code> - Pause for the given time</p>
+<h3 id="servercmd"><code>&lt;servercmd&gt;</code></h3>
+<p>Special-commands for the server.</p>
+<p>The first line of this file is always set to
+<code>Testnum [number]</code> by the test script, to allow servers to
+read that to know what test the client is about to issue.</p>
+<h4 id="for-ftpsmtppopimap">For FTP/SMTP/POP/IMAP</h4>
+<ul>
+<li><code>REPLY [command] [return value] [response string]</code> -
+Changes how the server responds to the [command]. [response string] is
+evaluated as a perl string, so it can contain embedded \r\n, for
+example. There is a special [command] named "welcome" (without quotes)
+which is the string sent immediately on connect as a welcome.</li>
+<li><code>REPLYLF</code> (like above but sends the response terminated
+with LF-only and not CRLF)</li>
+<li><code>COUNT [command] [num]</code> - Do the <code>REPLY</code>
+change for <code>[command]</code> only <code>[num]</code> times and then
+go back to the built-in approach</li>
+<li><code>DELAY [command] [secs]</code> - Delay responding to this
+command for the given time</li>
+<li><code>RETRWEIRDO</code> - Enable the "weirdo" RETR case when
+multiple response lines appear at once when a file is transferred</li>
+<li><code>RETRNOSIZE</code> - Make sure the RETR response does not
+contain the size of the file</li>
+<li><code>RETRSIZE [size]</code> - Force RETR response to contain the
+specified size</li>
+<li><code>NOSAVE</code> - Do not actually save what is received</li>
+<li><code>SLOWDOWN</code> - Send FTP responses with 0.01 sec delay
+between each byte</li>
+<li><code>SLOWDOWNDATA</code> - Send FTP responses with 0.01 sec delay
+between each data byte</li>
+<li><code>PASVBADIP</code> - makes PASV send back an illegal IP in its
+227 response</li>
+<li><code>CAPA [capabilities]</code> - Enables support for and specifies
+a list of space separated capabilities to return to the client for the
+IMAP <code>CAPABILITY</code>, POP3 <code>CAPA</code> and SMTP
+<code>EHLO</code> commands</li>
+<li><code>AUTH [mechanisms]</code> - Enables support for SASL
+authentication and specifies a list of space separated mechanisms for
+IMAP, POP3 and SMTP</li>
+<li><code>STOR [msg]</code> respond with this instead of default after
+<code>STOR</code></li>
+</ul>
+<h4 id="for-httphttps">For HTTP/HTTPS</h4>
+<ul>
+<li><code>auth_required</code> if this is set and a POST/PUT is made
+without auth, the server does NOT wait for the full request body to get
+sent</li>
+<li><code>delay: [msecs]</code> - delay this amount after
+connection</li>
+<li><code>idle</code> - do nothing after receiving the request, just
+"sit idle"</li>
+<li><code>stream</code> - continuously send data to the client,
+never-ending</li>
+<li><code>writedelay: [msecs]</code> delay this amount between reply
+packets</li>
+<li><code>skip: [num]</code> - instructs the server to ignore reading
+this many bytes from a PUT or POST request</li>
+<li><code>rtp: part [num] channel [num] size [num]</code> - stream a
+fake RTP packet for the given part on a chosen channel with the given
+payload size</li>
+<li><code>connection-monitor</code> - When used, this logs
+<code>[DISCONNECT]</code> to the <code>server.input</code> log when the
+connection is disconnected.</li>
+<li><code>upgrade</code> - when an HTTP upgrade header is found, the
+server upgrades to http2</li>
+<li><code>swsclose</code> - instruct server to close connection after
+response</li>
+<li><code>no-expect</code> - do not read the request body if Expect: is
+present</li>
+</ul>
+<h4 id="for-tftp">For TFTP</h4>
+<p><code>writedelay: [secs]</code> delay this amount between reply
+packets (each packet being 512 bytes payload)</p>
+<h3 id="dns"><code>&lt;dns&gt;</code></h3>
+<p>Commands for the test DNS server.</p>
+<ul>
+<li><code>A: [dotted ipv4 address]</code> - set IPv4 address to
+return</li>
+<li><code>AAAA: [numerical IPv6 address]</code> - set IPv6 address to
+return, with or without <code>[]</code></li>
+</ul>
+<h2 id="client"><code>&lt;client&gt;</code></h2>
+<h3 id="server"><code>&lt;server&gt;</code></h3>
+<p>What server(s) this test case requires/uses. Available servers:</p>
+<ul>
+<li><code>dict</code></li>
+<li><code>file</code></li>
+<li><code>ftp</code></li>
+<li><code>ftp-ipv6</code></li>
+<li><code>ftps</code></li>
+<li><code>gopher</code></li>
+<li><code>gopher-ipv6</code></li>
+<li><code>gophers</code></li>
+<li><code>http</code></li>
+<li><code>http/2</code></li>
+<li><code>http-ipv6</code></li>
+<li><code>http-proxy</code></li>
+<li><code>https</code></li>
+<li><code>https-proxy</code></li>
+<li><code>https-mtls</code></li>
+<li><code>httptls+srp</code></li>
+<li><code>httptls+srp-ipv6</code></li>
+<li><code>http-unix</code></li>
+<li><code>imap</code></li>
+<li><code>mqtt</code></li>
+<li><code>pop3</code></li>
+<li><code>rtsp</code></li>
+<li><code>rtsp-ipv6</code></li>
+<li><code>scp</code></li>
+<li><code>sftp</code></li>
+<li><code>smb</code></li>
+<li><code>smtp</code></li>
+<li><code>socks4</code></li>
+<li><code>socks5</code></li>
+<li><code>socks5unix</code></li>
+<li><code>telnet</code></li>
+<li><code>tftp</code></li>
+</ul>
+<p>Give only one per line. This subsection is mandatory (use
+<code>none</code> if no servers are required). Servers that require a
+special server certificate can have the PEM certificate filename (found
+in the <code>certs</code> directory) appended to the server name
+separated by a space.</p>
+<h3 id="features"><code>&lt;features&gt;</code></h3>
+<p>A list of features that MUST be present in the client/library for
+this test to be able to run. If a required feature is not present then
+the test is SKIPPED.</p>
+<p>Alternatively a feature can be prefixed with an exclamation mark to
+indicate a feature is NOT required. If the feature is present then the
+test is SKIPPED.</p>
+<p>Features testable here are:</p>
+<ul>
+<li><code>--libcurl</code></li>
+<li><code>alt-svc</code></li>
+<li><code>aws</code> - built with <strong>aws-sigv4</strong>
+support</li>
+<li><code>AppleIDN</code></li>
+<li><code>asyn-rr</code> - c-ares is used for additional records
+only</li>
+<li><code>brotli</code></li>
+<li><code>c-ares</code> - c-ares is used for (all) name resolves</li>
+<li><code>CharConv</code></li>
+<li><code>codeset-utf8</code>. If the running codeset is UTF-8
+capable.</li>
+<li><code>cookies</code></li>
+<li><code>crypto</code></li>
+<li><code>cygwin</code></li>
+<li><code>Debug</code></li>
+<li><code>digest</code></li>
+<li><code>DoH</code></li>
+<li><code>getrlimit</code></li>
+<li><code>GnuTLS</code></li>
+<li><code>GSS-API</code></li>
+<li><code>h2c</code></li>
+<li><code>headers-api</code></li>
+<li><code>HSTS</code></li>
+<li><code>HTTP-auth</code></li>
+<li><code>http/2</code></li>
+<li><code>http/3</code></li>
+<li><code>HTTPS-proxy</code></li>
+<li><code>HTTPSRR</code></li>
+<li><code>IDN</code></li>
+<li><code>IPv6</code></li>
+<li><code>Kerberos</code></li>
+<li><code>Largefile</code></li>
+<li><code>large-time</code> (time_t is larger than 32-bit)</li>
+<li><code>large-size</code> (size_t is larger than 32-bit)</li>
+<li><code>libssh2</code></li>
+<li><code>libssh</code></li>
+<li><code>oldlibssh</code> (versions before 0.9.4)</li>
+<li><code>libz</code></li>
+<li><code>local-http</code>. The HTTP server runs on 127.0.0.1</li>
+<li><code>manual</code></li>
+<li><code>mbedtls</code></li>
+<li><code>Mime</code></li>
+<li><code>netrc</code></li>
+<li><code>nghttpx</code></li>
+<li><code>nghttpx-h3</code></li>
+<li><code>NTLM</code></li>
+<li><code>NTLM_WB</code></li>
+<li><code>OpenSSL</code></li>
+<li><code>override-dns</code> - this build can use a "fake" DNS
+server</li>
+<li><code>parsedate</code></li>
+<li><code>proxy</code></li>
+<li><code>PSL</code></li>
+<li><code>rustls</code></li>
+<li><code>Schannel</code></li>
+<li><code>shuffle-dns</code></li>
+<li><code>socks</code></li>
+<li><code>SPNEGO</code></li>
+<li><code>SSL</code></li>
+<li><code>SSLpinning</code></li>
+<li><code>SSPI</code></li>
+<li><code>threaded-resolver</code></li>
+<li><code>TLS-SRP</code></li>
+<li><code>TrackMemory</code></li>
+<li><code>typecheck</code></li>
+<li><code>threadsafe</code></li>
+<li><code>Unicode</code></li>
+<li><code>unittest</code></li>
+<li><code>UnixSockets</code></li>
+<li><code>verbose-strings</code></li>
+<li><code>wakeup</code></li>
+<li><code>win32</code></li>
+<li><code>WinIDN</code></li>
+<li><code>wolfssl</code></li>
+<li><code>xattr</code></li>
+<li><code>zstd</code></li>
+</ul>
+<p>as well as each protocol that curl supports. A protocol only needs to
+be specified if it is different from the server (useful when the server
+is <code>none</code>).</p>
+<h3 id="killserver"><code>&lt;killserver&gt;</code></h3>
+<p>Using the same syntax as in <code>&lt;server&gt;</code> but when
+mentioned here these servers are explicitly KILLED when this test case
+is completed. Only use this if there is no other alternatives. Using
+this of course requires subsequent tests to restart servers.</p>
+<h3 id="precheck"><code>&lt;precheck&gt;</code></h3>
+<p>A command line that if set gets run by the test script before the
+test. If an output is displayed by the command or if the return code is
+non-zero, the test is skipped and the (single-line) output is displayed
+as reason for not running the test.</p>
+<h3 id="tool"><code>&lt;tool&gt;</code></h3>
+<p>Name of tool to invoke instead of "curl". This tool must be built and
+exist either in the <code>libtest/</code> directory (if the tool name
+starts with <code>lib</code>) or in the <code>unit/</code> directory (if
+the tool name starts with <code>unit</code>).</p>
+<h3 id="name"><code>&lt;name&gt;</code></h3>
+<p>Brief test case description, shown when the test runs.</p>
+<h3 id="setenv"><code>&lt;setenv&gt;</code></h3>
+<pre><code>variable1=contents1
+variable2=contents2
+variable3</code></pre>
+<p>Set the given environment variables to the specified value before the
+actual command is run. They are restored back to their former values
+again after the command has been run.</p>
+<p>If the variable name has no assignment, no <code>=</code>, then that
+variable is just deleted.</p>
+<h3
+id="command-optionno-qno-outputno-includeforce-outputbinary-trace-timeoutsecsdelaysecstypeperlshell"><code>&lt;command [option="no-q/no-output/no-include/force-output/binary-trace"] [timeout="secs"][delay="secs"][type="perl/shell"]&gt;</code></h3>
+<p>Command line to run.</p>
+<p>Note that the URL that gets passed to the server actually controls
+what data that is returned. The last slash in the URL must be followed
+by a number. That number (N) is used by the test-server to load test
+case N and return the data that is defined within the
+<code>&lt;reply&gt;&lt;data&gt;&lt;/data&gt;&lt;/reply&gt;</code>
+section.</p>
+<p>If there is no test number found above, the HTTP test server uses the
+number following the last dot in the given hostname (made so that a
+CONNECT can still pass on test number) so that "foo.bar.123" gets
+treated as test case 123. Alternatively, if an IPv6 address is provided
+to CONNECT, the last hexadecimal group in the address is used as the
+test number. For example the address "[1234::ff]" would be treated as
+test case 255.</p>
+<p>Set <code>type="perl"</code> to write the test case as a perl script.
+It implies that there is no memory debugging and valgrind gets shut off
+for this test.</p>
+<p>Set <code>type="shell"</code> to write the test case as a shell
+script. It implies that there is no memory debugging and valgrind gets
+shut off for this test.</p>
+<p>Set <code>option="no-output"</code> to prevent the test script to
+slap on the <code>--output</code> argument that directs the output to a
+file. The <code>--output</code> is also not added if the verify/stdout
+section is used.</p>
+<p>Set <code>option="force-output"</code> to make use of
+<code>--output</code> even when the test is otherwise written to verify
+stdout.</p>
+<p>Set <code>option="no-include"</code> to prevent the test script to
+slap on the <code>--include</code> argument.</p>
+<p>Set <code>option="no-q"</code> avoid using <code>-q</code> as the
+first argument in the curl command line.</p>
+<p>Set <code>option="binary-trace"</code> to use <code>--trace</code>
+instead of <code>--trace-ascii</code> for tracing. Suitable for
+binary-oriented protocols such as MQTT.</p>
+<p>Set <code>timeout="secs"</code> to override default server logs
+advisor read lock timeout. This timeout is used by the test harness,
+once that the command has completed execution, to wait for the test
+server to write out server side log files and remove the lock that
+advised not to read them. The "secs" parameter is the not negative
+integer number of seconds for the timeout. This <code>timeout</code>
+attribute is documented for completeness sake, but is deep test harness
+stuff and only needed for singular and specific test cases. Avoid using
+it.</p>
+<p>Set <code>delay="secs"</code> to introduce a time delay once that the
+command has completed execution and before the
+<code>&lt;postcheck&gt;</code> section runs. The "secs" parameter is the
+not negative integer number of seconds for the delay. This 'delay'
+attribute is intended for specific test cases, and normally not
+needed.</p>
+<h3
+id="file-namelogdirfilename-nonewlineyes"><code>&lt;file name="%LOGDIR/filename" [nonewline="yes"]&gt;</code></h3>
+<p>This creates the named file with this content before the test case is
+run, which is useful if the test case needs a file to act on.</p>
+<p>If <code>nonewline="yes"</code> is used, the created file gets the
+final newline stripped off.</p>
+<h3 id="file1"><code>&lt;file1&gt;</code></h3>
+<p>1 to 4 can be appended to 'file' to create more files.</p>
+<h3 id="file2"><code>&lt;file2&gt;</code></h3>
+<h3 id="file3"><code>&lt;file3&gt;</code></h3>
+<h3 id="file4"><code>&lt;file4&gt;</code></h3>
+<h3
+id="stdin-nonewlineyes"><code>&lt;stdin [nonewline="yes"]&gt;</code></h3>
+<p>Pass this given data on stdin to the tool.</p>
+<p>If <code>nonewline</code> is set, we cut off the trailing newline of
+this given data before comparing with the one actually received by the
+client</p>
+<h2 id="disable"><code>&lt;disable&gt;</code></h2>
+<p>If <code>test-duphandle</code> is a listed item here, this is not run
+when <code>--test-duphandle</code> is used.</p>
+<h2 id="verify"><code>&lt;verify&gt;</code></h2>
+<h3 id="errorcode"><code>&lt;errorcode&gt;</code></h3>
+<p>numerical error code curl is supposed to return. Specify a list of
+accepted error codes by separating multiple numbers with comma. See test
+237 for an example.</p>
+<h3 id="strip"><code>&lt;strip&gt;</code></h3>
+<p>One regex per line that is removed from the protocol dumps before the
+comparison is made. This is useful to remove dependencies on dynamically
+changing protocol data such as port numbers or user-agent strings.</p>
+<h3 id="strippart"><code>&lt;strippart&gt;</code></h3>
+<p>One perl op per line that operates on the protocol dump. This is
+pretty advanced. Example: <code>s/^EPRT .*/EPRT stripped/</code>.</p>
+<h3 id="postcheck"><code>&lt;postcheck&gt;</code></h3>
+<p>A command line that if set gets run by the test script after the
+test. If the command exists with a non-zero status code, the test is
+considered failed.</p>
+<h3 id="notexists"><code>&lt;notexists&gt;</code></h3>
+<p>A list of directory entries that are checked for after the test has
+completed and that must not exist. A listed entry existing causes the
+test to fail.</p>
+<h3
+id="protocol-nonewlineyescrlfyes"><code>&lt;protocol [nonewline="yes"][crlf="yes"]&gt;</code></h3>
+<p>the protocol dump curl should transmit, if <code>nonewline</code> is
+set, we cut off the trailing newline of this given data before comparing
+with the one actually sent by the client The <code>&lt;strip&gt;</code>
+and <code>&lt;strippart&gt;</code> rules are applied before comparisons
+are made.</p>
+<p><code>crlf=yes</code> forces the newlines to become CRLF even if not
+written so in the test.</p>
+<h3
+id="proxy-nonewlineyescrlfyes"><code>&lt;proxy [nonewline="yes"][crlf="yes"]&gt;</code></h3>
+<p>The protocol dump curl should transmit to an HTTP proxy (when the
+http-proxy server is used), if <code>nonewline</code> is set, we cut off
+the trailing newline of this given data before comparing with the one
+actually sent by the client The <code>&lt;strip&gt;</code> and
+<code>&lt;strippart&gt;</code> rules are applied before comparisons are
+made.</p>
+<h3
+id="stderr-modetext-nonewlineyes-crlfyes"><code>&lt;stderr [mode="text"] [nonewline="yes"] [crlf="yes"]&gt;</code></h3>
+<p>This verifies that this data was passed to stderr.</p>
+<p>Use the mode="text" attribute if the output is in text mode on
+platforms that have a text/binary difference.</p>
+<p><code>crlf=yes</code> forces the newlines to become CRLF even if not
+written so in the test.</p>
+<p>If <code>nonewline</code> is set, we cut off the trailing newline of
+this given data before comparing with the one actually received by the
+client</p>
+<h3
+id="stdout-modetext-nonewlineyes-crlfyes-loadfilefilename"><code>&lt;stdout [mode="text"] [nonewline="yes"] [crlf="yes"] [loadfile="filename"]&gt;</code></h3>
+<p>This verifies that this data was passed to stdout.</p>
+<p>Use the mode="text" attribute if the output is in text mode on
+platforms that have a text/binary difference.</p>
+<p>If <code>nonewline</code> is set, we cut off the trailing newline of
+this given data before comparing with the one actually received by the
+client</p>
+<p><code>crlf=yes</code> forces the newlines to become CRLF even if not
+written so in the test.</p>
+<p><code>loadfile="filename"</code> makes loading the data from an
+external file.</p>
+<h3 id="limit"><code>&lt;limit&gt;</code></h3>
+<p>When this test runs and curl was built with debug enabled, runtests
+make sure that the set limits are not exceeded. Supported limits:</p>
+<pre><code>Allocations: [number of allocation calls]
+Maximum allocated: [maximum concurrent memory allocated]</code></pre>
+<h3
+id="file-namelogdirfilename-modetext"><code>&lt;file name="%LOGDIR/filename" [mode="text"]&gt;</code></h3>
+<p>The file's contents must be identical to this after the test is
+complete. Use the mode="text" attribute if the output is in text mode on
+platforms that have a text/binary difference.</p>
+<h3 id="file1-1"><code>&lt;file1&gt;</code></h3>
+<p>1 to 4 can be appended to 'file' to compare more files.</p>
+<h3 id="file2-1"><code>&lt;file2&gt;</code></h3>
+<h3 id="file3-1"><code>&lt;file3&gt;</code></h3>
+<h3 id="file4-1"><code>&lt;file4&gt;</code></h3>
+<h3 id="stripfile"><code>&lt;stripfile&gt;</code></h3>
+<p>One perl op per line that operates on the output file or stdout
+before being compared with what is stored in the test file. This is
+pretty advanced. Example: "s/^EPRT .*/EPRT stripped/"</p>
+<h3 id="stripfile1"><code>&lt;stripfile1&gt;</code></h3>
+<p>1 to 4 can be appended to <code>stripfile</code> to strip the
+corresponding <code>&lt;fileN&gt;</code> content</p>
+<h3 id="stripfile2"><code>&lt;stripfile2&gt;</code></h3>
+<h3 id="stripfile3"><code>&lt;stripfile3&gt;</code></h3>
+<h3 id="stripfile4"><code>&lt;stripfile4&gt;</code></h3>
+<h3
+id="upload-crlfyes-nonewlineyes"><code>&lt;upload [crlf="yes"] [nonewline="yes"]&gt;</code></h3>
+<p>the contents of the upload data curl should have sent</p>
+<p><code>crlf=yes</code> forces <em>upload</em> newlines to become CRLF
+even if not written so in the source file.</p>
+<p><code>nonewline=yes</code> means that the last byte (the trailing
+newline character) should be cut off from the upload data before
+comparing it.</p>
+<h3 id="valgrind"><code>&lt;valgrind&gt;</code></h3>
+<p>disable - disables the valgrind log check for this test</p>
+<h3 id="dns-hostname"><code>&lt;dns [host="name"]&gt;</code></h3>
+<p>This specify the input the DNS server is expected to get from curl.
+Because of differences in implementations, this section is sorted
+automatically before compared.</p>
+<p>Because of local configurations in machines running tests, there may
+be additional requests sent to <code>[host].[custom suffix]</code>. To
+prevent such requests to mess up comparisons, we can set the hostname to
+check in the <code>&lt;dns&gt;</code> tag.</p>
+</div>
+</div>
+</body>
+</html>

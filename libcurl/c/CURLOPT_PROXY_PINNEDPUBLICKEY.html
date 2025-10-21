@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_PROXY_PINNEDPUBLICKEY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_PROXY_PINNEDPUBLICKEY</b></div>
+<h1> CURLOPT_PROXY_PINNEDPUBLICKEY explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_PROXY_PINNEDPUBLICKEY%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_PROXY_PINNEDPUBLICKEY.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_PROXY_PINNEDPUBLICKEY.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_PROXY_PINNEDPUBLICKEY - pinned public key for https proxy </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_PROXY_PINNEDPUBLICKEY.html">CURLOPT_PROXY_PINNEDPUBLICKEY</a>,
+&nbsp;                         char &#x2a;pinnedpubkey);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to a null-terminated string as parameter. The string can be the filename of your pinned public key. The file format expected is &quot;PEM&quot; or &quot;DER&quot;. The string can also be any number of base64 encoded sha256 hashes preceded by &quot;sha256//&quot; and separated by &quot;;&quot; </p>
+<p class="level0">When negotiating a TLS or SSL connection, the https proxy sends a certificate indicating its identity. A public key is extracted from this certificate and if it does not exactly match the public key provided to this option, libcurl aborts the connection before sending or receiving any data. </p>
+<p class="level0">On mismatch, <span Class="emphasis"><a href="libcurl-errors.html#CURLESSLPINNEDPUBKEYNOTMATCH">CURLE_SSL_PINNEDPUBKEYNOTMATCH</a></span> is returned. </p>
+<p class="level0">The application does not have to keep the string around after setting this option. </p>
+<p class="level0">Using this option multiple times makes the last set string override the previous ones. Set it to NULL to disable its use again. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all TLS based protocols: HTTPS, FTPS, IMAPS, POP3S, SMTPS etc. </p>
+<p class="level0">This option works only with the following TLS backends: GnuTLS, OpenSSL, mbedTLS and wolfSSL </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROXY.html">CURLOPT_PROXY</a>, &quot;https://proxy:443&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROXY_PINNEDPUBLICKEY.html">CURLOPT_PROXY_PINNEDPUBLICKEY</a>,
+&nbsp;                    &quot;sha256//YhKJKSzoTt2b5FP18fvpHo7fJYqQCjA&quot;
+&nbsp;                    &quot;a3HWY3tvRMwE=;sha256//t62CeU2tQiqkexU74&quot;
+&nbsp;                    &quot;Gxa2eg7fRbEgoChTociMee9wno=&quot;);
+&nbsp;
+&nbsp;   /&#x2a; Perform the request &#x2a;/
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="PUBLIC"></a><h2 class="nroffsh">Public key extraction</h2>
+<p class="level0">If you do not have the https proxy server&apos;s public key file you can extract it from the https proxy server&apos;s certificate. </p><pre class="level0">
+&#35; retrieve the server&#39;s certificate if you do not already have it
+&#35;
+&#35; be sure to examine the certificate to see if it is what you expected
+&#35;
+&#35; Windows-specific:
+&#35; - Use NUL instead of /dev/null.
+&#35; - OpenSSL may wait for input instead of disconnecting. Hit enter.
+&#35; - If you do not have sed, then just copy the certificate into a file:
+&#35;   Lines from -----BEGIN CERTIFICATE----- to -----END CERTIFICATE-----.
+&#35;
+openssl s_client -servername www.example.com -connect www.example.com:443 &bsol;
+&nbsp; &lt; /dev/null | sed -n &quot;/-----BEGIN/,/-----END/p&quot; &gt; www.example.com.pem
+&nbsp;
+&#35; extract public key in pem format from certificate
+openssl x509 -in www.example.com.pem -pubkey -noout &gt; www.example.com.pubkey.pem
+&nbsp;
+&#35; convert public key from pem to der
+openssl asn1parse -noout -inform pem -in www.example.com.pubkey.pem &bsol;
+&nbsp; -out www.example.com.pubkey.der
+&nbsp;
+&#35; sha256 hash and base64 encode der to string for use
+openssl dgst -sha256 -binary www.example.com.pubkey.der | openssl base64
+</pre>
+<p class="level0">The public key in PEM format contains a header, base64 data and a footer: </p><pre class="level0">
+-----BEGIN PUBLIC KEY-----
+[BASE 64 DATA]
+-----END PUBLIC KEY-----
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">PEM/DER support: </p>
+<p class="level0">&nbsp;<a href="/ch/7.52.0.html">7.52.0</a>: GnuTLS, OpenSSL, mbedTLS, wolfSSL </p>
+<p class="level0">sha256 support: </p>
+<p class="level0">&nbsp;<a href="/ch/7.52.0.html">7.52.0</a>: GnuTLS, OpenSSL, mbedTLS, wolfSSL </p>
+<p class="level0">Other SSL backends not supported. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.52.0.html">7.52.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_PINNEDPUBLICKEY.html">CURLOPT_PINNEDPUBLICKEY</a>(3), <a Class="bold" href="./CURLOPT_PROXY_CAINFO.html">CURLOPT_PROXY_CAINFO</a>(3), <a Class="bold" href="./CURLOPT_PROXY_CAPATH.html">CURLOPT_PROXY_CAPATH</a>(3), <a Class="bold" href="./CURLOPT_PROXY_SSL_VERIFYHOST.html">CURLOPT_PROXY_SSL_VERIFYHOST</a>(3), <a Class="bold" href="./CURLOPT_PROXY_SSL_VERIFYPEER.html">CURLOPT_PROXY_SSL_VERIFYPEER</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

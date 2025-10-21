@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_CUSTOMREQUEST</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_CUSTOMREQUEST</b></div>
+<h1> CURLOPT_CUSTOMREQUEST explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_CUSTOMREQUEST%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_CUSTOMREQUEST.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_CUSTOMREQUEST.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_CUSTOMREQUEST - custom request method </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a>, char &#x2a;method);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to a null-terminated string as parameter. </p>
+<p class="level0">When changing the request <span Class="emphasis">method</span> by setting <a Class="emphasis" href="./CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a>, you do not actually change how libcurl behaves or acts: you only change the actual string sent in the request. </p>
+<p class="level0">libcurl passes on the verbatim string in its request without any filter or other safe guards. That includes white space and control characters. </p>
+<p class="level0">The application does not have to keep the string around after setting this option. </p>
+<p class="level0">Using this option multiple times makes the last set string override the previous ones. Restore to the internal default by setting this to NULL. </p>
+<p class="level0">This option can be used to specify the request: </p>
+<p class="level0"><a name="HTTP"></a><span class="nroffip">HTTP</span> </p>
+<p class="level1">Instead of GET or HEAD when performing HTTP based requests. This is particularly useful, for example, for performing an HTTP DELETE request. </p>
+<p class="level1">For example: </p>
+<p class="level1">When you tell libcurl to do a HEAD request, but then specify a GET though a custom request libcurl still acts as if it sent a HEAD. To switch to a proper HEAD use <a Class="emphasis" href="./CURLOPT_NOBODY.html">CURLOPT_NOBODY</a>, to switch to a proper POST use <a Class="emphasis" href="./CURLOPT_POST.html">CURLOPT_POST</a> or <a Class="emphasis" href="./CURLOPT_POSTFIELDS.html">CURLOPT_POSTFIELDS</a> and to switch to a proper GET use <a Class="emphasis" href="./CURLOPT_HTTPGET.html">CURLOPT_HTTPGET</a>. </p>
+<p class="level1">Many people have wrongly used this option to replace the entire request with their own, including multiple headers and POST contents. While that might work in many cases, it might cause libcurl to send invalid requests and it could possibly confuse the remote server badly. Use <a Class="emphasis" href="./CURLOPT_POST.html">CURLOPT_POST</a> and <a Class="emphasis" href="./CURLOPT_POSTFIELDS.html">CURLOPT_POSTFIELDS</a> to set POST data. Use <a Class="emphasis" href="./CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a> to replace or extend the set of headers sent by libcurl. Use <a Class="emphasis" href="./CURLOPT_HTTP_VERSION.html">CURLOPT_HTTP_VERSION</a> to change the HTTP version. </p>
+<p class="level1">When this option is used together with <a Class="emphasis" href="./CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>, the custom set method overrides the method libcurl could otherwise change to for the subsequent requests. You can fine-tune that decision by using the CURLFOLLOW_OBEYCODE bit to <a Class="emphasis" href="./CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a> to make redirects adhere to the redirect response code as the protocol instructs. </p>
+<p class="level0"><a name="FTP"></a><span class="nroffip">FTP</span> </p>
+<p class="level1">Instead of LIST and NLST when performing FTP directory listings. </p>
+<p class="level0"><a name="IMAP"></a><span class="nroffip">IMAP</span> </p>
+<p class="level1">Instead of LIST when issuing IMAP based requests. </p>
+<p class="level0"><a name="POP3"></a><span class="nroffip">POP3</span> </p>
+<p class="level1">Instead of LIST and RETR when issuing POP3 based requests. </p>
+<p class="level1">For example: </p>
+<p class="level1">When you tell libcurl to use a custom request it behaves like a LIST or RETR command was sent where it expects data to be returned by the server. As such <a Class="emphasis" href="./CURLOPT_NOBODY.html">CURLOPT_NOBODY</a> should be used when specifying commands such as <span Class="bold">DELE</span> and <span Class="bold">NOOP</span> for example. </p>
+<p class="level0"><a name="SMTP"></a><span class="nroffip">SMTP</span> </p>
+<p class="level1">Instead of a <span Class="bold">HELP</span> or <span Class="bold">VRFY</span> when issuing SMTP based requests. </p>
+<p class="level1">For example: </p>
+<p class="level1">Normally a multi line response is returned which can be used, in conjunction with <a Class="emphasis" href="./CURLOPT_MAIL_RCPT.html">CURLOPT_MAIL_RCPT</a>, to specify an EXPN request. If the <a Class="emphasis" href="./CURLOPT_NOBODY.html">CURLOPT_NOBODY</a> option is specified then the request can be used to issue <span Class="bold">NOOP</span> and <span Class="bold">RSET</span> commands. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects ftp, http, imap, pop3 and smtp </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/foo.bin&quot;);
+&nbsp;
+&nbsp;   /&#x2a; DELETE the given path &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a>, &quot;DELETE&quot;);
+&nbsp;
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLINFO_EFFECTIVE_METHOD.html">CURLINFO_EFFECTIVE_METHOD</a>(3), <a Class="bold" href="./CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a>(3), <a Class="bold" href="./CURLOPT_NOBODY.html">CURLOPT_NOBODY</a>(3), <a Class="bold" href="./CURLOPT_REQUEST_TARGET.html">CURLOPT_REQUEST_TARGET</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

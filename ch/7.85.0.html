@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.85.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.85.0</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.84.0.html">🠰 7.84.0</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.86.0.html">7.86.0 🠲</a>
+</span>
+<h1> Changes in 7.85.0 - August 31 2022 </h1>
+<div class="video"><a href="https://youtu.be/I4vYSKjvHGE">7.85.0</a> </div><div class="vulnbox"><a href=/docs/vuln-7.85.0.html>7.85.0</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+ <li> <a href="https://curl.se/bug/?i=9290">quic: add support via wolfSSL</a>
+ <li> <a href="https://curl.se/bug/?i=8419">schannel: Add TLS 1.3 support</a>
+ <li> <a href="https://curl.se/bug/?i=8992">setopt: add CURLOPT_PROTOCOLS_STR and CURLOPT_REDIR_PROTOCOLS_STR</a>
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> <a href="https://curl.se/bug/?i=9265">amigaos: fix threaded resolver on AmigaOS 4.x</a>
+ <li> <a href="https://curl.se/bug/?i=9269">amissl: allow AmiSSL to be used with AmigaOS 4.x builds</a>
+ <li> <a href="https://curl.se/bug/?i=9267">amissl: make AmiSSL v5 a minimum requirement</a>
+ <li> <a href="https://curl.se/bug/?i=9310">asyn-ares: make a single alloc out of hostname + async data</a>
+ <li> <a href="https://curl.se/bug/?i=9310">asyn-thread: fix socket leak on OOM</a>
+ <li> <a href="https://curl.se/bug/?i=9081">asyn-thread: make getaddrinfo_complete return CURLcode</a>
+ <li> <a href="https://curl.se/bug/?i=9139">base64: base64url encoding has no padding</a>
+ <li> <a href="https://curl.se/bug/?i=9205">BUGS.md: improve language</a>
+ <li> <a href="https://curl.se/bug/?i=9117">build: improve OS string in CMake and `config-win32.h`</a>
+ <li> <a href="https://curl.se/bug/?i=9349">cert.d: clarify that escape character works for file paths</a>
+ <li> <a href="https://curl.se/bug/?i=9201">cirrus.yml: replace py38-pip with py39-pip</a>
+ <li> <a href="https://curl.se/bug/?i=9213">cirrus/freebsd-ci: bootstrap the pip installer</a>
+ <li> <a href="https://curl.se/bug/?i=9312">cmake: add detection of threadsafe feature</a>
+ <li> <a href="https://curl.se/bug/?i=9046">cmake: do not force Windows target versions</a>
+ <li> <a href="https://curl.se/bug/?i=9084">cmake: fix build for mingw cross compile</a>
+ <li> <a href="https://curl.se/bug/?i=9125">cmake: link curl to its dependencies with PRIVATE</a>
+ <li> <a href="https://curl.se/bug/?i=9124">cmake: remove APPEND in export(TARGETS)</a>
+ <li> <a href="https://curl.se/bug/?i=9391">cmake: set feature PSL if present</a>
+ <li> <a href="https://curl.se/bug/?i=9065">cmake: support ngtcp2 boringssl backend</a>
+ <li> <a href="https://curl.se/bug/?i=9230">cmdline-opts/gen.pl: improve performance</a>
+ <li> <a href="https://curl.se/bug/?i=9291">config: remove the check for and use of SIZEOF_SHORT</a>
+ <li> <a href="https://curl.se/bug/?i=9266">configure: -pthread not available on AmigaOS 4.x</a>
+ <li> <a href="https://curl.se/bug/?i=9059">configure: check for the stdatomic.h header in configure</a>
+ <li> <a href="https://curl.se/bug/?i=9134">configure: fix --disable-headers-api</a>
+ <li> <a href="https://curl.se/bug/?i=9344">configure: fix broken m4 syntax in TLS options</a>
+ <li> <a href="https://curl.se/bug/?i=9268">configure: fixup bsdsocket detection code for AmigaOS 4.x</a>
+ <li> <a href="https://curl.se/bug/?i=9367">configure: if asked to use TLS, fail if no TLS lib was detected</a>
+ <li> <a href="https://curl.se/bug/?i=9291">configure: introduce CURL_SIZEOF</a>
+ <li> <a href="https://curl.se/bug/?i=9286">connect: add quic connection information</a>
+ <li> <a href="https://curl.se/bug/?i=9303">connect: close the happy eyeballs loser connection when using QUIC</a>
+ <li> <a href="https://curl.se/bug/?i=9209">connect: revert the use of IP*_RECVERR</a>
+ <li> <a href="https://curl.se/bug/?i=9274">connect: set socktype/protocol correctly</a>
+ <li> <a href="https://curl.se/docs/CVE-2022-35252.html">cookie: reject cookies with &quot;control bytes&quot;</a>
+ <li> <a href="https://curl.se/bug/?i=9164">cookie: treat a blank domain in Set-Cookie: as non-existing</a>
+ <li> <a href="https://curl.se/bug/?i=9095">cookie: use %zu to infof() for size_t values</a>
+ <li> <a href="https://curl.se/bug/?i=9179">curl-compilers.m4: make icc use -diag* options and disable two warnings</a>
+ <li> <a href="https://curl.se/bug/?i=9253">curl-config: quote directories with potential space</a>
+ <li> <a href="https://curl.se/bug/?i=9183">curl-confopts: remove leftover AC_REQUIREs</a>
+ <li> <a href="https://curl.se/bug/?i=9190">curl-functions.m4: check whether atomics can link</a>
+ <li> <a href="https://curl.se/bug/?i=9187">curl-wolfssl.m4: add options header when building test code</a>
+ <li> <a href="https://curl.se/bug/?i=9067">curl.h: CURLE_CONV_FAILED is obsoleted</a>
+ <li> <a href="https://curl.se/bug/?i=9329">curl.h: include &lt;sys/select.h&gt; on SunOS</a>
+ <li> <a href="https://curl.se/bug/?i=9064">curl: output warning when a cookie is dropped due to size</a>
+ <li> <a href="https://curl.se/bug/?i=9150">curl: writeout: fix repeated header outputs</a>
+ <li> <a href="https://curl.se/bug/?i=9310">Curl_close: call Curl_resolver_cancel to avoid memory-leak</a>
+ <li> <a href="https://curl.se/bug/?i=9235">curl_easy_header: Add CURLH_PSEUDO to sanity check</a>
+ <li> <a href="https://curl.se/bug/?i=9063">curl_mime_data.3: polish the wording</a>
+ <li> <a href="https://curl.se/bug/?i=9155">curl_multi_timeout.3: clarify usage</a>
+ <li> <a href="https://curl.se/bug/?i=9239">CURLINFO_SPEED_UPLOAD/DOWNLOAD.3: fix examples</a>
+ <li> <a href="https://curl.se/bug/?i=9354">CURLOPT_BUFFERSIZE.3: add upload buffersize to see also</a>
+ <li> <a href="https://curl.se/bug/?i=9244">CURLOPT_CONNECT_ONLY.3: clarify multi API use</a>
+ <li> <a href="https://curl.se/bug/?i=9104">CURLOPT_SERVER_RESPONSE_TIMEOUT: the new name</a>
+ <li> <a href="https://curl.se/bug/?i=9199">digest: fix memory leak, fix not quoted &apos;opaque&apos;</a>
+ <li> <a href="https://curl.se/bug/?i=9090">digest: fix missing increment of &apos;nc&apos; value for auth-int</a>
+ <li> <a href="https://curl.se/bug/?i=9264">digest: pass over leading spaces in qop values</a>
+ <li> <a href="https://curl.se/bug/?i=9077">digest: reject broken header with session protocol but without qop</a>
+ <li> <a href="https://curl.se/bug/?i=9352">docs/cmdline-opts/gen.pl: encode leading single and double quotes</a>
+ <li> <a href="https://curl.se/bug/?i=9298">docs/cmdline-opts: fix example and categories for --form-escape</a>
+ <li> <a href="https://curl.se/bug/?i=9221">docs/cmdline: mark fail and fail-with-body as mutually exclusive</a>
+ <li> <a href="https://curl.se/bug/?i=9229">docs: add dns category to --resolve</a>
+ <li> <a href="https://curl.se/bug/?i=9115">docs: explain curl_easy_escape/unescape curl handle is ignored</a>
+ <li> <a href="https://curl.se/bug/?i=9208">docs: remove him/her/he/she from documentation</a>
+ <li> <a href="https://curl.se/bug/?i=9174">doh: move doh related struct definitions to doh.h</a>
+ <li> <a href="https://curl.se/bug/?i=9163">doh: use https protocol by default</a>
+ <li> <a href="https://curl.se/bug/?i=9054">easy_lock.h: include sched.h if available to fix build</a>
+ <li> <a href="https://curl.se/bug/?i=9056">easy_lock.h: use __asm__ instead of asm to fix build</a>
+ <li> <a href="https://curl.se/bug/?i=8997">easy_lock: fix build for mingw</a>
+ <li> <a href="https://curl.se/bug/?i=9081">easy_lock: fix build with icc</a>
+ <li> <a href="https://curl.se/bug/?i=9058">easy_lock: fix the #ifdef conditional for ia32_pause</a>
+ <li> <a href="https://curl.se/bug/?i=9055">easy_lock: switch to using atomic_int instead of bool</a>
+ <li> <a href="https://curl.se/bug/?i=9176">easyoptions: fix icc warning</a>
+ <li> <a href="https://curl.se/bug/?i=9115">escape: remove outdated comment</a>
+ <li> <a href="https://curl.se/bug/?i=9330">examples/curlx.c: remove</a>
+ <li> <a href="https://curl.se/bug/?i=9259">file: add handling of native AmigaOS paths</a>
+ <li> <a href="https://curl.se/bug/?i=9181">file: fix icc enumerated type mixed with another type warning</a>
+ <li> <a href="https://curl.se/bug/?i=9184">ftp: use a correct expire ID for timer expiry</a>
+ <li> <a href="https://curl.se/bug/?i=9114">getinfo: return better error on NULL as first argument</a>
+ <li> <a href="https://curl.se/bug/?i=9179">GHA: add two Intel compiler CI jobs</a>
+ <li> <a href="https://curl.se/bug/?i=9309">GHA: move libressl CI from zuul to GitHub</a>
+ <li> <a href="https://curl.se/bug/?i=9331">gha: move over ngtcp2-gnutls CI job from zuul</a>
+ <li> <a href="https://curl.se/bug/?i=9310">GHA: mv CI torture test from Zuul</a>
+ <li> <a href="https://curl.se/bug/?i=9170">h2h3: fix overriding the &apos;TE: Trailers&apos; header</a>
+ <li> <a href="https://curl.se/bug/?i=9192">hostip: resolve *.localhost to 127.0.0.1/::1</a>
+ <li> <a href="https://curl.se/bug/?i=9297">HTTP3.md: update to msh3 v0.4.0</a>
+ <li> <a href="https://curl.se/bug/?i=9179">http: typecast the httpreq assignment to avoid icc compiler warning</a>
+ <li> <a href="https://curl.se/bug/?i=9080">http_aws_sigv4.c: remove two unusued includes</a>
+ <li> <a href="https://curl.se/bug/?i=9179">http_chunks: remove an assign + typecast</a>
+ <li> <a href="https://curl.se/bug/?i=9217">hyper: customize test1274 to how hyper unfolds headers</a>
+ <li> <a href="https://curl.se/bug/?i=9216">hyper: enable obs-folded multiline headers</a>
+ <li> <a href="https://curl.se/bug/?i=9070">hyper: use wakers for curl pause/resume</a>
+ <li> <a href="https://curl.se/bug/?i=9289">imap: use ISALNUM() for alphanumeric checks</a>
+ <li> <a href="https://curl.se/bug/?i=9281">ldap: adapt to conn-&gt;port now being an &apos;int&apos;</a>
+ <li> <a href="https://curl.se/bug/?i=9073">lib/curl_path.c: add ISC to license expression</a>
+ <li> <a href="https://curl.se/bug/?i=9172">lib3026: reduce the number of threads to 100</a>
+ <li> <a href="https://curl.se/bug/?i=9057">libcurl-security.3: fix typo on macro &quot;SH_&quot;</a>
+ <li> <a href="https://curl.se/bug/?i=9328">libssh2: make atime/mtime date overflow return error</a>
+ <li> <a href="https://curl.se/bug/?i=9369">libssh2: provide symlink name in SFTP dir listing</a>
+ <li> <a href="https://curl.se/bug/?i=9382">libssh: ignore deprecation warnings</a>
+ <li> <a href="https://curl.se/bug/?i=9328">libssh: make atime/mtime date overflow return error</a>
+ <li> <a href="https://curl.se/bug/?i=9132">Makefile.m32: add `CURL_RC` and `CURL_STRIP` variables [ci skip]</a>
+ <li> <a href="https://curl.se/bug/?i=9109">Makefile.m32: add `NGTCP2_LIBS` option [ci skip]</a>
+ <li> <a href="https://curl.se/bug/?i=9092">makefile.m32: add support for custom ARCH [ci skip]</a>
+ <li> <a href="https://curl.se/bug/?i=9314">Makefile.m32: allow -nghttp3/-ngtcp2 without -ssl [ci skip]</a>
+ <li> <a href="https://curl.se/bug/?i=9069">Makefile.m32: do not set the libcurl.rc debug flag [ci skip]</a>
+ <li> <a href="https://curl.se/bug/?i=9169">Makefile.m32: stop trying to build libcares.a [ci skip]</a>
+ <li> <a href="https://curl.se/bug/?i=9306">memdebug: add annotation attributes</a>
+ <li> <a href="https://curl.se/bug/?i=9185">mprintf: fix *dyn_vprintf() when out-of-memory</a>
+ <li> <a href="https://curl.se/bug/?i=9149">mprintf: make dprintf_formatf never return negative</a>
+ <li> <a href="https://curl.se/bug/?i=8915">msh3: fix the QUIC disconnect function</a>
+ <li> <a href="https://curl.se/bug/?i=9179">multi: fix the return code from Curl_pgrsDone()</a>
+ <li> <a href="https://curl.se/bug/?i=9335">multi: have curl_multi_remove_handle close CONNECT_ONLY transfer</a>
+ <li> <a href="https://curl.se/bug/?i=6132">multi: use a pipe instead of a socketpair on apple platforms</a>
+ <li> <a href="https://curl.se/bug/?i=9376">multi: use larger dns hash table for multi interface</a>
+ <li> <a href="https://curl.se/bug/?i=9372">multi_wait: fix and improve Curl_poll error handling on Windows</a>
+ <li> <a href="https://curl.se/bug/?i=9361">multi_wait: fix skipping to populate revents for extra_fds</a>
+ <li> <a href="https://curl.se/bug/?i=9111">netrc.d: remove spurious quote</a>
+ <li> <a href="https://curl.se/bug/?i=9248">netrc: Use the password from lines without login</a>
+ <li> <a href="https://curl.se/bug/?i=9204">ngtcp2: Fix build error due to change in nghttp3 prototypes</a>
+ <li> <a href="https://curl.se/bug/?i=9056">ngtcp2: fix incompatible function pointer types</a>
+ <li> <a href="https://curl.se/bug/?i=9118">ngtcp2: Fix missing initialization of nghttp3_nv.flags</a>
+ <li> <a href="https://curl.se/bug/?i=9122">ngtcp2: fix stall or busy loop on STOP_SENDING with upload data</a>
+ <li> <a href="https://curl.se/bug/?i=9135">ngtcp2: implement cb_h3_stop_sending and cb_h3_reset_stream callbacks</a>
+ <li> <a href="https://curl.se/bug/?i=9113">openssl: add `CURL_BORINGSSL_VERSION` to identify BoringSSL</a>
+ <li> <a href="https://curl.se/bug/?i=9349">openssl: add cert path in error message</a>
+ <li> <a href="https://curl.se/bug/?i=9228">openssl: add details to &quot;unable to set client certificate&quot; error</a>
+ <li> <a href="https://curl.se/bug/?i=9110">openssl: fix BoringSSL symbol conflicts with LDAP and Schannel</a>
+ <li> <a href="https://curl.se/bug/?i=9223">quiche: fix build failure</a>
+ <li> <a href="https://bugs.archlinux.org/task/75201">select: do not return fatal error on EINTR from poll()</a>
+ <li> <a href="https://curl.se/bug/?i=9180">sendf: fix paused header writes since after the header API</a>
+ <li> <a href="https://curl.se/bug/?i=9179">sendf: make Curl_debug a void function</a>
+ <li> <a href="https://curl.se/bug/?i=9179">sendf: skip storing HTTP headers if HTTP disabled</a>
+ <li> <a href="https://curl.se/bug/?i=9179">sendf: store the header type in an usigned char to avoid icc warnings</a>
+ <li> <a href="https://curl.se/bug/?i=9179">splay: avoid using -1 in unsigned variable</a>
+ <li> <a href="https://curl.se/bug/?i=9012">test3026: add support for Windows using native Win32 threads</a>
+ <li> <a href="https://curl.se/bug/?i=9141">test3026: require &apos;threadsafe&apos;</a>
+ <li> <a href="https://curl.se/bug/?i=9250">test44[2-4]: add &apos;--resolve&apos; to the keywords</a>
+ <li> <a href="https://curl.se/bug/?i=9023">tests/server/sockfilt.c: avoid race condition without a mutex</a>
+ <li> <a href="https://curl.se/bug/?i=9364">tests: fix http2 tests to use CRLF headers</a>
+ <li> <a href="https://curl.se/bug/?i=9179">tests: several enumerated type cleanups</a>
+ <li> THANKS: merged two entries for Evgeny Grin
+ <li> <a href="https://curl.se/bug/?i=9044">tidy-up: delete unused build configuration macros</a>
+ <li> <a href="https://curl.se/bug/?i=9258">tool: reintroduce set file comment code for AmigaOS</a>
+ <li> <a href="https://curl.se/bug/?i=9179">tool_cfgable: make &apos;synthetic_error&apos; a plain bool</a>
+ <li> <a href="https://curl.se/bug/?i=9179">tool_formparse: fix variable may be used before its value is set</a>
+ <li> <a href="https://curl.se/bug/?i=9207">tool_getparam: make --doh-url &quot;&quot; switch it off</a>
+ <li> <a href="https://curl.se/bug/?i=9128">tool_getparam: repair cleanarg</a>
+ <li> <a href="https://curl.se/bug/?i=9114">tool_operate: better cleanup of easy handle in exit path</a>
+ <li> <a href="https://curl.se/bug/?i=9179">tool_paramhlp: fix &quot;enumerated type mixed with another type&quot;</a>
+ <li> <a href="https://curl.se/bug/?i=9179">tool_paramhlp: make check_protocol return ParameterError</a>
+ <li> <a href="https://curl.se/bug/?i=9082">tool_progress: avoid division by zero in parallel progress meter</a>
+ <li> <a href="https://curl.se/bug/?i=9179">tool_writeout: fix enumerated type mixed with another type</a>
+ <li> <a href="https://curl.se/bug/?i=9162">trace: 0x7F character is non-printable</a>
+ <li> <a href="https://curl.se/bug/?i=9356">unit1303: four tests should have TRUE for &apos;connecting&apos;</a>
+ <li> <a href="https://curl.se/bug/?i=9179">url: enumerated type mixed with another type</a>
+ <li> <a href="https://curl.se/bug/?i=9243">url: really use the user provided in the url when netrc entry exists</a>
+ <li> <a href="https://curl.se/bug/?i=9317">url: reject URLs with hostnames longer than 65535 bytes</a>
+ <li> <a href="https://curl.se/bug/?i=8653">url: treat missing usernames in netrc as empty</a>
+ <li> <a href="https://curl.se/bug/?i=9179">urldata: change second proxytype field to unsigned char to match</a>
+ <li> <a href="https://curl.se/bug/?i=9279">urldata: make &apos;negnpn&apos; use less storage</a>
+ <li> <a href="https://curl.se/bug/?i=9179">urldata: make state.httpreq an unsigned char</a>
+ <li> <a href="https://curl.se/bug/?i=9278">urldata: make three *_proto struct fields smaller</a>
+ <li> <a href="https://curl.se/bug/?i=9280">urldata: move smaller fields down in connectdata struct</a>
+ <li> <a href="https://curl.se/bug/?i=9106">urldata: reduce size of several struct fields</a>
+ <li> <a href="https://curl.se/bug/?i=9179">vtls: make Curl_ssl_backend() return the enum type curl_sslbackend</a>
+ <li> <a href="https://curl.se/bug/?i=9027">windows: improve random source</a>
+</ul>
+<h2> Further </h2>
+The previous release was 7.84.0.
+The next release was 7.86.0.

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_easy_perform()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_perform</b></div>
+<h1> curl_easy_perform - perform a blocking network transfer </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_easy_perform%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_easy_perform.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_easy_perform.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_easy_perform - perform a blocking network transfer </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_perform.html">curl_easy_perform</a>(CURL &#x2a;easy_handle);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a> performs a network transfer in a blocking manner and returns when done, or earlier if it fails. For non-blocking behavior, see <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a>. </p>
+<p class="level0">Invoke this function after <a Class="emphasis" href="./curl_easy_init.html">curl_easy_init</a> and all the <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> calls are made, and it performs the transfer as described in the options. It must be called with the same <span Class="bold">easy_handle</span> as input as the <a Class="emphasis" href="./curl_easy_init.html">curl_easy_init</a> call returned. </p>
+<p class="level0">You can do any amount of calls to <a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a> while using the same <span Class="bold">easy_handle</span>. If you intend to transfer more than one file, you are even encouraged to do so. libcurl attempts to reuse existing connections for the following transfers, thus making the operations faster, less CPU intense and using less network resources. You probably want to use <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> between the invokes to set options for the following <a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a> call. </p>
+<p class="level0">You must never call this function simultaneously from two places using the same <span Class="bold">easy_handle</span>. Let the function return first before invoking it another time. If you want parallel transfers, you must use several curl easy_handles. </p>
+<p class="level0">A network transfer moves data to a peer or from a peer. An application tells libcurl how to receive data by setting the <a Class="emphasis" href="./CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a> and <a Class="emphasis" href="./CURLOPT_WRITEDATA.html">CURLOPT_WRITEDATA</a> options. To tell libcurl what data to send, there are a few more alternatives but two common ones are <a Class="emphasis" href="./CURLOPT_READFUNCTION.html">CURLOPT_READFUNCTION</a> and <a Class="emphasis" href="./CURLOPT_POSTFIELDS.html">CURLOPT_POSTFIELDS</a>. </p>
+<p class="level0">While the <span Class="bold">easy_handle</span> is added to a multi handle, it cannot be used by <a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a>. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_init.html">curl_easy_init</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3), <a Class="bold" href="./curl_multi_add_handle.html">curl_multi_add_handle</a>(3), <a Class="bold" href="./curl_multi_perform.html">curl_multi_perform</a>(3), <a Class="bold" href="./libcurl-errors.html">libcurl-errors</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

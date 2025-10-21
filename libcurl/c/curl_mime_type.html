@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_mime_type()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_mime_type</b></div>
+<h1> curl_mime_type - set a mime part content type </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_mime_type%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_mime_type.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_mime_type.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_mime_type - set a mime part&apos;s content type </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_mime_type.html">curl_mime_type</a>(curl_mimepart &#x2a;part, const char &#x2a;mimetype);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><a Class="emphasis" href="./curl_mime_type.html">curl_mime_type</a> sets a mime part&apos;s content type. </p>
+<p class="level0"><span Class="emphasis">part</span> is the part&apos;s handle to assign the content type to. </p>
+<p class="level0"><span Class="emphasis">mimetype</span> points to the null-terminated file mime type string; it may be set to NULL to remove a previously attached mime type. </p>
+<p class="level0">The mime type string is copied into the part, thus the associated storage may safely be released or reused after call. Setting a part&apos;s type multiple times is valid: only the value set by the last call is retained. </p>
+<p class="level0">In the absence of a mime type and if needed by the protocol specifications, a default mime type is determined by the context: </p>
+<p class="level0">- If set as a custom header, use this value. </p>
+<p class="level0">- application/form-data for an HTTP form post. </p>
+<p class="level0">- If a remote filename is set, the mime type is taken from the filename extension, or application/octet-stream by default. </p>
+<p class="level0">- For a multipart part, multipart/mixed. </p>
+<p class="level0">- text/plain in other cases. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http, imap and smtp </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; curl_mime &#x2a;mime;
+&nbsp; curl_mimepart &#x2a;part;
+&nbsp;
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   /&#x2a; create a mime handle &#x2a;/
+&nbsp;   mime = <a href="curl_mime_init.html">curl_mime_init</a>(curl);
+&nbsp;
+&nbsp;   /&#x2a; add a part &#x2a;/
+&nbsp;   part = <a href="curl_mime_addpart.html">curl_mime_addpart</a>(mime);
+&nbsp;
+&nbsp;   /&#x2a; get data from this file &#x2a;/
+&nbsp;   <a href="curl_mime_filedata.html">curl_mime_filedata</a>(part, &quot;image.png&quot;);
+&nbsp;
+&nbsp;   /&#x2a; content-type for this part &#x2a;/
+&nbsp;   <a href="curl_mime_type.html">curl_mime_type</a>(part, &quot;image/png&quot;);
+&nbsp;
+&nbsp;   /&#x2a; set name &#x2a;/
+&nbsp;   <a href="curl_mime_name.html">curl_mime_name</a>(part, &quot;image&quot;);
+}
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.56.0.html">7.56.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_mime_addpart.html">curl_mime_addpart</a>(3), <a Class="bold" href="./curl_mime_data.html">curl_mime_data</a>(3), <a Class="bold" href="./curl_mime_name.html">curl_mime_name</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

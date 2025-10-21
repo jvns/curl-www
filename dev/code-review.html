@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head> <title>How to code review in curl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>code review</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/libcurl/abi.html">ABI</a>
+<br><a href="code-style.html">Code style</a>
+<br><a href="contribute.html">Contribute</a>
+<br><a href="/mail/">Mailing Lists</a>
+<br><a href="internals.html">Internals</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="how-to-do-code-reviews-for-curl">How to do code reviews for
+curl</h1>
+<p>Anyone and everyone is encouraged and welcome to review code
+submissions in curl. This is a guide on what to check for and how to
+perform a successful code review.</p>
+<h2 id="all-submissions-should-get-reviewed">All submissions should get
+reviewed</h2>
+<p>All pull requests and patches submitted to the project should be
+reviewed by at least one experienced curl maintainer before that code is
+accepted and merged.</p>
+<h2 id="let-the-tools-and-tests-take-the-first-rounds">Let the tools and
+tests take the first rounds</h2>
+<p>On initial pull requests, let the tools and tests do their job first
+and then start out by helping the submitter understand the test failures
+and tool alerts.</p>
+<h2 id="how-to-provide-feedback-to-author">How to provide feedback to
+author</h2>
+<p>Be nice. Ask questions. Provide examples or suggestions of
+improvements. Assume the best intentions. Remember language
+barriers.</p>
+<p>All first-time contributors can become regulars. Let's help them go
+there.</p>
+<h2 id="is-this-a-change-we-want">Is this a change we want?</h2>
+<p>If this is not a change that seems to be aligned with the project's
+path forward and as such cannot be accepted, inform the author about
+this sooner rather than later. Do it gently and explain why and possibly
+what could be done to make it more acceptable.</p>
+<h2 id="apiabi-stability-or-changed-behavior">API/ABI stability or
+changed behavior</h2>
+<p>Changing the API and the ABI may be fine in a change but it needs to
+be done deliberately and carefully. If not, a reviewer must help the
+author to realize the mistake.</p>
+<p>curl and libcurl are similarly strict on not modifying existing
+behavior. API and ABI stability is not enough, the behavior should also
+remain intact as far as possible.</p>
+<h2 id="code-style">Code style</h2>
+<p>Most code style nits are detected by checksrc but not all. Only leave
+remarks on style deviation once checksrc does not find anymore.</p>
+<p>Minor nits from fresh submitters can also be handled by the
+maintainer when merging, in case it seems like the submitter is not
+clear on what to do. We want to make the process fun and exciting for
+new contributors.</p>
+<h2 id="encourage-consistency">Encourage consistency</h2>
+<p>Make sure new code is written in a similar style as existing code.
+Naming, logic, conditions, etc.</p>
+<h2 id="are-pointers-always-non-null">Are pointers always non-NULL?</h2>
+<p>If a function or code rely on pointers being non-NULL, take an extra
+look if that seems to be a fair assessment.</p>
+<h2 id="asserts">Asserts</h2>
+<p>Conditions that should never be false can be verified with
+<code>DEBUGASSERT()</code> calls to get caught in tests and debugging
+easier, while not having an impact on final or release builds.</p>
+<h2 id="memory-allocation">Memory allocation</h2>
+<p>Can the mallocs be avoided? Do not introduce mallocs in any hot
+paths. If there are (new) mallocs, can they be combined into fewer
+calls?</p>
+<p>Are all allocations handled in error paths to avoid leaks and
+crashes?</p>
+<h2 id="thread-safety">Thread-safety</h2>
+<p>We do not like static variables as they break thread-safety and
+prevent functions from being reentrant.</p>
+<h2 id="should-features-be-ifdefed">Should features be
+<code>#ifdef</code>ed?</h2>
+<p>Features and functionality may not be present everywhere and should
+therefore be <code>#ifdef</code>ed. Additionally, some features should
+be possible to switch on/off in the build.</p>
+<p>Write <code>#ifdef</code>s to be as little of a "maze" as
+possible.</p>
+<h2 id="does-it-look-portable-enough">Does it look portable enough?</h2>
+<p>curl runs "everywhere". Does the code take a reasonable stance and
+enough precautions to be possible to build and run on most
+platforms?</p>
+<p>Remember that we live by C89 restrictions.</p>
+<h2 id="tests-and-testability">Tests and testability</h2>
+<p>New features should be added in conjunction with one or more test
+cases. Ideally, functions should also be written so that unit tests can
+be done to test individual functions.</p>
+<h2 id="documentation">Documentation</h2>
+<p>New features or changes to existing functionality
+<strong>must</strong> be accompanied by updated documentation.
+Submitting that in a separate follow-up pull request is not OK. A code
+review must also verify that the submitted documentation update matches
+the code submission.</p>
+<p>English is not everyone's first language, be mindful of this and help
+the submitter improve the text if it needs a rewrite to read better.</p>
+<h2 id="code-should-not-be-hard-to-understand">Code should not be hard
+to understand</h2>
+<p>Source code should be written to maximize readability and be easy to
+understand.</p>
+<h2 id="functions-should-not-be-large">Functions should not be
+large</h2>
+<p>A single function should never be large as that makes it hard to
+follow and understand all the exit points and state changes. Some
+existing functions in curl certainly violate this ground rule but when
+reviewing new code we should propose splitting into smaller
+functions.</p>
+<h2 id="duplication-is-evil">Duplication is evil</h2>
+<p>Anything that looks like duplicated code is a red flag. Anything that
+seems to introduce code that we <em>should</em> already have or provide
+needs a closer check.</p>
+<h2 id="sensitive-data">Sensitive data</h2>
+<p>When credentials are involved, take an extra look at what happens
+with this data. Where it comes from and where it goes.</p>
+<h2 id="variable-types-differ">Variable types differ</h2>
+<p><code>size_t</code> is not a fixed size. <code>time_t</code> can be
+signed or unsigned and have different sizes. Relying on variable sizes
+is a red flag.</p>
+<p>Also remember that endianness and &gt;= 32-bit accesses to unaligned
+addresses are problematic areas.</p>
+<h2 id="integer-overflows">Integer overflows</h2>
+<p>Be careful about integer overflows. Some variable types can be either
+32-bit or 64-bit. Integer overflows must be detected and acted on
+<em>before</em> they happen.</p>
+<h2 id="dangerous-use-of-functions">Dangerous use of functions</h2>
+<p>Maybe use of <code>realloc()</code> should rather use the dynbuf
+functions?</p>
+<p>Do not allow new code that grows buffers without using dynbuf.</p>
+<p>Use of C functions that rely on a terminating zero must only be used
+on data that really do have a null-terminating zero.</p>
+<h2 id="dangerous-data-styles">Dangerous "data styles"</h2>
+<p>Make extra precautions and verify that memory buffers that need a
+terminating zero always have exactly that. Buffers <em>without</em> a
+null-terminator must not be used as input to string functions.</p>
+<h1 id="commit-messages">Commit messages</h1>
+<p>Tightly coupled with a code review is making sure that the commit
+message is good. It is the responsibility of the person who merges the
+code to make sure that the commit message follows our standard (detailed
+in the <a href="https://curl.se/dev/contribute.html">CONTRIBUTE</a>
+document). This includes making sure the PR identifies related issues
+and giving credit to reporters and helpers.</p>
+</div>
+</div>
+</body>
+</html>

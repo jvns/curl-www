@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_RTSP_REQUEST</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_RTSP_REQUEST</b></div>
+<h1> CURLOPT_RTSP_REQUEST explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_RTSP_REQUEST%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_RTSP_REQUEST.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_RTSP_REQUEST.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_RTSP_REQUEST - RTSP request </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_RTSP_REQUEST.html">CURLOPT_RTSP_REQUEST</a>, long request);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Tell libcurl what kind of RTSP request to make. Pass one of the following RTSP enum values as a long in the <span Class="emphasis">request</span> argument. Unless noted otherwise, commands require the Session ID to be initialized. </p>
+<p class="level0"><a name="CURLRTSPREQOPTIONS"></a><span class="nroffip">CURL_RTSPREQ_OPTIONS</span> </p>
+<p class="level1">Used to retrieve the available methods of the server. The application is responsible for parsing and obeying the response. The session ID is not needed for this method. </p>
+<p class="level0"><a name="CURLRTSPREQDESCRIBE"></a><span class="nroffip">CURL_RTSPREQ_DESCRIBE</span> </p>
+<p class="level1">Used to get the low level description of a stream. The application should note what formats it understands in the <span Class="emphasis">&apos;Accept:&apos;</span> header. Unless set manually, libcurl automatically adds in <span Class="emphasis">&apos;Accept: application/sdp&apos;</span>. Time-condition headers are added to Describe requests if the <a Class="emphasis" href="./CURLOPT_TIMECONDITION.html">CURLOPT_TIMECONDITION</a> option is used. (The session ID is not needed for this method) </p>
+<p class="level0"><a name="CURLRTSPREQANNOUNCE"></a><span class="nroffip">CURL_RTSPREQ_ANNOUNCE</span> </p>
+<p class="level1">When sent by a client, this method changes the description of the session. For example, if a client is using the server to record a meeting, the client can use Announce to inform the server of all the meta-information about the session. ANNOUNCE acts like an HTTP PUT or POST just like <a class="emphasis" href="#CURLRTSPREQSETPARAMETER">CURL_RTSPREQ_SET_PARAMETER</a> </p>
+<p class="level0"><a name="CURLRTSPREQSETUP"></a><span class="nroffip">CURL_RTSPREQ_SETUP</span> </p>
+<p class="level1">Setup is used to initialize the transport layer for the session. The application must set the desired Transport options for a session by using the <a Class="emphasis" href="./CURLOPT_RTSP_TRANSPORT.html">CURLOPT_RTSP_TRANSPORT</a> option prior to calling setup. If no session ID is currently set with <a Class="emphasis" href="./CURLOPT_RTSP_SESSION_ID.html">CURLOPT_RTSP_SESSION_ID</a>, libcurl extracts and uses the session ID in the response to this request. The session ID is not needed for this method. </p>
+<p class="level0"><a name="CURLRTSPREQPLAY"></a><span class="nroffip">CURL_RTSPREQ_PLAY</span> </p>
+<p class="level1">Send a Play command to the server. Use the <a Class="emphasis" href="./CURLOPT_RANGE.html">CURLOPT_RANGE</a> option to modify the playback time (e.g. <span Class="emphasis">npt=10-15</span>). </p>
+<p class="level0"><a name="CURLRTSPREQPAUSE"></a><span class="nroffip">CURL_RTSPREQ_PAUSE</span> </p>
+<p class="level1">Send a Pause command to the server. Use the <a Class="emphasis" href="./CURLOPT_RANGE.html">CURLOPT_RANGE</a> option with a single value to indicate when the stream should be halted. (e.g. <span Class="emphasis">npt=25</span>) </p>
+<p class="level0"><a name="CURLRTSPREQTEARDOWN"></a><span class="nroffip">CURL_RTSPREQ_TEARDOWN</span> </p>
+<p class="level1">This command terminates an RTSP session. Simply closing a connection does not terminate the RTSP session since it is valid to control an RTSP session over different connections. </p>
+<p class="level0"><a name="CURLRTSPREQGETPARAMETER"></a><span class="nroffip">CURL_RTSPREQ_GET_PARAMETER</span> </p>
+<p class="level1">Retrieve a parameter from the server. By default, libcurl adds a <span Class="emphasis">Content-Type: text/parameters</span> header on all non-empty requests unless a custom one is set. GET_PARAMETER acts just like an HTTP PUT or POST (see <a class="emphasis" href="#CURLRTSPREQSETPARAMETER">CURL_RTSPREQ_SET_PARAMETER</a>). Applications wishing to send a heartbeat message (e.g. in the presence of a server-specified timeout) should send use an empty GET_PARAMETER request. </p>
+<p class="level0"><a name="CURLRTSPREQSETPARAMETER"></a><span class="nroffip">CURL_RTSPREQ_SET_PARAMETER</span> </p>
+<p class="level1">Set a parameter on the server. By default, libcurl uses a &#x2a;Content-Type: text/parameters&#x2a; header unless a custom one is set. The interaction with SET_PARAMETER is much like an HTTP PUT or POST. An application may either use <a Class="emphasis" href="./CURLOPT_UPLOAD.html">CURLOPT_UPLOAD</a> with <a Class="emphasis" href="./CURLOPT_READDATA.html">CURLOPT_READDATA</a> like an HTTP PUT, or it may use <a Class="emphasis" href="./CURLOPT_POSTFIELDS.html">CURLOPT_POSTFIELDS</a> like an HTTP POST. No chunked transfers are allowed, so the application must set the <a Class="emphasis" href="./CURLOPT_INFILESIZE.html">CURLOPT_INFILESIZE</a> in the former and <a Class="emphasis" href="./CURLOPT_POSTFIELDSIZE.html">CURLOPT_POSTFIELDSIZE</a> in the latter. Also, there is no use of multi-part POSTs within RTSP. </p>
+<p class="level0"><a name="CURLRTSPREQRECORD"></a><span class="nroffip">CURL_RTSPREQ_RECORD</span> </p>
+<p class="level1">Used to tell the server to record a session. Use the <a Class="emphasis" href="./CURLOPT_RANGE.html">CURLOPT_RANGE</a> option to modify the record time. </p>
+<p class="level0"><a name="CURLRTSPREQRECEIVE"></a><span class="nroffip">CURL_RTSPREQ_RECEIVE</span> </p>
+<p class="level1">This is a special request because it does not send any data to the server. The application may call this function in order to receive interleaved RTP data. It returns after processing one read buffer of data in order to give the application a chance to run. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects rtsp only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;rtsp://example.com/&quot;);
+&nbsp;   /&#x2a; ask for options &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_RTSP_REQUEST.html">CURLOPT_RTSP_REQUEST</a>, CURL_RTSPREQ_OPTIONS);
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0"><span Class="bold">CURL_RTSPREQ_</span>&#x2a; enums became <span Class="emphasis">long</span> types in <a href="/ch/8.13.0.html">8.13.0</a>, prior to this version a <span Class="emphasis">long</span> cast was necessary when passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.20.0.html">7.20.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_RTSP_SESSION_ID.html">CURLOPT_RTSP_SESSION_ID</a>(3), <a Class="bold" href="./CURLOPT_RTSP_STREAM_URI.html">CURLOPT_RTSP_STREAM_URI</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

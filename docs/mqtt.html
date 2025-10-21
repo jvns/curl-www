@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head> <title>MQTT with curl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/protdocs.html">Protocols</a> / <b>MQTT with curl</b></div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="mqtt-in-curl">MQTT in curl</h1>
+<h2 id="usage">Usage</h2>
+<p>A plain "GET" subscribes to the topic and prints all published
+messages.</p>
+<p>Doing a "POST" publishes the post data to the topic and exits.</p>
+<h3 id="subscribing">Subscribing</h3>
+<p>Command usage:</p>
+<pre><code>curl mqtt://host/topic</code></pre>
+<p>Example subscribe:</p>
+<pre><code>curl mqtt://host.home/bedroom/temp</code></pre>
+<p>This sends an MQTT SUBSCRIBE packet for the topic
+<code>bedroom/temp</code> and listen in for incoming PUBLISH
+packets.</p>
+<p>You can set the upkeep interval ms option to make curl send MQTT ping
+requests to the server at an internal, to prevent the connection to get
+closed because of idleness. You might then need to use the progress
+callback to cancel the operation.</p>
+<h3 id="publishing">Publishing</h3>
+<p>Command usage:</p>
+<pre><code>curl -d payload mqtt://host/topic</code></pre>
+<p>Example publish:</p>
+<pre><code>curl -d 75 mqtt://host.home/bedroom/dimmer</code></pre>
+<p>This sends an MQTT PUBLISH packet to the topic
+<code>bedroom/dimmer</code> with the payload <code>75</code>.</p>
+<h2 id="what-does-curl-deliver-as-a-response-to-a-subscribe">What does
+curl deliver as a response to a subscribe</h2>
+<p>Whenever a PUBLISH packet is received, curl outputs two bytes topic
+length (MSB | LSB), the topic followed by the payload.</p>
+<h2 id="caveats">Caveats</h2>
+<p>Remaining limitations:</p>
+<ul>
+<li>Only QoS level 0 is implemented for publish</li>
+<li>No way to set retain flag for publish</li>
+<li>No TLS (mqtts) support</li>
+<li>Naive EAGAIN handling does not handle split messages</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

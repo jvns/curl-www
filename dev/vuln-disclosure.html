@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Vulnerability Disclosure Policy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>Vulnerability Disclosure Policy</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/docs/security.html">curl CVEs</a>
+<br><a href="/docs/faq.html">FAQ</a>
+<br><a href="/ch/">Changelog</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="curl-vulnerability-disclosure-policy">curl vulnerability
+disclosure policy</h1>
+<p>This document describes how security vulnerabilities are handled in
+the curl project.</p>
+<h2 id="publishing-information">Publishing Information</h2>
+<p>All known and public curl or libcurl related vulnerabilities are
+listed on <a href="https://curl.se/docs/security.html">the curl website
+security page</a>.</p>
+<p>Security vulnerabilities <strong>should not</strong> be entered in
+the project's public bug tracker.</p>
+<h2 id="vulnerability-handling">Vulnerability Handling</h2>
+<p>The typical process for handling a new security vulnerability is as
+follows.</p>
+<p>No information should be made public about a vulnerability until it
+is formally announced at the end of this process. That means, for
+example, that a bug tracker entry must NOT be created to track the issue
+since that makes the issue public and it should not be discussed on any
+of the project's public mailing lists. Messages associated with any
+commits should not make any reference to the security nature of the
+commit if done prior to the public announcement.</p>
+<ul>
+<li><p>The person discovering the issue, the reporter, reports the
+vulnerability on <a href="https://hackerone.com/curl">HackerOne</a>.
+Issues filed there reach a handful of selected and trusted
+people.</p></li>
+<li><p>Messages that do not relate to the reporting or managing of an
+undisclosed security vulnerability in curl or libcurl are ignored and no
+further action is required.</p></li>
+<li><p>A person in the security team responds to the original report to
+acknowledge that a human has seen the report.</p></li>
+<li><p>The security team investigates the report and either rejects it
+or accepts it. See below for examples of problems that are not
+considered vulnerabilities.</p></li>
+<li><p>If the report is rejected, the team writes to the reporter to
+explain why.</p></li>
+<li><p>If the report is accepted, the team writes to the reporter to let
+them know it is accepted and that they are working on a fix.</p></li>
+<li><p>The security team discusses the problem, works out a fix,
+considers the impact of the problem and suggests a release schedule.
+This discussion should involve the reporter as much as
+possible.</p></li>
+<li><p>The release of the information should be "as soon as possible"
+and is most often synchronized with an upcoming release that contains
+the fix. If the reporter, or anyone else involved, thinks the next
+planned release is too far away, then a separate earlier release should
+be considered.</p></li>
+<li><p>Write a security advisory draft about the problem that explains
+what the problem is, its impact, which versions it affects, solutions or
+workarounds, when the release is out and make sure to credit all
+contributors properly. Figure out the CWE (Common Weakness Enumeration)
+number for the flaw. See <a
+href="https://curl.se/dev/advisory.html">SECURITY-ADVISORY</a> for help
+on creating the advisory.</p></li>
+<li><p>Request a CVE Id for the issue. curl is a CNA (CVE Numbering
+Authority) and can request its own numbers.</p></li>
+<li><p>Update the "security advisory" with the CVE number.</p></li>
+<li><p>The security team commits the fix in a private branch. The commit
+message should ideally contain the CVE number. If the severity level of
+the issue is set to Low or Medium, the fix is allowed to get merged into
+the master repository via a normal PR - but without mentioning it being
+a security vulnerability.</p></li>
+<li><p>The monetary reward part of the bug-bounty is managed by the
+Internet Bug Bounty team and the reporter is asked to request the reward
+from them after the issue has been completely handled and published by
+curl.</p></li>
+<li><p>No more than seven days before release, inform <a
+href="https://oss-security.openwall.org/wiki/mailing-lists/distros">distros@openwall</a>
+to prepare them about the upcoming public security vulnerability
+announcement - attach the advisory draft for information with CVE and
+current patch. 'distros' does not accept an embargo longer than 7 days
+and they do not care for Windows-specific flaws.</p></li>
+<li><p>No more than 48 hours before the release, the private branch is
+merged into the master branch and pushed. Once pushed, the information
+is accessible to the public and the actual release should follow suit
+immediately afterwards. The time between the push and the release is
+used for final tests and reviews.</p></li>
+<li><p>The project team creates a release that includes the
+fix.</p></li>
+<li><p>The project team announces the release and the vulnerability to
+the world in the same manner we always announce releases. It gets sent
+to the curl-announce, curl-library and curl-users mailing
+lists.</p></li>
+<li><p>The security webpage on the website should get the new
+vulnerability mentioned.</p></li>
+</ul>
+<h2 id="security-at-curl-dot-se">security (at curl dot se)</h2>
+<p>This is a private mailing list for discussions on and about curl
+security issues.</p>
+<p>Who is on this list? There are a couple of criteria you must meet,
+and then we might ask you to join the list or you can ask to join it. It
+really is not a formal process. We basically only require that you have
+a long-term presence in the curl project and you have shown an
+understanding for the project and its way of working. You must have been
+around for a good while and you should have no plans of vanishing in the
+near future.</p>
+<p>We do not make the list of participants public mostly because it
+tends to vary somewhat over time and a list somewhere only risks getting
+outdated.</p>
+<h2 id="publishing-security-advisories">Publishing Security
+Advisories</h2>
+<ol type="1">
+<li><p>Write up the security advisory, using markdown syntax. Use the
+same subtitles as last time to maintain consistency.</p></li>
+<li><p>Name the advisory file after the allocated CVE id.</p></li>
+<li><p>Add a line on the top of the array in
+<code>curl-www/docs/vuln.pm</code>.</p></li>
+<li><p>Put the new advisory markdown file in the
+<code>curl-www/docs/</code> directory. Add it to the git
+repository.</p></li>
+<li><p>Run <code>make</code> in your local web checkout and verify that
+things look fine.</p></li>
+<li><p>On security advisory release day, push the changes on the
+curl-www repository's remote master branch.</p></li>
+</ol>
+<h2 id="disclose-the-report">Disclose the report</h2>
+<p>Request the issue to be disclosed. If there are sensitive details
+present in the report and discussion, those should be redacted from the
+disclosure. The default policy is to disclose as much as possible as
+soon as the vulnerability has been published.</p>
+<p><em>All</em> reports submitted to the project, valid or not, should
+be disclosed and made public.</p>
+<h2 id="bug-bounty">Bug Bounty</h2>
+<p>See <a href="https://curl.se/docs/bugbounty.html">BUG-BOUNTY</a> for
+details on the bug bounty program.</p>
+<h1 id="severity-levels">Severity levels</h1>
+<p>The curl project's security team rates security problems using four
+severity levels depending how serious we consider the problem to be. We
+use <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>
+and <strong>Critical</strong>. We refrain from using numerical scoring
+of vulnerabilities.</p>
+<p>We do not support CVSS as a method to grade security vulnerabilities,
+so we do not set them for CVE records published by the curl project. We
+believe CVSS is a broken system that often does not properly evaluate to
+suitable severity levels that reflect all dimensions and factors
+involved. Other organizations however set and provide CVSS scores for
+curl vulnerabilities. You need to decide for yourself if you believe
+they know enough about the subjects involved to make reasonable
+assessments. Deciding between four different severity levels is hard
+enough for us.</p>
+<p>When deciding severity level on a particular issue, we take all the
+factors into account: attack vector, attack complexity, required
+privileges, necessary build configuration, protocols involved, platform
+specifics and also what effects a possible exploit or trigger of the
+issue can lead to, including confidentiality, integrity or availability
+problems.</p>
+<h2 id="low">Low</h2>
+<p>This is a security problem that is truly hard or unlikely to exploit
+or trigger. Due to timing, platform requirements or the fact that
+options or protocols involved are rare etc. <a
+href="https://curl.se/docs/CVE-2022-43552.html">Past example</a></p>
+<h2 id="medium">Medium</h2>
+<p>This is a security problem that is less hard than
+<strong>Low</strong> to exploit or trigger. Less strict timing, wider
+platform availability or involving more widely used options or
+protocols. A problem that usually needs something else to also happen to
+become serious. <a href="https://curl.se/docs/CVE-2022-32206.html">Past
+example</a></p>
+<h2 id="high">High</h2>
+<p>This issue is in itself a serious problem with real world impact.
+Flaws that can easily compromise the confidentiality, integrity or
+availability of resources. Exploiting or triggering this problem is not
+hard. <a href="https://curl.se/docs/CVE-2019-3822.html">Past
+example</a></p>
+<h2 id="critical">Critical</h2>
+<p>Easily exploitable by a remote unauthenticated attacker and lead to
+system compromise (arbitrary code execution) without requiring user
+interaction, with a common configuration on a popular platform. This
+issue has few restrictions and requirements and can be exploited easily
+using most curl configurations. <a
+href="https://curl.se/docs/CVE-2000-0973.html">Past example</a></p>
+<h1 id="not-security-issues">Not security issues</h1>
+<p>This is an incomplete list of issues that are not considered
+vulnerabilities.</p>
+<h2 id="small-memory-leaks">Small memory leaks</h2>
+<p>We do not consider a small memory leak a security problem; even if
+the amount of allocated memory grows by a small amount every now and
+then. Long-living applications and services already need to have
+countermeasures and deal with growing memory usage, be it leaks or just
+increased use. A small memory or resource leak is then expected to
+<em>not</em> cause a security problem.</p>
+<p>Of course there can be a discussion if a leak is small or not. A
+large leak can be considered a security problem due to the DOS risk. If
+leaked memory contains sensitive data it might also qualify as a
+security problem.</p>
+<h2 id="never-ending-transfers">Never-ending transfers</h2>
+<p>We do not consider flaws that cause a transfer to never end to be a
+security problem. There are already several benign and likely reasons
+for transfers to stall and never end, so applications that cannot deal
+with never-ending transfers already need to have counter-measures
+established.</p>
+<p>If the problem avoids the regular counter-measures when it causes a
+never- ending transfer, it might be a security problem.</p>
+<h2 id="not-practically-possible">Not practically possible</h2>
+<p>If the flaw or vulnerability cannot practically get executed on
+existing hardware it is not a security problem.</p>
+<h2 id="api-misuse">API misuse</h2>
+<p>If a reported issue only triggers by an application using the API in
+a way that is not documented to work or even documented to not work, it
+is probably not going to be considered a security problem. We only
+guarantee secure and proper functionality when the APIs are used as
+expected and documented.</p>
+<p>There can be a discussion about what the documentation actually means
+and how to interpret the text, which might end up with us still agreeing
+that it is a security problem.</p>
+<h2 id="local-attackers-already-present">Local attackers already
+present</h2>
+<p>When an issue can only be attacked or misused by an attacker present
+on the local system or network, the bar is raised. If a local user
+wrongfully has elevated rights on your system enough to attack curl,
+they can probably already do much worse harm and the problem is not
+really in curl.</p>
+<h2 id="debug--experiments">Debug &amp; Experiments</h2>
+<p>Vulnerabilities in features which are off by default (in the build)
+and documented as experimental, or exist only in debug mode, are not
+eligible for a reward and we do not consider them security problems.</p>
+<p>The same applies to scripts and software which are not installed by
+default through the make install rule.</p>
+<h2 id="url-inconsistencies">URL inconsistencies</h2>
+<p>URL parser inconsistencies between browsers and curl are expected and
+are not considered security vulnerabilities. The WHATWG URL
+Specification and RFC 3986+ (the plus meaning that it is an extended
+version) <a
+href="https://github.com/bagder/docs/blob/master/URL-interop.md">are not
+completely interoperable</a>.</p>
+<p>Obvious parser bugs can still be vulnerabilities of course.</p>
+<h2 id="visible-command-line-arguments">Visible command line
+arguments</h2>
+<p>The curl command blanks the contents of a number of command line
+arguments to prevent them from appearing in process listings. It does
+not blank all arguments, even though some that are not blanked might
+contain sensitive data. We consider this functionality a best-effort and
+omissions are not security vulnerabilities.</p>
+<ul>
+<li>not all systems allow the arguments to be blanked in the first
+place</li>
+<li>since curl blanks the argument itself they are readable for a short
+moment no matter what</li>
+<li>virtually every argument can contain sensitive data, depending on
+use</li>
+<li>blanking all arguments would make it impractical for users to
+differentiate curl command lines in process listings</li>
+</ul>
+<h2 id="busy-loops">Busy-loops</h2>
+<p>Busy-loops that consume 100% CPU time but eventually end (perhaps due
+to a set timeout value or otherwise) are not considered security
+problems. Applications are supposed to already handle situations when
+the transfer loop legitimately consumes 100% CPU time, so while a
+prolonged such busy-loop is a nasty bug, we do not consider it a
+security problem.</p>
+<h2 id="saving-files">Saving files</h2>
+<p>curl cannot protect against attacks where an attacker has write
+access to the same directory where curl is directed to save files.</p>
+<h2 id="tricking-a-user-to-run-a-command-line">Tricking a user to run a
+command line</h2>
+<p>A creative, misleading or funny looking command line is not a
+security problem. The curl command line tool takes options and URLs on
+the command line and if an attacker can trick the user to run a
+specifically crafted curl command line, all bets are off. Such an
+attacker can just as well have the user run a much worse command that
+can do something fatal (like <code>sudo rm -rf /</code>).</p>
+<h2 id="terminal-output-and-escape-sequences">Terminal output and escape
+sequences</h2>
+<p>Content that is transferred from a server and gets displayed in a
+terminal by curl may contain escape sequences or use other tricks to
+fool the user. This is curl working as designed and is not a curl
+security problem. Escape sequences, moving cursor, changing color etc,
+is also frequently used for good. To reduce the risk of getting fooled,
+save files and browse them after download using a display method that
+minimizes risks.</p>
+<h2 id="null-dereferences-and-crashes">NULL dereferences and
+crashes</h2>
+<p>If a malicious server can trigger a NULL dereference in curl or
+otherwise cause curl to crash (and nothing worse), chances are big that
+we do not consider that a security problem.</p>
+<p>Malicious servers can already cause considerable harm and denial of
+service like scenarios without having to trigger such code paths. For
+example by stalling, being terribly slow or by delivering enormous
+amounts of data. Additionally, applications are expected to handle
+"normal" crashes without that being the end of the world.</p>
+<p>There need to be more and special circumstances to treat such
+problems as security issues.</p>
+<h2 id="legacy-dependencies">Legacy dependencies</h2>
+<p>Problems that can be triggered only by the use of a <em>legacy
+dependency</em> are not considered security problems.</p>
+<p>A <em>legacy dependency</em> is here defined as:</p>
+<ul>
+<li><p>the legacy version was released over ten years ago AND</p></li>
+<li><p>the legacy version is no longer in use by any existing still
+supported operating system or distribution AND</p></li>
+<li><p>there are modern versions of equivalent or better functionality
+offered and in common use</p></li>
+</ul>
+<h2 id="weak-algorithms-required-for-functionality">weak algorithms
+required for functionality</h2>
+<p>curl supports several algorithms that are considered weak, like DES
+and MD5. These algorithms are still not curl security vulnerabilities or
+security problems as they are only used when the users explicitly ask
+for their use by using the protocols or options that require the use of
+those algorithms.</p>
+<p>When servers upgrade to use secure alternatives, curl users should
+use those options/protocols.</p>
+<h1 id="curl-major-incident-response">curl major incident response</h1>
+<p>Vulnerability disclosure manages the full life cycle of a
+vulnerability affecting curl - where the <strong>curl-security</strong>
+team privately engages with reporters coordinating on embargo and
+eventual release of security fixes.</p>
+<p>For most vulnerabilities (even critical vulnerabilities) this is the
+normal <em>'mode'</em> of incident response.</p>
+<p>A <strong>major incident</strong> is defined as something that has
+much larger scope and impact on users and developers of curl.</p>
+<p>A major incident usually encompasses one or more of the
+following:</p>
+<ul>
+<li>broad and deep impact on developers, distros and users</li>
+<li>high visibility</li>
+<li>remote code execution</li>
+<li>exploit readily available</li>
+<li>critical curl infrastructure compromised</li>
+<li>time sensitive</li>
+<li>premature disclosure (e.g. embargo broken)</li>
+</ul>
+<p>A major incident is declared only when it is deemed that the normal
+vulnerability disclosure process is not sufficient.</p>
+<p>The curl <strong>major incident</strong> process is as follows:</p>
+<h2 id="major-incident-begins">Major incident begins</h2>
+<p>Only a member of the <strong>curl-security</strong> team can declare
+a <strong>major incident</strong> via any or all of the following
+communication channels:</p>
+<ul>
+<li><strong>irc</strong>: channel #curl on the network <a
+href="https://libera.chat/">Libera.Chat</a></li>
+<li><strong>mailing-lists</strong>:
+<ul>
+<li>curl-announce</li>
+<li>curl-users</li>
+<li>curl-distros</li>
+</ul></li>
+<li><strong>website</strong>: <a
+href="https://curl.se/">curl.se</a></li>
+</ul>
+<p>This declaration may also be transmitted via other channels, though
+the above are considered official channels.</p>
+<p>The veracity of such a communication can be verified by consulting
+two or more <strong>curl-security</strong> team members.</p>
+<p>This announcement nominates, from <strong>curl-security</strong>
+team, the following roles:</p>
+<ul>
+<li><strong>incident lead</strong> - Coordinates technical efforts</li>
+<li><strong>communication lead</strong> - Single point of public
+contact</li>
+</ul>
+<p>It is likely that our <a
+href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">BDFL</a>
+occupies one of these roles, though this plan does not depend on it.</p>
+<p>A declaration may also contain more detailed information but as we
+honor embargoes and vulnerability disclosure throughout this process, it
+may also just contain brief notification that a <strong>major
+incident</strong> is occurring.</p>
+<h2 id="major-incident-ongoing">Major incident ongoing</h2>
+<p>During the incident - all press, media, legal or commercial entities
+should contact communication leader (<a
+href="mailto:security@curl.se">security@curl.se</a>).</p>
+<p>Existing <strong>curl-security</strong> team internal communication
+channels are used for all internal communication.</p>
+<p>Existing vulnerability disclosure process are followed for any
+embargoes and fixes.</p>
+<p>Where possible, public communication are provided:</p>
+<ul>
+<li><p>regular communication from communication leader (for example
+daily update)</p></li>
+<li><p>asynchronous communication from incident leader</p></li>
+<li><p>Delivered to the aforementioned curl communication
+channels.</p></li>
+</ul>
+<p>A log is kept of all external and internal communication.</p>
+<p>Once fixes have been released we may provide a more detailed
+postmortem and overall timeline of events.</p>
+<h2 id="major-incident-ends">Major incident ends</h2>
+<p>Both the incident and communication leads declare when a
+<strong>major incident</strong> has finished.</p>
+<p>Any notices are removed and a return to normal vulnerability
+disclosure process.</p>
+</div>
+</div>
+</body>
+</html>

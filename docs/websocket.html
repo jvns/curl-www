@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head> <title>WebSocket with curl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/protdocs.html">Protocols</a> / <b>WebSocket</b></div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="websocket-in-curl">WebSocket in curl</h1>
+<h2 id="url">URL</h2>
+<p>WebSocket communication with libcurl is done by setting up a transfer
+to a URL using the <code>ws://</code> or <code>wss://</code> URL
+schemes. The latter one being the secure version done over HTTPS.</p>
+<p>When using <code>wss://</code> to do WebSocket over HTTPS, the
+standard TLS and HTTPS options are acknowledged for the CA, verification
+of server certificate etc.</p>
+<p>WebSocket communication is done by upgrading a connection from either
+HTTP or HTTPS. When given a WebSocket URL to work with, libcurl
+considers it a transfer failure if the upgrade procedure fails. This
+means that a plain HTTP 200 response code is considered an error for
+this work.</p>
+<h2 id="api">API</h2>
+<p>The WebSocket API is described in the individual man pages for the
+new API.</p>
+<p>WebSocket with libcurl can be done two ways.</p>
+<ol type="1">
+<li><p>Get the WebSocket frames from the server sent to the write
+callback. You can then respond with <code>curl_ws_send()</code> from
+within the callback (or outside of it).</p></li>
+<li><p>Set <code>CURLOPT_CONNECT_ONLY</code> to 2L (new for WebSocket),
+which makes libcurl do an HTTP GET + <code>Upgrade:</code> request plus
+response in the <code>curl_easy_perform()</code> call before it returns
+and then you can use <code>curl_ws_recv()</code> and
+<code>curl_ws_send()</code> to receive and send WebSocket frames from
+and to the server.</p></li>
+</ol>
+<p>The new options to <code>curl_easy_setopt()</code>:</p>
+<p><code>CURLOPT_WS_OPTIONS</code> - to control specific behavior.
+<code>CURLWS_RAW_MODE</code> makes libcurl provide all WebSocket traffic
+raw in the callback. <code>CURLWS_NOAUTOPONG</code> disables automatic
+<code>PONG</code> replies.</p>
+<p>The new function calls:</p>
+<p><code>curl_ws_recv()</code> - receive a WebSocket frame</p>
+<p><code>curl_ws_send()</code> - send a WebSocket frame</p>
+<p><code>curl_ws_meta()</code> - return WebSocket metadata within a
+write callback</p>
+<h2 id="max-frame-size">Max frame size</h2>
+<p>The current implementation only supports frame sizes up to a max (64K
+right now). This is because the API delivers full frames and it then
+cannot manage the full 2^63 bytes size.</p>
+<p>If we decide we need to support (much) larger frames than 64K, we
+need to adjust the API accordingly to be able to deliver partial frames
+in both directions.</p>
+<h2 id="errors">Errors</h2>
+<p>If the given WebSocket URL (using <code>ws://</code> or
+<code>wss://</code>) fails to get upgraded via a 101 response code and
+instead gets another response code back from the HTTP server - the
+transfer returns <code>CURLE_HTTP_RETURNED_ERROR</code> for that
+transfer. Note then that even 2xx response codes are then considered
+error since it failed to provide a WebSocket transfer.</p>
+<h2 id="test-suite">Test suite</h2>
+<p>I looked for an existing small WebSocket server implementation with
+maximum flexibility to dissect and cram into the test suite but I ended
+up deciding that extending the existing test suite server sws to deal
+with WebSocket might be the better way.</p>
+<ul>
+<li><p>This server is already integrated and working in the test
+suite</p></li>
+<li><p>We want maximum control and ability to generate broken protocol
+and negative tests as well. A dumber and simpler TCP server could then
+be easier to massage into this than a "proper" WebSocket
+server.</p></li>
+</ul>
+<h2 id="command-line-tool-websocket">Command line tool WebSocket</h2>
+<p>The plan is to make curl do WebSocket similar to telnet/nc. That part
+of the work has not been started.</p>
+<p>Ideas:</p>
+<ul>
+<li>Read stdin and send off as messages. Consider newline as end of
+fragment. (default to text? offer option to set binary)</li>
+<li>Respond to PINGs automatically</li>
+<li>Issue PINGs at some default interval (option to switch off/change
+interval?)</li>
+<li>Allow <code>-d</code> to specify (initial) data to send (should the
+format allow for multiple separate frames?)</li>
+<li>Exit after N messages received, where N can be zero.</li>
+</ul>
+<h2 id="future-work">Future work</h2>
+<ul>
+<li>Verify the Sec-WebSocket-Accept response. It requires a sha-1
+function.</li>
+<li>Verify Sec-WebSocket-Extensions and Sec-WebSocket-Protocol in the
+response</li>
+<li>Consider a <code>curl_ws_poll()</code></li>
+<li>Make sure WebSocket code paths are fuzzed</li>
+<li>Add client-side PING interval</li>
+<li>Provide option to disable PING-PONG automation</li>
+<li>Support compression (<code>CURLWS_COMPRESS</code>)</li>
+</ul>
+<h2 id="why-not-libwebsocket">Why not libWebSocket</h2>
+<p>libWebSocket is said to be a solid, fast and efficient WebSocket
+library with a vast amount of users. My plan was originally to build
+upon it to skip having to implement the low level parts of WebSocket
+myself.</p>
+<p>Here are the reasons why I have decided to move forward with
+WebSocket in curl <strong>without using libWebSocket</strong>:</p>
+<ul>
+<li><p>doxygen generated docs only makes them hard to navigate. No
+tutorial, no clearly written explanatory pages for specific
+functions.</p></li>
+<li><p>seems (too) tightly integrated with a specific TLS library, while
+we want to support WebSocket with whatever TLS library libcurl was
+already made to work with.</p></li>
+<li><p>seems (too) tightly integrated with event libraries</p></li>
+<li><p>the references to threads and thread-pools in code and APIs
+indicate too much logic for our purposes</p></li>
+<li><p>"bloated" - it is a <em>huge</em> library that is actually more
+lines of code than libcurl itself</p></li>
+<li><p>WebSocket is a fairly simple protocol on the network/framing
+layer so making a homegrown handling of it should be fine</p></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

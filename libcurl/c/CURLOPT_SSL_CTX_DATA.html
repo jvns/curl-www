@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_SSL_CTX_DATA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_SSL_CTX_DATA</b></div>
+<h1> CURLOPT_SSL_CTX_DATA explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_SSL_CTX_DATA%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_SSL_CTX_DATA.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_SSL_CTX_DATA.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_SSL_CTX_DATA - pointer passed to SSL context callback </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_SSL_CTX_DATA.html">CURLOPT_SSL_CTX_DATA</a>, void &#x2a;pointer);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Data <span Class="emphasis">pointer</span> to pass to the ssl context callback set by the option <a Class="emphasis" href="./CURLOPT_SSL_CTX_FUNCTION.html">CURLOPT_SSL_CTX_FUNCTION</a>, this is the pointer you get as third parameter. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all TLS based protocols: HTTPS, FTPS, IMAPS, POP3S, SMTPS etc. </p>
+<p class="level0">This option works only with the following TLS backends: OpenSSL, mbedTLS and wolfSSL </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+/&#x2a; OpenSSL specific &#x2a;/
+&nbsp;
+&#35;include &lt;openssl/ssl.h&gt;
+&#35;include &lt;curl/curl.h&gt;
+&#35;include &lt;stdio.h&gt;
+&nbsp;
+static CURLcode sslctx_function(CURL &#x2a;curl, void &#x2a;sslctx, void &#x2a;pointer)
+{
+&nbsp; X509_STORE &#x2a;store;
+&nbsp; X509 &#x2a;cert = NULL;
+&nbsp; BIO &#x2a;bio;
+&nbsp; char &#x2a;mypem = pointer;
+&nbsp; /&#x2a; get a BIO &#x2a;/
+&nbsp; bio = BIO_new_mem_buf(mypem, -1);
+&nbsp; /&#x2a; use it to read the PEM formatted certificate from memory into an
+&nbsp;  &#x2a; X509 structure that SSL can use
+&nbsp;  &#x2a;/
+&nbsp; PEM_read_bio_X509(bio, &amp;cert, 0, NULL);
+&nbsp; if(!cert)
+&nbsp;   printf(&quot;PEM_read_bio_X509 failed...&bsol;n&quot;);
+&nbsp;
+&nbsp; /&#x2a; get a pointer to the X509 certificate store (which may be empty) &#x2a;/
+&nbsp; store = SSL_CTX_get_cert_store((SSL_CTX &#x2a;)sslctx);
+&nbsp;
+&nbsp; /&#x2a; add our certificate to this store &#x2a;/
+&nbsp; if(X509_STORE_add_cert(store, cert) == 0)
+&nbsp;   printf(&quot;error adding certificate&bsol;n&quot;);
+&nbsp;
+&nbsp; /&#x2a; decrease reference counts &#x2a;/
+&nbsp; X509_free(cert);
+&nbsp; BIO_free(bio);
+&nbsp;
+&nbsp; /&#x2a; all set to go &#x2a;/
+&nbsp; return <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;ch;
+&nbsp; CURLcode rv;
+&nbsp; char &#x2a;mypem = /&#x2a; CA cert in PEM format, replace the XXXs &#x2a;/
+&nbsp;   &quot;-----BEGIN CERTIFICATE-----&bsol;n&quot;
+&nbsp;   &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&bsol;n&quot;
+&nbsp;   &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&bsol;n&quot;
+&nbsp;   &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&bsol;n&quot;
+&nbsp;   &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&bsol;n&quot;
+&nbsp;   &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&bsol;n&quot;
+&nbsp;   &quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&bsol;n&quot;
+&nbsp;   &quot;-----END CERTIFICATE-----&bsol;n&quot;;
+&nbsp;
+&nbsp; <a href="curl_global_init.html">curl_global_init</a>(CURL_GLOBAL_ALL);
+&nbsp; ch = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp;
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(ch, <a href="CURLOPT_SSLCERTTYPE.html">CURLOPT_SSLCERTTYPE</a>, &quot;PEM&quot;);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(ch, <a href="CURLOPT_SSL_VERIFYPEER.html">CURLOPT_SSL_VERIFYPEER</a>, 1L);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(ch, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://www.example.com/&quot;);
+&nbsp;
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(ch, <a href="CURLOPT_SSL_CTX_FUNCTION.html">CURLOPT_SSL_CTX_FUNCTION</a>, &#x2a;sslctx_function);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(ch, <a href="CURLOPT_SSL_CTX_DATA.html">CURLOPT_SSL_CTX_DATA</a>, mypem);
+&nbsp; rv = <a href="curl_easy_perform.html">curl_easy_perform</a>(ch);
+&nbsp; if(!rv)
+&nbsp;   printf(&quot;&#x2a;&#x2a;&#x2a; transfer succeeded &#x2a;&#x2a;&#x2a;&bsol;n&quot;);
+&nbsp; else
+&nbsp;   printf(&quot;&#x2a;&#x2a;&#x2a; transfer failed &#x2a;&#x2a;&#x2a;&bsol;n&quot;);
+&nbsp;
+&nbsp; <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(ch);
+&nbsp; <a href="curl_global_cleanup.html">curl_global_cleanup</a>();
+&nbsp; return rv;
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">Added in <a href="/ch/7.11.0.html">7.11.0</a> for OpenSSL, in <a href="/ch/7.42.0.html">7.42.0</a> for wolfSSL, in <a href="/ch/7.54.0.html">7.54.0</a> for mbedTLS. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.10.6.html">7.10.6</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> if supported; or an error such as: </p>
+<p class="level0"><a href="libcurl-errors.html#CURLENOTBUILTIN">CURLE_NOT_BUILT_IN</a> - Not supported by the SSL backend </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEUNKNOWNOPTION">CURLE_UNKNOWN_OPTION</a> </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_SSLVERSION.html">CURLOPT_SSLVERSION</a>(3), <a Class="bold" href="./CURLOPT_SSL_CTX_FUNCTION.html">CURLOPT_SSL_CTX_FUNCTION</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

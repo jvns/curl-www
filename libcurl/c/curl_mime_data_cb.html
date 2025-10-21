@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_mime_data_cb()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_mime_data_cb</b></div>
+<h1> curl_mime_data_cb - set a callback-based data source for a mime part body </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_mime_data_cb%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_mime_data_cb.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_mime_data_cb.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_mime_data_cb - set a callback-based data source for a mime part&apos;s body </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+size_t readfunc(char &#x2a;buffer, size_t size, size_t nitems, void &#x2a;arg);
+&nbsp;
+int seekfunc(void &#x2a;arg, curl_off_t offset, int origin);
+&nbsp;
+void freefunc(void &#x2a;arg);
+&nbsp;
+CURLcode <a href="curl_mime_data_cb.html">curl_mime_data_cb</a>(curl_mimepart &#x2a;part, curl_off_t datasize,
+&nbsp;                          curl_read_callback readfunc,
+&nbsp;                          curl_seek_callback seekfunc,
+&nbsp;                          curl_free_callback freefunc, void &#x2a;arg);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><a Class="emphasis" href="./curl_mime_data_cb.html">curl_mime_data_cb</a> sets the data source of a mime part&apos;s body content from a data read callback function. </p>
+<p class="level0"><span Class="emphasis">part</span> is the part&apos;s to assign contents to. </p>
+<p class="level0"><span Class="emphasis">datasize</span> is the number of bytes the read callback is expected to provide. </p>
+<p class="level0"><span Class="emphasis">readfunc</span> is a pointer to a data read callback function, with a signature as shown by the above prototype. It may not be set to NULL. </p>
+<p class="level0"><span Class="emphasis">seekfunc</span> is a pointer to a seek callback function, with a signature as shown by the above prototype. This function is used when resending data (i.e.: after a redirect); this pointer may be set to NULL, in which case a resend might not be not possible. </p>
+<p class="level0"><span Class="emphasis">freefunc</span> is a pointer to a user resource freeing callback function, with a signature as shown by the above prototype. If no resource is to be freed, it may safely be set to NULL. This function is called upon mime structure freeing. </p>
+<p class="level0"><span Class="emphasis">arg</span> is a user defined argument to callback functions. </p>
+<p class="level0">The read callback function gets called by libcurl as soon as it needs to read data in order to send it to the peer - like if you ask it to upload or post data to the server. The data area pointed at by the pointer <span Class="emphasis">buffer</span> should be filled up with at most <span Class="emphasis">size</span> multiplied with <span Class="emphasis">nitems</span> number of bytes by your function. </p>
+<p class="level0">Your read function must then return the actual number of bytes that it stored in that memory area. Returning 0 signals end-of-file to the library and cause it to stop the current transfer. </p>
+<p class="level0">If you stop the current transfer by returning 0 &quot;pre-maturely&quot; (i.e. before the server expected it, like when you have said you intend to upload N bytes and yet you upload less than N bytes), you may experience that the server &quot;hangs&quot; waiting for the rest of the data that does not come. </p>
+<p class="level0">The read callback may return <span Class="emphasis">CURL_READFUNC_ABORT</span> to stop the current operation immediately, resulting in a <span Class="emphasis"><a href="libcurl-errors.html#CURLEABORTEDBYCALLBACK">CURLE_ABORTED_BY_CALLBACK</a></span> error code from the transfer. </p>
+<p class="level0">The callback can return <span Class="emphasis">CURL_READFUNC_PAUSE</span> to cause reading from this connection to pause. See <a Class="emphasis" href="./curl_easy_pause.html">curl_easy_pause</a> for further details. </p>
+<p class="level0">The seek function gets called by libcurl to rewind input stream data or to seek to a certain position. The function shall work like fseek(3) or lseek(3) and it gets SEEK_SET, SEEK_CUR or SEEK_END as argument for <span Class="emphasis">origin</span>, although libcurl currently only passes SEEK_SET. </p>
+<p class="level0">The callback function must return <span Class="emphasis">CURL_SEEKFUNC_OK</span> on success, <span Class="emphasis">CURL_SEEKFUNC_FAIL</span> to cause the upload operation to fail or <span Class="emphasis">CURL_SEEKFUNC_CANTSEEK</span> to indicate that while the seek failed, libcurl is free to work around the problem if possible. The latter can sometimes be done by instead reading from the input or similar. </p>
+<p class="level0">Care must be taken if the part is bound to a curl easy handle that is later duplicated: the <span Class="emphasis">arg</span> pointer argument is also duplicated, resulting in the pointed item to be shared between the original and the copied handle. In particular, special attention should be given to the <span Class="emphasis">freefunc</span> procedure code since it then gets called twice with the same argument. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http, imap and smtp </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2>
+<p class="level0">Sending a huge data string causes the same amount of memory to be allocated: to avoid overhead resources consumption, one might want to use a callback source to avoid data duplication. In this case, original data must be retained until after the transfer terminates. </p><pre class="level0">
+&#35;include &lt;string.h&gt; /&#x2a; for memcpy &#x2a;/
+char hugedata[512000];
+&nbsp;
+struct ctl {
+&nbsp; char &#x2a;buffer;
+&nbsp; curl_off_t size;
+&nbsp; curl_off_t position;
+};
+&nbsp;
+size_t read_callback(char &#x2a;buffer, size_t size, size_t nitems, void &#x2a;arg)
+{
+&nbsp; struct ctl &#x2a;p = (struct ctl &#x2a;) arg;
+&nbsp; curl_off_t sz = p-&gt;size - p-&gt;position;
+&nbsp;
+&nbsp; nitems &#x2a;= size;
+&nbsp; if(sz &gt; nitems)
+&nbsp;   sz = nitems;
+&nbsp; if(sz)
+&nbsp;   memcpy(buffer, p-&gt;buffer + p-&gt;position, sz);
+&nbsp; p-&gt;position += sz;
+&nbsp; return sz;
+}
+&nbsp;
+int seek_callback(void &#x2a;arg, curl_off_t offset, int origin)
+{
+&nbsp; struct ctl &#x2a;p = (struct ctl &#x2a;) arg;
+&nbsp;
+&nbsp; switch(origin) {
+&nbsp; case SEEK_END:
+&nbsp;   offset += p-&gt;size;
+&nbsp;   break;
+&nbsp; case SEEK_CUR:
+&nbsp;   offset += p-&gt;position;
+&nbsp;   break;
+&nbsp; }
+&nbsp;
+&nbsp; if(offset &lt; 0)
+&nbsp;   return CURL_SEEKFUNC_FAIL;
+&nbsp; p-&gt;position = offset;
+&nbsp; return CURL_SEEKFUNC_OK;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   curl_mime &#x2a;mime = <a href="curl_mime_init.html">curl_mime_init</a>(curl);
+&nbsp;   curl_mimepart &#x2a;part = <a href="curl_mime_addpart.html">curl_mime_addpart</a>(mime);
+&nbsp;   struct ctl hugectl;
+&nbsp;
+&nbsp;   hugectl.buffer = hugedata;
+&nbsp;   hugectl.size = sizeof(hugedata);
+&nbsp;   hugectl.position = 0;
+&nbsp;   <a href="curl_mime_data_cb.html">curl_mime_data_cb</a>(part, hugectl.size, read_callback,
+&nbsp;                     seek_callback, NULL, &amp;hugectl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.56.0.html">7.56.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_duphandle.html">curl_easy_duphandle</a>(3), <a Class="bold" href="./curl_mime_addpart.html">curl_mime_addpart</a>(3), <a Class="bold" href="./curl_mime_data.html">curl_mime_data</a>(3), <a Class="bold" href="./curl_mime_name.html">curl_mime_name</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

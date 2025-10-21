@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_ws_start_frame()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_init</b></div>
+<h1> curl_ws_start_frame - start a new WebSocket frame </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_ws_start_frame%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_ws_start_frame.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_ws_start_frame.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_ws_start_frame - start a new WebSocket frame </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_ws_start_frame.html">curl_ws_start_frame</a>(CURL &#x2a;curl,
+&nbsp;                            unsigned int flags,
+&nbsp;                            curl_off_t frame_len);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Add the WebSocket frame header for the given flags and length to the transfers send buffer for WebSocket encoded data. Intended for use in a <a Class="emphasis" href="./CURLOPT_READFUNCTION.html">CURLOPT_READFUNCTION</a> callback. </p>
+<p class="level0">When using a <a Class="emphasis" href="./CURLOPT_READFUNCTION.html">CURLOPT_READFUNCTION</a> in a WebSocket transfer, any data returned by that function is sent as a <span Class="emphasis">CURLWS_BINARY</span> frame with the length being the amount of data read. </p>
+<p class="level0">To send larger frames or frames of a different type, call <a href="curl_ws_start_frame.html">curl_ws_start_frame</a>() from within the read function and then return the data belonging to the frame. </p>
+<p class="level0">The function fails, if a previous frame has not been completely read yet. Also it fails in <span Class="emphasis">CURLWS_RAW_MODE</span>. </p>
+<p class="level0">The read function in libcurl usually treats a return value of 0 as the end of file indication and stops any further reads. This would prevent sending WebSocket frames of length 0. </p>
+<p class="level0">If the read function calls <span Class="emphasis">curl_ws_start_frame()</span> however, a return value of 0 is <span Class="emphasis">not</span> treated as an end of file and libcurl calls the read function again. </p><a name="FLAGS"></a><h2 class="nroffsh">Flags</h2>
+<p class="level0">Supports all flags documented in <a Class="emphasis" href="./curl_ws_meta.html">curl_ws_meta</a>. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects ws only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+&#35;include &lt;string.h&gt; /&#x2a; for strlen &#x2a;/
+&nbsp;
+struct read_ctx {
+&nbsp; CURL &#x2a;easy;
+&nbsp; char &#x2a;message;
+&nbsp; size_t msg_len;
+&nbsp; size_t nsent;
+};
+&nbsp;
+static size_t readcb(char &#x2a;buf, size_t nitems, size_t buflen, void &#x2a;p)
+{
+&nbsp; struct read_ctx &#x2a;ctx = p;
+&nbsp; size_t len = nitems &#x2a; buflen;
+&nbsp; size_t left = ctx-&gt;msg_len - ctx-&gt;nsent;
+&nbsp; CURLcode result;
+&nbsp;
+&nbsp; if(!ctx-&gt;nsent) {
+&nbsp;   /&#x2a; Want to send TEXT frame. &#x2a;/
+&nbsp;   result = <a href="curl_ws_start_frame.html">curl_ws_start_frame</a>(ctx-&gt;easy, CURLWS_TEXT,
+&nbsp;                                (curl_off_t)ctx-&gt;msg_len);
+&nbsp;   if(result) {
+&nbsp;     fprintf(stderr, &quot;error starting frame: %d&bsol;n&quot;, result);
+&nbsp;     return CURL_READFUNC_ABORT;
+&nbsp;   }
+&nbsp; }
+&nbsp; if(left) {
+&nbsp;   if(left &lt; len)
+&nbsp;     len = left;
+&nbsp;   memcpy(buf, ctx-&gt;message + ctx-&gt;nsent, len);
+&nbsp;   ctx-&gt;nsent += len;
+&nbsp;   return len;
+&nbsp; }
+&nbsp; return 0;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;easy;
+&nbsp; struct read_ctx rctx;
+&nbsp; CURLcode res;
+&nbsp;
+&nbsp; easy = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(!easy)
+&nbsp;   return 1;
+&nbsp;
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(easy, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;wss://example.com&quot;);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(easy, <a href="CURLOPT_READFUNCTION.html">CURLOPT_READFUNCTION</a>, readcb);
+&nbsp; /&#x2a; tell curl that we want to send the payload &#x2a;/
+&nbsp; memset(&amp;rctx, 0, sizeof(rctx));
+&nbsp; rctx.easy = easy;
+&nbsp; rctx.message = &quot;Hello, friend!&quot;;
+&nbsp; rctx.msg_len = strlen(rctx.message);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(easy, <a href="CURLOPT_READDATA.html">CURLOPT_READDATA</a>, &amp;rctx);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(easy, <a href="CURLOPT_UPLOAD.html">CURLOPT_UPLOAD</a>, 1L);
+&nbsp;
+&nbsp; /&#x2a; Perform the request, res gets the return code &#x2a;/
+&nbsp; res = <a href="curl_easy_perform.html">curl_easy_perform</a>(easy);
+&nbsp; /&#x2a; Check for errors &#x2a;/
+&nbsp; if(res != <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>)
+&nbsp;   fprintf(stderr, &quot;<a href="curl_easy_perform.html">curl_easy_perform</a>() failed: %s&bsol;n&quot;,
+&nbsp;           <a href="curl_easy_strerror.html">curl_easy_strerror</a>(res));
+&nbsp;
+&nbsp; /&#x2a; always cleanup &#x2a;/
+&nbsp; <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(easy);
+&nbsp; return 0;
+}
+&nbsp;
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/8.16.0.html">8.16.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p>
+<p class="level0">Instead of blocking, the function returns <span Class="bold"><a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a></span>. The correct behavior is then to wait for the socket to signal readability before calling this function again. </p>
+<p class="level0">Any other non-zero return value indicates an error. See the <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a> man page for the full list with descriptions. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_getinfo.html">curl_easy_getinfo</a>(3), <a Class="bold" href="./curl_easy_perform.html">curl_easy_perform</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3), <a Class="bold" href="./curl_ws_recv.html">curl_ws_recv</a>(3), <a Class="bold" href="./libcurl-ws.html">libcurl-ws</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

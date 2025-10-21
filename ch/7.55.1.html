@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.55.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.55.1</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.55.0.html">🠰 7.55.0</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.56.0.html">7.56.0 🠲</a>
+</span>
+<h1> Changes in 7.55.1 - August 14 2017 </h1>
+<div class="vulnbox"><a href=/docs/vuln-7.55.1.html>7.55.1</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> build: fix &#39;make install&#39; with configure, install docs/libcurl/&#42; too
+ <li> make install: add 8 missing manpages to the installation
+ <li> <a href="https://curl.se/bug/?i=1750">curl: do bounds check using a double comparison</a>
+ <li> <a href="https://curl.se/bug/?i=1744">dist: Add dictserver.py/negtelnetserver.py to release</a>
+ <li> <a href="https://curl.se/bug/?i=1742">digest_sspi: Don&#39;t reuse context if the user/passwd has changed</a>
+ <li> <a href="https://curl.se/bug/?i=1746">gitignore: ignore top-level .vs folder</a>
+ <li> <a href="https://curl.se/bug/?i=1746">build: check out *.sln files with Windows line endings</a>
+ <li> <a href="https://curl.se/bug/?i=1753">travis: verify "make install"</a>
+ <li> <a href="https://curl.se/bug/?i=1755">dist: fix the cmake build by shipping cmake_uninstall.cmake.in too</a>
+ <li> metalink: fix error: ‘*’ in boolean context, suggest ‘&&’ instead
+ <li> <a href="https://curl.se/bug/?i=1647">configure: use the threaded resolver backend by default if possible</a>
+ <li> <a href="https://curl.se/bug/?i=1743">mkhelp.pl: allow executing this script directly</a>
+ <li> <a href="https://curl.se/mail/lib-2017-08/0050.html">maketgz: remove old *.dist files before making the tarball</a>
+ <li> <a href="https://curl.se/bug/?i=1759">openssl: remove CONST_ASN1_BIT_STRING</a>
+ <li> openssl: fix "error: this statement may fall through"
+ <li> <a href="https://curl.se/bug/?i=1761">proxy: fix memory leak in case of invalid proxy server name</a>
+ <li> <a href="https://curl.se/bug/?i=1766">curl/system.h: support more architectures (OpenRISC, ARC)</a>
+ <li> <a href="https://curl.se/bug/?i=1770">docs: fix typos</a>
+ <li> <a href="https://curl.se/bug/?i=1752">curl/system.h: add Oracle Solaris Studio</a>
+ <li> <a href="https://curl.se/bug/?i=1769">CURLINFO_TOTAL_TIME: could wrongly return 4200 seconds</a>
+ <li> docs: --connect-to clarified
+ <li> <a href="https://curl.se/bug/?i=1763">cmake: allow user to override CMAKE_DEBUG_POSTFIX</a>
+ <li> travis: test cmake build on tarball too
+ <li> <a href="https://curl.se/bug/?i=1762">redirect: make it handle absolute redirects to IDN names</a>
+ <li> <a href="https://curl.se/bug/?i=1774">curl/system.h: fix for gcc on PowerPC</a>
+ <li> <a href="https://curl.se/bug/?i=1764">curl --interface: fixed for IPV6 unique local addresses</a>
+ <li> <a href="https://curl.se/bug/?i=1719">cmake: threads detection improvements</a>
+</ul>
+<h2> Further </h2>
+The previous release was 7.55.0.
+The next release was 7.56.0.

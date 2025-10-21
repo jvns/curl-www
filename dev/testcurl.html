@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Automatic Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>testcurl.pl</b></div>
+<h1> testcurl manpage </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="tests-overview.html">Tests Overview</a>
+<br><a href="runtests.html">runtests manpage</a>
+<br><a href="/docs/tutorial.html">Tutorial</a>
+</div>
+<h1 id="name">NAME</h1>
+<p>testcurl.pl - (automatically) test curl</p>
+<h1 id="synopsis">SYNOPSIS</h1>
+<p><strong>testcurl.pl [options] [dir] &gt; output</strong></p>
+<h1 id="description">DESCRIPTION</h1>
+<p><em>testcurl</em> is the master script to use for automatic
+distributed testing of curl from git or daily snapshots. It is written
+for the purpose of being run from a crontab job or similar at a regular
+interval. The output is suitable to be mailed to <strong><a
+href="mailto:curl-autocompile@haxx.se">curl-autocompile@haxx.se</a></strong>
+to be dealt with automatically (make sure the subject includes the word
+"autobuild" as the mail gets silently discarded otherwise). The most
+current build status (with a reasonable backlog) is published on the
+curl site, at <a
+href="https://curl.se/dev/builds.html">https://curl.se/dev/builds.html</a></p>
+<p><em>options</em> may be omitted. See <em>--setup</em> for what
+happens then.</p>
+<p><em>dir</em> is a curl source directory, possibly a daily snapshot
+one. Using this makes <em>testcurl</em> skip the <em>autoreconf</em>
+stage and thus it removes the dependency on automake, autoconf, libtool,
+GNU m4 and possibly a few other things.</p>
+<p><em>testcurl</em> runs <code>autoreconf</code> (or similar),
+configure, builds curl and libcurl in a separate build directory and
+then runs <code>make test</code> to test the fresh build.</p>
+<h1 id="options">OPTIONS</h1>
+<h2 id="--configureoptions"><code>--configure=[options]</code></h2>
+<p>Configure options passed to configure.</p>
+<h2 id="--crosscompile"><code>--crosscompile</code></h2>
+<p>`` This is a cross-compile. Makes <em>testcurl</em> skip a few
+things.</p>
+<h2 id="--descdesc"><code>--desc=[desc]</code></h2>
+<p>Description of your test system. Displayed on the build summary page
+on the website.</p>
+<h2 id="--emailemail"><code>--email=[email]</code></h2>
+<p>Set email address to report as. Displayed in the build logs on the
+site.</p>
+<h2 id="--mktarballcommand"><code>--mktarball=[command]</code></h2>
+<p>Generic command to run after completed test.</p>
+<h2 id="--namename"><code>--name=[name]</code></h2>
+<p>Set name to report as. Displayed in the build summary on the
+site.</p>
+<h2 id="--nobuildconf"><code>--nobuildconf</code></h2>
+<p>Do not run autoreconf. Useful when many builds use the same source
+tree, as then only one need to do this. Also, if multiple processes run
+tests simultaneously on the same source tree (like several hosts on a
+NFS mounted directory), simultaneous autoreconf invokes may cause
+problems. (Added in 7.14.1)</p>
+<h2 id="--nogitpull"><code>--nogitpull</code></h2>
+<p>Do not update from git even though it is a git tree. Useful to still
+be able to test even though your network is down, or similar.</p>
+<h2 id="--runtestoptsoptions"><code>--runtestopts=[options]</code></h2>
+<p>Options that is passed to the runtests script. Useful for disabling
+valgrind by force, and similar.</p>
+<h2 id="--setupfilename"><code>--setup=[filename]</code></h2>
+<p>filename to read setup from (deprecated). The old style of providing
+info. If info is missing when <em>testcurl</em> is started, it prompts
+you and then stores the info in a 'setup' file, which it looks for on
+each invoke. Use <em>--name</em>, <em>--email</em>, <em>--configure</em>
+and <em>--desc</em> instead.</p>
+<h2 id="--targetyour-os"><code>--target=[your os]</code></h2>
+<p>Specify your target environment. Recognized strings include
+<code>vc</code>, <code>mingw32</code>, and <code>borland</code>.</p>
+<h1 id="initial-setup">INITIAL SETUP</h1>
+<p>First, make a checkout from git (or you write a script that downloads
+daily snapshots automatically):</p>
+<pre><code>$ mkdir curl-testing
+$ cd curl-testing
+$ git clone https://github.com/curl/curl.git</code></pre>
+<p>With the curl sources checked out, or downloaded, you can start
+testing right away. If you want to use <em>testcurl</em> without command
+line arguments and to have it store and remember the config in its
+'setup' file, then start it manually now and fill in the answers to the
+questions it prompts you for:</p>
+<pre><code>$ ./curl/tests/testcurl</code></pre>
+<p>Now you are ready to go. If you let the script run, it performs a
+full cycle and spit out lots of output. Mail us that output as described
+above.</p>
+<h1 id="crontab-example">CRONTAB EXAMPLE</h1>
+<p>The crontab could include something like this:</p>
+<pre><code># autobuild curl:
+0 4 * * * cd curl-testing &amp;&amp; ./testit.sh</code></pre>
+<p>Where <code>testit.sh</code> is a shell script that could look
+similar to this:</p>
+<pre><code>mail=&quot;mail -s autobuild curl-autocompile@haxx.se&quot;
+name=&quot;--name=whoami&quot;
+email=&quot;--email=iamme@nowhere&quot;
+desc=&#39;&quot;--desc=supermachine Turbo 2000&quot;&#39;
+testprog=&quot;perl ./curl/tests/testcurl.pl $name $email $desc&quot;
+opts1=&quot;--configure=--enable-debug&quot;
+opts2=&quot;--configure=--enable-ipv6&quot;
+#run  first test
+$testprog $opts1 | $mail
+#run  second test
+$testprog $opts2 | $mail</code></pre>
+</div>
+</div>
+</body>
+</html>

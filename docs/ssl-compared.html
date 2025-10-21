@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - SSL libraries compared</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="comparison.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/protdocs.html">Protocols</a> / <b>SSL libraries compared</b></div>
+<h1> Compare SSL libraries </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="comparison-table.html">Compare HTTP/FTP Tools</a>
+<br><a href="../libcurl/competitors.html">Compare HTTP Libraries</a>
+</div>
+<p> This comparison only involves SSL/TLS libraries that libcurl can be built
+to use.
+<p>
+<table cellspacing="2" cellpadding="2" border="0" summary="Comparison of SSL libraries">
+ <thead>
+ <tr class="tabletop">
+  <th> Feature </th>
+  <th> OpenSSL[1] </th>
+  <th> GnuTLS </th>
+  <th> wolfSSL </th>
+  <th> mbedTLS </th>
+  <th> Schannel </th>
+  <th> rustls </th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr valign=top> <td> Supported </td>          <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> Native cert check </td>  <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> </tr>
+ <tr valign=top> <td> CRL </td>                <td class="no">manual</td> <td class="no">manual</td> <td class="no">manual</td> <td class="no">manual</td> <td class="yes">automatic</td> <td class="no">manual</td> </tr>
+ <tr valign=top> <td> TLSv1.0 </td>            <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> TLSv1.1 </td>            <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> TLSv1.2 </td>            <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> </tr>
+ <tr valign=top> <td> TLSv1.3 </td>            <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> </tr>
+ <tr valign=top> <td> TLS SRP </td>            <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> TLS ECC </td>            <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> </tr>
+ <tr valign=top> <td> ALPN </td>               <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> </tr>
+ <tr valign=top> <td> QUIC API </td>           <td class="yes">yes [2]</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> QUIC impl </td>          <td class="yes">yes [2]</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> Small </td>              <td class="no">no</td> <td class="no">no</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> Platforms </td>
+  <td class="yes"> POSIX, Windows, VMS </td>
+  <td class="yes"> POSIX, Windows </td>
+  <td class="yes"> POSIX, Windows </td>
+  <td class="yes"> POSIX, Windows </td>
+  <td class="yes"> Windows </td>
+  <td class="yes"> POSIX, Windows </td>
+ </tr>
+ <tr valign=top> <td> Uses Certificate Files </td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> <td class="yes">yes</td> </tr>
+ <tr valign=top> <td> Uses Certificate db </td>    <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> <td class="yes">yes</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> Crypto module/token support </td>         <td class="yes">PKCS<!-- " -->#11<!-- "--> [3]</td> <td class="yes">PKCS<!-- " -->#11<!-- "--></td> <td class="no">no</td> <td class="no">no</td> <td class="yes">Microsoft CryptoAPI</td>    <td class="no">no</td> </tr>
+ <tr valign=top> <td> Select Certificates/Keys with PKCS#11 URI </td>    YES_P8 <td class="yes">yes</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> Integrates with system token database </td>        <td class="yes">yes</td>  <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> <td class="yes">yes</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> FIPS-140 </td>         <td class="yes">yes</td> <td class="yes">yes</td> <td class="yes">yes</td> <td class="no">no</td> <td class="yes">yes</td> <td class="yes">yes</td> </tr>
+ <tr valign=top> <td> OpenSSL-like API </td> <td class="yes">yes</td> <td class="no">no</td> <td class="yes">yes</td> <td class="no">no</td> <td class="no">no</td> <td class="no">no</td> </tr>
+ <tr valign=top> <td> Vendor </td>
+  <td class="yes"> <a href="https://www.openssl.org/">OpenSSL Project</a> </td>
+  <td class="yes"> <a href="https://www.gnu.org/">Free Software Foundation</a> </td>
+  <td class="yes"> <a href="https://www.wolfssl.com/">wolfSSL</a> </td>
+  <td class="yes"> <a href="https://tls.mbed.org/">mbed TLS</a> </td>
+  <td class="yes"> <a href="https://www.microsoft.com/">Microsoft Corporation</a> </td>
+  <td class="yes"> Open Source team </td>
+ </tr>
+ <tr valign=top> <td> License </td>
+  <td class="yes"> Apache-2.0 </td>
+  <td class="yes"> LGPL </td>
+  <td class="yes"> GPLv2  </td>
+  <td class="yes"> Apache-2.0 / GPLv2 </td>
+  <td class="yes"> Proprietary </td>
+  <td class="yes"> Apache-2.0 / MIT / ISC </td>
+ </tr>
+ <tr valign=top> <td> First release </td>
+  <td class="yes"> 1998 </td>
+  <td class="yes"> 2004? </td>
+  <td class="yes"> 2006 </td>
+  <td class="yes"> 2006 </td>
+  <td class="yes"> 2000 </td>
+  <td class="yes"> 2016 </td>
+ </tr>
+ </tbody>
+</table>
+<p>
+[1] = Mostly the same feature set is also provided by LibreSSL, BoringSSL,
+AWS-LC and QuictLS.
+See <a href="https://github.com/curl/curl/wiki/OpenSSL-forks">OpenSSL
+forks</A> for details on those.
+<p>
+[2] = OpenSSL 3.2+ has a QUIC stack implementation that curl works with
+experimentally. OpenSSL 3.5+ and the OpenSSL forks LibreSSL, BoringSSL, AWS-LC
+and QuicTLS offer a QUIC API that curl works with using ngtcp2.
+<p>
+[3] = Via external <a href="https://github.com/OpenSC/OpenSC/wiki/Engine-pkcs11-quickstart">engine_pkcs11</a>;
+<h2> Glossary of Terms </h2>
+<b>Supported:</b> "no" here means the TLS library is still <i>experimental</i>
+in curl and we discourage using it in production.
+<p>
+<b>Native cert check:</b> The TLS library can verify server certificates
+ against the platform's native CA cert store.
+<p>
+<b>CRL:</b> CRL means "Certificate Revocation List" and is used to check to
+see if any certificates in the server's chain have been revoked for some
+reason. If automatic, then the engine will automatically download a CRL and
+use it to evaluate the trust of the server's certificate chain when performing
+the TLS handshake. If manual, then the engine will not automatically use a
+CRL, but you can provide one that has been downloaded separately by using the
+CURLOPT_CRL option. If no, then the CURLOPT_CRL option will be ignored.
+<p>
+<b>SSLv2:</b> This was the first public release of the SSL protocol. It is
+deprecated and really should no longer be used, because it has a number of
+serious security problems.
+<p>
+<b>SSLv3:</b> It is deprecated and should no longer be used, because it has a
+number of serious security problems.
+<p>
+<b>TLSv1.0:</b> TLS is a slight variation on SSLv3 that was the first version
+of the protocol to be approved of by the Internet Engineering Task Force
+(IETF). This version of TLS has been available since 1999 and is by far the
+most widely supported version on the public Internet. There have been a few
+minor security vulnerabilities found in TLSv1.0 which were fixed later, but
+all of them (so far) have been easily worked around, which has contributed to
+the longevity of this version of TLS.
+<p>
+<b>TLSv1.1:</b> TLSv1.1 is similar to v1.0, except that it has a better fix
+for the CBC (Cipher Block Chain) cipher-suite attack that lead to the BEAST
+(Browser Exploit Against SSL/TLS) vulnerability in TLSv1.0.
+<p>
+<b>TLSv1.2:</b> TLSv1.2 provides better security than earlier versions, with
+support for many all-new cipher suites that are even more difficult to
+crack.
+<p>
+<b>TLSv1.3:</b> This is the most recent version. TLSv1.3 provides even better
+security than TLSv1.2, with more data encrypted in the handshake etc. It also
+offers less roundtrip handshakes.
+<p>
+<b>TLS SRP:</b> SRP means "Secure Remote Password" and it is a method of
+performing client-side authentication with a TLS server by using a username
+and password, sometimes coupled with a certificate. It is not yet widely
+supported, but for the engines that do support it, you can provide the
+credentials to curl by using the CURLOPT_TLSAUTH_USERNAME and
+CURLOPT_TLSAUTH_PASSWORD options.
+<p>
+<b>TLS ECC:</b> ECC means "Elliptic Curve Cryptography" and it is an advanced
+set of cipher-suites that are used in TLS connections (typically with
+TLSv1.2). Not all engines support ECC.
+<p>
+<b>QUIC API:</b> Needed for usingf this TLS library when implementing a QUIC
+stack.
+<p>
+<b>QUIC Implementation:</b> A complete QUIC implementation, not just the API
+necessary for someone else to implement it.
+<p>
+<b>Small:</b> can be built with a small foot-print. The system native ones also count
+here since they come "for free" for users.
+<p>
+<b>Uses Certificate/Key Files:</b> Some engines, such as OpenSSL, read
+certificates and keys from files rather than a central database. These engines
+require you to use a certificate bundle in order to verify a server's
+certificate chain; this is usually set at build time but can also be set by
+using the CURLOPT_CAINFO option.
+<p>
+<b>Uses Certificate/Key Database:</b> Some engines, such as Apple's Security
+framework, use a central database instead of separate files to store
+certificates and keys. Apple's Security framework database, for instance, is
+called the Keychain. For engines that use a database and do not also support
+files, the CURLOPT_CAINFO option is ignored.
+<p>
+<b>Crypto module/token support:</b> Support for cryptographic hardware tokens
+and software databases is typically provided via
+<a href="https://en.wikipedia.org/wiki/PKCS_11">; PKCS#11</a> on POSIX platforms,
+and via platform-specific APIs on Windows and Darwin. Examples of PKCS#11
+software tokens include the GNOME keyring, and the NSS "soft token" database.
+<p>
+<b>Integrates with system token database:</b> Platforms often have a
+system-wide configuration which specifies which crypto modules/token should
+be visible in which applications. Many Linux distributions have chosen
+to use <a href="https://p11-glue.freedesktop.org/p11-kit.html">p11-kit</a>;
+to provide this configuration, and some now consider it a bug for
+applications <em>not</em> to automatically use the tokens configured therein.
+<p>
+<b>Select Certificates/Keys with PKCS#11 URI:</b> <a
+href="https://datatracker.ietf.org/doc/html/rfc7512">RFC 7512</a> defines a
+standard URI format for specifying objects within PKCS#11
+tokens/databases.
+<p>
+<b>FIPS-140:</b> FIPS-140 is a security standard used by the United States and
+Canada for transferring information that is sensitive but not classified. If
+yes, and you are using curl or a libcurl-based application in the US or
+Canadian government, or in a government contractor, then it is okay for you to
+use the engine when building curl/libcurl.
+<p>
+<b>License:</b> If you are deploying an application that uses libcurl, then
+the license used by the engine may affect whether or not you are able to
+distribute your application legally. OpenSSL's 4-clause BSD license, for
+instance, is not compatible with the GNU GPL.
+<h2> More reading </h2>
+<p>
+ The mentioned libraries: <a href="https://www.openssl.org/">OpenSSL</a>, <a
+ href="https://www.gnutls.org/">GnuTLS</a>, <a
+ href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS">NSS</a>, <a
+ href="https://www.wolfssl.com/">wolfSSL</a>, <a
+ href="https://tls.mbed.org">mbed TLS</a>, <a
+ href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms678421(v=vs.85).aspx">Secure Channel</a>, <a href="https://developer.apple.com/documentation/security/secure_transport">Secure Transport</a>, <a href="https://rustls.dev">Rustls</a>.
+<p> More comparisons in the extensive <a
+href="https://en.wikipedia.org/wiki/Comparison_of_TLS_Implementations">feature-by-feature
+comparison on wikipedia</a>.
+<p>
+ curl's documentation of <a href="https://github.com/curl/curl/blob/master/docs/SSL-PROBLEMS.md">SSL problems</a>.
+<p>
+ Please <a href="mailto:curl-web@haxx.se">mail us</a> corrections if this
+ table is incorrect, or tell us other features we should compare!
+</div>
+</div>
+</body>
+</html>

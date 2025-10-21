@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Known Bugs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/projdocs.html">Project</a> / <b>Known Bugs</b></div>
+<h1> Known Bugs </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/dev/deprecate.html">Deprecate</a>
+<br><a href="bugs.html">How To Report Bugs</a>
+<br><a href="todo.html">TODO</a>
+</div>
+<p>
+ This is the document 'docs/KNOWN_BUGS' from the curl release archive.
+<h2><a href="#TLS">TLS</a></h2>
+<p>
+<a href="#IMAPS_connection_fails_with_Rust">2.1</a> IMAPS connection fails with Rustls error<br>
+<a href="#Access_violation_sending_client">2.2</a> Access violation sending client cert with Schannel<br>
+<a href="#Client_cert_handling_with_Issuer">2.5</a> Client cert handling with Issuer DN differs between backends<br>
+<a href="#Client_cert_MTLS_issues_with_S">2.7</a> Client cert (MTLS) issues with Schannel<br>
+<a href="#Schannel_TLS_1_2_handshake_bug_i">2.11</a> Schannel TLS 1.2 handshake bug in old Windows versions<br>
+<a href="#CURLOPT_CERTINFO_results_in_CURL">2.13</a> CURLOPT_CERTINFO results in CURLE_OUT_OF_MEMORY with Schannel<br>
+<a href="#mbedTLS_and_CURLE_AGAIN_handling">2.14</a> mbedTLS and CURLE_AGAIN handling<br>
+<h2><a href="#Email-protocols">Email protocols</a></h2>
+<p>
+<a href="#IMAP_SEARCH_ALL_truncated_respon">3.1</a> IMAP SEARCH ALL truncated response<br>
+<a href="#No_disconnect_command">3.2</a> No disconnect command<br>
+<a href="#AUTH_PLAIN_for_SMTP_is_not_worki">3.4</a> AUTH PLAIN for SMTP is not working on all servers<br>
+<a href="#APOP_authentication_fails_on_POP">3.5</a> APOP authentication fails on POP3<br>
+<a href="#POP3_issue_when_reading_small_ch">3.6</a> POP3 issue when reading small chunks<br>
+<h2><a href="#Command-line">Command line</a></h2>
+<p>
+<a href="#T_dev_stdin_may_upload_with_an">4.1</a> -T /dev/stdin may upload with an incorrect content length<br>
+<a href="#T_always_uploads_chunked">4.2</a> -T - always uploads chunked<br>
+<h2><a href="#Build-and-portability-issues">Build and portability issues</a></h2>
+<p>
+<a href="#OS400_port_requires_deprecated_I">5.1</a> OS400 port requires deprecated IBM library<br>
+<a href="#curl_config_libs_contains_priv">5.2</a> curl-config --libs contains private details<br>
+<a href="#LDFLAGS_passed_too_late_making_l">5.3</a> LDFLAGS passed too late making libs linked incorrectly<br>
+<a href="#Cygwin_make_install_installs_cu">5.6</a> Cygwin: make install installs curl-config.1 twice<br>
+<a href="#flaky_CI_builds">5.12</a> flaky CI builds<br>
+<a href="#long_paths_are_not_fully_support">5.13</a> long paths are not fully supported on Windows<br>
+<a href="#Unicode_on_Windows">5.15</a> Unicode on Windows<br>
+<h2><a href="#Authentication">Authentication</a></h2>
+<p>
+<a href="#Digest_auth_int_for_PUT_POST">6.1</a> Digest auth-int for PUT/POST<br>
+<a href="#MIT_Kerberos_for_Windows_build">6.2</a> MIT Kerberos for Windows build<br>
+<a href="#NTLM_in_system_context_uses_wron">6.3</a> NTLM in system context uses wrong name<br>
+<a href="#NTLM_does_not_support_password_w">6.5</a> NTLM does not support password with Unicode 'SECTION SIGN' character<br>
+<a href="#libcurl_can_fail_to_try_alternat">6.6</a> libcurl can fail to try alternatives with --proxy-any<br>
+<a href="#Do_not_clear_digest_for_single_r">6.7</a> Do not clear digest for single realm<br>
+<a href="#SHA_256_digest_not_supported_in">6.9</a> SHA-256 digest not supported in Windows SSPI builds<br>
+<a href="#curl_never_completes_Negotiate_o">6.10</a> curl never completes Negotiate over HTTP<br>
+<a href="#Negotiate_on_Windows_fails">6.11</a> Negotiate on Windows fails<br>
+<a href="#Negotiate_against_Hadoop_HDFS">6.13</a> Negotiate against Hadoop HDFS<br>
+<h2><a href="#FTP">FTP</a></h2>
+<p>
+<a href="#FTP_with_ACCT">7.4</a> FTP with ACCT<br>
+<a href="#FTPS_directory_listing_hangs_on">7.12</a> FTPS directory listing hangs on Windows with Schannel<br>
+<h2><a href="#SFTP-and-SCP">SFTP and SCP</a></h2>
+<p>
+<a href="#SFTP_does_not_do_CURLOPT_POSTQUO">9.1</a> SFTP does not do CURLOPT_POSTQUOTE correct<br>
+<a href="#Remote_recursive_folder_creation">9.3</a> Remote recursive folder creation with SFTP<br>
+<a href="#libssh_blocking_and_infinite_loo">9.4</a> libssh blocking and infinite loop problem<br>
+<a href="#Cygwin_WARNING_UNPROTECTED_PR">9.5</a> Cygwin: "WARNING: UNPROTECTED PRIVATE KEY FILE!"<br>
+<h2><a href="#Connection">Connection</a></h2>
+<p>
+<a href="#interface_with_link_scoped_IPv">10.1</a> --interface with link-scoped IPv6 address<br>
+<a href="#Does_not_acknowledge_getaddrinfo">10.2</a> Does not acknowledge getaddrinfo sorting policy<br>
+<a href="#SOCKS_SSPI_discards_the_security">10.3</a> SOCKS-SSPI discards the security context<br>
+<h2><a href="#Internals">Internals</a></h2>
+<p>
+<a href="#gssapi_library_name_version_is">11.1</a> gssapi library name + version is missing in curl_version_info()<br>
+<a href="#error_buffer_not_set_if_connecti">11.2</a> error buffer not set if connection to multiple addresses fails<br>
+<a href="#HTTP_test_server_connection_mon">11.4</a> HTTP test server 'connection-monitor' problems<br>
+<a href="#Connection_information_when_usin">11.5</a> Connection information when using TCP Fast Open<br>
+<a href="#test_cases_sometimes_timeout">11.6</a> test cases sometimes timeout<br>
+<a href="#CURLOPT_CONNECT_TO_does_not_work">11.7</a> CURLOPT_CONNECT_TO does not work for HTTPS proxy<br>
+<a href="#WinIDN_test_failures">11.8</a> WinIDN test failures<br>
+<a href="#setting_a_disabled_option_should">11.9</a> setting a disabled option should return CURLE_NOT_BUILT_IN<br>
+<h2><a href="#LDAP">LDAP</a></h2>
+<p>
+<a href="#OpenLDAP_hangs_after_returning_r">12.1</a> OpenLDAP hangs after returning results<br>
+<a href="#LDAP_on_Windows_does_authenticat">12.2</a> LDAP on Windows does authentication wrong?<br>
+<a href="#LDAP_on_Windows_does_not_work">12.3</a> LDAP on Windows does not work<br>
+<a href="#LDAPS_requests_to_ActiveDirector">12.4</a> LDAPS requests to ActiveDirectory server hang<br>
+<h2><a href="#TCPIP">TCP/IP</a></h2>
+<p>
+<a href="#telnet_code_does_not_handle_part">13.1</a> telnet code does not handle partial writes properly<br>
+<a href="#Trying_local_ports_fails_on_Wind">13.2</a> Trying local ports fails on Windows<br>
+<h2><a href="#CMake">CMake</a></h2>
+<p>
+<a href="#cmake_outputs_no_version_inform">15.1</a> cmake outputs: no version information available<br>
+<a href="#uses_lpthread_instead_of_Thread">15.6</a> uses -lpthread instead of Threads::Threads<br>
+<a href="#generated_pc_file_contains_stra">15.7</a> generated .pc file contains strange entries<br>
+<a href="#CMake_build_with_MIT_Kerberos_do">15.13</a> CMake build with MIT Kerberos does not work<br>
+<h2><a href="#awssigv4">aws-sigv4</a></h2>
+<p>
+<a href="#aws_sigv4_does_not_handle_multip">16.2</a> aws-sigv4 does not handle multipart/form-data correctly<br>
+<h2><a href="#HTTP2">HTTP/2</a></h2>
+<p>
+<a href="#HTTP_2_prior_knowledge_over_prox">17.1</a> HTTP/2 prior knowledge over proxy<br>
+<a href="#HTTP_2_frames_while_in_the_conne">17.2</a> HTTP/2 frames while in the connection pool kill reuse<br>
+<a href="#ENHANCE_YOUR_CALM_causes_infinit">17.3</a> ENHANCE_YOUR_CALM causes infinite retries<br>
+<a href="#HTTP_2_TLS_spends_a_lot_of_tim">17.4</a> HTTP/2 + TLS spends a lot of time in recv<br>
+<h2><a href="#HTTP3">HTTP/3</a></h2>
+<p>
+<a href="#connection_migration_does_not_wo">18.1</a> connection migration does not work<br>
+<a href="#quiche_QUIC_connection_is_drain">18.2</a> quiche: QUIC connection is draining<br>
+<a href="#OpenSSL_QUIC_problems_on_google">18.3</a> OpenSSL-QUIC problems on google.com<br>
+<h2><a href="#RTSP">RTSP</a></h2>
+<p>
+<a href="#Some_methods_do_not_support_resp">19.1</a> Some methods do not support response bodies<br>
+<hr>
+ <a name="HTTP"></a>
+<h2>1. HTTP</h2><a name="TLS"></a>
+<h2>2. TLS</h2><a name="IMAPS_connection_fails_with_Rust"></a><h3>2.1 IMAPS connection fails with Rustls error</h3>
+<p> <a href="https://github.com/curl/curl/issues/10457">https://github.com/curl/curl/issues/10457</a>
+<a name="Access_violation_sending_client"></a><h3>2.2 Access violation sending client cert with Schannel</h3>
+<p> When using Schannel to do client certs, curl sets PKCS12_NO_PERSIST_KEY to
+  avoid leaking the private key into the filesystem. Unfortunately that flag
+   instead seems to trigger a crash.
+ <p> See <a href="https://github.com/curl/curl/issues/17626">https://github.com/curl/curl/issues/17626</a>
+<a name="Client_cert_handling_with_Issuer"></a><h3>2.5 Client cert handling with Issuer DN differs between backends</h3>
+<p> When the specified client certificate does not match any of the
+  server-specified DNs, the OpenSSL and GnuTLS backends behave differently.
+   The github discussion may contain a solution.
+ <p> See <a href="https://github.com/curl/curl/issues/1411">https://github.com/curl/curl/issues/1411</a>
+<a name="Client_cert_MTLS_issues_with_S"></a><h3>2.7 Client cert (MTLS) issues with Schannel</h3>
+<p> See <a href="https://github.com/curl/curl/issues/3145">https://github.com/curl/curl/issues/3145</a>
+<a name="Schannel_TLS_1_2_handshake_bug_i"></a><h3>2.11 Schannel TLS 1.2 handshake bug in old Windows versions</h3>
+<p> In old versions of Windows such as 7 and 8.1 the Schannel TLS 1.2 handshake
+  implementation likely has a bug that can rarely cause the key exchange to
+   fail, resulting in error SEC_E_BUFFER_TOO_SMALL or SEC_E_MESSAGE_ALTERED.
+ <p> <a href="https://github.com/curl/curl/issues/5488">https://github.com/curl/curl/issues/5488</a>
+<a name="CURLOPT_CERTINFO_results_in_CURL"></a><h3>2.13 CURLOPT_CERTINFO results in CURLE_OUT_OF_MEMORY with Schannel</h3>
+<p> <a href="https://github.com/curl/curl/issues/8741">https://github.com/curl/curl/issues/8741</a>
+<a name="mbedTLS_and_CURLE_AGAIN_handling"></a><h3>2.14 mbedTLS and CURLE_AGAIN handling</h3>
+<p> <a href="https://github.com/curl/curl/issues/15801">https://github.com/curl/curl/issues/15801</a>
+<a name="Email-protocols"></a>
+<h2>3. Email protocols</h2><a name="IMAP_SEARCH_ALL_truncated_respon"></a><h3>3.1 IMAP SEARCH ALL truncated response</h3>
+<p> IMAP "SEARCH ALL" truncates output on large boxes. "A quick search of the
+  code reveals that pingpong.c contains some truncation code, at line 408, when
+   it deems the server response to be too large truncating it to 40 characters"
+   <a href="https://curl.se/bug/view.cgi?id=1366">https://curl.se/bug/view.cgi?id=1366</a>
+ <a name="No_disconnect_command"></a><h3>3.2 No disconnect command</h3>
+<p> The disconnect commands (LOGOUT and QUIT) may not be sent by IMAP, POP3 and
+  SMTP if a failure occurs during the authentication phase of a connection.
+ <a name="AUTH_PLAIN_for_SMTP_is_not_worki"></a><h3>3.4 AUTH PLAIN for SMTP is not working on all servers</h3>
+<p> Specifying "--login-options AUTH=PLAIN" on the command line does not seem to
+  work correctly.
+ <p> See <a href="https://github.com/curl/curl/issues/4080">https://github.com/curl/curl/issues/4080</a>
+<a name="APOP_authentication_fails_on_POP"></a><h3>3.5 APOP authentication fails on POP3</h3>
+<p> See <a href="https://github.com/curl/curl/issues/10073">https://github.com/curl/curl/issues/10073</a>
+<a name="POP3_issue_when_reading_small_ch"></a><h3>3.6 POP3 issue when reading small chunks</h3>
+<p> CURL_DBG_SOCK_RMAX=4 ./runtests.pl -v 982
+<p> See <a href="https://github.com/curl/curl/issues/12063">https://github.com/curl/curl/issues/12063</a>
+<a name="Command-line"></a>
+<h2>4. Command line</h2><a name="T_dev_stdin_may_upload_with_an"></a><h3>4.1 -T /dev/stdin may upload with an incorrect content length</h3>
+<p> -T stats the path to figure out its size in bytes to use it as Content-Length
+  if it is a regular file.
+ <p> The problem with that is that, on BSDs and some other UNIXes (not Linux),
+  open(path) may not give you a file descriptor with a 0 offset from the start
+   of the file.
+ <p> See <a href="https://github.com/curl/curl/issues/12177">https://github.com/curl/curl/issues/12177</a>
+<a name="T_always_uploads_chunked"></a><h3>4.2 -T - always uploads chunked</h3>
+<p> When the `&lt;` shell operator is used. curl should realise that stdin is a
+  regular file in this case, and that it can do a non-chunked upload, like it
+   would do if you used -T file.
+ <p> See <a href="https://github.com/curl/curl/issues/12171">https://github.com/curl/curl/issues/12171</a>
+<a name="Build-and-portability-issues"></a>
+<h2>5. Build and portability issues</h2><a name="OS400_port_requires_deprecated_I"></a><h3>5.1 OS400 port requires deprecated IBM library</h3>
+<p> curl for OS400 requires QADRT to build, which provides ASCII wrappers for
+  libc/POSIX functions in the ILE, but IBM no longer supports or even offers
+   this library to download.
+ <p> See <a href="https://github.com/curl/curl/issues/5176">https://github.com/curl/curl/issues/5176</a>
+<a name="curl_config_libs_contains_priv"></a><h3>5.2 curl-config --libs contains private details</h3>
+<p> "curl-config --libs" include details set in LDFLAGS when configure is run
+  that might be needed only for building libcurl. Further, curl-config --cflags
+   suffers from the same effects with CFLAGS/CPPFLAGS.
+ <a name="LDFLAGS_passed_too_late_making_l"></a><h3>5.3 LDFLAGS passed too late making libs linked incorrectly</h3>
+<p> Compiling latest curl on HP-UX and linking against a custom OpenSSL (which is
+  on the default loader/linker path), fails because the generated Makefile has
+   LDFLAGS passed on after LIBS.
+ <p> See <a href="https://github.com/curl/curl/issues/14893">https://github.com/curl/curl/issues/14893</a>
+<a name="Cygwin_make_install_installs_cu"></a><h3>5.6 Cygwin: make install installs curl-config.1 twice</h3>
+<p> <a href="https://github.com/curl/curl/issues/8839">https://github.com/curl/curl/issues/8839</a>
+<a name="flaky_CI_builds"></a><h3>5.12 flaky CI builds</h3>
+<p> We run many CI builds for each commit and PR on github, and especially a
+  number of the Windows builds are flaky. This means that we rarely get all CI
+   builds go green and complete without errors. This is unfortunate as it makes
+   us sometimes miss actual build problems and it is surprising to newcomers to
+   the project who (rightfully) do not expect this.
+ <p> See <a href="https://github.com/curl/curl/issues/6972">https://github.com/curl/curl/issues/6972</a>
+<a name="long_paths_are_not_fully_support"></a><h3>5.13 long paths are not fully supported on Windows</h3>
+<p> curl on Windows cannot access long paths (paths longer than 260 characters).
+  However, as a workaround, the Windows path prefix \\?\ which disables all
+   path interpretation may work to allow curl to access the path. For example:
+   \\?\c:\longpath.
+ <p> See <a href="https://github.com/curl/curl/issues/8361">https://github.com/curl/curl/issues/8361</a>
+<a name="Unicode_on_Windows"></a><h3>5.15 Unicode on Windows</h3>
+<p> Passing in a Unicode filename with -o:
+<p> <a href="https://github.com/curl/curl/issues/11461">https://github.com/curl/curl/issues/11461</a>
+<p> Passing in Unicode character with -d:
+<p> <a href="https://github.com/curl/curl/issues/12231">https://github.com/curl/curl/issues/12231</a>
+<p> Windows Unicode builds use homedir in current locale
+<p> The Windows Unicode builds of curl use the current locale, but expect Unicode
+  UTF-8 encoded paths for internal use such as open, access and stat. The
+   user's home directory is retrieved via curl_getenv in the current locale and
+   not as UTF-8 encoded Unicode.
+ <p> See <a href="https://github.com/curl/curl/pull/7252">https://github.com/curl/curl/pull/7252</a> and
+<pre>
+ <a href="https://github.com/curl/curl/pull/7281">https://github.com/curl/curl/pull/7281</a>
+</pre>
+<p> Cannot handle Unicode arguments in non-Unicode builds on Windows
+<p> If a URL or filename cannot be encoded using the user's current codepage then
+  it can only be encoded properly in the Unicode character set. Windows uses
+   UTF-16 encoding for Unicode and stores it in wide characters, however curl
+   and libcurl are not equipped for that at the moment except when built with
+   _UNICODE and UNICODE defined. Except for Cygwin, Windows cannot use UTF-8 as
+   a locale.
+ <p>  <a href="https://curl.se/bug/?i=345">https://curl.se/bug/?i=345</a>
+   <a href="https://curl.se/bug/?i=731">https://curl.se/bug/?i=731</a>
+    <a href="https://curl.se/bug/?i=3747">https://curl.se/bug/?i=3747</a>
+ <p> NTLM authentication and Unicode
+<p> NTLM authentication involving Unicode username or password only works
+  properly if built with UNICODE defined together with the Schannel backend.
+   The original problem was mentioned in:
+   <a href="https://curl.se/mail/lib-2009-10/0024.html">https://curl.se/mail/lib-2009-10/0024.html</a>
+   <a href="https://curl.se/bug/view.cgi?id=896">https://curl.se/bug/view.cgi?id=896</a>
+ <p> The Schannel version verified to work as mentioned in
+  <a href="https://curl.se/mail/lib-2012-07/0073.html">https://curl.se/mail/lib-2012-07/0073.html</a>
+ <a name="Authentication"></a>
+<h2>6. Authentication</h2><a name="Digest_auth_int_for_PUT_POST"></a><h3>6.1 Digest auth-int for PUT/POST</h3>
+<p> We do not support auth-int for Digest using PUT or POST
+<a name="MIT_Kerberos_for_Windows_build"></a><h3>6.2 MIT Kerberos for Windows build</h3>
+<p> libcurl fails to build with MIT Kerberos for Windows (KfW) due to KfW's
+  library header files exporting symbols/macros that should be kept private to
+   the KfW library. See ticket #5601 at <a href="https://krbdev.mit.edu/rt/">https://krbdev.mit.edu/rt/</a>
+ <a name="NTLM_in_system_context_uses_wron"></a><h3>6.3 NTLM in system context uses wrong name</h3>
+<p> NTLM authentication using SSPI (on Windows) when (lib)curl is running in
+  "system context" makes it use wrong(?) username - at least when compared to
+   what winhttp does. See <a href="https://curl.se/bug/view.cgi?id=535">https://curl.se/bug/view.cgi?id=535</a>
+ <a name="NTLM_does_not_support_password_w"></a><h3>6.5 NTLM does not support password with Unicode 'SECTION SIGN' character</h3>
+<p> <a href="https://en.wikipedia.org/wiki/Section_sign">https://en.wikipedia.org/wiki/Section_sign</a>
+  <a href="https://codepoints.net/U+00A7">https://codepoints.net/U+00A7</a> SECTION SIGN
+   <a href="https://github.com/curl/curl/issues/2120">https://github.com/curl/curl/issues/2120</a>
+ <a name="libcurl_can_fail_to_try_alternat"></a><h3>6.6 libcurl can fail to try alternatives with --proxy-any</h3>
+<p> When connecting via a proxy using --proxy-any, a failure to establish an
+  authentication causes libcurl to abort trying other options if the failed
+   method has a higher preference than the alternatives. As an example,
+   --proxy-any against a proxy which advertise Negotiate and NTLM, but which
+   fails to set up Kerberos authentication does not proceed to try
+   authentication using NTLM.
+ <p> <a href="https://github.com/curl/curl/issues/876">https://github.com/curl/curl/issues/876</a>
+<a name="Do_not_clear_digest_for_single_r"></a><h3>6.7 Do not clear digest for single realm</h3>
+<p> <a href="https://github.com/curl/curl/issues/3267">https://github.com/curl/curl/issues/3267</a>
+<a name="SHA_256_digest_not_supported_in"></a><h3>6.9 SHA-256 digest not supported in Windows SSPI builds</h3>
+<p> Windows builds of curl that have SSPI enabled use the native Windows API calls
+  to create authentication strings. The call to InitializeSecurityContext fails
+   with SEC_E_QOP_NOT_SUPPORTED which causes curl to fail with CURLE_AUTH_ERROR.
+ <p> Microsoft does not document supported digest algorithms and that SEC_E error
+  code is not a documented error for InitializeSecurityContext (digest).
+ <p> <a href="https://github.com/curl/curl/issues/6302">https://github.com/curl/curl/issues/6302</a>
+<a name="curl_never_completes_Negotiate_o"></a><h3>6.10 curl never completes Negotiate over HTTP</h3>
+<p> Apparently it is not working correctly...?
+<p> See <a href="https://github.com/curl/curl/issues/5235">https://github.com/curl/curl/issues/5235</a>
+<a name="Negotiate_on_Windows_fails"></a><h3>6.11 Negotiate on Windows fails</h3>
+<p> When using --negotiate (or NTLM) with curl on Windows, SSL/TLS handshake
+  fails despite having a valid kerberos ticket cached. Works without any issue
+   in Unix/Linux.
+ <p> <a href="https://github.com/curl/curl/issues/5881">https://github.com/curl/curl/issues/5881</a>
+<a name="Negotiate_against_Hadoop_HDFS"></a><h3>6.13 Negotiate authentication against Hadoop HDFS</h3>
+<p> <a href="https://github.com/curl/curl/issues/8264">https://github.com/curl/curl/issues/8264</a>
+<a name="FTP"></a>
+<h2>7. FTP</h2><a name="FTP_with_ACCT"></a><h3>7.4 FTP with ACCT</h3>
+<p> When doing an operation over FTP that requires the ACCT command (but not when
+  logging in), the operation fails since libcurl does not detect this and thus
+   fails to issue the correct command: <a href="https://curl.se/bug/view.cgi?id=635">https://curl.se/bug/view.cgi?id=635</a>
+ <a name="FTPS_directory_listing_hangs_on"></a><h3>7.12 FTPS server compatibility on Windows with Schannel</h3>
+<p> FTPS is not widely used with the Schannel TLS backend and so there may be
+  more bugs compared to other TLS backends such as OpenSSL. In the past users
+   have reported hanging and failed connections. It is likely some changes to
+   curl since then fixed the issues. None of the reported issues can be
+   reproduced any longer.
+ <p> If you encounter an issue connecting to your server via FTPS with the latest
+  curl and Schannel then please search for open issues or file a new issue.
+ <a name="SFTP-and-SCP"></a>
+<h2>9. SFTP and SCP</h2><a name="SFTP_does_not_do_CURLOPT_POSTQUO"></a><h3>9.1 SFTP does not do CURLOPT_POSTQUOTE correct</h3>
+<p> When libcurl sends CURLOPT_POSTQUOTE commands when connected to an SFTP
+  server using the multi interface, the commands are not being sent correctly
+   and instead the connection is "cancelled" (the operation is considered done)
+   prematurely. There is a half-baked (busy-looping) patch provided in the bug
+   report but it cannot be accepted as-is. See
+   <a href="https://curl.se/bug/view.cgi?id=748">https://curl.se/bug/view.cgi?id=748</a>
+ <a name="Remote_recursive_folder_creation"></a><h3>9.3 Remote recursive folder creation with SFTP</h3>
+<p> On this servers, the curl fails to create directories on the remote server
+  even when the CURLOPT_FTP_CREATE_MISSING_DIRS option is set.
+ <p> See <a href="https://github.com/curl/curl/issues/5204">https://github.com/curl/curl/issues/5204</a>
+<a name="libssh_blocking_and_infinite_loo"></a><h3>9.4 libssh blocking and infinite loop problem</h3>
+<p> In the SSH_SFTP_INIT state for libssh, the ssh session working mode is set to
+  blocking mode. If the network is suddenly disconnected during sftp
+   transmission, curl is stuck, even if curl is configured with a timeout.
+ <p> <a href="https://github.com/curl/curl/issues/8632">https://github.com/curl/curl/issues/8632</a>
+<a name="Cygwin_WARNING_UNPROTECTED_PR"></a><h3>9.5 Cygwin: "WARNING: UNPROTECTED PRIVATE KEY FILE!"</h3>
+<p> Running SCP and SFTP tests on Cygwin makes this warning message appear.
+<p> <a href="https://github.com/curl/curl/issues/11244">https://github.com/curl/curl/issues/11244</a>
+<a name="Connection"></a>
+<h2>10. Connection</h2><a name="interface_with_link_scoped_IPv"></a><h3>10.1 --interface with link-scoped IPv6 address</h3>
+<p> When you give the `--interface` option telling curl to use a specific
+  interface for its outgoing traffic in combination with an IPv6 address in the
+   URL that uses a link-local scope, curl might pick the wrong address from the
+   named interface and the subsequent transfer fails.
+ <p> Example command line:
+<p>    curl --interface eth0 'http://[fe80:928d:xxff:fexx:xxxx]/'
+<p> The fact that the given IP address is link-scoped should probably be used as
+  input to somehow make curl make a better choice for this.
+ <p> <a href="https://github.com/curl/curl/issues/14782">https://github.com/curl/curl/issues/14782</a>
+<a name="Does_not_acknowledge_getaddrinfo"></a><h3>10.2 Does not acknowledge getaddrinfo sorting policy</h3>
+<p> Even if a user edits /etc/gai.conf to prefer IPv4, curl still prefers and
+  tries IPv6 addresses first.
+ <p> <a href="https://github.com/curl/curl/issues/16718">https://github.com/curl/curl/issues/16718</a>
+<a name="SOCKS_SSPI_discards_the_security"></a><h3>10.3 SOCKS-SSPI discards the security context</h3>
+<p> After a successful SSPI/GSS-API exchange, the function queries and logs the
+  authenticated username and reports the supported data-protection level, but
+   then immediately deletes the negotiated SSPI security context and frees the
+   credentials before returning. The negotiated context is not stored on the
+   connection and is therefore never used to protect later SOCKS5 traffic.
+ <a name="Internals"></a>
+<h2>11. Internals</h2><a name="gssapi_library_name_version_is"></a><h3>11.1 gssapi library name + version is missing in curl_version_info()</h3>
+<p> The struct needs to be expanded and code added to store this info.
+<p> See <a href="https://github.com/curl/curl/issues/13492">https://github.com/curl/curl/issues/13492</a>
+<a name="error_buffer_not_set_if_connecti"></a><h3>11.2 error buffer not set if connection to multiple addresses fails</h3>
+<p> If you ask libcurl to resolve a hostname like example.com to IPv6 addresses
+  when you only have IPv4 connectivity. libcurl fails with
+   CURLE_COULDNT_CONNECT, but the error buffer set by CURLOPT_ERRORBUFFER
+   remains empty. Issue: <a href="https://github.com/curl/curl/issues/544">https://github.com/curl/curl/issues/544</a>
+ <a name="HTTP_test_server_connection_mon"></a><h3>11.4 HTTP test server 'connection-monitor' problems</h3>
+<p> The 'connection-monitor' feature of the sws HTTP test server does not work
+  properly if some tests are run in unexpected order. Like 1509 and then 1525.
+ <p> See <a href="https://github.com/curl/curl/issues/868">https://github.com/curl/curl/issues/868</a>
+<a name="Connection_information_when_usin"></a><h3>11.5 Connection information when using TCP Fast Open</h3>
+<p> CURLINFO_LOCAL_PORT (and possibly a few other) fails when TCP Fast Open is
+  enabled.
+ <p> See <a href="https://github.com/curl/curl/issues/1332">https://github.com/curl/curl/issues/1332</a> and
+  <a href="https://github.com/curl/curl/issues/4296">https://github.com/curl/curl/issues/4296</a>
+ <a name="test_cases_sometimes_timeout"></a><h3>11.6 test cases sometimes timeout</h3>
+<p> Occasionally, one of the tests timeouts. Inexplicably.
+<p> See <a href="https://github.com/curl/curl/issues/13350">https://github.com/curl/curl/issues/13350</a>
+<a name="CURLOPT_CONNECT_TO_does_not_work"></a><h3>11.7 CURLOPT_CONNECT_TO does not work for HTTPS proxy</h3>
+<p> It is unclear if the same option should even cover the proxy connection or if
+  if requires a separate option.
+ <p> See <a href="https://github.com/curl/curl/issues/14481">https://github.com/curl/curl/issues/14481</a>
+<a name="WinIDN_test_failures"></a><h3>11.8 WinIDN test failures</h3>
+<p> Test 165 disabled when built with WinIDN.
+<a name="setting_a_disabled_option_should"></a><h3>11.9 setting a disabled option should return CURLE_NOT_BUILT_IN</h3>
+<p> When curl has been built with specific features or protocols disabled,
+  setting such options with curl_easy_setopt() should rather return
+   CURLE_NOT_BUILT_IN instead of CURLE_UNKNOWN_OPTION to signal the difference
+   to the application
+ <p> See <a href="https://github.com/curl/curl/issues/15472">https://github.com/curl/curl/issues/15472</a>
+<a name="LDAP"></a>
+<h2>12. LDAP</h2><a name="OpenLDAP_hangs_after_returning_r"></a><h3>12.1 OpenLDAP hangs after returning results</h3>
+<p> By configuration defaults, OpenLDAP automatically chase referrals on
+  secondary socket descriptors. The OpenLDAP backend is asynchronous and thus
+   should monitor all socket descriptors involved. Currently, these secondary
+   descriptors are not monitored, causing OpenLDAP library to never receive
+   data from them.
+ <p> As a temporary workaround, disable referrals chasing by configuration.
+<p> The fix is not easy: proper automatic referrals chasing requires a
+  synchronous bind callback and monitoring an arbitrary number of socket
+   descriptors for a single easy handle (currently limited to 5).
+ <p> Generic LDAP is synchronous: OK.
+<p> See <a href="https://github.com/curl/curl/issues/622">https://github.com/curl/curl/issues/622</a> and
+<pre>
+ <a href="https://curl.se/mail/lib-2016-01/0101.html">https://curl.se/mail/lib-2016-01/0101.html</a>
+</pre>
+<a name="LDAP_on_Windows_does_authenticat"></a><h3>12.2 LDAP on Windows does authentication wrong?</h3>
+<p> <a href="https://github.com/curl/curl/issues/3116">https://github.com/curl/curl/issues/3116</a>
+<a name="LDAP_on_Windows_does_not_work"></a><h3>12.3 LDAP on Windows does not work</h3>
+<p> A simple curl command line getting "ldap://ldap.forumsys.com" returns an
+  error that says "no memory" !
+ <p> <a href="https://github.com/curl/curl/issues/4261">https://github.com/curl/curl/issues/4261</a>
+<a name="LDAPS_requests_to_ActiveDirector"></a><h3>12.4 LDAPS requests to ActiveDirectory server hang</h3>
+<p> <a href="https://github.com/curl/curl/issues/9580">https://github.com/curl/curl/issues/9580</a>
+<a name="TCPIP"></a>
+<h2>13. TCP/IP</h2><a name="telnet_code_does_not_handle_part"></a><h3>13.1 telnet code does not handle partial writes properly</h3>
+<p> It probably does not happen too easily because of how slow and infrequent
+  sends are normally performed.
+ <a name="Trying_local_ports_fails_on_Wind"></a><h3>13.2 Trying local ports fails on Windows</h3>
+<p> This makes '--local-port [range]' to not work since curl cannot properly
+  detect if a port is already in use, so it tries the first port, uses that and
+   then subsequently fails anyway if that was actually in use.
+ <p> <a href="https://github.com/curl/curl/issues/8112">https://github.com/curl/curl/issues/8112</a>
+<a name="CMake"></a>
+<h2>15. CMake</h2><a name="cmake_outputs_no_version_inform"></a><h3>15.1 cmake outputs: no version information available</h3>
+<p> Something in the SONAME generation seems to be wrong in the cmake build.
+<p> <a href="https://github.com/curl/curl/issues/11158">https://github.com/curl/curl/issues/11158</a>
+<a name="uses_lpthread_instead_of_Thread"></a><h3>15.6 uses -lpthread instead of Threads::Threads</h3>
+<p> See <a href="https://github.com/curl/curl/issues/6166">https://github.com/curl/curl/issues/6166</a>
+<a name="generated_pc_file_contains_stra"></a><h3>15.7 generated .pc file contains strange entries</h3>
+<p> The Libs.private field of the generated .pc file contains -lgcc -lgcc_s -lc
+  -lgcc -lgcc_s
+ <p> See <a href="https://github.com/curl/curl/issues/6167">https://github.com/curl/curl/issues/6167</a>
+<a name="CMake_build_with_MIT_Kerberos_do"></a><h3>15.13 CMake build with MIT Kerberos does not work</h3>
+<p> Minimum CMake version was bumped in curl 7.71.0 (#5358) Since CMake 3.2
+  try_compile started respecting the CMAKE_EXE_FLAGS. The code dealing with
+   MIT Kerberos detection sets few variables to potentially weird mix of space,
+   and ;-separated flags. It had to blow up at some point. All the CMake checks
+   that involve compilation are doomed from that point, the configured tree
+   cannot be built.
+ <p> <a href="https://github.com/curl/curl/issues/6904">https://github.com/curl/curl/issues/6904</a>
+<a name="awssigv4"></a>
+<h2>16. aws-sigv4</h2><a name="aws_sigv4_does_not_handle_multip"></a><h3>16.2 aws-sigv4 does not handle multipart/form-data correctly</h3>
+<p> <a href="https://github.com/curl/curl/issues/13351">https://github.com/curl/curl/issues/13351</a>
+<a name="HTTP2"></a>
+<h2>17. HTTP/2</h2><a name="HTTP_2_prior_knowledge_over_prox"></a><h3>17.1 HTTP/2 prior knowledge over proxy</h3>
+<p> <a href="https://github.com/curl/curl/issues/12641">https://github.com/curl/curl/issues/12641</a>
+<a name="HTTP_2_frames_while_in_the_conne"></a><h3>17.2 HTTP/2 frames while in the connection pool kill reuse</h3>
+<p> If the server sends HTTP/2 frames (like for example an HTTP/2 PING frame) to
+  curl while the connection is held in curl's connection pool, the socket is
+   found readable when considered for reuse and that makes curl think it is dead
+   and then it is closed and a new connection gets created instead.
+ <p> This is *best* fixed by adding monitoring to connections while they are kept
+  in the pool so that pings can be responded to appropriately.
+ <a name="ENHANCE_YOUR_CALM_causes_infinit"></a><h3>17.3 ENHANCE_YOUR_CALM causes infinite retries</h3>
+<p> Infinite retries with 2 parallel requests on one connection receiving GOAWAY
+  with ENHANCE_YOUR_CALM error code.
+ <p> See <a href="https://github.com/curl/curl/issues/5119">https://github.com/curl/curl/issues/5119</a>
+<a name="HTTP_2_TLS_spends_a_lot_of_tim"></a><h3>17.4 HTTP/2 + TLS spends a lot of time in recv</h3>
+<p> It has been observed that by making the speed limit less accurate we could
+  improve this performance. (by reverting
+   <a href="https://github.com/curl/curl/commit/db5c9f4f9e0779b49624752b135281a0717b277b">https://github.com/curl/curl/commit/db5c9f4f9e0779b49624752b135281a0717b277b</a>)
+   Can we find a golden middle ground?
+ <p> See <a href="https://curl.se/mail/lib-2024-05/0026.html">https://curl.se/mail/lib-2024-05/0026.html</a> and
+  <a href="https://github.com/curl/curl/issues/13416">https://github.com/curl/curl/issues/13416</a>
+ <a name="HTTP3"></a>
+<h2>18. HTTP/3</h2><a name="connection_migration_does_not_wo"></a><h3>18.1 connection migration does not work</h3>
+<p> <a href="https://github.com/curl/curl/issues/7695">https://github.com/curl/curl/issues/7695</a>
+<a name="quiche_QUIC_connection_is_drain"></a><h3>18.2 quiche: QUIC connection is draining</h3>
+<p> The transfer ends with error "QUIC connection is draining".
+<p> <a href="https://github.com/curl/curl/issues/12037">https://github.com/curl/curl/issues/12037</a>
+<a name="OpenSSL_QUIC_problems_on_google"></a><h3>18.3 OpenSSL-QUIC problems on google.com</h3>
+<p> With some specific Google servers, and seemingly timing dependent, the
+  OpenSSL-QUIC backend seems to not actually send off the HTTP/3 request which
+   makes the QUIC connection just sit idle until killed by the server. curl or
+   OpenSSL bug?
+ <p> <a href="https://github.com/curl/curl/issues/18336">https://github.com/curl/curl/issues/18336</a>
+<a name="RTSP"></a>
+<h2>19. RTSP</h2><a name="Some_methods_do_not_support_resp"></a><h3>19.1 Some methods do not support response bodies</h3>
+<p> The RTSP implementation is written to assume that a number of RTSP methods
+  always get responses without bodies, even though there seems to be no
+   indication in the RFC that this is always the case.
+ <p> <a href="https://github.com/curl/curl/issues/12414">https://github.com/curl/curl/issues/12414</a>
+</div>
+</div>
+</body>
+</html>

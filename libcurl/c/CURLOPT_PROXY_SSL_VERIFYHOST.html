@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_PROXY_SSL_VERIFYHOST</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_PROXY_SSL_VERIFYHOST</b></div>
+<h1> CURLOPT_PROXY_SSL_VERIFYHOST explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_PROXY_SSL_VERIFYHOST%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_PROXY_SSL_VERIFYHOST.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_PROXY_SSL_VERIFYHOST.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_PROXY_SSL_VERIFYHOST - verify the proxy certificate&apos;s name against host </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_PROXY_SSL_VERIFYHOST.html">CURLOPT_PROXY_SSL_VERIFYHOST</a>,
+&nbsp;                         long verify);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a long set to 2L as asking curl to <span Class="emphasis">verify</span> in the HTTPS proxy&apos;s certificate name fields against the proxy name. </p>
+<p class="level0">This option determines whether libcurl verifies that the proxy cert contains the correct name for the name it is known as. </p>
+<p class="level0">When <a Class="emphasis" href="./CURLOPT_PROXY_SSL_VERIFYHOST.html">CURLOPT_PROXY_SSL_VERIFYHOST</a> is 2, the proxy certificate must indicate that the server is the proxy to which you meant to connect to, or the connection fails. </p>
+<p class="level0">curl considers the proxy the intended one when the Common Name field or a Subject Alternate Name field in the certificate matches the hostname in the proxy string which you told curl to use. </p>
+<p class="level0">If <span Class="emphasis">verify</span> value is set to 1: </p>
+<p class="level0">In <a href="/ch/7.28.0.html">7.28.0</a> and earlier: treated as a debug option of some sorts, not supported anymore due to frequently leading to programmer mistakes. </p>
+<p class="level0">From <a href="/ch/7.28.1.html">7.28.1</a> to <a href="/ch/7.65.3.html">7.65.3</a>: setting it to 1 made <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> return an error and leaving the flag untouched. </p>
+<p class="level0">From <a href="/ch/7.66.0.html">7.66.0</a>: treats 1 and 2 the same. </p>
+<p class="level0">When the <span Class="emphasis">verify</span> value is 0L, the connection succeeds regardless of the names used in the certificate. Use that ability with caution. </p>
+<p class="level0">See also <a Class="emphasis" href="./CURLOPT_PROXY_SSL_VERIFYPEER.html">CURLOPT_PROXY_SSL_VERIFYPEER</a> to verify the digital signature of the proxy certificate. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">2 </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all TLS based protocols: HTTPS, FTPS, IMAPS, POP3S, SMTPS etc. </p>
+<p class="level0">All TLS backends support this option. </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   /&#x2a; Set the default value: strict name check please &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROXY_SSL_VERIFYHOST.html">CURLOPT_PROXY_SSL_VERIFYHOST</a>, 2L);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.52.0.html">7.52.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_CAINFO.html">CURLOPT_CAINFO</a>(3), <a Class="bold" href="./CURLOPT_PROXY_CAINFO.html">CURLOPT_PROXY_CAINFO</a>(3), <a Class="bold" href="./CURLOPT_PROXY_SSL_VERIFYPEER.html">CURLOPT_PROXY_SSL_VERIFYPEER</a>(3), <a Class="bold" href="./CURLOPT_SSL_VERIFYPEER.html">CURLOPT_SSL_VERIFYPEER</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

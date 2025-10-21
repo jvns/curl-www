@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_easy_ssls_export()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_ssls_export</b></div>
+<h1> curl_easy_ssls_export - export SSL sessions </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_easy_ssls_export%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_easy_ssls_export.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_easy_ssls_export.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_easy_ssls_export - export SSL sessions </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+typedef CURLcode curl_ssls_export_function(CURL &#x2a;handle,
+&nbsp;                                          void &#x2a;userptr,
+&nbsp;                                          const char &#x2a;session_key,
+&nbsp;                                          const unsigned char &#x2a;shmac,
+&nbsp;                                          size_t shmac_len,
+&nbsp;                                          const unsigned char &#x2a;sdata,
+&nbsp;                                          size_t sdata_len,
+&nbsp;                                          curl_off_t valid_until,
+&nbsp;                                          int ietf_tls_id,
+&nbsp;                                          const char &#x2a;alpn,
+&nbsp;                                          size_t earlydata_max);
+&nbsp;
+CURLcode <a href="curl_easy_ssls_export.html">curl_easy_ssls_export</a>(CURL &#x2a;handle,
+&nbsp;                              curl_ssls_export_function &#x2a;export_fn,
+&nbsp;                              void &#x2a;userptr);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function iterates over all SSL session tickets that belong to the easy handle and invokes the <span Class="bold">export_fn</span> callback on each of them, as long as the callback returns <span Class="bold"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a></span>. </p>
+<p class="level0">The callback may then store this information and use <a Class="emphasis" href="./curl_easy_ssls_import.html">curl_easy_ssls_import</a> in another libcurl instance to add SSL session tickets again. Reuse of SSL session tickets may result in faster handshakes and some connections might be able to send request data in the initial packets (0-RTT). </p>
+<p class="level0">From all the parameters passed to the <span Class="bold">export_fn</span> only two need to be persisted: either <span Class="bold">session_key</span> or <span Class="bold">shamc</span> and always <span Class="bold">sdata</span>. All other parameters are informative, e.g. allow the callback to act only on specific session tickets. </p>
+<p class="level0">Note that SSL sessions that involve a client certificate or SRP username/password are not exported. </p><a name="Export"></a><h2 class="nroffsh">Export function parameter</h2>
+<p class="level0"><a name="Session"></a><span class="nroffip">Session Key</span> </p>
+<p class="level1">This is a printable, null-terminated string that starts with <span Class="bold">hostname:port</span> the session ticket is originating from and also contains all relevant SSL parameters used in the connection. The key also carries the name and version number of the TLS backend used. </p>
+<p class="level1">It is recommended to only persist <span Class="bold">session_key</span> when it can be protected from outside access. Since the hostname appears in plain text, it would allow any third party to see how curl has been used for. </p>
+<p class="level0"><a name="Salted"></a><span class="nroffip">Salted Hash</span> </p>
+<p class="level1">A binary blob of <span Class="bold">shmac_len</span> bytes that contains a random salt and a cryptographic hash of the salt and <span Class="bold">session_key</span>. The salt is generated for every session individually. Storing <span Class="bold">shmac</span> is recommended when placing session tickets in a file, for example. </p>
+<p class="level1">A third party may brute-force known hostnames, but cannot just &quot;grep&quot; for them. </p>
+<p class="level0"><a name="Session"></a><span class="nroffip">Session Data</span> </p>
+<p class="level1">A binary blob of <span Class="bold">sdata_len</span> bytes, <span Class="bold">sdata</span> contains all relevant SSL session ticket information for a later import - apart from <span Class="bold">session_key</span> and <span Class="bold">shmac</span>. </p>
+<p class="level0"><a name="validuntil"></a><span class="nroffip">valid_until</span> </p>
+<p class="level1">Seconds since EPOCH (1970-01-01) until the session ticket is considered valid. </p>
+<p class="level0"><a name="TLS"></a><span class="nroffip">TLS Version</span> </p>
+<p class="level1">The IETF assigned number for the TLS version the session ticket originates from. This is <span Class="bold">0x0304</span> for TLSv1.3, <span Class="bold">0x0303</span> for 1.2, etc. Session tickets from version 1.3 have better security properties, so an export might store only those. </p>
+<p class="level0"><a name="ALPN"></a><span class="nroffip">ALPN</span> </p>
+<p class="level1">The ALPN protocol that had been negotiated with the host. This may be <span Class="bold">NULL</span> if negotiation gave no result or had not been attempted. </p>
+<p class="level0"><a name="Early"></a><span class="nroffip">Early Data</span> </p>
+<p class="level1">The maximum amount of bytes the server supports to receive in early data (0-RTT). This is 0 unless the server explicitly indicates support. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all TLS based protocols: HTTPS, FTPS, IMAPS, POP3S, SMTPS etc. </p>
+<p class="level0">This option works only with the following TLS backends: GnuTLS, OpenSSL, mbedTLS and wolfSSL </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+CURLcode my_export_cb(CURL &#x2a;handle,
+&nbsp;                     void &#x2a;userptr,
+&nbsp;                     const char &#x2a;session_key,
+&nbsp;                     const unsigned char &#x2a;shmac,
+&nbsp;                     size_t shmac_len,
+&nbsp;                     const unsigned char &#x2a;sdata,
+&nbsp;                     size_t sdata_len,
+&nbsp;                     curl_off_t valid_until,
+&nbsp;                     int ietf_tls_id,
+&nbsp;                     const char &#x2a;alpn,
+&nbsp;                     size_t earlydata_max)
+{
+&nbsp; /&#x2a; persist sdata &#x2a;/
+&nbsp; return <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURLSHcode sh;
+&nbsp; CURLSH &#x2a;share = <a href="curl_share_init.html">curl_share_init</a>();
+&nbsp; CURLcode rc;
+&nbsp; CURL &#x2a;curl;
+&nbsp;
+&nbsp; sh = <a href="curl_share_setopt.html">curl_share_setopt</a>(share, <a href="CURLSHOPT_SHARE.html">CURLSHOPT_SHARE</a>, CURL_LOCK_DATA_SSL_SESSION);
+&nbsp; if(sh)
+&nbsp;   printf(&quot;Error: %s&bsol;n&quot;, <a href="curl_share_strerror.html">curl_share_strerror</a>(sh));
+&nbsp;
+&nbsp; curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_SHARE.html">CURLOPT_SHARE</a>, share);
+&nbsp;
+&nbsp;   /&#x2a; run a transfer, all TLS sessions received will be added
+&nbsp;    &#x2a; to the share. &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/&quot;);
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   /&#x2a; export the TLS sessions collected in the share &#x2a;/
+&nbsp;   rc = <a href="curl_easy_ssls_export.html">curl_easy_ssls_export</a>(curl, my_export_cb, NULL);
+&nbsp;
+&nbsp;   /&#x2a; always cleanup &#x2a;/
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+&nbsp; <a href="curl_share_cleanup.html">curl_share_cleanup</a>(share);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/8.12.0.html">8.12.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_SHARE.html">CURLOPT_SHARE</a>(3), <a Class="bold" href="./curl_easy_ssls_import.html">curl_easy_ssls_import</a>(3), <a Class="bold" href="./curl_share_setopt.html">curl_share_setopt</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

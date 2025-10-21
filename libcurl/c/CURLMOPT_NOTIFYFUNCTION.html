@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLMOPT_NOTIFYFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a> / <b>CURLMOPT_NOTIFYFUNCTION</b></div>
+<h1> CURLMOPT_NOTIFYFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=@template%20manpage:@&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLMOPT_NOTIFYFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLMOPT_NOTIFYFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLMOPT_NOTIFYFUNCTION - callback receiving notifications </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+void notify_callback(CURLM &#x2a;multi,     /&#x2a; multi handle &#x2a;/
+&nbsp;                    unsigned int notification, /&#x2a; notification type &#x2a;/
+&nbsp;                    CURL &#x2a;easy,       /&#x2a; easy handle &#x2a;/
+&nbsp;                    void &#x2a;notifyp);   /&#x2a; private notify pointer &#x2a;/
+&nbsp;
+CURLMcode <a href="curl_multi_setopt.html">curl_multi_setopt</a>(CURLM &#x2a;handle, <a href="CURLMOPT_NOTIFYFUNCTION.html">CURLMOPT_NOTIFYFUNCTION</a>, notify_callback);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to your callback function, which should match the prototype shown above. </p>
+<p class="level0">When the multi handle processes transfers, changes can be observed by receiving notifications about them. This can eliminate the need to constantly interrogate the multi handle to observe such changes to act on them. </p>
+<p class="level0">Notifications are collected and dispatched to the application&apos;s callback function at an appropriate time. </p>
+<p class="level0">The notify callback is different from other callbacks in that it can use more libcurl API functions. Apart from <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a>, <a Class="emphasis" href="./curl_multi_socket.html">curl_multi_socket</a>, <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a>, <a Class="emphasis" href="./curl_multi_socket_all.html">curl_multi_socket_all</a> and <a Class="emphasis" href="./curl_multi_cleanup.html">curl_multi_cleanup</a> it may call all other methods on the multi and easy handles. This includes adding and removing easy handles to/from the multi handle. </p>
+<p class="level0">This callback may get invoked at any time when interacting with libcurl. This may even happen after all transfers are done and <span Class="emphasis">may also</span> happen <span Class="emphasis">during</span> a call to <a Class="emphasis" href="./curl_multi_cleanup.html">curl_multi_cleanup</a> when cached connections are shut down. </p><a name="CALLBACK"></a><h2 class="nroffsh">Callback arguments</h2>
+<p class="level0"><span Class="emphasis">multi</span> identifies the multi handle that triggered the notification. </p>
+<p class="level0"><span Class="bold">notification</span> is the type of notification, e.g. what happened. The following types are available right now. In the future, new ones might be added. </p>
+<p class="level0"><a name="CURLMNOTIFYINFOREAD"></a><span class="nroffip">CURLMNOTIFY_INFO_READ</span> </p>
+<p class="level1">When enabled via <a Class="emphasis" href="./curl_multi_notify_enable.html">curl_multi_notify_enable</a>, this informs the application that there are new messages to be processed via <a Class="emphasis" href="./curl_multi_info_read.html">curl_multi_info_read</a>. </p>
+<p class="level1">This notification happens whenever a message is added to an empty message stack in the multi handle and not for subsequent additions. The notification callback is then expected to read all available message, emptying the stack, so a subsequent addition triggers the notification again. </p>
+<p class="level1">The <span Class="emphasis">easy</span> handle passed is an internal handle. </p>
+<p class="level0"><a name="CURLMNOTIFYEASYDONE"></a><span class="nroffip">CURLMNOTIFY_EASY_DONE</span> </p>
+<p class="level1">When enabled via <a Class="emphasis" href="./curl_multi_notify_enable.html">curl_multi_notify_enable</a>, this notification is triggered when an easy handle has finished. This happens both for successful and failed transfers. </p>
+<p class="level1">The <span Class="emphasis">easy</span> handle passed is the transfer that is done. This <span Class="emphasis">may</span> be an internal handle when DoH or other features are used. </p>
+<p class="level1"><span Class="emphasis">easy</span> identifies the transfer involved. This may be one of the application&apos;s own easy handle or an internal handle. </p>
+<p class="level1"><span Class="bold">notifyp</span> is set with <a Class="emphasis" href="./CURLMOPT_NOTIFYDATA.html">CURLMOPT_NOTIFYDATA</a>. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL (no callback) </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+struct priv {
+&nbsp; void &#x2a;ours;
+};
+&nbsp;
+static void notify_cb(CURLM &#x2a;multi, unsigned int notification,
+&nbsp;                     CURL &#x2a;easy, void &#x2a;notifyp)
+{
+&nbsp; struct priv &#x2a;p = notifyp;
+&nbsp; printf(&quot;my ptr: %p&bsol;n&quot;, p-&gt;ours);
+&nbsp; /&#x2a; ... &#x2a;/
+}
+&nbsp;
+int main(void)
+{
+&nbsp; struct priv setup;
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp; /&#x2a; ... use socket callback and custom pointer &#x2a;/
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_NOTIFYFUNCTION.html">CURLMOPT_NOTIFYFUNCTION</a>, notify_cb);
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_NOTIFYDATA.html">CURLMOPT_NOTIFYDATA</a>, &amp;setup);
+&nbsp; <a href="curl_multi_notify_enable.html">curl_multi_notify_enable</a>(multi, CURLMNOTIFY_INFO_READ);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/8.17.0.html">8.17.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">Returns <a href="libcurl-errors.html#CURLMOK">CURLM_OK</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLMOPT_NOTIFYDATA.html">CURLMOPT_NOTIFYDATA</a>(3), <a Class="bold" href="./curl_multi_notify_disable.html">curl_multi_notify_disable</a>(3), <a Class="bold" href="./curl_multi_notify_enable.html">curl_multi_notify_enable</a>(3), <a Class="bold" href="./curl_multi_socket_action.html">curl_multi_socket_action</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

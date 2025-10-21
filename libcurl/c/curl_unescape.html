@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_unescape()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_unescape</b></div>
+<h1> curl_unescape - URL decode the given string </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_unescape%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_unescape.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_unescape.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_unescape - URL decode a string </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+char &#x2a;<a href="curl_unescape.html">curl_unescape</a>(const char &#x2a;input, int length);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Deprecated. Use <a Class="emphasis" href="./curl_easy_unescape.html">curl_easy_unescape</a> instead. </p>
+<p class="level0">This function converts the URL encoded string <span Class="bold">input</span> to a &quot;plain string&quot; and return that as a new allocated string. All input characters that are URL encoded (%XX where XX is a two-digit hexadecimal number) are converted to their plain text versions. </p>
+<p class="level0">If the <span Class="bold">length</span> argument is set to 0, <a Class="emphasis" href="./curl_unescape.html">curl_unescape</a> calls strlen() on <span Class="bold">input</span> to find out the size. </p>
+<p class="level0">You must <a Class="emphasis" href="./curl_free.html">curl_free</a> the returned string when you are done with it. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   char &#x2a;decoded = <a href="curl_unescape.html">curl_unescape</a>(&quot;%63%75%72%6c&quot;, 12);
+&nbsp;   if(decoded) {
+&nbsp;     /&#x2a; do not assume printf() works on the decoded data &#x2a;/
+&nbsp;     printf(&quot;Decoded: &quot;);
+&nbsp;     /&#x2a; ... &#x2a;/
+&nbsp;     <a href="curl_free.html">curl_free</a>(decoded);
+&nbsp;   }
+&nbsp; }
+}
+</pre>
+<a name="DEPRECATED"></a><h2 class="nroffsh">Deprecated</h2>
+<p class="level0">Since <a href="/ch/7.15.4.html">7.15.4</a>, <a Class="emphasis" href="./curl_easy_unescape.html">curl_easy_unescape</a> should be used. This function might be removed in a future release. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">A pointer to a null-terminated string or NULL if it failed. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><span Class="bold">RFC</span>2396, <a Class="bold" href="./curl_easy_escape.html">curl_easy_escape</a>(3), <a Class="bold" href="./curl_easy_unescape.html">curl_easy_unescape</a>(3), <a Class="bold" href="./curl_free.html">curl_free</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

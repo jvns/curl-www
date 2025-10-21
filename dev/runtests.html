@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Run curl tests</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>runtests.pl</b></div>
+<h1> runtests manpage </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="tests-overview.html">Tests Overview</a>
+<br><a href="/docs/manpage.html">manpage</a>
+<br><a href="testcurl.html">testcurl manpage</a>
+</div>
+<h1 id="name">NAME</h1>
+<p>runtests.pl - run one or more test cases</p>
+<h1 id="synopsis">SYNOPSIS</h1>
+<p><strong>runtests.pl [options] [tests]</strong></p>
+<h1 id="description">DESCRIPTION</h1>
+<p><em>runtests.pl</em> runs one, several or all the existing test cases
+in curl's test suite. It is often called from the root Makefile of the
+curl package with 'make test'.</p>
+<h1 id="tests">TESTS</h1>
+<p>Specify which test(s) to run by specifying test numbers or
+keywords.</p>
+<p>If no test number or keyword is given, all existing tests that the
+script can find are considered for running. You can specify single test
+cases to run by specifying test numbers space-separated, like
+<code>1 3 5 7 11</code>, and you can specify a range of tests like
+<code>45 to 67</code>.</p>
+<p>Specify tests to not run with a leading exclamation point, like
+<code>!66</code>, which runs all available tests except number 66.</p>
+<p>Prefix a test number with a tilde (~) to still run it, but ignore the
+results.</p>
+<p>It is also possible to specify tests based on a keyword describing
+the test(s) to run, like <code>FTPS</code>. The keywords are strings
+used in the individual tests.</p>
+<p>Features are included as keywords with the <code>feat:</code> prefix
+(e.g., <code>feat:debug</code>). Specify a feature to run only tests
+requiring it, or exclude tests using <code>!feat:&lt;feature&gt;</code>,
+like <code>!feat:proxy</code>, to disable tests which depend on that
+feature.</p>
+<p>You can also specify keywords with a leading exclamation point and
+the keyword or phrase, like "!HTTP NTLM auth" to run all tests
+<strong>except</strong> those using this keyword. Remember that the
+exclamation marks and spaces need to be quoted somehow when entered at
+many command shells.</p>
+<p>Prefix a keyword with a tilde (~) to still run it, but ignore the
+results.</p>
+<h1 id="output">OUTPUT</h1>
+<p>When running without <code>-s</code> (short output), for instance
+when running runtests.pl directly rather than via make, each test emits
+a pair of lines like this:</p>
+<pre><code>Test 0045...[simple HTTP Location: without protocol in initial URL]
+--pd---e-v- OK (45  out of 1427, remaining: 16:08, took 6.188s, duration: 00:31)</code></pre>
+<p>the first line contains the test number and a description. On the
+second line, the characters at the beginning are flags indicating which
+aspects of curl's behavior were checked by the test:</p>
+<pre><code>s stdout
+r stderr
+p protocol
+d data
+u upload
+P proxy
+o output
+e exit code
+m memory
+v valgrind
+E the test was run event-based</code></pre>
+<p>The remainder of the second line contains the test result, current
+test sequence, total number of tests to be run and an estimated amount
+of time to complete the test run.</p>
+<h1 id="options">OPTIONS</h1>
+<h2 id="-a"><code>-a</code></h2>
+<p>Continue running the rest of the test cases even if one test fails.
+By default, the test script stops as soon as an error is detected.</p>
+<h2 id="-ac-curl"><code>-ac \&lt;curl\&gt;</code></h2>
+<p>Provide a path to a curl binary to talk to APIs (currently only CI
+test APIs).</p>
+<h2 id="-am"><code>-am</code></h2>
+<p>Display test results in automake style output
+(<code>PASS/FAIL: [number] [name]</code>).</p>
+<h2 id="--buildinfo"><code>--buildinfo</code></h2>
+<p>Dump <code>buildinfo.txt</code>.</p>
+<h2 id="-c-curl"><code>-c \&lt;curl\&gt;</code></h2>
+<p>Provide a path to a custom curl binary to run the tests with. Default
+is the curl executable in the build tree.</p>
+<h2 id="-d"><code>-d</code></h2>
+<p>Enable protocol debug: have the servers display protocol output. If
+used in conjunction with parallel testing, it is difficult to associate
+the logs with the specific test being run.</p>
+<h2 id="-e-exclude_file"><code>-E \&lt;exclude_file\&gt;</code></h2>
+<p>Load the <strong>exclude_file</strong> with additional reasons why
+certain tests should be skipped. Useful when testing with external HTTP
+proxies in which case some of the tests are not appropriate.</p>
+<p>The file contains colon-delimited lines. The first field contains the
+type of exclusion, the second field contains a pattern and the final
+field contains the reason why matching tests should be skipped. The
+exclusion types are <em>keyword</em>, <em>test</em>, and
+<em>tool</em>.</p>
+<h2 id="-e-or---test-event"><code>-e</code> or
+<code>--test-event</code></h2>
+<p>Run the test event-based (if possible). This makes runtests invoke
+curl with --test-event option. This option only works if both curl and
+libcurl were built debug-enabled.</p>
+<h2 id="-f"><code>-f</code></h2>
+<p>Force the test to run even if mentioned in DISABLED.</p>
+<h2 id="-g"><code>-g</code></h2>
+<p>Run the given test(s) with gdb. This is best used on a single test
+case and curl built --disable-shared. This then fires up gdb with
+command line set to run the specified test case. Simply (set a
+break-point and) type 'run' to start.</p>
+<h2 id="-gl"><code>-gl</code></h2>
+<p>Run the given test(s) with lldb. This is best used on a single test
+case and curl built --disable-shared. This then fires up lldb with
+command line set to run the specified test case. Simply (set a
+break-point and) type 'run' to start.</p>
+<h2 id="-gw"><code>-gw</code></h2>
+<p>Run the given test(s) with gdb as a windowed application.</p>
+<h2 id="-h---help"><code>-h, --help</code></h2>
+<p>Displays a help text about this program's command line options.</p>
+<h2 id="-jnum"><code>-j[num]</code></h2>
+<p>Spawn the given number of processes to run tests in. This defaults to
+0 to run tests serially within a single process. Using a number greater
+than one allows multiple tests to run in parallel, speeding up a test
+run. The optimum number is dependent on the system and set of tests to
+run, but 7 times the number of CPU cores is a good figure to start with,
+or 1.3 times if Valgrind is in use, or 5 times for torture tests.
+Enabling parallel tests is not recommended in conjunction with the -g
+option.</p>
+<h2 id="-k"><code>-k</code></h2>
+<p>Keep output and log files in log/ after a test run, even if no error
+was detected. Useful for debugging.</p>
+<h2 id="-l-file"><code>-L \&lt;file\&gt;</code></h2>
+<p>Load and execute the specified file which should contain perl code.
+This option allows one to change <em>runtests.pl</em> behavior by
+overwriting functions and variables and is useful when testing external
+proxies using curl's regression test suite.</p>
+<h2 id="-l"><code>-l</code></h2>
+<p>Lists all test case names.</p>
+<h2 id="-n"><code>-n</code></h2>
+<p>Disable the check for and use of valgrind.</p>
+<h2 id="--no-debuginfod"><code>--no-debuginfod</code></h2>
+<p>Delete the <code>DEBUGINFOD_URLS</code> variable if that is defined.
+Makes valgrind, gdb etc not able to use this functionality.</p>
+<h2
+id="-o-variablenamevalue"><code>-o \&lt;variablename=value\&gt;</code></h2>
+<p>Overwrite the specified internal <strong>variable</strong> with
+<strong>value</strong>. Useful to change variables that did not get a
+dedicated flag to change them. Check the source to see which variables
+are available.</p>
+<h2 id="-p-proxy"><code>-P \&lt;proxy\&gt;</code></h2>
+<p>Use the specified HTTP proxy when executing tests, even if the tests
+themselves do not specify a proxy. This option allows one to test
+external proxies using curl's regression test suite.</p>
+<h2 id="-p"><code>-p</code></h2>
+<p>Prints out all files in the log directory to stdout when a test case
+fails. Practical when used in the automated and distributed tests since
+then the people checking the failures and the reasons for them might not
+have physical access to the machine and logs.</p>
+<h2 id="-r"><code>-R</code></h2>
+<p>Run the tests in a scrambled, or randomized, order instead of
+sequentially.</p>
+<p>The random seed initially set for this is fixed per month and can be
+set with <em>--seed</em>.</p>
+<h2 id="-r-1"><code>-r</code></h2>
+<p>Display run time statistics. (Requires the
+<code>Perl Time::HiRes</code> module)</p>
+<h2 id="-rf"><code>-rf</code></h2>
+<p>Display full run time statistics. (Requires the
+<code>Perl Time::HiRes</code> module)</p>
+<h2 id="--repeatnum"><code>--repeat=[num]</code></h2>
+<p>This repeats the given set of test numbers this many times. If no
+test numbers are given, it repeats ALL tests this many times. It adds
+the new repeated sequence at the end of the initially given one.</p>
+<p>If <strong>-R</strong> option is also used, the scrambling is done
+after the repeats have extended the test sequence.</p>
+<h2 id="--retrynum"><code>--retry=[num]</code></h2>
+<p>Number of attempts for the whole test run to retry failed tests.</p>
+<h2 id="-s"><code>-s</code></h2>
+<p>Shorter output. Speaks less than default.</p>
+<h2 id="--seednum"><code>--seed=[num]</code></h2>
+<p>When using <em>--shallow</em> or <em>-R</em> that randomize certain
+aspects of the behavior, this option can set the initial seed. If not
+set, the random seed is set based on the currently set local year and
+month and the first line of the "curl -V" output.</p>
+<h2 id="--shallownum"><code>--shallow=[num]</code></h2>
+<p>Used together with <strong>-t</strong>. This limits the number of
+tests to fail in torture mode to no more than <strong>num</strong> per
+test case. If this reduces the amount, the script randomly discards
+entries to fail until the amount is <strong>num</strong>.</p>
+<p>The random seed initially set for this is fixed per month and can be
+set with <em>--seed</em>.</p>
+<h2 id="-tnum"><code>-t[num]</code></h2>
+<p>Selects a <strong>torture</strong> test for the given tests. This
+makes runtests.pl first run the tests once and count the number of
+memory allocations made. It then reruns the test that number of times,
+each time forcing one of the allocations to fail until all allocations
+have been tested. By setting <em>num</em> you can force the allocation
+with that number to be set to fail at once instead of looping through
+everyone, which is handy when debugging and then often in combination
+with <em>-g</em>.</p>
+<h2 id="--test-duphandle"><code>--test-duphandle</code></h2>
+<p>Passes the <code>--test-duphandle</code> option to curl when invoked.
+This command line option only exists in debug builds and runs curl
+normally, but duplicates the easy handle before the transfer and use the
+duplicate instead of the original handle. This verifies that the
+duplicate works exactly as good as the original handle.</p>
+<p>Because of how the curl tool uses a share object to store and keep
+some data, not everything is however perfectly copied in the duplicate.
+In particular HSTS data is not. A specific test case can be set to avoid
+using <code>--test-duphandle</code> by disabling it on a per test
+basis.</p>
+<h2 id="-u"><code>-u</code></h2>
+<p>Error instead of warning on server unexpectedly alive.</p>
+<h2 id="-v"><code>-v</code></h2>
+<p>Enable verbose output. Speaks more than by default. If used in
+conjunction with parallel testing, it is difficult to associate the logs
+with the specific test being run.</p>
+<h2 id="-vc-curl"><code>-vc \&lt;curl\&gt;</code></h2>
+<p>Provide a path to a custom curl binary to run when verifying that the
+servers running are indeed our test servers. Default is the curl
+executable in the build tree.</p>
+<h1 id="running-tests">RUNNING TESTS</h1>
+<p>Many tests have conditions that must be met before the test case can
+run fine. They could depend on built-in features in libcurl or features
+present in the operating system or even in third-party libraries that
+curl may or may not use.</p>
+<p>The test script checks most of these by itself to determine when it
+is safe to attempt to run each test. Those which cannot be run due to
+failed requirements are simply skipped and listed at the completion of
+all test cases. In some unusual configurations, the test script cannot
+make the correct determination for all tests. In these cases, the
+problematic tests can be skipped using the "!keyword" skip feature
+documented earlier.</p>
+<h1 id="writing-tests">WRITING TESTS</h1>
+<p>The simplest way to write test cases is to start with a similar
+existing test, save it with a new number and then adjust it to fit.
+There is an attempt to document the test case file format in
+<strong>tests/FILEFORMAT.md</strong>.</p>
+</div>
+</div>
+</body>
+</html>

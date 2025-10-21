@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Release Notes for next curl release</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>Pending Release Notes</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/ch/">changelog</a>
+<br><a href="/docs/manpage.html">curl manpage</a>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/docs/faq.html">FAQ</a>
+<br><a href="/docs/tutorial.html">Tutorial</a>
+<br><a href="/docs/releases.html">Release log</a>
+</div>
+<h1> Pending RELEASE-NOTES for the upcoming release </h1>
+<p>
+ This is work in progress and will change before the release goes public on <b>2015-11-05</b>.
+<p>
+<p> Changes:
+<ul class="changes">
+ <li> <a href="https://curl.se/bug/?i=18928">build: drop Heimdal support</a>
+ <li> <a href="https://curl.se/bug/?i=18040">build: drop the winbuild build system</a>
+ <li> <a href="https://curl.se/bug/?i=18577">krb5: drop support for Kerberos FTP</a>
+ <li> <a href="https://curl.se/bug/?i=18612">libssh2: up the minimum requirement to 1.9.0</a>
+ <li> <a href="https://curl.se/bug/?i=18432">multi: add notifications API</a>
+ <li> <a href="https://curl.se/bug/?i=18828">progress: expand to use 6 characters per size</a>
+ <li> <a href="https://curl.se/bug/?i=18703">ssl: support Apple SecTrust configurations</a>
+ <li> <a href="https://curl.se/bug/?i=18859">tool_getparam: add --knownhosts</a>
+ <li> <a href="https://curl.se/bug/?i=18700">vssh: drop support for wolfSSH</a>
+ <li> <a href="https://curl.se/bug/?i=18754">wcurl: import v2025.09.27</a>
+ <li> <a href="https://curl.se/bug/?i=18491">write-out: make %header{} able to output *all* occurrences of a header</a>
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> <a href="https://curl.se/bug/?i=18251">ares: fix leak in tracing</a>
+ <li> <a href="https://curl.se/bug/?i=19014">asyn-ares: remove wrong comment about the callback argument</a>
+ <li> <a href="https://curl.se/bug/?i=18980">asyn-ares: use the duped hostname pointer for all calls</a>
+ <li> <a href="https://curl.se/bug/?i=18769">asyn-thrdd resolver: clear timeout when done</a>
+ <li> <a href="https://curl.se/bug/?i=18532">asyn-thrdd: drop pthread_cancel</a>
+ <li> <a href="https://curl.se/bug/?i=18669">autotools: add support for libgsasl auto-detection via pkg-config</a>
+ <li> <a href="https://curl.se/bug/?i=18671">autotools: capitalize Rustls in the log output</a>
+ <li> <a href="https://curl.se/bug/?i=19078">autotools: drop detection of ancient OpenSSL libs RSAglue and rsaref</a>
+ <li> <a href="https://curl.se/bug/?i=18667">autotools: fix duplicate UNIX and BSD flags in buildinfo.txt</a>
+ <li> <a href="https://curl.se/bug/?i=18666">autotools: fix silly mistake in clang detection for buildinfo.txt</a>
+ <li> <a href="https://curl.se/bug/?i=18473">autotools: make --enable-code-coverage support llvm/clang</a>
+ <li> <a href="https://curl.se/bug/?i=18568">aws-lc: re-enable large read-ahead with v1.61.0 again</a>
+ <li> <a href="https://curl.se/bug/?i=18617">base64: accept zero length argument to base64_encode</a>
+ <li> <a href="https://curl.se/bug/?i=18477">build: address some -Weverything warnings, update picky warnings</a>
+ <li> <a href="https://curl.se/bug/?i=18776">build: avoid overriding system open and stat symbols</a>
+ <li> <a href="https://curl.se/bug/?i=18510">build: avoid overriding system symbols for fopen functions</a>
+ <li> <a href="https://curl.se/bug/?i=18503">build: avoid overriding system symbols for socket functions</a>
+ <li> <a href="https://curl.se/bug/?i=18645">build: show llvm/clang in platform flags and buildinfo.txt</a>
+ <li> <a href="https://curl.se/bug/?i=18999">c-ares: when resolving failed, persist error</a>
+ <li> <a href="https://curl.se/bug/?i=18715">cf-h2-proxy: break loop on edge case</a>
+ <li> <a href="https://curl.se/bug/?i=18749">cf-ip-happy: mention unix domain path, not port number</a>
+ <li> <a href="https://curl.se/bug/?i=18862">cf-socket: always check Curl_cf_socket_peek() return code</a>
+ <li> <a href="https://curl.se/bug/?i=18882">cf-socket: check params and remove accept procondition</a>
+ <li> <a href="https://curl.se/bug/?i=18968">cf-socket: set FD_CLOEXEC on all sockets opened</a>
+ <li> <a href="https://curl.se/bug/?i=18787">cf-socket: tweak a memcpy() to read better</a>
+ <li> <a href="https://curl.se/bug/?i=18641">cf-socket: use the right byte order for ports in bindlocal</a>
+ <li> <a href="https://curl.se/bug/?i=18596">cfilter: unlink and discard</a>
+ <li> <a href="https://curl.se/bug/?i=19048">checksrc: allow disabling warnings on FIXME/TODO comments</a>
+ <li> <a href="https://curl.se/bug/?i=18779">checksrc: catch banned functions when preceded by (</a>
+ <li> <a href="https://curl.se/bug/?i=18775">checksrc: fix possible endless loop when detecting BANNEDFUNC</a>
+ <li> <a href="https://curl.se/bug/?i=18845">checksrc: fix possible endless loops in the banned function logic</a>
+ <li> <a href="https://curl.se/bug/?i=18836">checksrc: fix to handle ) predecing a banned function</a>
+ <li> <a href="https://curl.se/bug/?i=18823">checksrc: reduce directory-specific exceptions</a>
+ <li> <a href="https://curl.se/bug/?i=18973">CI.md: refresh</a>
+ <li> <a href="https://curl.se/bug/?i=18994">cmake/FindGSS: dedupe pkg-config module strings</a>
+ <li> <a href="https://curl.se/bug/?i=18993">cmake/FindGSS: drop wrong header check for GNU GSS</a>
+ <li> <a href="https://curl.se/bug/?i=18932">cmake/FindGSS: fix pkg-config fallback logic for CMake &lt;3.16</a>
+ <li> <a href="https://curl.se/bug/?i=19012">cmake/FindGSS: simplify/de-dupe lib setup</a>
+ <li> <a href="https://curl.se/bug/?i=18957">cmake/FindGSS: whitespace/formatting</a>
+ <li> <a href="https://curl.se/bug/?i=18468">cmake: add CURL_CODE_COVERAGE option</a>
+ <li> <a href="https://curl.se/bug/?i=18911">cmake: build the &quot;all&quot; examples source list dynamically</a>
+ <li> <a href="https://curl.se/bug/?i=18659">cmake: clang detection tidy-ups</a>
+ <li> <a href="https://curl.se/bug/?i=18810">cmake: drop exclamation in comment looking like a name</a>
+ <li> <a href="https://curl.se/bug/?i=18560">cmake: fix building docs when the base directory contains .3</a>
+ <li> cmake: fix Linux pre-fill `HAVE_POSIX_STRERROR_R` (when `_CURL_PREFILL=ON`)
+ <li> <a href="https://curl.se/bug/?i=19116">cmake: fix Linux pre-fills for non-glibc (when `_CURL_PREFILL=ON`)</a>
+ <li> <a href="https://curl.se/bug/?i=18951">cmake: minor Heimdal flavour detection fix</a>
+ <li> <a href="https://curl.se/bug/?i=19013">cmake: pre-fill three more type sizes on Windows</a>
+ <li> <a href="https://curl.se/bug/?i=18909">cmake: support building some complicated examples, build them in CI</a>
+ <li> <a href="https://curl.se/bug/?i=18688">cmake: use modern alternatives for get_filename_component()</a>
+ <li> <a href="https://curl.se/bug/?i=18762">cmake: use more COMPILER_OPTIONS, LINK_OPTIONS / LINK_FLAGS</a>
+ <li> <a href="https://curl.se/bug/?i=18550">cmdline-docs: extended, clarified, refreshed</a>
+ <li> <a href="https://curl.se/bug/?i=18817">cmdline-opts/_PROGRESS.md: explain the suffixes</a>
+ <li> <a href="https://curl.se/bug/?i=18585">configure: add &quot;-mt&quot; for pthread support on HP-UX</a>
+ <li> <a href="https://curl.se/bug/?i=18995">conn: fix hostname move on connection reuse</a>
+ <li> <a href="https://curl.se/bug/?i=19079">connect: remove redundant condition in shutdown start</a>
+ <li> <a href="https://curl.se/bug/?i=18621">cookie: avoid saving a cookie file if no transfer was done</a>
+ <li> <a href="https://curl.se/bug/?i=18850">cpool: make bundle-&gt;dest an array; fix UB</a>
+ <li> <a href="https://curl.se/mail/lib-2025-10/0018.html">curl.h: remove incorrect comment about CURLOPT_PINNEDPUBLICKEY</a>
+ <li> <a href="https://curl.se/bug/?i=18512">curl_easy_getinfo: error code on NULL arg</a>
+ <li> <a href="https://curl.se/bug/?i=19151">curl_easy_setopt.md: add missing CURLOPT_POSTFIELDS</a>
+ <li> <a href="https://curl.se/bug/?i=18510">curl_mem_undef.h: limit to CURLDEBUG for non-memalloc overrides</a>
+ <li> <a href="https://curl.se/bug/?i=18878">curl_osslq: error out properly if BIO_ADDR_rawmake() fails</a>
+ <li> <a href="https://curl.se/bug/?i=19141">curl_path: make sure just whitespace is illegal</a>
+ <li> <a href="https://curl.se/bug/?i=18979">Curl_resolv: fix comment. &apos;entry&apos; argument is not optional</a>
+ <li> <a href="https://curl.se/bug/?i=18627">curl_slist_append.md: clarify that a NULL pointer is not acceptable</a>
+ <li> <a href="https://curl.se/bug/?i=19015">curl_threads: delete WinCE fallback branch</a>
+ <li> <a href="https://curl.se/bug/?i=18531">CURLINFO_FTP_ENTRY_PATH.md: this is for SFTP as well</a>
+ <li> <a href="https://curl.se/bug/?i=18924">CURLOPT_COOKIEFILE.md: clarify when the cookies are loaded</a>
+ <li> <a href="https://curl.se/bug/?i=18640">CURLOPT_HEADER/WRITEFUNCTION.md: drop &apos;* size&apos; since size is always 1</a>
+ <li> <a href="https://curl.se/bug/?i=18527">CURLOPT_MAXLIFETIME_CONN: make default 24 hours</a>
+ <li> <a href="https://curl.se/bug/?i=18548">CURLOPT_SSL_VERIFYHOST.md: add see-also to two other VERIFYHOST options</a>
+ <li> <a href="https://curl.se/bug/?i=18551">CURLOPT_TIMECONDITION.md: works for FILE and FTP as well</a>
+ <li> <a href="https://curl.se/bug/?i=18488">digest_sspi: fix two memory leaks in error branches</a>
+ <li> <a href="https://curl.se/bug/?i=18549">dist: do not distribute CI.md</a>
+ <li> <a href="https://curl.se/bug/?i=18829">docs/cmdline-opts: drop double quotes from GLOBBING and URL examples</a>
+ <li> <a href="https://curl.se/bug/?i=18569">docs/libcurl: clarify some timeout option behavior</a>
+ <li> <a href="https://curl.se/bug/?i=18530">docs/libcurl: remove ancient version references</a>
+ <li> <a href="https://curl.se/bug/?i=18570">docs/libcurl: use lowercase must</a>
+ <li> <a href="https://curl.se/bug/?i=19025">docs: expand on quoting rules for file names in SFTP quote</a>
+ <li> <a href="https://curl.se/bug/?i=18707">docs: fix/tidy code fences</a>
+ <li> <a href="https://curl.se/bug/?i=18996">doswin: CloseHandle the thread on shutdown</a>
+ <li> <a href="https://curl.se/bug/?i=18511">easy_getinfo: check magic, Curl_close safety</a>
+ <li> <a href="https://curl.se/bug/?i=19112">examples/chkspeed: portable printing when outputting curl_off_t values</a>
+ <li> <a href="https://curl.se/bug/?i=18918">examples/sessioninfo: cast printf string mask length to int</a>
+ <li> <a href="https://curl.se/bug/?i=18969">examples/sessioninfo: do not disable security</a>
+ <li> <a href="https://curl.se/bug/?i=19032">examples/synctime: fix null termination assumptions</a>
+ <li> <a href="https://curl.se/bug/?i=18890">examples/synctime: make the sscanf not overflow the local buffer</a>
+ <li> <a href="https://curl.se/bug/?i=18908">examples/usercertinmem: avoid stripping const</a>
+ <li> <a href="https://curl.se/bug/?i=19088">examples/websocket: fix use of uninitialized rlen</a>
+ <li> <a href="https://curl.se/bug/?i=19051">examples: call curl_global_cleanup() where missing</a>
+ <li> <a href="https://curl.se/bug/?i=19055">examples: check more errors, fix cleanups, scope variables</a>
+ <li> <a href="https://curl.se/bug/?i=18842">examples: drop unused curl/mprintf.h includes</a>
+ <li> <a href="https://curl.se/bug/?i=18914">examples: fix build issues in &apos;complicated&apos; examples</a>
+ <li> <a href="https://curl.se/bug/?i=18843">examples: fix two build issues surfaced with WinCE</a>
+ <li> <a href="https://curl.se/bug/?i=18605">examples: fix two issues found by CodeQL</a>
+ <li> <a href="https://curl.se/bug/?i=18778">examples: fix two more cases of stat() TOCTOU</a>
+ <li> <a href="https://curl.se/bug/?i=19053">examples: improve global init, error checks and returning errors</a>
+ <li> <a href="https://curl.se/bug/?i=19133">examples: replace casts with `curl_off_t` printf masks</a>
+ <li> <a href="https://curl.se/bug/?i=19052">examples: return curl_easy_perform() results</a>
+ <li> <a href="https://curl.se/bug/?i=19086">firefox-db2pem.sh: add macOS support, tidy-ups</a>
+ <li> <a href="https://curl.se/bug/?i=18790">form.md: drop reference to MANUAL</a>
+ <li> <a href="https://curl.se/bug/?i=18869">ftp: add extra buffer length check</a>
+ <li> <a href="https://curl.se/bug/?i=18650">ftp: fix ftp_do_more returning with *completep unset</a>
+ <li> <a href="https://curl.se/bug/?i=18636">ftp: fix port number range loop for PORT commands</a>
+ <li> <a href="https://curl.se/bug/?i=18867">ftp: fix the 213 scanner memchr buffer limit argument</a>
+ <li> <a href="https://curl.se/bug/?i=18870">ftp: improve fragile check for first digit &gt; 3</a>
+ <li> <a href="https://curl.se/bug/?i=18871">ftp: remove misleading comments</a>
+ <li> <a href="https://curl.se/bug/?i=19069">ftp: replace strstr() in ;type= handling</a>
+ <li> <a href="https://curl.se/bug/?i=18984">ftp: simplify the 150/126 size scanner</a>
+ <li> <a href="https://curl.se/bug/?i=18964">gnutls: check conversion of peer cert chain</a>
+ <li> <a href="https://curl.se/bug/?i=18620">gtls: avoid potential use of uninitialized variable in trace output</a>
+ <li> <a href="https://curl.se/bug/?i=18953">hostip: don&apos;t store negative resolves due unrelated errors</a>
+ <li> <a href="https://curl.se/bug/?i=18680">hostip: remove leftover INT_MAX check in Curl_dnscache_prune</a>
+ <li> <a href="https://curl.se/bug/?i=18930">http2: check push header names by length first</a>
+ <li> <a href="https://curl.se/bug/?i=18931">http2: cleanup pushed newhandle on fail</a>
+ <li> <a href="https://curl.se/bug/?i=18933">http2: ingress handling edge cases</a>
+ <li> <a href="https://curl.se/bug/?i=18662">http: handle user-defined connection headers</a>
+ <li> <a href="https://curl.se/bug/?i=19065">http: look for trailing &apos;type=&apos; in ftp:// without strstr</a>
+ <li> <a href="https://curl.se/bug/?i=18921">http: make Content-Length parser more WHATWG</a>
+ <li> <a href="https://curl.se/bug/?i=18631">httpsrr: free old pointers when storing new</a>
+ <li> <a href="https://curl.se/bug/?i=19089">imap: treat capabilities case insensitively</a>
+ <li> <a href="https://curl.se/bug/?i=18927">INSTALL-CMAKE.md: document useful build targets</a>
+ <li> <a href="https://curl.se/bug/?i=19106">INSTALL: update the list of known operating systems</a>
+ <li> <a href="https://curl.se/bug/?i=18808">INTERNALS: drop Winsock 2.2 from the dependency list</a>
+ <li> <a href="https://curl.se/bug/?i=18767">ip-happy: do not set unnecessary timeout</a>
+ <li> <a href="https://curl.se/bug/?i=18815">ip-happy: prevent event-based stall on retry</a>
+ <li> <a href="https://curl.se/bug/?i=18992">kerberos: bump minimum to 1.3 (2003-07-08), drop legacy logic</a>
+ <li> <a href="https://curl.se/bug/?i=18978">kerberos: drop logic for MIT Kerberos &lt;1.2.3 (pre-2002) versions</a>
+ <li> <a href="https://curl.se/bug/?i=18990">kerberos: stop including gssapi/gssapi_generic.h</a>
+ <li> <a href="https://curl.se/bug/?i=19064">krb5: fix output_token allocators in the GSS debug stub (Windows)</a>
+ <li> <a href="https://curl.se/bug/?i=18561">krb5: return appropriate error on send failures</a>
+ <li> <a href="https://curl.se/bug/?i=18976">krb5_gssapi: fix memory leak on error path</a>
+ <li> <a href="https://curl.se/bug/?i=18865">krb5_sspi: the chlg argument is NOT optional</a>
+ <li> <a href="https://curl.se/bug/?i=18988">ldap: avoid null ptr deref on failure</a>
+ <li> <a href="https://curl.se/bug/?i=18602">ldap: do not base64 encode zero length string</a>
+ <li> <a href="https://curl.se/bug/?i=19122">ldap: do not pass a \n to failf()</a>
+ <li> <a href="https://curl.se/bug/?i=18888">ldap: tidy-up types, fix error code confusion</a>
+ <li> <a href="https://curl.se/bug/?i=19027">lib1514: fix return code mixup</a>
+ <li> <a href="https://curl.se/bug/?i=18839">lib: drop unused include and duplicate guards</a>
+ <li> <a href="https://curl.se/bug/?i=18799">lib: fix build error with verbose strings disabled</a>
+ <li> <a href="https://curl.se/bug/?i=19124">lib: remove newlines from failf() calls</a>
+ <li> <a href="https://curl.se/bug/?i=18803">lib: remove personal names from comments</a>
+ <li> <a href="https://curl.se/bug/?i=19006">lib: SSL connection reuse</a>
+ <li> <a href="https://curl.se/bug/?i=19059">lib: stop NULL-checking conn-&gt;passwd and -&gt;user</a>
+ <li> <a href="https://curl.se/bug/?i=18227">lib: upgrade/multiplex handling</a>
+ <li> <a href="https://curl.se/bug/?i=18579">libcurl-multi.md: added curl_multi_get_offt mention</a>
+ <li> <a href="https://curl.se/bug/?i=18533">libcurl-security.md: mention long-running connections</a>
+ <li> <a href="https://curl.se/bug/?i=19030">libssh/libssh2: reject quote command lines with too much data</a>
+ <li> <a href="https://curl.se/bug/?i=18952">libssh/sftp: fix resume corruption by avoiding O_APPEND with rresume</a>
+ <li> <a href="https://curl.se/bug/?i=18952">libssh2/sftp: fix resume corruption by avoiding O_APPEND with rresume</a>
+ <li> <a href="https://curl.se/bug/?i=18875">libssh2/sftp_realpath: change state consistently</a>
+ <li> <a href="https://curl.se/bug/?i=19043">libssh2: avoid risking using an uninitialized local struct field</a>
+ <li> <a href="https://curl.se/bug/?i=18863">libssh2: bail out on chgrp and chown number parsing errors</a>
+ <li> <a href="https://curl.se/bug/?i=18864">libssh2: clarify that sshp-&gt;path is always at least one byte</a>
+ <li> <a href="https://curl.se/bug/?i=18606">libssh2: drop two redundant null-terminations</a>
+ <li> <a href="https://curl.se/bug/?i=18598">libssh2: error check and null-terminate in ssh_state_sftp_readdir_link()</a>
+ <li> <a href="https://curl.se/bug/?i=19042">libssh2: fix EAGAIN return in ssh_state_auth_agent</a>
+ <li> <a href="https://curl.se/bug/?i=18874">libssh2: fix return code for EAGAIN</a>
+ <li> <a href="https://curl.se/bug/?i=19004">libssh2: use sockindex consistently</a>
+ <li> <a href="https://curl.se/bug/?i=18740">libssh: acknowledge SSH_AGAIN in the SFTP state machine</a>
+ <li> <a href="https://curl.se/bug/?i=19044">libssh: catch a resume point larger than the size</a>
+ <li> <a href="https://curl.se/bug/?i=18739">libssh: clarify myssh_block2waitfor</a>
+ <li> <a href="https://curl.se/bug/?i=18684">libssh: drop two unused assignments</a>
+ <li> <a href="https://curl.se/bug/?i=18629">libssh: error on bad chgrp number</a>
+ <li> <a href="https://curl.se/bug/?i=18639">libssh: error on bad chown number and store the value</a>
+ <li> <a href="https://curl.se/bug/?i=18652">libssh: fix range parsing error handling mistake</a>
+ <li> <a href="https://curl.se/bug/?i=18989">libssh: make atime and mtime cap the timestamp instead of wrap</a>
+ <li> <a href="https://curl.se/bug/?i=18616">libssh: react on errors from ssh_scp_read</a>
+ <li> <a href="https://curl.se/bug/?i=18637">libssh: return out of memory correctly if aprintf fails</a>
+ <li> <a href="https://curl.se/bug/?i=19135">libssh: return the proper error for readdir problems</a>
+ <li> <a href="https://curl.se/bug/?i=18835">Makefile.example: fix option order</a>
+ <li> <a href="https://curl.se/bug/?i=18554">Makefile.example: simplify and make it configurable</a>
+ <li> <a href="https://curl.se/bug/?i=18583">managen: ignore version mentions &lt; 7.66.0</a>
+ <li> <a href="https://curl.se/bug/?i=18580">managen: render better manpage references/links</a>
+ <li> <a href="https://curl.se/bug/?i=18675">managen: strict protocol check</a>
+ <li> <a href="https://curl.se/bug/?i=18884">managen: verify the options used in example lines</a>
+ <li> <a href="https://curl.se/bug/?i=19077">mbedtls: add support for 4.0.0</a>
+ <li> <a href="https://curl.se/bug/?i=18727">mbedtls: check result of setting ALPN</a>
+ <li> <a href="https://curl.se/bug/?i=18682">mbedtls: handle WANT_WRITE from mbedtls_ssl_read()</a>
+ <li> <a href="https://curl.se/bug/?i=18889">mdlinkcheck: reject URLs containing quotes</a>
+ <li> <a href="https://curl.se/bug/?i=18966">memdup0: handle edge case</a>
+ <li> <a href="https://curl.se/bug/?i=19100">mime: fix use of fseek()</a>
+ <li> <a href="https://curl.se/bug/?i=18578">multi.h: add CURLMINFO_LASTENTRY</a>
+ <li> <a href="https://curl.se/bug/?i=18804">multi_ev: remove unnecessary data check that confuses analysers</a>
+ <li> <a href="https://curl.se/bug/?i=18904">nghttp3: return NGHTTP3_ERR_CALLBACK_FAILURE from recv_header</a>
+ <li> <a href="https://curl.se/bug/?i=19093">ngtcp2: add a comment explaining write result handling</a>
+ <li> <a href="https://curl.se/bug/?i=19132">ngtcp2: adopt ngtcp2_conn_get_stream_user_data if available</a>
+ <li> <a href="https://curl.se/bug/?i=18521">ngtcp2: check error code on connect failure</a>
+ <li> <a href="https://curl.se/bug/?i=18904">ngtcp2: close just-opened QUIC stream when submit_request fails</a>
+ <li> <a href="https://curl.se/bug/?i=18903">ngtcp2: compare idle timeout in ms to avoid overflow</a>
+ <li> <a href="https://curl.se/bug/?i=18723">ngtcp2: fix early return</a>
+ <li> <a href="https://curl.se/bug/?i=18905">ngtcp2: fix handling of blocked stream data</a>
+ <li> <a href="https://curl.se/bug/?i=18881">ngtcp2: fix returns when TLS verify failed</a>
+ <li> <a href="https://curl.se/bug/?i=18891">noproxy: fix the IPV6 network mask pattern match</a>
+ <li> <a href="https://curl.se/bug/?i=18600">openldap: avoid indexing the result at -1 for blank responses</a>
+ <li> <a href="https://curl.se/bug/?i=18747">openldap: check ber_sockbuf_add_io() return code</a>
+ <li> <a href="https://curl.se/bug/?i=18653">openldap: check ldap_get_option() return codes</a>
+ <li> <a href="https://curl.se/bug/?i=19120">openldap: do not pass newline to infof()</a>
+ <li> <a href="https://curl.se/bug/?i=18985">openldap: fix memory-leak in error path</a>
+ <li> <a href="https://curl.se/bug/?i=18986">openldap: fix memory-leak on oldap_do&apos;s exit path</a>
+ <li> <a href="https://issues.oss-fuzz.com/issues/432441303">openldap: limit max incoming size</a>
+ <li> <a href="https://curl.se/bug/?i=18720">openssl-quic: check results better</a>
+ <li> <a href="https://curl.se/bug/?i=18725">openssl-quic: handle error in SSL_get_stream_read_error_code</a>
+ <li> <a href="https://curl.se/bug/?i=18780">openssl-quic: ignore unexpected streams opened by server</a>
+ <li> <a href="https://curl.se/bug/?i=19094">openssl: better return code checks when logging cert data</a>
+ <li> <a href="https://curl.se/bug/?i=18872">openssl: call SSL_get_error() with proper error</a>
+ <li> <a href="https://curl.se/bug/?i=18724">openssl: clear retry flag on x509 error</a>
+ <li> <a href="https://curl.se/bug/?i=19091">openssl: fail if more than MAX_ALLOWED_CERT_AMOUNT certs</a>
+ <li> <a href="https://curl.se/bug/?i=18646">openssl: fail the transfer if ossl_certchain() fails</a>
+ <li> <a href="https://curl.se/bug/?i=18841">openssl: fix build for v1.0.2</a>
+ <li> <a href="https://hackerone.com/reports/3373640">openssl: fix peer certificate leak in channel binding</a>
+ <li> <a href="https://curl.se/bug/?i=19111">openssl: fix resource leak in provider error path</a>
+ <li> <a href="https://curl.se/bug/?i=19149">openssl: fix unable do typo in failf() calls</a>
+ <li> <a href="https://curl.se/bug/?i=19114">openssl: free UI_METHOD on exit path</a>
+ <li> <a href="https://curl.se/bug/?i=18647">openssl: make the asn1_object_dump name null terminated</a>
+ <li> <a href="https://curl.se/bug/?i=18733">openssl: set io_need always</a>
+ <li> <a href="https://curl.se/bug/?i=18902">openssl: skip session resumption when verifystatus is set</a>
+ <li> <a href="https://curl.se/bug/?i=18967">os400: document threads handling in code.</a>
+ <li> <a href="https://curl.se/bug/?i=18713">OS400: fix a use-after-free/double-free case</a>
+ <li> <a href="https://curl.se/bug/?i=18907">osslq: set idle timeout to 0</a>
+ <li> pingpong: remove two old leftover debug infof() calls
+ <li> <a href="https://curl.se/bug/?i=19039">pop3: function could get the -&gt;transfer field wrong</a>
+ <li> <a href="https://curl.se/bug/?i=18801">pytest: skip specific tests for no-verbose builds</a>
+ <li> <a href="https://curl.se/bug/?i=18518">quic: fix min TLS version handling</a>
+ <li> <a href="https://curl.se/bug/?i=18505">quic: ignore EMSGSIZE on receive</a>
+ <li> <a href="https://curl.se/bug/?i=19101">quic: improve UDP GRO receives</a>
+ <li> <a href="https://curl.se/bug/?i=19060">quic: remove data_idle handling</a>
+ <li> <a href="https://curl.se/bug/?i=18880">quiche: fix possible leaks on teardown</a>
+ <li> <a href="https://curl.se/bug/?i=18726">quiche: fix verbose message when ip quadruple cannot be obtained.</a>
+ <li> <a href="https://curl.se/bug/?i=18934">quiche: handle tls fail correctly</a>
+ <li> <a href="https://curl.se/bug/?i=18730">quiche: when ingress processing fails, return that error code</a>
+ <li> <a href="https://curl.se/bug/?i=18800">runtests: tag tests that require curl verbose strings</a>
+ <li> <a href="https://curl.se/bug/?i=19125">rustls: exit on error</a>
+ <li> <a href="https://curl.se/bug/?i=18670">rustls: fix clang-tidy warning</a>
+ <li> <a href="https://curl.se/bug/?i=18728">rustls: fix comment describing cr_recv()</a>
+ <li> <a href="https://curl.se/bug/?i=19095">rustls: limit snprintf proper in cr_keylog_log_cb()</a>
+ <li> <a href="https://curl.se/bug/?i=19104">rustls: make read_file_into not reject good files</a>
+ <li> <a href="https://curl.se/bug/?i=18961">rustls: pass the correct result to rustls_failf</a>
+ <li> <a href="https://curl.se/bug/?i=18628">rustls: typecast variable for safer trace output</a>
+ <li> <a href="https://curl.se/bug/?i=18651">rustls: use %zu for size_t in failf() format string</a>
+ <li> <a href="https://curl.se/bug/?i=18573">sasl: clear canceled mechanism instead of toggling it</a>
+ <li> <a href="https://curl.se/bug/?i=18642">schannel: assign result before using it</a>
+ <li> <a href="https://curl.se/bug/?i=19118">schannel: fix memory leak</a>
+ <li> <a href="https://curl.se/bug/?i=19123">schannel_verify: do not call infof with an appended \n</a>
+ <li> <a href="https://curl.se/bug/?i=18972">schannel_verify: fix mem-leak in Curl_verify_host</a>
+ <li> <a href="https://curl.se/bug/?i=18737">schannel_verify: use more human friendly error messages</a>
+ <li> <a href="https://curl.se/bug/?i=19076">scripts: pass -- before passing xargs</a>
+ <li> <a href="https://curl.se/mail/lib-2025-09/0031.html">setopt: accept *_SSL_VERIFYHOST set to 2L</a>
+ <li> <a href="https://curl.se/bug/?i=18959">setopt: allow CURLOPT_DNS_CACHE_TIMEOUT set to -1</a>
+ <li> <a href="https://curl.se/bug/?i=19102">setopt: fix unused variable warning in minimal build</a>
+ <li> <a href="https://curl.se/bug/?i=18571">setopt: make CURLOPT_MAXREDIRS accept -1 (again)</a>
+ <li> <a href="https://curl.se/bug/?i=18599">smb: adjust buffer size checks</a>
+ <li> <a href="https://curl.se/bug/?i=19003">smb: transfer debugassert to real check</a>
+ <li> <a href="https://curl.se/bug/?i=18588">smtp: check EHLO responses case insensitively</a>
+ <li> <a href="https://curl.se/bug/?i=19136">smtp: return value ignored</a>
+ <li> <a href="https://curl.se/bug/?i=18938">socks: advance iobuf instead of reset</a>
+ <li> <a href="https://curl.se/bug/?i=19139">socks: avoid UAF risk in error path</a>
+ <li> <a href="https://curl.se/bug/?i=18937">socks: deny server basic-auth if not configured</a>
+ <li> <a href="https://curl.se/bug/?i=18722">socks: handle error in verbose trace gracefully</a>
+ <li> <a href="https://curl.se/bug/?i=18883">socks: handle premature close</a>
+ <li> <a href="https://curl.se/bug/?i=18635">socks: make Curl_blockread_all return CURLcode</a>
+ <li> <a href="https://curl.se/bug/?i=18401">socks: rewwork, cleaning up socks state handling</a>
+ <li> <a href="https://curl.se/bug/?i=18711">socks_gssapi: make the gss_context a local variable</a>
+ <li> <a href="https://curl.se/bug/?i=18681">socks_gssapi: reject too long tokens</a>
+ <li> <a href="https://curl.se/bug/?i=18714">socks_gssapi: remove superfluous releases of the gss_recv_token</a>
+ <li> <a href="https://curl.se/bug/?i=18712">socks_gssapi: remove the forced &quot;no protection&quot;</a>
+ <li> <a href="https://curl.se/bug/?i=18719">socks_sspi: bail out on too long fields</a>
+ <li> <a href="https://curl.se/bug/?i=18587">socks_sspi: fix memory cleanup calls</a>
+ <li> <a href="https://curl.se/bug/?i=19040">socks_sspi: remove the enforced mode clearing</a>
+ <li> <a href="https://curl.se/bug/?i=18592">socks_sspi: restore non-blocking socket on error paths</a>
+ <li> <a href="https://curl.se/bug/?i=19046">socks_sspi: use the correct free function</a>
+ <li> <a href="https://curl.se/bug/?i=19026">socksd: remove --bindonly mention, there is no such option</a>
+ <li> <a href="https://curl.se/bug/?i=19119">src/var: remove dead code</a>
+ <li> <a href="https://curl.se/bug/?i=18523">ssl-sessions.md: mark option experimental</a>
+ <li> <a href="https://curl.se/bug/?i=18857">strerror: drop workaround for SalfordC win32 header bug</a>
+ <li> <a href="https://curl.se/bug/?i=18565">sws: fix checking sscanf() return value</a>
+ <li> <a href="https://curl.se/bug/?i=19031">sws: pass in socket reference to allow function to close it</a>
+ <li> <a href="https://curl.se/bug/?i=18811">tcp-nodelay.md: expand the documentation</a>
+ <li> <a href="https://curl.se/bug/?i=18899">telnet: ignore empty suboptions</a>
+ <li> <a href="https://curl.se/bug/?i=18873">telnet: make bad_option() consider NULL a bad option too</a>
+ <li> <a href="https://curl.se/bug/?i=18618">telnet: make printsub require another byte input</a>
+ <li> <a href="https://curl.se/bug/?i=18852">telnet: print DISPlay LOCation in printsub without mutating buffer</a>
+ <li> <a href="https://curl.se/bug/?i=18657">telnet: refuse IAC codes in content</a>
+ <li> <a href="https://curl.se/bug/?i=18886">telnet: return error if WSAEventSelect fails</a>
+ <li> <a href="https://curl.se/bug/?i=18648">telnet: return error on crazy TTYPE or XDISPLOC lengths</a>
+ <li> <a href="https://curl.se/bug/?i=18887">telnet: send failure logged but not returned</a>
+ <li> <a href="https://curl.se/bug/?i=18851">telnet: use pointer[0] for &quot;unknown&quot; option instead of pointer[i]</a>
+ <li> <a href="https://curl.se/bug/?i=18922">tests/server: drop pointless memory allocation overrides</a>
+ <li> <a href="https://curl.se/bug/?i=18774">tests/server: drop unsafe open() override in signal handler (Windows)</a>
+ <li> <a href="https://curl.se/bug/?i=18603">tftp: check and act on tftp_set_timeouts() returning error</a>
+ <li> <a href="https://curl.se/bug/?i=19070">tftp: check for trailing &quot;;mode=&quot; in URL without strstr</a>
+ <li> <a href="https://curl.se/bug/?i=18893">tftp: default timeout per block is now 15 seconds</a>
+ <li> <a href="https://curl.se/bug/?i=19033">tftp: error requests for blank filenames</a>
+ <li> <a href="https://curl.se/bug/?i=18638">tftp: handle tftp_multi_statemach() return code</a>
+ <li> <a href="https://curl.se/bug/?i=18658">tftp: pin the first used address</a>
+ <li> <a href="https://curl.se/bug/?i=18574">tftp: propagate expired timer from tftp_state_timeout()</a>
+ <li> <a href="https://curl.se/bug/?i=18894">tftp: return error if it hits an illegal state</a>
+ <li> <a href="https://curl.se/bug/?i=18643">tftp: return error when sendto() fails</a>
+ <li> <a href="https://curl.se/bug/?i=18998">thread: errno on thread creation</a>
+ <li> <a href="https://curl.se/bug/?i=18664">tidy-up: assortment of small fixes</a>
+ <li> <a href="https://curl.se/bug/?i=18482">tidy-up: avoid using the reserved macro namespace</a>
+ <li> <a href="https://curl.se/bug/?i=18782">tidy-up: fcntl.h includes</a>
+ <li> <a href="https://curl.se/bug/?i=18626">tidy-up: update MS links, allow long URLs via checksrc</a>
+ <li> <a href="https://curl.se/bug/?i=18689">tidy-up: URLs</a>
+ <li> <a href="https://curl.se/bug/?i=18816">time-cond.md: refer to the singular curl_getdate man page</a>
+ <li> <a href="https://curl.se/bug/?i=18788">TODO: fix a typo</a>
+ <li> <a href="https://curl.se/bug/?i=18542">TODO: remove already implemented or bad items</a>
+ <li> <a href="https://curl.se/bug/?i=18591">tool: fix exponential retry delay</a>
+ <li> <a href="https://curl.se/bug/?i=18593">tool_cb_hdr: fix fwrite check in header callback</a>
+ <li> <a href="https://curl.se/bug/?i=18630">tool_cb_hdr: size is always 1</a>
+ <li> <a href="https://curl.se/bug/?i=19143">tool_cb_rea: use poll instead of select if available</a>
+ <li> <a href="https://curl.se/bug/?i=18633">tool_doswin: fix to use curl socket functions</a>
+ <li> <a href="https://curl.se/bug/?i=19147">tool_filetime: cap crazy file times instead of erroring</a>
+ <li> <a href="https://curl.se/bug/?i=18858">tool_filetime: replace cast with the fitting printf mask (Windows)</a>
+ <li> <a href="https://curl.se/bug/?i=19113">tool_formparse: rewrite the headers file parser</a>
+ <li> <a href="https://curl.se/bug/?i=18624">tool_getparam/set_rate: skip the multiplication on overflow</a>
+ <li> <a href="https://curl.se/bug/?i=18805">tool_getparam: always disable &quot;lib-ids&quot; for tracing</a>
+ <li> <a href="https://curl.se/bug/?i=19029">tool_getparam: make --fail and --fail-with-body override each other</a>
+ <li> <a href="https://curl.se/bug/?i=18793">tool_getparam: warn if provided header looks malformed</a>
+ <li> <a href="https://curl.se/bug/?i=19097">tool_ipfs: simplify the ipfs gateway logic</a>
+ <li> <a href="https://curl.se/bug/?i=19035">tool_msgs: make errorf() show if --show-error</a>
+ <li> <a href="https://curl.se/bug/?i=18604">tool_operate: improve wording in retry message</a>
+ <li> <a href="https://curl.se/bug/?i=18035">tool_operate: keep failed partial download for retry auto-resume</a>
+ <li> <a href="https://curl.se/bug/?i=18607">tool_operate: keep the progress meter for --out-null</a>
+ <li> <a href="https://curl.se/bug/?i=16143">tool_operate: retry on HTTP response codes 522 and 524</a>
+ <li> <a href="https://curl.se/bug/?i=19145">tool_operate: return error on strdup() failure</a>
+ <li> <a href="https://curl.se/bug/?i=19115">tool_paramhlp: remove outdated comment in str2tls_max()</a>
+ <li> <a href="https://curl.se/bug/?i=18744">tool_progress: handle possible integer overflows</a>
+ <li> <a href="https://curl.se/bug/?i=18807">tool_progress: make max5data() use an algorithm</a>
+ <li> <a href="https://curl.se/bug/?i=18732">transfer: avoid busy loop with tiny speed limit</a>
+ <li> <a href="https://curl.se/bug/?i=18926">transfer: reset retry count on each request</a>
+ <li> <a href="https://curl.se/bug/?i=18860">unit1323: sync time types and printf masks, drop casts</a>
+ <li> <a href="https://curl.se/bug/?i=18838">unit1664: drop casts, expand masks to full values</a>
+ <li> <a href="https://curl.se/bug/?i=18855">url: make Curl_init_userdefined return void</a>
+ <li> <a href="https://curl.se/bug/?i=18525">urldata: FILE is not a list-only protocol</a>
+ <li> <a href="https://curl.se/bug/?i=19071">urldata: make &apos;retrycount&apos; a single byte</a>
+ <li> <a href="https://curl.se/bug/?i=19072">urldata: make redirect counter 16 bit</a>
+ <li> <a href="https://curl.se/bug/?i=18975">vauth/digest: improve the digest parser</a>
+ <li> <a href="https://curl.se/bug/?i=19073">version: add GSS backend name and version</a>
+ <li> <a href="https://curl.se/bug/?i=18903">vquic: fix idle-timeout checks (ms&lt;--&gt;ns), 64-bit log & honor 0=no-timeout</a>
+ <li> <a href="https://curl.se/bug/?i=18812">vquic: handling of io improvements</a>
+ <li> <a href="https://curl.se/bug/?i=18936">vquic: sending non-gso packets fix for EAGAIN</a>
+ <li> <a href="https://curl.se/bug/?i=18717">vtls: alpn setting, check proto parameter</a>
+ <li> <a href="https://curl.se/bug/?i=18644">vtls_int.h: clarify data_pending</a>
+ <li> <a href="https://curl.se/bug/?i=18806">vtls_scache: fix race condition</a>
+ <li> <a href="https://curl.se/bug/?i=18451">windows: replace _beginthreadex() with CreateThread()</a>
+ <li> <a href="https://curl.se/bug/?i=18490">windows: stop passing unused, optional argument for Win9x compatibility</a>
+ <li> <a href="https://curl.se/bug/?i=18877">windows: use consistent format when showing error codes</a>
+ <li> <a href="https://curl.se/bug/?i=18868">windows: use native error code types more</a>
+ <li> <a href="https://curl.se/bug/?i=18718">wolfssl: check BIO read parameters</a>
+ <li> <a href="https://curl.se/bug/?i=19126">wolfssl: clear variable to avoid uninitialized use</a>
+ <li> <a href="https://curl.se/bug/?i=18729">wolfssl: fix error check in shutdown</a>
+ <li> <a href="https://curl.se/bug/?i=19110">wolfssl: fix resource leak in verify_pinned error paths</a>
+ <li> <a href="https://curl.se/bug/?i=18940">wolfssl: no double get_error() detail</a>
+ <li> <a href="https://curl.se/bug/?i=18654">ws: clarify an error message</a>
+ <li> <a href="https://curl.se/bug/?i=18965">ws: fix some edge cases</a>
+ <li> <a href="https://curl.se/bug/?i=19017">ws: fix type conversion check</a>
+ <li> <a href="https://curl.se/bug/?i=18656">ws: reject curl_ws_recv called with NULL buffer with a buflen</a>
+</ul>
+<p> Contributors:<p> Adam Light, Alice Lee Poetics, Andrei Kurushin, Andrew Kirillov, Andrew Olsen, BobodevMm on github, Christian Schmitz, curl.stunt430, Dan Fandrich, Daniel Stenberg, Daniel Terhorst-North, dependabot[bot], divinity76 on github, Emilio Pozuelo Monfort, Emre Çalışkan, Ethan Everett, Evgeny Grin (Karlson2k), fds242 on github, Harry Sintonen, Howard Chu, Ignat Loskutov, James Fuller, Javier Blazquez, Jicea, jmaggard10 on github, Jochen Sprickerhof, Johannes Schindelin, Jonathan Cardoso Machado, Joseph Birr-Pixton, Joshua Rogers, kapsiR on github, kuchara on github, Marcel Raad, Michael Osipov, Michał Petryka, Mitchell Blank Jr, Mohamed Daahir, Nir Azkiel, Patrick Monnerat, plv1313 on github, Pocs Norbert, Ray Satiro, renovate[bot], rinsuki on github, Sakthi SK, Samuel Dionne-Riel, Samuel Henrique, Stanislav Fort, Stefan Eissing, Tatsuhiro Tsujikawa, tkzv on github, Viktor Szakats, Yedaya Katsman
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl_multi_fdset</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>libcurl</b></div>
+<h1> curl_multi_fdset - extracts file descriptors from multi handle </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_multi_fdset%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_multi_fdset.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_multi_fdset.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_multi_fdset - extract file descriptor information from a multi handle </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_fdset.html">curl_multi_fdset</a>(CURLM &#x2a;multi_handle,
+&nbsp;                          fd_set &#x2a;read_fd_set,
+&nbsp;                          fd_set &#x2a;write_fd_set,
+&nbsp;                          fd_set &#x2a;exc_fd_set,
+&nbsp;                          int &#x2a;max_fd);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function extracts file descriptor information from a given multi_handle. libcurl returns its <span Class="emphasis">fd_set</span> sets. The application can use these to select() on, but be sure to <span Class="emphasis">FD_ZERO</span> them before calling this function as <a Class="emphasis" href="./curl_multi_fdset.html">curl_multi_fdset</a> only adds its own descriptors, it does not zero or otherwise remove any others. The <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a> function should be called as soon as one of them is ready to be read from or written to. </p>
+<p class="level0">The <span Class="emphasis">read_fd_set</span> argument should point to an object of type <span Class="bold">fd_set</span> that on returns specifies the file descriptors to be checked for being ready to read. </p>
+<p class="level0">The <span Class="emphasis">write_fd_set</span> argument should point to an object of type <span Class="bold">fd_set</span> that on return specifies the file descriptors to be checked for being ready to write. </p>
+<p class="level0">The <span Class="emphasis">exc_fd_set</span> argument should point to an object of type <span Class="bold">fd_set</span> that on return specifies the file descriptors to be checked for error conditions. </p>
+<p class="level0">If no file descriptors are set by libcurl, <span Class="emphasis">max_fd</span> contain -1 when this function returns. Otherwise it contains the highest descriptor number libcurl set. When libcurl returns -1 in <span Class="emphasis">max_fd</span>, it is because libcurl currently does something that is not possible for your application to monitor with a socket and unfortunately you can then not know exactly when the current action is completed using select(). You then need to wait a while before you proceed and call <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a> anyway. How long to wait? Unless <a Class="emphasis" href="./curl_multi_timeout.html">curl_multi_timeout</a> gives you a lower number, we suggest 100 milliseconds or so, but you may want to test it out in your own particular conditions to find a suitable value. </p>
+<p class="level0">When doing select(), you should use <a Class="emphasis" href="./curl_multi_timeout.html">curl_multi_timeout</a> to figure out how long to wait for action. Call <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a> even if no activity has been seen on the <span Class="bold">fd_sets</span> after the timeout expires as otherwise internal retries and timeouts may not work as you would think and want. </p>
+<p class="level0">If one of the sockets used by libcurl happens to be larger than what can be set in an <span Class="bold">fd_set</span>, which on POSIX systems means that the file descriptor is larger than <span Class="bold">FD_SETSIZE</span>, then libcurl tries to not set it. Setting a too large file descriptor in an <span Class="bold">fd_set</span> implies an out of bounds write which can cause crashes, or worse. The effect of NOT storing it might possibly save you from the crash, but makes your program NOT wait for sockets it should wait for... </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; fd_set fdread;
+&nbsp; fd_set fdwrite;
+&nbsp; fd_set fdexcep;
+&nbsp; int maxfd;
+&nbsp; int rc;
+&nbsp; CURLMcode mc;
+&nbsp; struct timeval timeout = {1, 0};
+&nbsp;
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp;
+&nbsp; do {
+&nbsp;
+&nbsp;   /&#x2a; call <a href="curl_multi_perform.html">curl_multi_perform</a>() &#x2a;/
+&nbsp;
+&nbsp;   FD_ZERO(&amp;fdread);
+&nbsp;   FD_ZERO(&amp;fdwrite);
+&nbsp;   FD_ZERO(&amp;fdexcep);
+&nbsp;
+&nbsp;   /&#x2a; get file descriptors from the transfers &#x2a;/
+&nbsp;   mc = <a href="curl_multi_fdset.html">curl_multi_fdset</a>(multi, &amp;fdread, &amp;fdwrite, &amp;fdexcep, &amp;maxfd);
+&nbsp;
+&nbsp;   if(mc != <a href="libcurl-errors.html#CURLMOK">CURLM_OK</a>) {
+&nbsp;     fprintf(stderr, &quot;<a href="curl_multi_fdset.html">curl_multi_fdset</a>() failed, code %d.&bsol;n&quot;, mc);
+&nbsp;     break;
+&nbsp;   }
+&nbsp;
+&nbsp;   /&#x2a; wait for activity on one of the sockets &#x2a;/
+&nbsp;   rc = select(maxfd + 1, &amp;fdread, &amp;fdwrite, &amp;fdexcep, &amp;timeout);
+&nbsp;
+&nbsp; } while(!mc);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.9.6.html">7.9.6</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_multi_cleanup.html">curl_multi_cleanup</a>(3), <a Class="bold" href="./curl_multi_init.html">curl_multi_init</a>(3), <a Class="bold" href="./curl_multi_perform.html">curl_multi_perform</a>(3), <a Class="bold" href="./curl_multi_timeout.html">curl_multi_timeout</a>(3), <a Class="bold" href="./curl_multi_wait.html">curl_multi_wait</a>(3), <a Class="bold" href="./curl_multi_waitfds.html">curl_multi_waitfds</a>(3), <span Class="bold">select</span>(2) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

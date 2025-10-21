@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Vulnerability Table</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style type="text/css">
+.contents {
+  max-width: 90%;
+  overflow: auto;
+}
+a.vuln {
+    color: black;
+    font-size: 70%;
+    text-decoration: none;
+}
+a.vuln:hover {
+    color: #ffffff;
+    background-color: #093754;
+}
+@media (prefers-color-scheme: dark) {
+   a.vuln {
+       color: #e0e0e0;
+       font-size: 70%;
+       text-decoration: none;
+   }
+   a.vuln:hover {
+       color: #ffffff;
+       background-color: #093754;
+   }
+}
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Vulnerabilities</b></div>
+<h1> curl and libcurl vulnerabilities </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="security.html">curl CVEs</a>
+<br><a href="vuln.json">CVEs as JSON</a>
+<br><a href="releases.html">Release log</a>
+<br><a href="/dev/vuln-disclosure.html">Vulnerability Disclosure</a>
+</div>
+<p>
+ This table shows the <b>25</b> most recent curl versions and which releases
+ that are vulnerable to which publicly
+ disclosed <a href="security.html">vulnerabilities</a>.
+<p>
+ Each version number links a vulnerability summary for that specific
+ release. Each vulnerability in the table header links to more details.
+<p>
+  Green: <span style="color: green;">&FilledSmallSquare;</span> severity low.
+  Blue: <span style="color: blue;">&FilledSmallSquare;</span> severity medium.
+  Red: <span style="color: red;">&FilledSmallSquare;</span> severity high.
+  Black: <span style="color: black;">&FilledSmallSquare;</span> severity critical.
+<p>
+<table><tr class="tabletop"><th>Version</th><th><a class=vuln title="CVE-2025-10148: predictable WebSocket mask" href="CVE-2025-10148.html">169</a></th><th><a class=vuln title="CVE-2025-9086: Out of bounds read for cookie path" href="CVE-2025-9086.html">168</a></th><th><a class=vuln title="CVE-2025-5399: WebSocket endless loop" href="CVE-2025-5399.html">167</a></th><th><a class=vuln title="CVE-2025-5025: No QUIC certificate pinning with wolfSSL" href="CVE-2025-5025.html">166</a></th><th><a class=vuln title="CVE-2025-4947: QUIC certificate check skip with wolfSSL" href="CVE-2025-4947.html">165</a></th><th><a class=vuln title="CVE-2025-0725: gzip integer overflow" href="CVE-2025-0725.html">164</a></th><th><a class=vuln title="CVE-2025-0665: eventfd double close" href="CVE-2025-0665.html">163</a></th><th><a class=vuln title="CVE-2025-0167: netrc and default credential leak" href="CVE-2025-0167.html">162</a></th><th><a class=vuln title="CVE-2024-11053: netrc and redirect credential leak" href="CVE-2024-11053.html">161</a></th><th><a class=vuln title="CVE-2024-9681: HSTS subdomain overwrites parent cache entry" href="CVE-2024-9681.html">160</a></th><th><a class=vuln title="CVE-2024-8096: OCSP stapling bypass with GnuTLS" href="CVE-2024-8096.html">159</a></th><th><a class=vuln title="CVE-2024-7264: ASN.1 date parser overread" href="CVE-2024-7264.html">158</a></th><th><a class=vuln title="CVE-2024-6874: macidn punycode buffer overread" href="CVE-2024-6874.html">157</a></th><th><a class=vuln title="CVE-2024-6197: freeing stack buffer in utf8asn1str" href="CVE-2024-6197.html">156</a></th><th><a class=vuln title="CVE-2024-2466: TLS certificate check bypass with mbedTLS" href="CVE-2024-2466.html">155</a></th><th><a class=vuln title="CVE-2024-2398: HTTP/2 push headers memory-leak" href="CVE-2024-2398.html">154</a></th><th><a class=vuln title="CVE-2024-2379: QUIC certificate check bypass with wolfSSL" href="CVE-2024-2379.html">153</a></th><th><a class=vuln title="CVE-2024-2004: Usage of disabled protocol" href="CVE-2024-2004.html">152</a></th><th><a class=vuln title="CVE-2024-0853: OCSP verification bypass with TLS session reuse" href="CVE-2024-0853.html">151</a></th><th><a class=vuln title="CVE-2023-46219: HSTS long filename clears contents" href="CVE-2023-46219.html">150</a></th><th><a class=vuln title="CVE-2023-46218: cookie mixed case PSL bypass" href="CVE-2023-46218.html">149</a></th><th><a class=vuln title="CVE-2023-38546: cookie injection with none file" href="CVE-2023-38546.html">148</a></th><th><a class=vuln title="CVE-2023-38545: SOCKS5 heap buffer overflow" href="CVE-2023-38545.html">147</a></th><th><a class=vuln title="CVE-2023-38039: HTTP headers eat all memory" href="CVE-2023-38039.html">146</a></th><th><a class=vuln title="CVE-2023-28322: more POST-after-PUT confusion" href="CVE-2023-28322.html">145</a></th><th><a class=vuln title="CVE-2023-28321: IDN wildcard match" href="CVE-2023-28321.html">144</a></th><th><a class=vuln title="CVE-2023-28320: siglongjmp race condition" href="CVE-2023-28320.html">143</a></th><th><a class=vuln title="CVE-2023-28319: UAF in SSH sha256 fingerprint check" href="CVE-2023-28319.html">142</a></th><th>Total</th>
+</tr>
+<tr class="odd"><td><a href="vuln-8.16.0.html">8.16.0</a></td><td colspan="28">&nbsp;</td><td>0</td></tr>
+<tr class="even"><td><a href="vuln-8.15.0.html">8.15.0</a></td><td valign=top style="background-color: green;" title="CVE-2025-10148: predictable WebSocket mask (low)" rowspan="8" onclick="window.location.href='CVE-2025-10148.html'">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2025-9086: Out of bounds read for cookie path (low)" rowspan="25" onclick="window.location.href='CVE-2025-9086.html'">&nbsp;</td><td colspan="26">&nbsp;</td><td>2</td></tr>
+<tr class="odd"><td><a href="vuln-8.14.1.html">8.14.1</a></td><td colspan="26">&nbsp;</td><td>2</td></tr>
+<tr class="even"><td><a href="vuln-8.14.0.html">8.14.0</a></td><td valign=top style="background-color: green;" title="CVE-2025-5399: WebSocket endless loop (low)" rowspan="2" onclick="window.location.href='CVE-2025-5399.html'">&nbsp;</td><td colspan="25">&nbsp;</td><td>3</td></tr>
+<tr class="odd"><td><a href="vuln-8.13.0.html">8.13.0</a></td><td valign=top style="background-color: blue;" title="CVE-2025-5025: No QUIC certificate pinning with wolfSSL (medium)" rowspan="14" onclick="window.location.href='CVE-2025-5025.html'">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2025-4947: QUIC certificate check skip with wolfSSL (medium)" rowspan="10" onclick="window.location.href='CVE-2025-4947.html'">&nbsp;</td><td colspan="23">&nbsp;</td><td>5</td></tr>
+<tr class="even"><td><a href="vuln-8.12.1.html">8.12.1</a></td><td colspan="1">&nbsp;</td><td colspan="23">&nbsp;</td><td>4</td></tr>
+<tr class="odd"><td><a href="vuln-8.12.0.html">8.12.0</a></td><td colspan="1">&nbsp;</td><td colspan="23">&nbsp;</td><td>4</td></tr>
+<tr class="even"><td><a href="vuln-8.11.1.html">8.11.1</a></td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2025-0725: gzip integer overflow (low)" rowspan="19" onclick="window.location.href='CVE-2025-0725.html'">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2025-0665: eventfd double close (low)" rowspan="1" onclick="window.location.href='CVE-2025-0665.html'">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2025-0167: netrc and default credential leak (low)" rowspan="19" onclick="window.location.href='CVE-2025-0167.html'">&nbsp;</td><td colspan="20">&nbsp;</td><td>7</td></tr>
+<tr class="odd"><td><a href="vuln-8.11.0.html">8.11.0</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2024-11053: netrc and redirect credential leak (low)" rowspan="18" onclick="window.location.href='CVE-2024-11053.html'">&nbsp;</td><td colspan="19">&nbsp;</td><td>7</td></tr>
+<tr class="even"><td><a href="vuln-8.10.1.html">8.10.1</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2024-9681: HSTS subdomain overwrites parent cache entry (low)" rowspan="17" onclick="window.location.href='CVE-2024-9681.html'">&nbsp;</td><td colspan="18">&nbsp;</td><td>7</td></tr>
+<tr class="odd"><td><a href="vuln-8.10.0.html">8.10.0</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="18">&nbsp;</td><td>7</td></tr>
+<tr class="even"><td><a href="vuln-8.9.1.html">8.9.1</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2024-8096: OCSP stapling bypass with GnuTLS (medium)" rowspan="15" onclick="window.location.href='CVE-2024-8096.html'">&nbsp;</td><td colspan="17">&nbsp;</td><td>8</td></tr>
+<tr class="odd"><td><a href="vuln-8.9.0.html">8.9.0</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2024-7264: ASN.1 date parser overread (low)" rowspan="14" onclick="window.location.href='CVE-2024-7264.html'">&nbsp;</td><td colspan="16">&nbsp;</td><td>9</td></tr>
+<tr class="even"><td><a href="vuln-8.8.0.html">8.8.0</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2024-6874: macidn punycode buffer overread (low)" rowspan="1" onclick="window.location.href='CVE-2024-6874.html'">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2024-6197: freeing stack buffer in utf8asn1str (medium)" rowspan="4" onclick="window.location.href='CVE-2024-6197.html'">&nbsp;</td><td colspan="14">&nbsp;</td><td>11</td></tr>
+<tr class="odd"><td><a href="vuln-8.7.1.html">8.7.1</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="14">&nbsp;</td><td>9</td></tr>
+<tr class="even"><td><a href="vuln-8.7.0.html">8.7.0</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="14">&nbsp;</td><td>9</td></tr>
+<tr class="odd"><td><a href="vuln-8.6.0.html">8.6.0</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2024-2466: TLS certificate check bypass with mbedTLS (medium)" rowspan="2" onclick="window.location.href='CVE-2024-2466.html'">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2024-2398: HTTP/2 push headers memory-leak (medium)" rowspan="10" onclick="window.location.href='CVE-2024-2398.html'">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2024-2379: QUIC certificate check bypass with wolfSSL (low)" rowspan="1" onclick="window.location.href='CVE-2024-2379.html'">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2024-2004: Usage of disabled protocol (low)" rowspan="10" onclick="window.location.href='CVE-2024-2004.html'">&nbsp;</td><td colspan="10">&nbsp;</td><td>13</td></tr>
+<tr class="even"><td><a href="vuln-8.5.0.html">8.5.0</a></td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="2">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2024-0853: OCSP verification bypass with TLS session reuse (low)" rowspan="1" onclick="window.location.href='CVE-2024-0853.html'">&nbsp;</td><td colspan="9">&nbsp;</td><td>12</td></tr>
+<tr class="odd"><td><a href="vuln-8.4.0.html">8.4.0</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2023-46219: HSTS long filename clears contents (low)" rowspan="8" onclick="window.location.href='CVE-2023-46219.html'">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2023-46218: cookie mixed case PSL bypass (medium)" rowspan="8" onclick="window.location.href='CVE-2023-46218.html'">&nbsp;</td><td colspan="7">&nbsp;</td><td>11</td></tr>
+<tr class="even"><td><a href="vuln-8.3.0.html">8.3.0</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2023-38546: cookie injection with none file (low)" rowspan="7" onclick="window.location.href='CVE-2023-38546.html'">&nbsp;</td><td valign=top style="background-color: red;" title="CVE-2023-38545: SOCKS5 heap buffer overflow (high)" rowspan="7" onclick="window.location.href='CVE-2023-38545.html'">&nbsp;</td><td colspan="5">&nbsp;</td><td>13</td></tr>
+<tr class="odd"><td><a href="vuln-8.2.1.html">8.2.1</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2023-38039: HTTP headers eat all memory (medium)" rowspan="6" onclick="window.location.href='CVE-2023-38039.html'">&nbsp;</td><td colspan="4">&nbsp;</td><td>14</td></tr>
+<tr class="even"><td><a href="vuln-8.2.0.html">8.2.0</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="4">&nbsp;</td><td>14</td></tr>
+<tr class="odd"><td><a href="vuln-8.1.2.html">8.1.2</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="4">&nbsp;</td><td>14</td></tr>
+<tr class="even"><td><a href="vuln-8.1.1.html">8.1.1</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="4">&nbsp;</td><td>14</td></tr>
+<tr class="odd"><td><a href="vuln-8.1.0.html">8.1.0</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="4">&nbsp;</td><td>14</td></tr>
+<tr class="even"><td><a href="vuln-8.0.1.html">8.0.1</a></td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="1">&nbsp;</td><td colspan="1">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2023-28322: more POST-after-PUT confusion (low)" rowspan="1" onclick="window.location.href='CVE-2023-28322.html'">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2023-28321: IDN wildcard match (low)" rowspan="1" onclick="window.location.href='CVE-2023-28321.html'">&nbsp;</td><td valign=top style="background-color: green;" title="CVE-2023-28320: siglongjmp race condition (low)" rowspan="1" onclick="window.location.href='CVE-2023-28320.html'">&nbsp;</td><td valign=top style="background-color: blue;" title="CVE-2023-28319: UAF in SSH sha256 fingerprint check (medium)" rowspan="1" onclick="window.location.href='CVE-2023-28319.html'">&nbsp;</td><td>18</td></tr>
+</table>
+<p>
+ See also the <a href="vulnall.html">vulnerability table for <i>all</i> curl releases</a>.
+</div>
+</div>
+</body> </html>

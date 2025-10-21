@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Bug Bounty</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/projdocs.html">Project</a> / <b>Bug Bounty</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="audits.html">Audits</a>
+<br><a href="/docs/bugbounty.html">Bug Bounty</a>
+<br><a href="/ch/">Changelog</a>
+<br><a href="security.html">curl CVEs</a>
+<br><a href="/dev/vuln-disclosure.html">Vulnerability Disclosure</a>
+<br><a href="vulnerabilities.html">Vulnerabilities Table</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="the-curl-bug-bounty">The curl bug bounty</h1>
+<p>The curl project runs a bug bounty program in association with <a
+href="https://www.hackerone.com/">HackerOne</a> and the <a
+href="https://internetbugbounty.org/">Internet Bug Bounty</a>.</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>Start out by posting your suspected security vulnerability directly
+to <a href="https://hackerone.com/curl">curl's HackerOne
+program</a>.</p>
+<p>After you have reported a security issue, it has been deemed
+credible, and a patch and advisory has been made public, you may be
+eligible for a bounty from this program. See the <a
+href="https://curl.se/dev/secprocess.html">Security Process</a> document
+for how we work with security issues.</p>
+<h2 id="what-are-the-reward-amounts">What are the reward amounts?</h2>
+<p>The curl project offers monetary compensation for reported and
+published security vulnerabilities. The amount of money that is rewarded
+depends on how serious the flaw is determined to be.</p>
+<p>Since 2021, the Bug Bounty is managed in association with the
+Internet Bug Bounty and they set the reward amounts. If it would turn
+out that they set amounts that are way lower than we can accept, the
+curl project intends to "top up" rewards.</p>
+<p>In 2025, typical "Medium" rated vulnerabilities are rewarded 2,500
+USD each.</p>
+<h2 id="who-is-eligible-for-a-reward">Who is eligible for a reward?</h2>
+<p>Everyone and anyone who reports a security problem in a released curl
+version that has not already been reported can ask for a bounty.</p>
+<p>Dedicated - paid for - security audits that are performed in
+collaboration with curl developers are not eligible for bounties.</p>
+<p>Vulnerabilities in features that are off by default and documented as
+experimental are not eligible for a reward.</p>
+<p>The vulnerability has to be fixed and publicly announced (by the curl
+project) before a bug bounty is considered.</p>
+<p>Once the vulnerability has been published by curl, the researcher can
+request their bounty from the <a
+href="https://hackerone.com/ibb">Internet Bug Bounty</a>.</p>
+<p>Bounties need to be requested within twelve months from the
+publication of the vulnerability.</p>
+<p>The curl security team reserves themselves the right to deny or allow
+bug bounty payouts on its own discretion. There is no appeals
+process.</p>
+<h2 id="product-vulnerabilities-only">Product vulnerabilities only</h2>
+<p>This bug bounty only concerns the curl and libcurl products and thus
+their respective source codes - when running on existing hardware. It
+does not include curl documentation, curl websites, or other curl
+related infrastructure.</p>
+<p>The curl security team is the sole arbiter if a reported flaw is
+subject to a bounty or not.</p>
+<h2 id="third-parties">Third parties</h2>
+<p>The curl bug bounty does not cover flaws in third party dependencies
+(libraries) used by curl or libcurl. If the bug triggers because of curl
+behaving wrongly or abusing a third party dependency, the problem is
+rather in curl and not in the dependency and then the bounty might cover
+the problem.</p>
+<h2 id="how-are-vulnerabilities-graded">How are vulnerabilities
+graded?</h2>
+<p>The grading of each reported vulnerability that makes a reward claim
+is performed by the curl security team. The grading is based on the CVSS
+(Common Vulnerability Scoring System) 3.0.</p>
+<h2 id="how-are-reward-amounts-determined">How are reward amounts
+determined?</h2>
+<p>The curl security team gives the vulnerability a score or severity
+level, as mentioned above. The actual monetary reward amount is decided
+and paid by the Internet Bug Bounty..</p>
+<h2 id="regarding-taxes-etc-on-the-bounties">Regarding taxes, etc. on
+the bounties</h2>
+<p>In the event that the individual receiving a bug bounty needs to pay
+taxes on the reward money, the responsibility lies with the receiver.
+The curl project or its security team never actually receive any of this
+money, hold the money, or pay out the money.</p>
+</div>
+</div>
+</body>
+</html>

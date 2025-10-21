@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_easy_getinfo()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_getinfo</b></div>
+<h1> curl_easy_getinfo - extract information from a curl handle </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_easy_getinfo%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_easy_getinfo.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_easy_getinfo.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_easy_getinfo - extract information from a curl handle </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_getinfo.html">curl_easy_getinfo</a>(CURL &#x2a;curl, CURLINFO info, ... );
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Get the <span Class="emphasis">info</span> kept in the <span Class="emphasis">curl</span> handle. The third argument <span Class="bold">MUST</span> be pointing to the specific type of the used option which is documented in each man page of the <span Class="emphasis">info</span> option. The data is stored accordingly and can be relied upon only if this function returns <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>. Use this function after a performed transfer if you want to get transfer related data. </p>
+<p class="level0">You should not free the memory returned by this function unless it is explicitly mentioned below. </p><a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
+<p class="level0">The following information can be extracted: </p>
+<p class="level0"><a name="CURLINFOACTIVESOCKET"></a><span class="nroffip">CURLINFO_ACTIVESOCKET</span> </p>
+<p class="level1">The session&apos;s active socket. See <a Class="emphasis" href="./CURLINFO_ACTIVESOCKET.html">CURLINFO_ACTIVESOCKET</a> </p>
+<p class="level0"><a name="CURLINFOAPPCONNECTTIME"></a><span class="nroffip">CURLINFO_APPCONNECT_TIME</span> </p>
+<p class="level1">The time it took from the start until the SSL connect/handshake with the remote host was completed as a double in number of seconds. </p>
+<p class="level0"><a name="CURLINFOAPPCONNECTTIMET"></a><span class="nroffip">CURLINFO_APPCONNECT_TIME_T</span> </p>
+<p class="level1">The time it took from the start until the SSL connect/handshake with the remote host was completed in number of microseconds. (Added in <a href="/ch/7.60.0.html">7.60.0</a>) See <a Class="emphasis" href="./CURLINFO_APPCONNECT_TIME_T.html">CURLINFO_APPCONNECT_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFOCAINFO"></a><span class="nroffip">CURLINFO_CAINFO</span> </p>
+<p class="level1">Get the default value for <a Class="emphasis" href="./CURLOPT_CAINFO.html">CURLOPT_CAINFO</a>. See <a Class="emphasis" href="./CURLINFO_CAINFO.html">CURLINFO_CAINFO</a> </p>
+<p class="level0"><a name="CURLINFOCAPATH"></a><span class="nroffip">CURLINFO_CAPATH</span> </p>
+<p class="level1">Get the default value for <a Class="emphasis" href="./CURLOPT_CAPATH.html">CURLOPT_CAPATH</a>. See <a Class="emphasis" href="./CURLINFO_CAPATH.html">CURLINFO_CAPATH</a> </p>
+<p class="level0"><a name="CURLINFOCERTINFO"></a><span class="nroffip">CURLINFO_CERTINFO</span> </p>
+<p class="level1">Certificate chain. See <a Class="emphasis" href="./CURLINFO_CERTINFO.html">CURLINFO_CERTINFO</a> </p>
+<p class="level0"><a name="CURLINFOCONDITIONUNMET"></a><span class="nroffip">CURLINFO_CONDITION_UNMET</span> </p>
+<p class="level1">Whether or not a time conditional was met or 304 HTTP response. See <a Class="emphasis" href="./CURLINFO_CONDITION_UNMET.html">CURLINFO_CONDITION_UNMET</a> </p>
+<p class="level0"><a name="CURLINFOCONNECTTIME"></a><span class="nroffip">CURLINFO_CONNECT_TIME</span> </p>
+<p class="level1">The time it took from the start until the connect to the remote host (or proxy) was completed. As a double. See <a Class="emphasis" href="./CURLINFO_CONNECT_TIME.html">CURLINFO_CONNECT_TIME</a> </p>
+<p class="level0"><a name="CURLINFOCONNECTTIMET"></a><span class="nroffip">CURLINFO_CONNECT_TIME_T</span> </p>
+<p class="level1">The time it took from the start until the connect to the remote host (or proxy) was completed. In microseconds. See <a Class="emphasis" href="./CURLINFO_CONNECT_TIME_T.html">CURLINFO_CONNECT_TIME_T</a>. </p>
+<p class="level0"><a name="CURLINFOCONNID"></a><span class="nroffip">CURLINFO_CONN_ID</span> </p>
+<p class="level1">The ID of the last connection used by the transfer. (Added in <a href="/ch/8.2.0.html">8.2.0</a>) See <a Class="emphasis" href="./CURLINFO_CONN_ID.html">CURLINFO_CONN_ID</a> </p>
+<p class="level0"><a name="CURLINFOCONTENTLENGTHDOWNLOAD"></a><span class="nroffip">CURLINFO_CONTENT_LENGTH_DOWNLOAD</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) Content length from the Content-Length header. See <a Class="emphasis" href="./CURLINFO_CONTENT_LENGTH_DOWNLOAD.html">CURLINFO_CONTENT_LENGTH_DOWNLOAD</a> </p>
+<p class="level0"><a name="CURLINFOCONTENTLENGTHDOWNLOADT"></a><span class="nroffip">CURLINFO_CONTENT_LENGTH_DOWNLOAD_T</span> </p>
+<p class="level1">Content length from the Content-Length header. See <a Class="emphasis" href="./CURLINFO_CONTENT_LENGTH_DOWNLOAD_T.html">CURLINFO_CONTENT_LENGTH_DOWNLOAD_T</a> </p>
+<p class="level0"><a name="CURLINFOCONTENTLENGTHUPLOAD"></a><span class="nroffip">CURLINFO_CONTENT_LENGTH_UPLOAD</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) Upload size. See <a Class="emphasis" href="./CURLINFO_CONTENT_LENGTH_UPLOAD.html">CURLINFO_CONTENT_LENGTH_UPLOAD</a> </p>
+<p class="level0"><a name="CURLINFOCONTENTLENGTHUPLOADT"></a><span class="nroffip">CURLINFO_CONTENT_LENGTH_UPLOAD_T</span> </p>
+<p class="level1">Upload size. See <a Class="emphasis" href="./CURLINFO_CONTENT_LENGTH_UPLOAD_T.html">CURLINFO_CONTENT_LENGTH_UPLOAD_T</a> </p>
+<p class="level0"><a name="CURLINFOCONTENTTYPE"></a><span class="nroffip">CURLINFO_CONTENT_TYPE</span> </p>
+<p class="level1">Content type from the <span Class="emphasis">Content-Type:</span> header. We recommend using <a Class="emphasis" href="./curl_easy_header.html">curl_easy_header</a> instead. See <a Class="emphasis" href="./CURLINFO_CONTENT_TYPE.html">CURLINFO_CONTENT_TYPE</a> </p>
+<p class="level0"><a name="CURLINFOCOOKIELIST"></a><span class="nroffip">CURLINFO_COOKIELIST</span> </p>
+<p class="level1">List of all known cookies. See <a Class="emphasis" href="./CURLINFO_COOKIELIST.html">CURLINFO_COOKIELIST</a> </p>
+<p class="level0"><a name="CURLINFOEARLYDATASENTT"></a><span class="nroffip">CURLINFO_EARLYDATA_SENT_T</span> </p>
+<p class="level1">Amount of TLS early data sent (in number of bytes) when CURLSSLOPT_EARLYDATA is enabled. </p>
+<p class="level0"><a name="CURLINFOEFFECTIVEMETHOD"></a><span class="nroffip">CURLINFO_EFFECTIVE_METHOD</span> </p>
+<p class="level1">Last used HTTP method. See <a Class="emphasis" href="./CURLINFO_EFFECTIVE_METHOD.html">CURLINFO_EFFECTIVE_METHOD</a> </p>
+<p class="level0"><a name="CURLINFOEFFECTIVEURL"></a><span class="nroffip">CURLINFO_EFFECTIVE_URL</span> </p>
+<p class="level1">Last used URL. See <a Class="emphasis" href="./CURLINFO_EFFECTIVE_URL.html">CURLINFO_EFFECTIVE_URL</a> </p>
+<p class="level0"><a name="CURLINFOFILETIME"></a><span class="nroffip">CURLINFO_FILETIME</span> </p>
+<p class="level1">Remote time of the retrieved document. See <a Class="emphasis" href="./CURLINFO_FILETIME.html">CURLINFO_FILETIME</a> </p>
+<p class="level0"><a name="CURLINFOFILETIMET"></a><span class="nroffip">CURLINFO_FILETIME_T</span> </p>
+<p class="level1">Remote time of the retrieved document. See <a Class="emphasis" href="./CURLINFO_FILETIME_T.html">CURLINFO_FILETIME_T</a> </p>
+<p class="level0"><a name="CURLINFOFTPENTRYPATH"></a><span class="nroffip">CURLINFO_FTP_ENTRY_PATH</span> </p>
+<p class="level1">The entry path after logging in to an FTP server. See <a Class="emphasis" href="./CURLINFO_FTP_ENTRY_PATH.html">CURLINFO_FTP_ENTRY_PATH</a> </p>
+<p class="level0"><a name="CURLINFOHEADERSIZE"></a><span class="nroffip">CURLINFO_HEADER_SIZE</span> </p>
+<p class="level1">Number of bytes of all headers received. See <a Class="emphasis" href="./CURLINFO_HEADER_SIZE.html">CURLINFO_HEADER_SIZE</a> </p>
+<p class="level0"><a name="CURLINFOHTTPAUTHAVAIL"></a><span class="nroffip">CURLINFO_HTTPAUTH_AVAIL</span> </p>
+<p class="level1">Available HTTP authentication methods. See <a Class="emphasis" href="./CURLINFO_HTTPAUTH_AVAIL.html">CURLINFO_HTTPAUTH_AVAIL</a> </p>
+<p class="level0"><a name="CURLINFOHTTPAUTHUSED"></a><span class="nroffip">CURLINFO_HTTPAUTH_USED</span> </p>
+<p class="level1">Used HTTP authentication method. See <a Class="emphasis" href="./CURLINFO_HTTPAUTH_USED.html">CURLINFO_HTTPAUTH_USED</a> </p>
+<p class="level0"><a name="CURLINFOHTTPCONNECTCODE"></a><span class="nroffip">CURLINFO_HTTP_CONNECTCODE</span> </p>
+<p class="level1">Last proxy CONNECT response code. See <a Class="emphasis" href="./CURLINFO_HTTP_CONNECTCODE.html">CURLINFO_HTTP_CONNECTCODE</a> </p>
+<p class="level0"><a name="CURLINFOHTTPVERSION"></a><span class="nroffip">CURLINFO_HTTP_VERSION</span> </p>
+<p class="level1">The http version used in the connection. See <a Class="emphasis" href="./CURLINFO_HTTP_VERSION.html">CURLINFO_HTTP_VERSION</a> </p>
+<p class="level0"><a name="CURLINFOLASTSOCKET"></a><span class="nroffip">CURLINFO_LASTSOCKET</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) Last socket used. See <a Class="emphasis" href="./CURLINFO_LASTSOCKET.html">CURLINFO_LASTSOCKET</a> </p>
+<p class="level0"><a name="CURLINFOLOCALIP"></a><span class="nroffip">CURLINFO_LOCAL_IP</span> </p>
+<p class="level1">Source IP address of the last connection. See <a Class="emphasis" href="./CURLINFO_LOCAL_IP.html">CURLINFO_LOCAL_IP</a> </p>
+<p class="level0"><a name="CURLINFOLOCALPORT"></a><span class="nroffip">CURLINFO_LOCAL_PORT</span> </p>
+<p class="level1">Source port number of the last connection. See <a Class="emphasis" href="./CURLINFO_LOCAL_PORT.html">CURLINFO_LOCAL_PORT</a> </p>
+<p class="level0"><a name="CURLINFONAMELOOKUPTIME"></a><span class="nroffip">CURLINFO_NAMELOOKUP_TIME</span> </p>
+<p class="level1">Time from start until name resolving completed as a double. See <a Class="emphasis" href="./CURLINFO_NAMELOOKUP_TIME.html">CURLINFO_NAMELOOKUP_TIME</a> </p>
+<p class="level0"><a name="CURLINFONAMELOOKUPTIMET"></a><span class="nroffip">CURLINFO_NAMELOOKUP_TIME_T</span> </p>
+<p class="level1">Time from start until name resolving completed in number of microseconds. See <a Class="emphasis" href="./CURLINFO_NAMELOOKUP_TIME_T.html">CURLINFO_NAMELOOKUP_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFONUMCONNECTS"></a><span class="nroffip">CURLINFO_NUM_CONNECTS</span> </p>
+<p class="level1">Number of new successful connections used for previous transfer. See <a Class="emphasis" href="./CURLINFO_NUM_CONNECTS.html">CURLINFO_NUM_CONNECTS</a> </p>
+<p class="level0"><a name="CURLINFOOSERRNO"></a><span class="nroffip">CURLINFO_OS_ERRNO</span> </p>
+<p class="level1">The errno from the last failure to connect. See <a Class="emphasis" href="./CURLINFO_OS_ERRNO.html">CURLINFO_OS_ERRNO</a> </p>
+<p class="level0"><a name="CURLINFOPOSTTRANSFERTIMET"></a><span class="nroffip">CURLINFO_POSTTRANSFER_TIME_T</span> </p>
+<p class="level1">The time it took from the start until the last byte is sent by libcurl. In microseconds. (Added in <a href="/ch/8.10.0.html">8.10.0</a>) See <a Class="emphasis" href="./CURLINFO_POSTTRANSFER_TIME_T.html">CURLINFO_POSTTRANSFER_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFOPRETRANSFERTIME"></a><span class="nroffip">CURLINFO_PRETRANSFER_TIME</span> </p>
+<p class="level1">The time it took from the start until the file transfer is just about to begin. This includes all pre-transfer commands and negotiations that are specific to the particular protocol(s) involved. See <a Class="emphasis" href="./CURLINFO_PRETRANSFER_TIME.html">CURLINFO_PRETRANSFER_TIME</a> </p>
+<p class="level0"><a name="CURLINFOPRETRANSFERTIMET"></a><span class="nroffip">CURLINFO_PRETRANSFER_TIME_T</span> </p>
+<p class="level1">The time it took from the start until the file transfer is just about to begin. This includes all pre-transfer commands and negotiations that are specific to the particular protocol(s) involved. In microseconds. See <a Class="emphasis" href="./CURLINFO_PRETRANSFER_TIME_T.html">CURLINFO_PRETRANSFER_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFOPRIMARYIP"></a><span class="nroffip">CURLINFO_PRIMARY_IP</span> </p>
+<p class="level1">Destination IP address of the last connection. See <a Class="emphasis" href="./CURLINFO_PRIMARY_IP.html">CURLINFO_PRIMARY_IP</a> </p>
+<p class="level0"><a name="CURLINFOPRIMARYPORT"></a><span class="nroffip">CURLINFO_PRIMARY_PORT</span> </p>
+<p class="level1">Destination port of the last connection. See <a Class="emphasis" href="./CURLINFO_PRIMARY_PORT.html">CURLINFO_PRIMARY_PORT</a> </p>
+<p class="level0"><a name="CURLINFOPRIVATE"></a><span class="nroffip">CURLINFO_PRIVATE</span> </p>
+<p class="level1">User&apos;s private data pointer. See <a Class="emphasis" href="./CURLINFO_PRIVATE.html">CURLINFO_PRIVATE</a> </p>
+<p class="level0"><a name="CURLINFOPROTOCOL"></a><span class="nroffip">CURLINFO_PROTOCOL</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) The protocol used for the connection. See <a Class="emphasis" href="./CURLINFO_PROTOCOL.html">CURLINFO_PROTOCOL</a> </p>
+<p class="level0"><a name="CURLINFOPROXYAUTHAVAIL"></a><span class="nroffip">CURLINFO_PROXYAUTH_AVAIL</span> </p>
+<p class="level1">Available HTTP proxy authentication methods. See <a Class="emphasis" href="./CURLINFO_PROXYAUTH_AVAIL.html">CURLINFO_PROXYAUTH_AVAIL</a> </p>
+<p class="level0"><a name="CURLINFOPROXYAUTHUSED"></a><span class="nroffip">CURLINFO_PROXYAUTH_USED</span> </p>
+<p class="level1">Used HTTP proxy authentication methods. See <a Class="emphasis" href="./CURLINFO_PROXYAUTH_USED.html">CURLINFO_PROXYAUTH_USED</a> </p>
+<p class="level0"><a name="CURLINFOPROXYERROR"></a><span class="nroffip">CURLINFO_PROXY_ERROR</span> </p>
+<p class="level1">Detailed proxy error. See <a Class="emphasis" href="./CURLINFO_PROXY_ERROR.html">CURLINFO_PROXY_ERROR</a> </p>
+<p class="level0"><a name="CURLINFOPROXYSSLVERIFYRESULT"></a><span class="nroffip">CURLINFO_PROXY_SSL_VERIFYRESULT</span> </p>
+<p class="level1">Proxy certificate verification result. See <a Class="emphasis" href="./CURLINFO_PROXY_SSL_VERIFYRESULT.html">CURLINFO_PROXY_SSL_VERIFYRESULT</a> </p>
+<p class="level0"><a name="CURLINFOQUEUETIMET"></a><span class="nroffip">CURLINFO_QUEUE_TIME_T</span> </p>
+<p class="level1">The time during which the transfer was held in a waiting queue before it could start for real in number of microseconds. (Added in <a href="/ch/8.6.0.html">8.6.0</a>) See <a Class="emphasis" href="./CURLINFO_QUEUE_TIME_T.html">CURLINFO_QUEUE_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFOREDIRECTCOUNT"></a><span class="nroffip">CURLINFO_REDIRECT_COUNT</span> </p>
+<p class="level1">Total number of redirects that were followed. See <a Class="emphasis" href="./CURLINFO_REDIRECT_COUNT.html">CURLINFO_REDIRECT_COUNT</a> </p>
+<p class="level0"><a name="CURLINFOREDIRECTTIME"></a><span class="nroffip">CURLINFO_REDIRECT_TIME</span> </p>
+<p class="level1">The time it took for all redirection steps include name lookup, connect, pretransfer and transfer before final transaction was started. So, this is zero if no redirection took place. As a double. See <a Class="emphasis" href="./CURLINFO_REDIRECT_TIME.html">CURLINFO_REDIRECT_TIME</a> </p>
+<p class="level0"><a name="CURLINFOREDIRECTTIMET"></a><span class="nroffip">CURLINFO_REDIRECT_TIME_T</span> </p>
+<p class="level1">The time it took for all redirection steps include name lookup, connect, pretransfer and transfer before final transaction was started. So, this is zero if no redirection took place. In number of microseconds. See <a Class="emphasis" href="./CURLINFO_REDIRECT_TIME_T.html">CURLINFO_REDIRECT_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFOREDIRECTURL"></a><span class="nroffip">CURLINFO_REDIRECT_URL</span> </p>
+<p class="level1">URL a redirect would take you to, had you enabled redirects. See <a Class="emphasis" href="./CURLINFO_REDIRECT_URL.html">CURLINFO_REDIRECT_URL</a> </p>
+<p class="level0"><a name="CURLINFOREFERER"></a><span class="nroffip">CURLINFO_REFERER</span> </p>
+<p class="level1">Referrer header. See <a Class="emphasis" href="./CURLINFO_REFERER.html">CURLINFO_REFERER</a> </p>
+<p class="level0"><a name="CURLINFOREQUESTSIZE"></a><span class="nroffip">CURLINFO_REQUEST_SIZE</span> </p>
+<p class="level1">Number of bytes sent in the issued HTTP requests. See <a Class="emphasis" href="./CURLINFO_REQUEST_SIZE.html">CURLINFO_REQUEST_SIZE</a> </p>
+<p class="level0"><a name="CURLINFORESPONSECODE"></a><span class="nroffip">CURLINFO_RESPONSE_CODE</span> </p>
+<p class="level1">Last received response code. See <a Class="emphasis" href="./CURLINFO_RESPONSE_CODE.html">CURLINFO_RESPONSE_CODE</a> </p>
+<p class="level0"><a name="CURLINFORETRYAFTER"></a><span class="nroffip">CURLINFO_RETRY_AFTER</span> </p>
+<p class="level1">The value from the Retry-After header. See <a Class="emphasis" href="./CURLINFO_RETRY_AFTER.html">CURLINFO_RETRY_AFTER</a> </p>
+<p class="level0"><a name="CURLINFORTSPCLIENTCSEQ"></a><span class="nroffip">CURLINFO_RTSP_CLIENT_CSEQ</span> </p>
+<p class="level1">The RTSP client CSeq that is expected next. See <a Class="emphasis" href="./CURLINFO_RTSP_CLIENT_CSEQ.html">CURLINFO_RTSP_CLIENT_CSEQ</a> </p>
+<p class="level0"><a name="CURLINFORTSPCSEQRECV"></a><span class="nroffip">CURLINFO_RTSP_CSEQ_RECV</span> </p>
+<p class="level1">RTSP CSeq last received. See <a Class="emphasis" href="./CURLINFO_RTSP_CSEQ_RECV.html">CURLINFO_RTSP_CSEQ_RECV</a> </p>
+<p class="level0"><a name="CURLINFORTSPSERVERCSEQ"></a><span class="nroffip">CURLINFO_RTSP_SERVER_CSEQ</span> </p>
+<p class="level1">The RTSP server CSeq that is expected next. See <a Class="emphasis" href="./CURLINFO_RTSP_SERVER_CSEQ.html">CURLINFO_RTSP_SERVER_CSEQ</a> </p>
+<p class="level0"><a name="CURLINFORTSPSESSIONID"></a><span class="nroffip">CURLINFO_RTSP_SESSION_ID</span> </p>
+<p class="level1">RTSP session ID. See <a Class="emphasis" href="./CURLINFO_RTSP_SESSION_ID.html">CURLINFO_RTSP_SESSION_ID</a> </p>
+<p class="level0"><a name="CURLINFOSCHEME"></a><span class="nroffip">CURLINFO_SCHEME</span> </p>
+<p class="level1">The scheme used for the connection. See <a Class="emphasis" href="./CURLINFO_SCHEME.html">CURLINFO_SCHEME</a> </p>
+<p class="level0"><a name="CURLINFOSIZEDOWNLOAD"></a><span class="nroffip">CURLINFO_SIZE_DOWNLOAD</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) Number of bytes downloaded. See <a Class="emphasis" href="./CURLINFO_SIZE_DOWNLOAD.html">CURLINFO_SIZE_DOWNLOAD</a> </p>
+<p class="level0"><a name="CURLINFOSIZEDOWNLOADT"></a><span class="nroffip">CURLINFO_SIZE_DOWNLOAD_T</span> </p>
+<p class="level1">Number of bytes downloaded. See <a Class="emphasis" href="./CURLINFO_SIZE_DOWNLOAD_T.html">CURLINFO_SIZE_DOWNLOAD_T</a> </p>
+<p class="level0"><a name="CURLINFOSIZEUPLOAD"></a><span class="nroffip">CURLINFO_SIZE_UPLOAD</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) Number of bytes uploaded. See <a Class="emphasis" href="./CURLINFO_SIZE_UPLOAD.html">CURLINFO_SIZE_UPLOAD</a> </p>
+<p class="level0"><a name="CURLINFOSIZEUPLOADT"></a><span class="nroffip">CURLINFO_SIZE_UPLOAD_T</span> </p>
+<p class="level1">Number of bytes uploaded. See <a Class="emphasis" href="./CURLINFO_SIZE_UPLOAD_T.html">CURLINFO_SIZE_UPLOAD_T</a> </p>
+<p class="level0"><a name="CURLINFOSPEEDDOWNLOAD"></a><span class="nroffip">CURLINFO_SPEED_DOWNLOAD</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) Average download speed. See <a Class="emphasis" href="./CURLINFO_SPEED_DOWNLOAD.html">CURLINFO_SPEED_DOWNLOAD</a> </p>
+<p class="level0"><a name="CURLINFOSPEEDDOWNLOADT"></a><span class="nroffip">CURLINFO_SPEED_DOWNLOAD_T</span> </p>
+<p class="level1">Average download speed. See <a Class="emphasis" href="./CURLINFO_SPEED_DOWNLOAD_T.html">CURLINFO_SPEED_DOWNLOAD_T</a> </p>
+<p class="level0"><a name="CURLINFOSPEEDUPLOAD"></a><span class="nroffip">CURLINFO_SPEED_UPLOAD</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) Average upload speed. See <a Class="emphasis" href="./CURLINFO_SPEED_UPLOAD.html">CURLINFO_SPEED_UPLOAD</a> </p>
+<p class="level0"><a name="CURLINFOSPEEDUPLOADT"></a><span class="nroffip">CURLINFO_SPEED_UPLOAD_T</span> </p>
+<p class="level1">Average upload speed in number of bytes per second. See <a Class="emphasis" href="./CURLINFO_SPEED_UPLOAD_T.html">CURLINFO_SPEED_UPLOAD_T</a> </p>
+<p class="level0"><a name="CURLINFOSSLENGINES"></a><span class="nroffip">CURLINFO_SSL_ENGINES</span> </p>
+<p class="level1">A list of OpenSSL crypto engines. See <a Class="emphasis" href="./CURLINFO_SSL_ENGINES.html">CURLINFO_SSL_ENGINES</a> </p>
+<p class="level0"><a name="CURLINFOSSLVERIFYRESULT"></a><span class="nroffip">CURLINFO_SSL_VERIFYRESULT</span> </p>
+<p class="level1">Certificate verification result. See <a Class="emphasis" href="./CURLINFO_SSL_VERIFYRESULT.html">CURLINFO_SSL_VERIFYRESULT</a> </p>
+<p class="level0"><a name="CURLINFOSTARTTRANSFERTIME"></a><span class="nroffip">CURLINFO_STARTTRANSFER_TIME</span> </p>
+<p class="level1">The time it took from the start until the first byte is received by libcurl. As a double. See <a Class="emphasis" href="./CURLINFO_STARTTRANSFER_TIME.html">CURLINFO_STARTTRANSFER_TIME</a> </p>
+<p class="level0"><a name="CURLINFOSTARTTRANSFERTIMET"></a><span class="nroffip">CURLINFO_STARTTRANSFER_TIME_T</span> </p>
+<p class="level1">The time it took from the start until the first byte is received by libcurl. In microseconds. See <a Class="emphasis" href="./CURLINFO_STARTTRANSFER_TIME_T.html">CURLINFO_STARTTRANSFER_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFOTLSSESSION"></a><span class="nroffip">CURLINFO_TLS_SESSION</span> </p>
+<p class="level1">(<span Class="bold">Deprecated</span>) TLS session info that can be used for further processing. See <a Class="emphasis" href="./CURLINFO_TLS_SESSION.html">CURLINFO_TLS_SESSION</a>. Use <a Class="emphasis" href="./CURLINFO_TLS_SSL_PTR.html">CURLINFO_TLS_SSL_PTR</a> instead. </p>
+<p class="level0"><a name="CURLINFOTLSSSLPTR"></a><span class="nroffip">CURLINFO_TLS_SSL_PTR</span> </p>
+<p class="level1">TLS session info that can be used for further processing. See <a Class="emphasis" href="./CURLINFO_TLS_SSL_PTR.html">CURLINFO_TLS_SSL_PTR</a> </p>
+<p class="level0"><a name="CURLINFOTOTALTIME"></a><span class="nroffip">CURLINFO_TOTAL_TIME</span> </p>
+<p class="level1">Total time of previous transfer. See <a Class="emphasis" href="./CURLINFO_TOTAL_TIME.html">CURLINFO_TOTAL_TIME</a> </p>
+<p class="level0"><a name="CURLINFOTOTALTIMET"></a><span class="nroffip">CURLINFO_TOTAL_TIME_T</span> </p>
+<p class="level1">Total time of previous transfer. See <a Class="emphasis" href="./CURLINFO_TOTAL_TIME_T.html">CURLINFO_TOTAL_TIME_T</a> </p>
+<p class="level0"><a name="CURLINFOUSEDPROXY"></a><span class="nroffip">CURLINFO_USED_PROXY</span> </p>
+<p class="level1">Whether the proxy was used (Added in <a href="/ch/8.7.0.html">8.7.0</a>). See <a Class="emphasis" href="./CURLINFO_USED_PROXY.html">CURLINFO_USED_PROXY</a> </p>
+<p class="level0"><a name="CURLINFOXFERID"></a><span class="nroffip">CURLINFO_XFER_ID</span> </p>
+<p class="level1">The ID of the transfer. (Added in <a href="/ch/8.2.0.html">8.2.0</a>) See <a Class="emphasis" href="./CURLINFO_XFER_ID.html">CURLINFO_XFER_ID</a> </p><a name="TIMES"></a><h2 class="nroffsh">Times</h2>
+<p class="level0">An overview of the time values available from <a Class="emphasis" href="./curl_easy_getinfo.html">curl_easy_getinfo</a> </p><pre class="level0">
+<a href="curl_easy_perform.html">curl_easy_perform</a>()
+&nbsp;   |
+&nbsp;   |--QUEUE
+&nbsp;   |--|--NAMELOOKUP
+&nbsp;   |--|--|--CONNECT
+&nbsp;   |--|--|--|--APPCONNECT
+&nbsp;   |--|--|--|--|--PRETRANSFER
+&nbsp;   |--|--|--|--|--|--POSTTRANSFER
+&nbsp;   |--|--|--|--|--|--|--STARTTRANSFER
+&nbsp;   |--|--|--|--|--|--|--|--TOTAL
+&nbsp;   |--|--|--|--|--|--|--|--REDIRECT
+</pre>
+<p class="level0">&nbsp;<a Class="emphasis" href="./CURLINFO_QUEUE_TIME_T.html">CURLINFO_QUEUE_TIME_T</a>, <a Class="emphasis" href="./CURLINFO_NAMELOOKUP_TIME_T.html">CURLINFO_NAMELOOKUP_TIME_T</a>, &nbsp;<a Class="emphasis" href="./CURLINFO_CONNECT_TIME_T.html">CURLINFO_CONNECT_TIME_T</a>, <a Class="emphasis" href="./CURLINFO_APPCONNECT_TIME_T.html">CURLINFO_APPCONNECT_TIME_T</a>, &nbsp;<a Class="emphasis" href="./CURLINFO_PRETRANSFER_TIME_T.html">CURLINFO_PRETRANSFER_TIME_T</a>, <a Class="emphasis" href="./CURLINFO_POSTTRANSFER_TIME_T.html">CURLINFO_POSTTRANSFER_TIME_T</a>, &nbsp;<a Class="emphasis" href="./CURLINFO_STARTTRANSFER_TIME_T.html">CURLINFO_STARTTRANSFER_TIME_T</a>, <a Class="emphasis" href="./CURLINFO_TOTAL_TIME_T.html">CURLINFO_TOTAL_TIME_T</a>, &nbsp;<a Class="emphasis" href="./CURLINFO_REDIRECT_TIME_T.html">CURLINFO_REDIRECT_TIME_T</a> </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://www.example.com/&quot;);
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   if(<a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> == res) {
+&nbsp;     char &#x2a;ct;
+&nbsp;     /&#x2a; ask for the content-type &#x2a;/
+&nbsp;     res = <a href="curl_easy_getinfo.html">curl_easy_getinfo</a>(curl, <a href="CURLINFO_CONTENT_TYPE.html">CURLINFO_CONTENT_TYPE</a>, &amp;ct);
+&nbsp;
+&nbsp;     if((<a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> == res) &amp;&amp; ct)
+&nbsp;       printf(&quot;We received Content-Type: %s&bsol;n&quot;, ct);
+&nbsp;   }
+&nbsp;
+&nbsp;   /&#x2a; always cleanup &#x2a;/
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.4.1.html">7.4.1</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

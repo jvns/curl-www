@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Download</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style type="text/css">
+  .download {
+      font-size: 140%;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <b>Download</b></div>
+<h1> Releases and Downloads </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/ch/">Changelog</a>
+<br><a href="/download/">Old Releases</a>
+<br><a href="/dev/source.html">Source code repo</a>
+<br><a href="https://curl.se/snapshots/">Daily Snapshots</a>
+<br><a href="https://daniel.haxx.se/address.html">PGP Key</a>
+<br><a href="/rc/">Release Candidates</a>
+<br><a href="/docs/releases.html">Release log</a>
+</div>
+<p>
+ The curl project mostly provides source packages. Other packages are kindly
+ provided by external persons and organizations.
+<h2> Source Archives </h2>
+<p>
+ <b>curl 8.16.0</b>, Released on the <b>2025-09-10</b>. <a href="/ch/8.16.0.html">Changelog for 8.16.0</a>.
+<table class="download">
+  <tr>
+    <td class="download"><a href="/download/curl-8.16.0.tar.xz" type="application/x-xz">curl-8.16.0.tar.xz</a></td>
+    <td><a href="/download/curl-8.16.0.tar.xz.asc" type="application/pgp-signature">[pgp]</a></td>
+  </tr>
+  <tr>
+    <td class="download"><a href="/download/curl-8.16.0.tar.bz2" type="application/x-bzip2">curl-8.16.0.tar.bz2</a></td>
+    <td><a href="/download/curl-8.16.0.tar.bz2.asc" type="application/pgp-signature">[pgp]</a></td>
+  </tr>
+  <tr>
+    <td class="download"><a href="/download/curl-8.16.0.tar.gz" type="application/x-gzip">curl-8.16.0.tar.gz</a></td>
+    <td><a href="/download/curl-8.16.0.tar.gz.asc" type="application/pgp-signature">[pgp]</a></td>
+  </tr>
+  <tr>
+    <td class="download"><a href="/download/curl-8.16.0.zip" type="application/zip">curl-8.16.0.zip</a></td>
+    <td><a href="/download/curl-8.16.0.zip.asc" type="application/pgp-signature">[pgp]</a></td>
+  </tr>
+</table>
+<h2> Long-term support </h2>
+<p>
+ There are long-term support curl releases
+ called <a href="https://rock-solid.curl.dev/">Rock-solid curl</a>, provided
+ as a commercial offer.
+<h2> Packages </h2>
+<p>
+<div class="oslinks">
+</div>
+<p><table class="download2" cellpadding="0" cellspacing="0">
+<tr>
+<th>Package</th>
+<th>Version</th>
+<th>Type</th>
+<th>Provider</th>
+</tr>
+<tr><td class="osend" colspan="8">&nbsp;</td></tr>
+</table>
+<p>
+ <table><tr class="latest2"><td>
+ This colour means the packaged version is the latest stable version available (8.16.0)!
+ </td></tr></table>
+<p>
+ If you have newer archives or archives for platforms not already present in
+ this table, we would like to add them to this table with a pointer to your
+ location. Mail <a href="mailto:curl-release&#64;haxx.se">curl-release</a> and
+ tell us!
+ <p>
+   <table>
+     <tr class="tabletop">
+       <th> type </th>
+       <th> description </th>
+     </tr>
+     <tr><td><b>tool</b> </td>
+       <td> The command line tool. libcurl may then be provided either linked
+         statically or included linked dynamically.</td><tr>
+       </tr>
+     <tr><td><b>libcurl</b> </td>
+       <td> libcurl without the command line tool.</td><tr>
+       </tr>
+     <tr><td><b>devel</b> </td>
+       <td> libcurl and headers, suitable for application developers to work
+         with.</td><tr>
+       </tr>
+     <tr><td><b>source</b> </td>
+       <td> curl and libcurl full source code, possibly adjusted for the particular
+         surrounding the package is made for</td><tr>
+       </tr>
+   </table>
+<h2> Official curl container images </h2>
+<p>
+    The official curl container images are available at:
+    <ul>
+        <li><a href="https://quay.io/repository/curl/curl?tab=info">Quay.io</a>: > podman run quay.io/curl/curl:latest</li>
+        <li><a href="https://hub.docker.com/r/curlimages/curl">Docker hub</a>: > podman run curlimages/curl:latest</li>
+    </ul>
+</div>
+</div>
+</body>
+</html>

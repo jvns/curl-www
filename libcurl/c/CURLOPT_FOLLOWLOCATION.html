@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_FOLLOWLOCATION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_FOLLOWLOCATION</b></div>
+<h1> CURLOPT_FOLLOWLOCATION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_FOLLOWLOCATION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_FOLLOWLOCATION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_FOLLOWLOCATION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_FOLLOWLOCATION - follow HTTP 3xx redirects </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>, long mode);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This option tells the library to follow <span Class="emphasis">Location:</span> header redirects that an HTTP server sends in a 30x response. The <span Class="emphasis">Location:</span> header can specify a relative or an absolute URL to follow. The long parameter <span Class="emphasis">mode</span> instructs how libcurl should act on subsequent requests. </p>
+<p class="level0"><span Class="emphasis">mode</span> only had a single value (1L) for a long time that enables redirect following. Since <a href="/ch/8.13.0.html">8.13.0</a>, two additional modes are also supported. See below. </p>
+<p class="level0">When following redirects, libcurl issues another request for the new URL and follows subsequent new <span Class="emphasis">Location:</span> redirects all the way until no more such headers are returned or the maximum limit is reached. <a Class="emphasis" href="./CURLOPT_MAXREDIRS.html">CURLOPT_MAXREDIRS</a> is used to limit the number of redirects libcurl follows. </p>
+<p class="level0">libcurl restricts what protocols it automatically follow redirects to. The accepted target protocols are set with <a Class="emphasis" href="./CURLOPT_REDIR_PROTOCOLS_STR.html">CURLOPT_REDIR_PROTOCOLS_STR</a>. By default libcurl allows HTTP, HTTPS, FTP and FTPS on redirects. </p>
+<p class="level0">When following a redirect, the specific 30x response code also dictates which request method libcurl uses in the subsequent request: For 301, 302 and 303 responses libcurl switches method from POST to GET unless <a Class="emphasis" href="./CURLOPT_POSTREDIR.html">CURLOPT_POSTREDIR</a> instructs libcurl otherwise. All other redirect response codes make libcurl use the same method again. </p>
+<p class="level0">When libcurl switches method to GET, it then uses that method without sending any request body. If it does not change the method, it sends the subsequent request the same way as the previous one; including the request body if one was provided. </p>
+<p class="level0">For users who think the existing location following is too naive, too simple or just lacks features, it is easy to instead implement your own redirect follow logic with the use of <a Class="emphasis" href="./curl_easy_getinfo.html">curl_easy_getinfo</a>&apos;s <a Class="emphasis" href="./CURLINFO_REDIRECT_URL.html">CURLINFO_REDIRECT_URL</a> option instead of using <a Class="emphasis" href="./CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>. </p>
+<p class="level0">By default, libcurl only sends <span Class="emphasis">Authentication:</span> or explicitly set <span Class="emphasis">Cookie:</span> headers to the initial host given in the original URL, to avoid leaking username + password to other sites. <a Class="emphasis" href="./CURLOPT_UNRESTRICTED_AUTH.html">CURLOPT_UNRESTRICTED_AUTH</a> is provided to change that behavior. </p>
+<p class="level0">Due to the way HTTP works, almost any header can be made to contain data a client may not want to pass on to other servers than the initially intended host and for all other headers than the two mentioned above, there is no protection from this happening when libcurl is told to follow redirects. </p>
+<p class="level0">Pick one of the following modes: </p>
+<p class="level0"><a name="CURLFOLLOWALL"></a><span class="nroffip">CURLFOLLOW_ALL (1)</span> </p>
+<p class="level1">Before <a href="/ch/8.13.0.html">8.13.0</a> this bit had no name and 1L was just the value to enable this option. This makes a set custom method be used in all HTTP requests, even after redirects. </p>
+<p class="level0"><a name="CURLFOLLOWOBEYCODE"></a><span class="nroffip">CURLFOLLOW_OBEYCODE (2)</span> </p>
+<p class="level1">When there is a custom request method set with <a Class="emphasis" href="./CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a>, that set method replaces what libcurl would otherwise use. If a 301/302/303 response code is returned to signal a redirect, the method is changed from POST to <span Class="emphasis">GET</span>. For 307/308, the custom method remains set and used. </p>
+<p class="level1">Note that only POST (or a custom post) is changed to GET on 301/302, its not change PUT etc - and therefore also not when libcurl issues a custom PUT. A 303 response makes it switch to GET independently of the original method (except for HEAD). </p>
+<p class="level1">To control for which of the 301/302/303 status codes libcurl should <span Class="emphasis">not</span> switch back to GET for when doing a custom POST, and instead keep the custom method, use <a Class="emphasis" href="./CURLOPT_POSTREDIR.html">CURLOPT_POSTREDIR</a>. </p>
+<p class="level1">If you prefer a custom POST method to be reset to exactly the method <span Class="emphasis">POST</span>, use CURLFOLLOW_FIRSTONLY instead. </p>
+<p class="level0"><a name="CURLFOLLOWFIRSTONLY"></a><span class="nroffip">CURLFOLLOW_FIRSTONLY (3)</span> </p>
+<p class="level1">When there is a custom request method set with <a Class="emphasis" href="./CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a>, that set method replaces what libcurl would otherwise use in the first outgoing request only. The second request is then done according to the redirect response code. </p>
+<p class="level1">If you prefer your custom method to remain in use after a 307/308 redirect, use CURLFOLLOW_OBEYCODE instead. </p><a name="NOTE"></a><h2 class="nroffsh">Note</h2>
+<p class="level0">Since libcurl changes method or not based on the specific HTTP response code, setting <a Class="emphasis" href="./CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a> while following redirects may change what libcurl would otherwise do and if not that carefully may even make it misbehave since <a Class="emphasis" href="./CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a> overrides the method libcurl would otherwise select internally. </p>
+<p class="level0">Setting the CURLFOLLOW_OBEYCODE bit makes libcurl <span Class="emphasis">not</span> use the custom set method after redirects for 301, 302 and 303 responses. Unless the <a Class="emphasis" href="./CURLOPT_POSTREDIR.html">CURLOPT_POSTREDIR</a> bits are set for those status codes. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">0, disabled </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   /&#x2a; example.com is redirected, so we tell libcurl to follow redirection &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>, 1L);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLINFO_REDIRECT_COUNT.html">CURLINFO_REDIRECT_COUNT</a>(3), <a Class="bold" href="./CURLINFO_REDIRECT_URL.html">CURLINFO_REDIRECT_URL</a>(3), <a Class="bold" href="./CURLOPT_POSTREDIR.html">CURLOPT_POSTREDIR</a>(3), <a Class="bold" href="./CURLOPT_PROTOCOLS_STR.html">CURLOPT_PROTOCOLS_STR</a>(3), <a Class="bold" href="./CURLOPT_REDIR_PROTOCOLS_STR.html">CURLOPT_REDIR_PROTOCOLS_STR</a>(3), <a Class="bold" href="./CURLOPT_UNRESTRICTED_AUTH.html">CURLOPT_UNRESTRICTED_AUTH</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

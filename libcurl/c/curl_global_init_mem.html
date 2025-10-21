@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_global_init_mem()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_global_init_mem</b></div>
+<h1> curl_global_init_mem - libcurl initialisation with memory callbacks </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_global_init_mem%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_global_init_mem.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_global_init_mem.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_global_init_mem - global libcurl initialization with memory callbacks </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_global_init_mem.html">curl_global_init_mem</a>(long flags,
+&nbsp;                             curl_malloc_callback m,
+&nbsp;                             curl_free_callback f,
+&nbsp;                             curl_realloc_callback r,
+&nbsp;                             curl_strdup_callback s,
+&nbsp;                             curl_calloc_callback c);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function works exactly as <a Class="emphasis" href="./curl_global_init.html">curl_global_init</a> with one addition: it allows the application to set callbacks to replace the otherwise used internal memory functions. </p>
+<p class="level0">If you are using libcurl from multiple threads or libcurl was built with the threaded resolver option then the callback functions must be thread safe. The threaded resolver is a common build option to enable (and in some cases the default) so we strongly urge you to make your callback functions thread safe. </p>
+<p class="level0">All callback arguments must be set to valid function pointers. The prototypes for the given callbacks must match these: </p>
+<p class="level0"><a name="void"></a><span class="nroffip">void &#x2a;malloc_callback(size_t size);</span> </p>
+<p class="level1">To replace malloc() </p>
+<p class="level0"><a name="void"></a><span class="nroffip">void free_callback(void &#x2a;ptr);</span> </p>
+<p class="level1">To replace free() </p>
+<p class="level0"><a name="void"></a><a name="sizet"></a><span class="nroffip">void &#x2a;realloc_callback(void &#x2a;ptr, size_t size);</span> </p>
+<p class="level1">To replace realloc() </p>
+<p class="level0"><a name="char"></a><span class="nroffip">char &#x2a;strdup_callback(const char &#x2a;str);</span> </p>
+<p class="level1">To replace strdup() </p>
+<p class="level0"><a name="void"></a><a name="sizet"></a><span class="nroffip">void &#x2a;calloc_callback(size_t nmemb, size_t size);</span> </p>
+<p class="level1">To replace calloc() </p>
+<p class="level1">This function is otherwise the same as <a Class="emphasis" href="./curl_global_init.html">curl_global_init</a>, please refer to that man page for documentation. </p><a name="CAUTION"></a><h2 class="nroffsh">Caution</h2>
+<p class="level0">Manipulating these gives considerable powers to the application to severely screw things up for libcurl. Take care. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+extern void &#x2a;malloc_cb(size_t);
+extern void free_cb(void &#x2a;);
+extern void &#x2a;realloc_cb(void &#x2a;, size_t);
+extern char &#x2a;strdup_cb(const char &#x2a;);
+extern void &#x2a;calloc_cb(size_t, size_t);
+&nbsp;
+int main(void)
+{
+&nbsp; <a href="curl_global_init_mem.html">curl_global_init_mem</a>(CURL_GLOBAL_DEFAULT, malloc_cb,
+&nbsp;                      free_cb, realloc_cb,
+&nbsp;                      strdup_cb, calloc_cb);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.12.0.html">7.12.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_global_cleanup.html">curl_global_cleanup</a>(3), <a Class="bold" href="./curl_global_init.html">curl_global_init</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - List of Features</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/projdocs.html">Project</a> / <b>Features</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="comparison-table.html">feature comparison table</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="features----what-curl-can-do">Features -- what curl can do</h1>
+<h2 id="curl-tool">curl tool</h2>
+<ul>
+<li>config file support</li>
+<li>multiple URLs in a single command line</li>
+<li>range "globbing" support: [0-13], {one,two,three}</li>
+<li>multiple file upload on a single command line</li>
+<li>redirect stderr</li>
+<li>parallel transfers</li>
+</ul>
+<h2 id="libcurl">libcurl</h2>
+<ul>
+<li>URL RFC 3986 syntax</li>
+<li>custom maximum download time</li>
+<li>custom lowest download speed acceptable</li>
+<li>custom output result after completion</li>
+<li>guesses protocol from hostname unless specified</li>
+<li>supports .netrc</li>
+<li>progress bar with time statistics while downloading</li>
+<li>standard proxy environment variables support</li>
+<li>have run on 101 operating systems and 28 CPU architectures</li>
+<li>selectable network interface for outgoing traffic</li>
+<li>IPv6 support on Unix and Windows</li>
+<li>happy eyeballs dual-stack IPv4 + IPv6 connects</li>
+<li>persistent connections</li>
+<li>SOCKS 4 + 5 support, with or without local name resolving</li>
+<li><em>pre-proxy</em> support, for <em>proxy chaining</em></li>
+<li>supports username and password in proxy environment variables</li>
+<li>operations through HTTP proxy "tunnel" (using CONNECT)</li>
+<li>replaceable memory functions (malloc, free, realloc, etc)</li>
+<li>asynchronous name resolving</li>
+<li>both a push and a pull style interface</li>
+<li>international domain names (IDN)</li>
+<li>transfer rate limiting</li>
+<li>stable API and ABI</li>
+<li>TCP keep alive</li>
+<li>TCP Fast Open</li>
+<li>DNS cache (that can be shared between transfers)</li>
+<li>non-blocking single-threaded parallel transfers</li>
+<li>Unix domain sockets to server or proxy</li>
+<li>DNS-over-HTTPS</li>
+<li>uses non-blocking name resolves</li>
+<li>selectable name resolver backend</li>
+</ul>
+<h2 id="url-api">URL API</h2>
+<ul>
+<li>parses RFC 3986 URLs</li>
+<li>generates URLs from individual components</li>
+<li>manages "redirects"</li>
+</ul>
+<h2 id="header-api">Header API</h2>
+<ul>
+<li>easy access to HTTP response headers, from all contexts</li>
+<li>named headers</li>
+<li>iterate over headers</li>
+</ul>
+<h2 id="tls">TLS</h2>
+<ul>
+<li>selectable TLS backend(s)</li>
+<li>TLS False Start</li>
+<li>TLS version control</li>
+<li>TLS session resumption</li>
+<li>key pinning</li>
+<li>mutual authentication</li>
+<li>Use dedicated CA cert bundle</li>
+<li>Use OS-provided CA store</li>
+<li>separate TLS options for HTTPS proxy</li>
+</ul>
+<h2 id="http">HTTP</h2>
+<ul>
+<li>HTTP/0.9 responses are optionally accepted</li>
+<li>HTTP/1.0</li>
+<li>HTTP/1.1</li>
+<li>HTTP/2, including multiplexing and server push</li>
+<li>GET</li>
+<li>PUT</li>
+<li>HEAD</li>
+<li>POST</li>
+<li>multipart formpost (RFC 1867-style)</li>
+<li>authentication: Basic, Digest, NTLM (9) and Negotiate (SPNEGO) to
+server and proxy</li>
+<li>resume transfers</li>
+<li>follow redirects</li>
+<li>maximum amount of redirects to follow</li>
+<li>custom HTTP request</li>
+<li>cookie get/send fully parsed</li>
+<li>reads/writes the Netscape cookie file format</li>
+<li>custom headers (replace/remove internally generated headers)</li>
+<li>custom user-agent string</li>
+<li>custom referrer string</li>
+<li>range</li>
+<li>proxy authentication</li>
+<li>time conditions</li>
+<li>via HTTP proxy, HTTPS proxy or SOCKS proxy</li>
+<li>HTTP/2 or HTTP/1.1 to HTTPS proxy</li>
+<li>retrieve file modification date</li>
+<li>Content-Encoding support for deflate, gzip, brotli and zstd</li>
+<li>"Transfer-Encoding: chunked" support in uploads</li>
+<li>HSTS</li>
+<li>alt-svc</li>
+<li>ETags</li>
+<li>HTTP/1.1 trailers, both sending and getting</li>
+</ul>
+<h2 id="https">HTTPS</h2>
+<ul>
+<li>HTTP/3</li>
+<li>using client certificates</li>
+<li>verify server certificate</li>
+<li>via HTTP proxy, HTTPS proxy or SOCKS proxy</li>
+<li>select desired encryption</li>
+<li>select usage of a specific TLS version</li>
+<li>ECH</li>
+</ul>
+<h2 id="ftp">FTP</h2>
+<ul>
+<li>download</li>
+<li>authentication</li>
+<li>Kerberos 5</li>
+<li>active/passive using PORT, EPRT, PASV or EPSV</li>
+<li>single file size information (compare to HTTP HEAD)</li>
+<li>'type=' URL support</li>
+<li>directory listing</li>
+<li>directory listing names-only</li>
+<li>upload</li>
+<li>upload append</li>
+<li>upload via http-proxy as HTTP PUT</li>
+<li>download resume</li>
+<li>upload resume</li>
+<li>custom ftp commands (before and/or after the transfer)</li>
+<li>simple "range" support</li>
+<li>via HTTP proxy, HTTPS proxy or SOCKS proxy</li>
+<li>all operations can be tunneled through proxy</li>
+<li>customizable to retrieve file modification date</li>
+<li>no directory depth limit</li>
+</ul>
+<h2 id="ftps">FTPS</h2>
+<ul>
+<li>implicit <code>ftps://</code> support that use SSL on both
+connections</li>
+<li>explicit "AUTH TLS" and "AUTH SSL" usage to "upgrade" plain
+<code>ftp://</code> connection to use SSL for both or one of the
+connections</li>
+</ul>
+<h2 id="ssh-both-scp-and-sftp">SSH (both SCP and SFTP)</h2>
+<ul>
+<li>selectable SSH backend</li>
+<li>known hosts support</li>
+<li>public key fingerprinting</li>
+<li>both password and public key auth</li>
+</ul>
+<h2 id="sftp">SFTP</h2>
+<ul>
+<li>both password and public key auth</li>
+<li>with custom commands sent before/after the transfer</li>
+<li>directory listing</li>
+</ul>
+<h2 id="tftp">TFTP</h2>
+<ul>
+<li>download</li>
+<li>upload</li>
+</ul>
+<h2 id="telnet">TELNET</h2>
+<ul>
+<li>connection negotiation</li>
+<li>custom telnet options</li>
+<li>stdin/stdout I/O</li>
+</ul>
+<h2 id="ldap">LDAP</h2>
+<ul>
+<li>full LDAP URL support</li>
+</ul>
+<h2 id="dict">DICT</h2>
+<ul>
+<li>extended DICT URL support</li>
+</ul>
+<h2 id="file">FILE</h2>
+<ul>
+<li>URL support</li>
+<li>upload</li>
+<li>resume</li>
+</ul>
+<h2 id="smb">SMB</h2>
+<ul>
+<li>SMBv1 over TCP and SSL</li>
+<li>download</li>
+<li>upload</li>
+<li>authentication with NTLMv1</li>
+</ul>
+<h2 id="smtp">SMTP</h2>
+<ul>
+<li>authentication: Plain, Login, CRAM-MD5, Digest-MD5, NTLM, Kerberos 5
+and External</li>
+<li>send emails</li>
+<li>mail from support</li>
+<li>mail size support</li>
+<li>mail auth support for trusted server-to-server relaying</li>
+<li>multiple recipients</li>
+<li>via http-proxy</li>
+</ul>
+<h2 id="smtps">SMTPS</h2>
+<ul>
+<li>implicit <code>smtps://</code> support</li>
+<li>explicit "STARTTLS" usage to "upgrade" plain <code>smtp://</code>
+connections to use SSL</li>
+<li>via http-proxy</li>
+</ul>
+<h2 id="pop3">POP3</h2>
+<ul>
+<li>authentication: Clear Text, APOP and SASL</li>
+<li>SASL based authentication: Plain, Login, CRAM-MD5, Digest-MD5, NTLM,
+Kerberos 5 and External</li>
+<li>list emails</li>
+<li>retrieve emails</li>
+<li>enhanced command support for: CAPA, DELE, TOP, STAT, UIDL and NOOP
+via custom requests</li>
+<li>via http-proxy</li>
+</ul>
+<h2 id="pop3s">POP3S</h2>
+<ul>
+<li>implicit <code>pop3s://</code> support</li>
+<li>explicit <code>STLS</code> usage to "upgrade" plain
+<code>pop3://</code> connections to use SSL</li>
+<li>via http-proxy</li>
+</ul>
+<h2 id="imap">IMAP</h2>
+<ul>
+<li>authentication: Clear Text and SASL</li>
+<li>SASL based authentication: Plain, Login, CRAM-MD5, Digest-MD5, NTLM,
+Kerberos 5 and External</li>
+<li>list the folders of a mailbox</li>
+<li>select a mailbox with support for verifying the
+<code>UIDVALIDITY</code></li>
+<li>fetch emails with support for specifying the UID and SECTION</li>
+<li>upload emails via the append command</li>
+<li>enhanced command support for: EXAMINE, CREATE, DELETE, RENAME,
+STATUS, STORE, COPY and UID via custom requests</li>
+<li>via http-proxy</li>
+</ul>
+<h2 id="imaps">IMAPS</h2>
+<ul>
+<li>implicit <code>imaps://</code> support</li>
+<li>explicit "STARTTLS" usage to "upgrade" plain <code>imap://</code>
+connections to use SSL</li>
+<li>via http-proxy</li>
+</ul>
+<h2 id="mqtt">MQTT</h2>
+<ul>
+<li>Subscribe to and publish topics using URL scheme
+<code>mqtt://broker/topic</code></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

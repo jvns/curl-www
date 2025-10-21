@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head> <title>mk-ca-bundle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/tooldocs.html">Tool</a> / <b>mk-ca-bundle</b></div>
+<h1> mk-ca-bundle the man page </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="faq.html">FAQ</a>
+<br><a href="httpscripting.html">HTTP Scripting</a>
+<br><a href="tutorial.html">Tutorial</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">mk-ca-bundle - convert Mozilla&apos;s certificate bundle to PEM format </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
+<p class="level0">mk-ca-bundle [options] [output] </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This tool downloads the <span Class="emphasis">certdata.txt</span> file from Mozilla&apos;s source tree over HTTPS, then parses it and extracts the included certificates into PEM format. By default, only CA root certificates trusted to issue SSL server authentication certificates are extracted. These are then processed with the OpenSSL command line tool to produce the final ca-bundle output file. </p>
+<p class="level0">The default <span Class="emphasis">output</span> name is <span Class="bold">ca-bundle.crt</span>. By setting it to &apos;-&apos; (a single dash) you get the output sent to STDOUT instead of a file. </p>
+<p class="level0">The PEM format this scripts uses for output makes the result readily available for use by just about all OpenSSL or GnuTLS powered applications, such as curl and others. </p><a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
+<p class="level0">The following options are supported: </p>
+<p class="level0"><a name="-b"></a><span class="nroffip">-b</span> </p>
+<p class="level1">backup an existing version of <span Class="emphasis">output</span> </p>
+<p class="level0"><a name="-d"></a><span class="nroffip">-d [name]</span> </p>
+<p class="level1">specify which Mozilla tree to pull <span Class="emphasis">certdata.txt</span> from (or a custom URL). Valid names are: <span Class="bold">aurora</span>, <span Class="bold">beta</span>, <span Class="bold">central</span>, <span Class="bold">Mozilla</span>, <span Class="bold">nss</span>, <span Class="bold">release</span> (default). They are shortcuts for which source tree to get the certificate data from. </p>
+<p class="level0"><a name="-f"></a><span class="nroffip">-f</span> </p>
+<p class="level1">force rebuild even if <span Class="emphasis">certdata.txt</span> is current (Added in version 1.17) </p>
+<p class="level0"><a name="-i"></a><span class="nroffip">-i</span> </p>
+<p class="level1">print version info about used modules </p>
+<p class="level0"><a name="-k"></a><span class="nroffip">-k</span> </p>
+<p class="level1">Allow insecure data transfer. By default (since 1.27) this command fails if the HTTPS transfer fails. This overrides that decision (and opens for man-in-the-middle attacks). </p>
+<p class="level0"><a name="-l"></a><span class="nroffip">-l</span> </p>
+<p class="level1">print license info about <span Class="emphasis">certdata.txt</span> </p>
+<p class="level0"><a name="-m"></a><span class="nroffip">-m</span> </p>
+<p class="level1">(Added in 1.26) Include meta data comments in the output. The meta data is specific information about each certificate that is stored in the original file as comments and using this option makes those comments get passed on to the output file. The meta data is not parsed in any way by mk-ca-bundle. </p>
+<p class="level0"><a name="-n"></a><span class="nroffip">-n</span> </p>
+<p class="level1">Do not download <span Class="emphasis">certdata.txt</span> - use the existing. </p>
+<p class="level0"><a name="-p"></a><span class="nroffip">-p [purposes]:[levels]</span> </p>
+<p class="level1">list of Mozilla trust purposes and levels for certificates to include in output. Takes the form of a comma separated list of purposes, a colon, and a comma separated list of levels. The default is to include all certificates trusted to issue SSL Server certificates (<span Class="emphasis">SERVER_AUTH:TRUSTED_DELEGATOR</span>). </p>
+<p class="level1">Valid purposes are: <span Class="bold">ALL</span>, <span Class="bold">DIGITAL_SIGNATURE</span>, <span Class="bold">NON_REPUDIATION</span>, <span Class="bold">KEY_ENCIPHERMENT</span>, <span Class="bold">DATA_ENCIPHERMENT</span>, <span Class="bold">KEY_AGREEMENT</span>, <span Class="bold">KEY_CERT_SIGN</span>, <span Class="bold">CRL_SIGN</span>, <span Class="bold">SERVER_AUTH</span> (default), <span Class="bold">CLIENT_AUTH</span>, <span Class="bold">CODE_SIGNING</span>, <span Class="bold">EMAIL_PROTECTION</span>, <span Class="bold">IPSEC_END_SYSTEM</span>, <span Class="bold">IPSEC_TUNNEL</span>, <span Class="bold">IPSEC_USER</span>, <span Class="bold">TIME_STAMPING</span>, <span Class="bold">STEP_UP_APPROVED</span> </p>
+<p class="level1">Valid trust levels are: <span Class="bold">ALL</span>, <span Class="bold">TRUSTED_DELEGATOR</span> (default), <span Class="bold">NOT_TRUSTED</span>, <span Class="bold">MUST_VERIFY_TRUST</span>, <span Class="bold">TRUSTED</span> </p>
+<p class="level0"><a name="-q"></a><span class="nroffip">-q</span> </p>
+<p class="level1">be really quiet (no progress output at all) </p>
+<p class="level0"><a name="-t"></a><span class="nroffip">-t</span> </p>
+<p class="level1">include plain text listing of certificates </p>
+<p class="level0"><a name="-s"></a><span class="nroffip">-s [algorithms]</span> </p>
+<p class="level1">A comma separated list of signature algorithms with which to hash/fingerprint each certificate and output when run in plain text mode. </p>
+<p class="level1">Valid algorithms are: ALL, NONE, MD5 (default), SHA1, SHA256, SHA384, SHA512 </p>
+<p class="level0"><a name="-u"></a><span class="nroffip">-u</span> </p>
+<p class="level1">unlink (remove) <span Class="emphasis">certdata.txt</span> after processing </p>
+<p class="level0"><a name="-v"></a><span class="nroffip">-v</span> </p>
+<p class="level1">be verbose and print out processed certificate authorities </p><a name="EXIT"></a><h2 class="nroffsh">Exit status</h2>
+<p class="level0">Returns 0 on success. Returns 1 if it fails to download data. </p><a name="FILE"></a><h2 class="nroffsh">File format</h2>
+<p class="level0">The file format used by Mozilla for this trust information is documented here: </p>
+<p class="level0"><a href="https://p11-glue.freedesktop.org/doc/storing-trust-policy/storing-trust-existing.html">https://p11-glue.freedesktop.org/doc/storing-trust-policy/storing-trust-existing.html</a> </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><span Class="bold">curl</span>(1) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

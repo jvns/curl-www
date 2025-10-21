@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 8.14.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 8.14.1</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="8.14.0.html">🠰 8.14.0</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="8.15.0.html">8.15.0 🠲</a>
+</span>
+<h1> Changes in 8.14.1 - June 4 2025 </h1>
+<div class="video"><a href="https://youtu.be/vpz7_NMGY6s?si=HveFdVtSvyau1JTU">8.14.1</a> </div><div class="vulnbox"><a href=/docs/vuln-8.14.1.html>8.14.1</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> <a href="https://curl.se/bug/?i=17507">asyn-thrdd: fix cleanup when RR fails due to OOM</a>
+ <li> <a href="https://curl.se/bug/?i=17512">autotools: recognize more Linux targets when setting `-D_GNU_SOURCE`</a>
+ <li> <a href="https://curl.se/bug/?i=17470">BUG-BOUNTY.md. mention the medium bounty amount in 2025</a>
+ <li> <a href="https://curl.se/bug/?i=16980">cmake: fix missed version number for multi-pkg-config detections</a>
+ <li> <a href="https://curl.se/bug/?i=17521">cmdline-docs: mention HTTP resumed uploads to be shaky</a>
+ <li> <a href="https://curl.se/bug/?i=17527">curl: make -N handled correctly</a>
+ <li> <a href="https://curl.se/bug/?i=17513">curl: upload from &apos;.&apos; fix</a>
+ <li> <a href="https://curl.se/bug/?i=17262">dllmain: exclude from Cygwin builds</a>
+ <li> <a href="https://curl.se/bug/?i=17500">docs/tests: remove mention of hyper</a>
+ <li> <a href="https://curl.se/bug/?i=17480">docs: fix typos</a>
+ <li> <a href="https://curl.se/bug/?i=17482">ftp: fix teardown of DATA connection in done</a>
+ <li> <a href="https://curl.se/bug/?i=17472">http: fail early when rewind of input failed when following redirects</a>
+ <li> <a href="https://curl.se/bug/?i=17502">license: update some copyright links to curl.se</a>
+ <li> <a href="https://curl.se/bug/?i=17503">memanalyze.pl: fix getaddrinfo/freeaddrinfo checks</a>
+ <li> <a href="https://curl.se/bug/?i=17478">misc: fix spelling</a>
+ <li> <a href="https://curl.se/bug/?i=17484">misc: we write *an* IPv6 address</a>
+ <li> <a href="https://curl.se/bug/?i=17473">multi: fix add_handle resizing</a>
+ <li> <a href="https://curl.se/bug/?i=17487">spelling: &apos;a&apos; vs &apos;an&apos;</a>
+ <li> <a href="https://curl.se/bug/?i=17489">spelling: call it null-terminate consistently</a>
+ <li> <a href="https://curl.se/bug/?i=17515">test1510: fix expectation</a>
+ <li> <a href="https://curl.se/bug/?i=17492">tests: await portfile to be complete</a>
+ <li> <a href="https://curl.se/bug/?i=17493">tests: fix checks for https-mtls proto</a>
+ <li> <a href="https://curl.se/bug/?i=17516">tests: improve server start reliability</a>
+ <li> <a href="https://curl.se/bug/?i=17463">tests: move test docs into /docs</a>
+ <li> <a href="https://curl.se/bug/?i=17462">tests: re-enable 1510, document heimdal memleak</a>
+ <li> <a href="https://curl.se/bug/?i=17493">tests: test mtls also w/ clientAuth EKU only</a>
+ <li> <a href="https://curl.se/bug/?i=17493">tests: test mtls with --insecure</a>
+ <li> <a href="https://curl.se/bug/?i=17471">tls BIOs: handle BIO_CTRL_EOF correctly</a>
+ <li> <a href="https://curl.se/bug/?i=17508">tool_getparam: make --no-anyauth not be accepted</a>
+ <li> <a href="https://curl.se/bug/?i=17448">tool_getparam: refactored, simplified</a>
+ <li> <a href="https://curl.se/bug/?i=17483">tool_getparam: remove two nextarg NULL checks</a>
+ <li> <a href="https://curl.se/bug/?i=17497">VULN-DISCLOSURE-POLICY.md: the distros list wants &lt;= 7 days embargo</a>
+ <li> <a href="https://curl.se/bug/?i=17481">wolfssl: fix sending of early data</a>
+ <li> <a href="https://curl.se/bug/?i=17496">ws: handle blocked sends better</a>
+ <li> <a href="https://curl.se/bug/?i=17136">ws: tests and fixes</a>
+</ul>
+<h2> Further </h2>
+The previous release was 8.14.0.
+The next release was 8.15.0.

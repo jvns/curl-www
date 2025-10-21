@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head> <title>TLS backend support of libcurl options</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+<link rel="stylesheet" type="text/css" href="../../docs/comparison.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>TLS options</b></div>
+<h1> TLS related options and the backends they work with </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">info options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+</div>
+<p>
+  libcurl can use different TLS backends, selected at both build-time and
+  runtime. This table shows all TLS related options and details the set of
+  TLS backends that work with it.
+<p>
+ The <b>OpenSSL</b> column also covers BoringSSL, libressl, quictls, AWS-LC
+ and AmiSSL.
+<p>
+<table cellspacing="2" cellpadding="2" border="0" summary="Which libcurl TLS options that work with which TLS backend"><tr class="tabletop"><th>option</th>
+<th>BearSSL</th><th>GnuTLS</th><th>mbedTLS</th><th>OpenSSL</th><th>rustls</th><th>Schannel</th><th>Secure Transport</th><th>wolfSSL</th></tr>
+<tr><td><a href="CURLINFO_CAINFO.html">CURLINFO_CAINFO</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLINFO_CAPATH.html">CURLINFO_CAPATH</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLINFO_CERTINFO.html">CURLINFO_CERTINFO</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLINFO_EARLYDATA_SENT_T.html">CURLINFO_EARLYDATA_SENT_T</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLINFO_PROXY_SSL_VERIFYRESULT.html">CURLINFO_PROXY_SSL_VERIFYRESULT</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLINFO_SSL_ENGINES.html">CURLINFO_SSL_ENGINES</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLINFO_SSL_VERIFYRESULT.html">CURLINFO_SSL_VERIFYRESULT</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLINFO_TLS_SESSION.html">CURLINFO_TLS_SESSION</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLINFO_TLS_SSL_PTR.html">CURLINFO_TLS_SSL_PTR</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_CA_CACHE_TIMEOUT.html">CURLOPT_CA_CACHE_TIMEOUT</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_CAINFO_BLOB.html">CURLOPT_CAINFO_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_CAINFO.html">CURLOPT_CAINFO</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_CAPATH.html">CURLOPT_CAPATH</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_CERTINFO.html">CURLOPT_CERTINFO</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_CRLFILE.html">CURLOPT_CRLFILE</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_DOH_SSL_VERIFYHOST.html">CURLOPT_DOH_SSL_VERIFYHOST</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_DOH_SSL_VERIFYPEER.html">CURLOPT_DOH_SSL_VERIFYPEER</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_DOH_SSL_VERIFYSTATUS.html">CURLOPT_DOH_SSL_VERIFYSTATUS</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_ECH.html">CURLOPT_ECH</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_EGDSOCKET.html">CURLOPT_EGDSOCKET</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_ISSUERCERT_BLOB.html">CURLOPT_ISSUERCERT_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_ISSUERCERT.html">CURLOPT_ISSUERCERT</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_KEYPASSWD.html">CURLOPT_KEYPASSWD</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PINNEDPUBLICKEY.html">CURLOPT_PINNEDPUBLICKEY</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_CAINFO_BLOB.html">CURLOPT_PROXY_CAINFO_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_CAINFO.html">CURLOPT_PROXY_CAINFO</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_CAPATH.html">CURLOPT_PROXY_CAPATH</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_CRLFILE.html">CURLOPT_PROXY_CRLFILE</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_ISSUERCERT_BLOB.html">CURLOPT_PROXY_ISSUERCERT_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_ISSUERCERT.html">CURLOPT_PROXY_ISSUERCERT</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_KEYPASSWD.html">CURLOPT_PROXY_KEYPASSWD</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_PINNEDPUBLICKEY.html">CURLOPT_PROXY_PINNEDPUBLICKEY</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSL_CIPHER_LIST.html">CURLOPT_PROXY_SSL_CIPHER_LIST</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSL_OPTIONS.html">CURLOPT_PROXY_SSL_OPTIONS</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSL_VERIFYHOST.html">CURLOPT_PROXY_SSL_VERIFYHOST</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSL_VERIFYPEER.html">CURLOPT_PROXY_SSL_VERIFYPEER</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSLCERT_BLOB.html">CURLOPT_PROXY_SSLCERT_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSLCERT.html">CURLOPT_PROXY_SSLCERT</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSLCERTTYPE.html">CURLOPT_PROXY_SSLCERTTYPE</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSLKEY_BLOB.html">CURLOPT_PROXY_SSLKEY_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSLKEY.html">CURLOPT_PROXY_SSLKEY</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSLKEYTYPE.html">CURLOPT_PROXY_SSLKEYTYPE</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_SSLVERSION.html">CURLOPT_PROXY_SSLVERSION</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_TLS13_CIPHERS.html">CURLOPT_PROXY_TLS13_CIPHERS</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_TLSAUTH_PASSWORD.html">CURLOPT_PROXY_TLSAUTH_PASSWORD</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_TLSAUTH_TYPE.html">CURLOPT_PROXY_TLSAUTH_TYPE</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_PROXY_TLSAUTH_USERNAME.html">CURLOPT_PROXY_TLSAUTH_USERNAME</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_RANDOM_FILE.html">CURLOPT_RANDOM_FILE</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_SSL_CIPHER_LIST.html">CURLOPT_SSL_CIPHER_LIST</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_CTX_DATA.html">CURLOPT_SSL_CTX_DATA</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_CTX_FUNCTION.html">CURLOPT_SSL_CTX_FUNCTION</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_EC_CURVES.html">CURLOPT_SSL_EC_CURVES</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_ENABLE_ALPN.html">CURLOPT_SSL_ENABLE_ALPN</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_ENABLE_NPN.html">CURLOPT_SSL_ENABLE_NPN</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_FALSESTART.html">CURLOPT_SSL_FALSESTART</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_SSL_OPTIONS.html">CURLOPT_SSL_OPTIONS</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_SESSIONID_CACHE.html">CURLOPT_SSL_SESSIONID_CACHE</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_SIGNATURE_ALGORITHMS.html">CURLOPT_SSL_SIGNATURE_ALGORITHMS</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_SSL_VERIFYHOST.html">CURLOPT_SSL_VERIFYHOST</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_VERIFYPEER.html">CURLOPT_SSL_VERIFYPEER</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSL_VERIFYSTATUS.html">CURLOPT_SSL_VERIFYSTATUS</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_SSLCERT_BLOB.html">CURLOPT_SSLCERT_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSLCERT.html">CURLOPT_SSLCERT</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSLCERTTYPE.html">CURLOPT_SSLCERTTYPE</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSLENGINE_DEFAULT.html">CURLOPT_SSLENGINE_DEFAULT</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_SSLENGINE.html">CURLOPT_SSLENGINE</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_SSLKEY_BLOB.html">CURLOPT_SSLKEY_BLOB</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSLKEY.html">CURLOPT_SSLKEY</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSLKEYTYPE.html">CURLOPT_SSLKEYTYPE</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_SSLVERSION.html">CURLOPT_SSLVERSION</a></td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_TLS13_CIPHERS.html">CURLOPT_TLS13_CIPHERS</a></td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td></tr>
+<tr><td><a href="CURLOPT_TLSAUTH_PASSWORD.html">CURLOPT_TLSAUTH_PASSWORD</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_TLSAUTH_TYPE.html">CURLOPT_TLSAUTH_TYPE</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td><a href="CURLOPT_TLSAUTH_USERNAME.html">CURLOPT_TLSAUTH_USERNAME</a></td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="yes">&#x2714;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td><td class="no">&nbsp;</td></tr>
+<tr><td>counter</td><td align="center">16</td><td align="center">46</td><td align="center">40</td><td align="center">72</td><td align="center">26</td><td align="center">35</td><td align="center">16</td><td align="center">43</td></tr></table>
+</div>
+</div>
+</body>
+</html>

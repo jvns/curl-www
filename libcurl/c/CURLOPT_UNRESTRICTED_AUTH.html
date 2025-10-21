@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_UNRESTRICTED_AUTH</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_UNRESTRICTED_AUTH</b></div>
+<h1> CURLOPT_UNRESTRICTED_AUTH explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_UNRESTRICTED_AUTH%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_UNRESTRICTED_AUTH.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_UNRESTRICTED_AUTH.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_UNRESTRICTED_AUTH - send credentials to other hosts too </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_UNRESTRICTED_AUTH.html">CURLOPT_UNRESTRICTED_AUTH</a>,
+&nbsp;                         long goahead);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Set the long <span Class="emphasis">gohead</span> parameter to 1L to make libcurl continue to send authentication (user+password) credentials or explicitly set cookie headers when following locations, even when the host changes. This option is meaningful only when setting <a Class="emphasis" href="./CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>. </p>
+<p class="level0">Further, when this option is not used or set to <span Class="bold">0L</span>, libcurl does not send custom nor internally generated <span Class="emphasis">Authentication:</span> or <span Class="emphasis">Cookie:</span> headers on requests done to other hosts than the one used for the initial URL. Another host means that one or more of hostname, protocol scheme or port number changed. </p>
+<p class="level0">By default, libcurl only sends <span Class="emphasis">Authentication:</span> or explicitly set <span Class="emphasis">Cookie:</span> headers to the initial host as given in the original URL, to avoid leaking username + password to other sites. </p>
+<p class="level0">This option should be used with caution: when curl follows redirects it blindly fetches the next URL as instructed by the server. Setting <a Class="emphasis" href="./CURLOPT_UNRESTRICTED_AUTH.html">CURLOPT_UNRESTRICTED_AUTH</a> to 1L makes curl trust the server and sends possibly sensitive credentials to any host the server points to, possibly again and again as the following hosts can keep redirecting to new hosts. </p>
+<p class="level0">Due to the way HTTP works, almost any header can be made to contain data a client may not want to pass on to other servers than the initially intended host and for all other headers than the two mentioned above, there is no protection from this happening when libcurl is told to follow redirects. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">0 </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>, 1L);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_UNRESTRICTED_AUTH.html">CURLOPT_UNRESTRICTED_AUTH</a>, 1L);
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.10.4.html">7.10.4</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLINFO_REDIRECT_COUNT.html">CURLINFO_REDIRECT_COUNT</a>(3), <a Class="bold" href="./CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>(3), <a Class="bold" href="./CURLOPT_MAXREDIRS.html">CURLOPT_MAXREDIRS</a>(3), <a Class="bold" href="./CURLOPT_REDIR_PROTOCOLS_STR.html">CURLOPT_REDIR_PROTOCOLS_STR</a>(3), <a Class="bold" href="./CURLOPT_USERPWD.html">CURLOPT_USERPWD</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

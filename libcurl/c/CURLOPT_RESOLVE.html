@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_RESOLVE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_RESOLVE</b></div>
+<h1> CURLOPT_RESOLVE explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_RESOLVE%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_RESOLVE.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_RESOLVE.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_RESOLVE - provide custom hostname to IP address resolves </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_RESOLVE.html">CURLOPT_RESOLVE</a>,
+&nbsp;                         struct curl_slist &#x2a;hosts);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to a linked list of strings with hostname resolve information to use for requests with this handle. The linked list should be a fully valid list of <span Class="bold">struct curl_slist</span> structs properly filled in. Use <a Class="emphasis" href="./curl_slist_append.html">curl_slist_append</a> to create the list and <a Class="emphasis" href="./curl_slist_free_all.html">curl_slist_free_all</a> to clean up an entire list. </p>
+<p class="level0">libcurl does not copy the list, it needs to be kept around until after the transfer has completed. </p>
+<p class="level0">Each resolve rule to add should be written using the format </p><pre class="level0">
+[+]HOST:PORT:ADDRESS[,ADDRESS]
+</pre>
+<p class="level0">HOST is the name libcurl wants to resolve, PORT is the port number of the service where libcurl wants to connect to the HOST and ADDRESS is one or more numerical IP addresses. If you specify multiple IP addresses they need to be separated by comma. If libcurl is built to support IPv6, each of the ADDRESS entries can of course be either IPv4 or IPv6 style addressing. </p>
+<p class="level0">Specify the host as a single asterisk (<span Class="emphasis">&#x2a;</span>) to match all names. This wildcard is resolved last so any resolve with a specific host and port number is given priority. </p>
+<p class="level0">This option effectively populates the DNS cache with entries for the host+port pair so redirects and everything that operations against the HOST+PORT instead use your provided ADDRESS. </p>
+<p class="level0">The optional leading plus (<span Class="emphasis">+</span>) specifies that the new entry should timeout. Entries added without the leading plus character never times out whereas entries added with <span Class="emphasis">+HOST:...</span> times out just like ordinary DNS cache entries. </p>
+<p class="level0">If the DNS cache already has an entry for the given host+port pair, the new entry overrides the former one. </p>
+<p class="level0">An ADDRESS provided by this option is only used if not restricted by the setting of <a Class="emphasis" href="./CURLOPT_IPRESOLVE.html">CURLOPT_IPRESOLVE</a> to a different IP version. </p>
+<p class="level0">To remove names from the DNS cache again, to stop providing these fake resolves, include a string in the linked list that uses the format </p><pre class="level0">
+-HOST:PORT
+</pre>
+<p class="level0">The entry to remove must be prefixed with a dash, and the hostname and port number must exactly match what was added previously. </p>
+<p class="level0">Provide IPv6 addresses within [brackets]. </p>
+<p class="level0">Using this option multiple times makes the last set list override the previous ones. Set it to NULL to disable its use again. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl;
+&nbsp; struct curl_slist &#x2a;host = NULL;
+&nbsp; host = <a href="curl_slist_append.html">curl_slist_append</a>(NULL, &quot;example.com:443:12<a href="/ch/7.0.0.1.html">7.0.0.1</a>&quot;);
+&nbsp; host = <a href="curl_slist_append.html">curl_slist_append</a>(host, &quot;example.com:443:[2001:db8::252f:efd6]&quot;);
+&nbsp;
+&nbsp; curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_RESOLVE.html">CURLOPT_RESOLVE</a>, host);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   /&#x2a; always cleanup &#x2a;/
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+&nbsp;
+&nbsp; <a href="curl_slist_free_all.html">curl_slist_free_all</a>(host);
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">Added in <a href="/ch/7.21.3.html">7.21.3</a>. Removal support added in <a href="/ch/7.42.0.html">7.42.0</a>. </p>
+<p class="level0">Support for providing the ADDRESS within [brackets] was added in <a href="/ch/7.57.0.html">7.57.0</a>. </p>
+<p class="level0">Support for providing multiple IP addresses per entry was added in <a href="/ch/7.59.0.html">7.59.0</a>. </p>
+<p class="level0">Support for adding non-permanent entries by using the &quot;+&quot; prefix was added in <a href="/ch/7.75.0.html">7.75.0</a>. </p>
+<p class="level0">Support for specifying the host component as an IPv6 address was added in <a href="/ch/8.13.0.html">8.13.0</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.21.3.html">7.21.3</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_CONNECT_TO.html">CURLOPT_CONNECT_TO</a>(3), <a Class="bold" href="./CURLOPT_DNS_CACHE_TIMEOUT.html">CURLOPT_DNS_CACHE_TIMEOUT</a>(3), <a Class="bold" href="./CURLOPT_IPRESOLVE.html">CURLOPT_IPRESOLVE</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

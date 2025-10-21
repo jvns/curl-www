@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Tests Overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>Tests Overview</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="runtests.html">runtests manpage</a>
+<br><a href="testcurl.html">Test curl</a>
+<br><a href="/docs/tutorial.html">Tutorial</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="the-curl-test-suite">The curl Test Suite</h1>
+<h1 id="running">Running</h1>
+<p>See the "Requires to run" section for prerequisites.</p>
+<p>In the root of the curl repository:</p>
+<pre><code>./configure &amp;&amp; make &amp;&amp; make test</code></pre>
+<p>To run a specific set of tests (e.g. 303 and 410):</p>
+<pre><code>make test TFLAGS=&quot;303 410&quot;</code></pre>
+<p>To run the tests faster, pass the -j (parallelism) flag:</p>
+<pre><code>make test TFLAGS=&quot;-j10&quot;</code></pre>
+<p>"make test" builds the test suite support code and invokes the
+'runtests.pl' perl script to run all the tests. The value of
+<code>TFLAGS</code> is passed directly to 'runtests.pl'.</p>
+<p>When you run tests via make, the flags <code>-a</code> and
+<code>-s</code> are passed, meaning to continue running tests even after
+one fails, and to emit short output.</p>
+<p>If you would like to not use those flags, you can run 'runtests.pl'
+directly. You must <code>chdir</code> into the tests directory, then you
+can run it like so:</p>
+<pre><code>./runtests.pl 303 410</code></pre>
+<p>You must have run <code>make test</code> at least once first to build
+the support code.</p>
+<p>To see what flags are available for runtests.pl, and what output it
+emits, run:</p>
+<pre><code>man ./tests/runtests.1</code></pre>
+<p>After a test fails, examine the tests/log directory for stdout,
+stderr, and output from the servers used in the test.</p>
+<h2 id="requires-to-run">Requires to run</h2>
+<ul>
+<li><code>perl</code> (and a Unix-style shell)</li>
+<li><code>python</code> (and a Unix-style shell, for SMB and TELNET
+tests)</li>
+<li><code>python-impacket</code> (for SMB tests)</li>
+<li><code>diff</code> (when a test fails, a diff is shown)</li>
+<li><code>stunnel</code> (for HTTPS and FTPS tests)</li>
+<li><code>openssl</code> (the command line tool, for generating test
+server certificates)</li>
+<li><code>openssh</code> or <code>SunSSH</code> (for SCP and SFTP
+tests)</li>
+<li><code>nghttpx</code> (for HTTP/2 and HTTP/3 tests)</li>
+</ul>
+<h3 id="installation-of-impacket">Installation of impacket</h3>
+<p>The Python-based test servers support Python 3.</p>
+<p>Please install python-impacket in the correct Python environment. You
+can use pip or your OS' package manager to install 'impacket'.</p>
+<p>On Debian/Ubuntu the package name is 'python3-impacket'</p>
+<p>On FreeBSD the package name is 'py311-impacket'</p>
+<p>On any system where pip is available: 'python3 -m pip install
+impacket'</p>
+<p>You may also need to manually install the Python package 'six' as
+that may be a missing requirement for impacket.</p>
+<h2 id="event-based">Event-based</h2>
+<p>If curl is built with <code>Debug</code> enabled (see below), then
+the <code>runtests.pl</code> script offers a <code>-e</code> option (or
+<code>--test-event</code>) that makes it perform <em>event-based</em>.
+Such tests invokes the curl tool with <code>--test-event</code>, a
+debug-only option made for this purpose.</p>
+<p>Performing event-based means that the curl tool uses the
+<code>curl_multi_socket_action()</code> API call to drive the
+transfer(s), instead of the otherwise "normal" functions it would use.
+This allows us to test drive the socket_action API. Transfers done this
+way should work exactly the same as with the non-event based API.</p>
+<p>To be able to use <code>--test-event</code> together with
+<code>--parallel</code>, curl requires <em>libuv</em> to be present and
+enabled in the build: <code>configure --enable-libuv</code></p>
+<h2 id="duplicated-handles">Duplicated handles</h2>
+<p>If curl is built with <code>Debug</code> enabled (see below), then
+the <code>runtests.pl</code> script offers a
+<code>--test-duphandle</code> option. When enabled, curl always
+duplicates the easy handle and does its transfers using the new one
+instead of the original. This is done entirely for testing purpose to
+verify that everything works exactly the same when this is done;
+confirming that the <code>curl_easy_duphandle()</code> function
+duplicates everything that it should.</p>
+<h3 id="port-numbers-used-by-test-servers">Port numbers used by test
+servers</h3>
+<p>All test servers run on "random" port numbers. All tests must be
+written to use the suitable variables instead of fixed port numbers so
+that test cases continue to work independently of what port numbers the
+test servers actually use.</p>
+<p>See <a href="FILEFORMAT.md"><code>FILEFORMAT</code></a> for the port
+number variables.</p>
+<h3 id="test-servers">Test servers</h3>
+<p>The test suite runs stand-alone servers on random ports to which it
+makes requests. For SSL tests, it runs stunnel to handle encryption to
+the regular servers. For SSH, it runs a standard OpenSSH server.</p>
+<p>The listen port numbers for the test servers are picked randomly to
+allow users to run multiple test cases concurrently and to not collide
+with other existing services that might listen to ports on the
+machine.</p>
+<p>The HTTP server supports listening on a Unix domain socket, the
+default location is 'http.sock'.</p>
+<p>For HTTP/2 and HTTP/3 testing an installed <code>nghttpx</code> is
+used. HTTP/3 tests check if nghttpx supports the protocol. To override
+the nghttpx used, set the environment variable <code>NGHTTPX</code>. The
+default can also be changed by specifying
+<code>--with-test-nghttpx=&lt;path&gt;</code> as argument to
+<code>configure</code>.</p>
+<h3 id="dns-server">DNS server</h3>
+<p>There is a test DNS server to allow tests to resolve hostnames to
+verify those code paths. This server is started like all the other
+servers within the <code>&lt;servers&gt;</code> section.</p>
+<p>To make a curl build actually use the test DNS server requires a
+debug build. When such a test runs, the environment variable
+<code>CURL_DNS_SERVER</code> is set to identify the IP address and port
+number of the DNS server to use.</p>
+<ul>
+<li><p>curl built to use c-ares for resolving automatically asks that
+server for host information</p></li>
+<li><p>curl built to use <code>getaddrinfo()</code> for resolving
+<em>and</em> is built with c-ares 1.26.0 or later, gets a special
+work-around. In such builds, when the environment variable is set, curl
+instead invokes a getaddrinfo wrapper that emulates the function and
+acknowledges the DNS server environment variable. This way, the
+getaddrinfo-using code paths in curl are verified, and yet the custom
+responses from the test DNS server are used.</p></li>
+</ul>
+<p>curl that is built to support a custom DNS server in a test gets the
+<code>override-dns</code> feature set.</p>
+<p>When curl ask for HTTPS-RR, c-ares is always used and in debug builds
+such asks respects the dns server environment variable as well.</p>
+<p>The test DNS server only has a few limited responses. When asked
+for</p>
+<ul>
+<li>type <code>A</code> response, it returns the address
+<code>127.0.0.1</code> three times</li>
+<li>type <code>AAAA</code> response, it returns the address
+<code>::1</code> three times</li>
+<li>other types, it returns a blank response without answers</li>
+</ul>
+<h3 id="shell-startup-scripts">Shell startup scripts</h3>
+<p>Tests which use the ssh test server, SCP/SFTP tests, might be badly
+influenced by the output of system wide or user specific shell startup
+scripts, .bashrc, .profile, /etc/csh.cshrc, .login, /etc/bashrc, etc.
+which output text messages or escape sequences on user login. When these
+shell startup messages or escape sequences are output they might corrupt
+the expected stream of data which flows to the sftp-server or from the
+ssh client which can result in bad test behavior or even prevent the
+test server from running.</p>
+<p>If the test suite ssh or sftp server fails to start up and logs the
+message 'Received message too long' then you are certainly suffering the
+unwanted output of a shell startup script. Locate, cleanup or adjust the
+shell script.</p>
+<h3 id="memory-test">Memory test</h3>
+<p>The test script checks that all allocated memory is freed properly IF
+curl has been built with the <code>CURLDEBUG</code> define set. The
+script automatically detects if that is the case, and it uses the
+<code>memanalyze.pl</code> script to analyze the memory debugging
+output.</p>
+<p>Also, if you run tests on a machine where valgrind is found, the
+script uses valgrind to run the test with (unless you use
+<code>-n</code>) to further verify correctness.</p>
+<p>The <code>runtests.pl</code> <code>-t</code> option enables torture
+testing mode. It runs each test many times and makes each different
+memory allocation fail on each successive run. This tests the out of
+memory error handling code to ensure that memory leaks do not occur even
+in those situations. It can help to compile curl with
+<code>CPPFLAGS=-DMEMDEBUG_LOG_SYNC</code> when using this option, to
+ensure that the memory log file is properly written even if curl
+crashes.</p>
+<h3 id="debug">Debug</h3>
+<p>If a test case fails, you can conveniently get the script to invoke
+the debugger (gdb) for you with the server running and the same command
+line parameters that failed. Just invoke
+<code>runtests.pl &lt;test number&gt; -g</code> and then just type 'run'
+in the debugger to perform the command through the debugger.</p>
+<h3 id="logs">Logs</h3>
+<p>All logs are generated in the log/ subdirectory (it is emptied first
+in the runtests.pl script). They remain in there after a test run.</p>
+<h3 id="log-verbosity">Log Verbosity</h3>
+<p>A curl build with <code>--enable-debug</code> offers more verbose
+output in the logs. This applies not only for test cases, but also when
+running it standalone with <code>curl -v</code>. While a curl debug
+built is <em><strong>not suitable for production</strong></em>, it is
+often helpful in tracking down problems.</p>
+<p>Sometimes, one needs detailed logging of operations, but does not
+want to drown in output. The newly introduced <em>connection
+filters</em> allows one to dynamically increase log verbosity for a
+particular <em>filter type</em>. Example:</p>
+<pre><code>CURL_DEBUG=ssl curl -v https://curl.se</code></pre>
+<p>makes the <code>ssl</code> connection filter log more details. One
+may do that for every filter type and also use a combination of names,
+separated by <code>,</code> or space.</p>
+<pre><code>CURL_DEBUG=ssl,http/2 curl -v https://curl.se</code></pre>
+<p>The order of filter type names is not relevant. Names used here are
+case insensitive. Note that these names are implementation internals and
+subject to change.</p>
+<p>Some, likely stable names are <code>tcp</code>, <code>ssl</code>,
+<code>http/2</code>. For a current list, one may search the sources for
+<code>struct Curl_cftype</code> definitions and find the names there.
+Also, some filters are only available with certain build options, of
+course.</p>
+<h3 id="test-input-files">Test input files</h3>
+<p>All test cases are put in the <code>data/</code> subdirectory. Each
+test is stored in the file named according to the test number.</p>
+<p>See <a href="FILEFORMAT.md"><code>FILEFORMAT</code></a> for a
+description of the test case file format.</p>
+<h3 id="code-coverage">Code coverage</h3>
+<p>gcc provides a tool that can determine the code coverage figures for
+the test suite. To use it, configure curl with
+<code>CFLAGS='-fprofile-arcs -ftest-coverage -g -O0'</code>. Make sure
+you run the normal and torture tests to get more full coverage, i.e.
+do:</p>
+<pre><code>make test
+make test-torture</code></pre>
+<p>The graphical tool <code>ggcov</code> can be used to browse the
+source and create coverage reports on *nix hosts:</p>
+<pre><code>ggcov -r lib src</code></pre>
+<p>The text mode tool <code>gcov</code> may also be used, but it does
+not handle object files in more than one directory correctly.</p>
+<h3 id="remote-testing">Remote testing</h3>
+<p>The runtests.pl script provides some hooks to allow curl to be tested
+on a machine where perl can not be run. The test framework in this case
+runs on a workstation where perl is available, while curl itself is run
+on a remote system using ssh or some other remote execution method. See
+the comments at the beginning of runtests.pl for details.</p>
+<h2 id="test-case-numbering">Test case numbering</h2>
+<p>Test cases used to be numbered by category ranges, but the ranges
+filled up. Subsets of tests can now be selected by passing keywords to
+the runtests.pl script via the make <code>TFLAGS</code> variable.</p>
+<p>New tests are added by finding a free number in
+<code>tests/data/Makefile.am</code>.</p>
+<h2 id="write-tests">Write tests</h2>
+<p>Here's a quick description on writing test cases. We basically have
+three kinds of tests: the ones that test the curl tool, the ones that
+build small applications and test libcurl directly and the unit tests
+that test individual (possibly internal) functions.</p>
+<h3 id="test-data">test data</h3>
+<p>Each test has a master file that controls all the test data. What to
+read, what the protocol exchange should look like, what exit code to
+expect and what command line arguments to use etc.</p>
+<p>These files are <code>tests/data/test[num]</code> where
+<code>[num]</code> is just a unique identifier described above, and the
+XML-like file format of them is described in the separate <a
+href="FILEFORMAT.md"><code>FILEFORMAT</code></a> document.</p>
+<h3 id="curl-tests">curl tests</h3>
+<p>A test case that runs the curl tool and verifies that it gets the
+correct data, it sends the correct data, it uses the correct protocol
+primitives etc.</p>
+<h3 id="libcurl-tests">libcurl tests</h3>
+<p>The libcurl tests are identical to the curl ones, except that they
+use a specific and dedicated custom-built program to run instead of
+"curl". This tool is built from source code placed in
+<code>tests/libtest</code> and if you want to make a new libcurl test
+that is where you add your code.</p>
+<h3 id="unit-tests">unit tests</h3>
+<p>Unit tests are placed in <code>tests/unit</code>. There is a
+tests/unit/README describing the specific set of checks and macros that
+may be used when writing tests that verify behaviors of specific
+individual functions.</p>
+<p>The unit tests depend on curl being built with debug enabled.</p>
+<h3 id="test-bundles">test bundles</h3>
+<p>Individual tests are bundled into single executables, one for
+libtests, one for unit tests and one for servers. The executables' first
+argument is the name of libtest, unit test or server respectively. In
+these executables, the build process automatically renames the entry
+point to a unique symbol. <code>test</code> becomes
+<code>test_&lt;tool&gt;</code>, e.g. <code>test_lib1598</code> or
+<code>test_unit1305</code>. For servers <code>main</code> becomes
+<code>main_sws</code> for the <code>sws</code> server, and so on. Other
+common symbols may also be suffixed the same way.</p>
+</div>
+</div>
+</body>
+</html>

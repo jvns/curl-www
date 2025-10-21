@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl_multi_wait</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>libcurl</b></div>
+<h1> curl_multi_wait - polls on all easy handles in a multi handle </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_multi_wait%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_multi_wait.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_multi_wait.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_multi_wait - poll on all easy handles in a multi handle </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_wait.html">curl_multi_wait</a>(CURLM &#x2a;multi_handle,
+&nbsp;                         struct curl_waitfd extra_fds[],
+&nbsp;                         unsigned int extra_nfds,
+&nbsp;                         int timeout_ms,
+&nbsp;                         int &#x2a;numfds);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><a Class="emphasis" href="./curl_multi_wait.html">curl_multi_wait</a> polls all file descriptors used by the curl easy handles contained in the given multi handle set. It blocks until activity is detected on at least one of the handles or <span Class="emphasis">timeout_ms</span> has passed. Alternatively, if the multi handle has a pending internal timeout that has a shorter expiry time than <span Class="emphasis">timeout_ms</span>, that shorter time is being used instead to make sure timeout accuracy is reasonably kept. </p>
+<p class="level0">The calling application may pass additional <a class="emphasis" href="#curlwaitfd">curl_waitfd</a> structures which are similar to <span Class="emphasis">poll(2)</span>&apos;s <span Class="emphasis">pollfd</span> structure to be waited on in the same call. </p>
+<p class="level0">On completion, if <span Class="emphasis">numfds</span> is non-NULL, it gets populated with the total number of file descriptors on which interesting events occurred. This number can include both libcurl internal descriptors as well as descriptors provided in <span Class="emphasis">extra_fds</span>. </p>
+<p class="level0">If no extra file descriptors are provided and libcurl has no file descriptor to offer to wait for, this function returns immediately. (Consider using <a Class="emphasis" href="./curl_multi_poll.html">curl_multi_poll</a> to avoid this behavior.) </p>
+<p class="level0">This function is encouraged to be used instead of select(3) when using the multi interface to allow applications to easier circumvent the common problem with 1024 maximum file descriptors. </p><a name="curlwaitfd"></a><h2 class="nroffsh">Curl_waitfd</h2><pre class="level0">
+struct curl_waitfd {
+&nbsp; curl_socket_t fd;
+&nbsp; short events;
+&nbsp; short revents;
+};
+</pre>
+<p class="level0"><a name="CURLWAITPOLLIN"></a><span class="nroffip">CURL_WAIT_POLLIN</span> </p>
+<p class="level1">Bit flag to <span Class="emphasis">curl_waitfd.events</span> indicating the socket should poll on read events such as new data received. </p>
+<p class="level0"><a name="CURLWAITPOLLPRI"></a><span class="nroffip">CURL_WAIT_POLLPRI</span> </p>
+<p class="level1">Bit flag to <span Class="emphasis">curl_waitfd.events</span> indicating the socket should poll on high priority read events such as out of band data. </p>
+<p class="level0"><a name="CURLWAITPOLLOUT"></a><span class="nroffip">CURL_WAIT_POLLOUT</span> </p>
+<p class="level1">Bit flag to <span Class="emphasis">curl_waitfd.events</span> indicating the socket should poll on write events such as the socket being clear to write without blocking. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;easy;
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp; int still_running;
+&nbsp;
+&nbsp; easy = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp;
+&nbsp; /&#x2a; add the individual easy handle &#x2a;/
+&nbsp; <a href="curl_multi_add_handle.html">curl_multi_add_handle</a>(multi, easy);
+&nbsp;
+&nbsp; do {
+&nbsp;   CURLMcode mc;
+&nbsp;   int numfds;
+&nbsp;
+&nbsp;   mc = <a href="curl_multi_perform.html">curl_multi_perform</a>(multi, &amp;still_running);
+&nbsp;
+&nbsp;   if(mc == <a href="libcurl-errors.html#CURLMOK">CURLM_OK</a>) {
+&nbsp;     /&#x2a; wait for activity, timeout or &quot;nothing&quot; &#x2a;/
+&nbsp;     mc = <a href="curl_multi_wait.html">curl_multi_wait</a>(multi, NULL, 0, 1000, &amp;numfds);
+&nbsp;   }
+&nbsp;
+&nbsp;   if(mc != <a href="libcurl-errors.html#CURLMOK">CURLM_OK</a>) {
+&nbsp;     fprintf(stderr, &quot;curl_multi failed, code %d.&bsol;n&quot;, mc);
+&nbsp;     break;
+&nbsp;   }
+&nbsp;
+&nbsp; } while(still_running);
+&nbsp;
+&nbsp; <a href="curl_multi_remove_handle.html">curl_multi_remove_handle</a>(multi, easy);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.28.0.html">7.28.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_multi_fdset.html">curl_multi_fdset</a>(3), <a Class="bold" href="./curl_multi_perform.html">curl_multi_perform</a>(3), <a Class="bold" href="./curl_multi_poll.html">curl_multi_poll</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

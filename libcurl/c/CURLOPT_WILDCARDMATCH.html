@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_WILDCARDMATCH</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_WILDCARDMATCH</b></div>
+<h1> CURLOPT_WILDCARDMATCH explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_WILDCARDMATCH%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_WILDCARDMATCH.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_WILDCARDMATCH.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_WILDCARDMATCH - directory wildcard transfers </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_WILDCARDMATCH.html">CURLOPT_WILDCARDMATCH</a>, long onoff);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Set <span Class="emphasis">onoff</span> to 1 if you want to transfer multiple files according to a filename pattern. The pattern can be specified as part of the <a Class="emphasis" href="./CURLOPT_URL.html">CURLOPT_URL</a> option, using an <span Class="bold">fnmatch</span>-like pattern (Shell Pattern Matching) in the last part of URL (filename). </p>
+<p class="level0">By default, libcurl uses its internal wildcard matching implementation. You can provide your own matching function by the <a Class="emphasis" href="./CURLOPT_FNMATCH_FUNCTION.html">CURLOPT_FNMATCH_FUNCTION</a> option. </p>
+<p class="level0">A brief introduction of its syntax follows: </p>
+<p class="level0"><a name=""></a><span class="nroffip">&#x2a; - ASTERISK</span> </p><pre class="level1">
+ftp://example.com/some/path/&#x2a;.txt
+</pre>
+<p class="level1">matches all <span Class="emphasis">.txt</span> files in the root directory. Only two asterisks are allowed within the same pattern string. </p>
+<p class="level0"><a name=""></a><span class="nroffip">? - QUESTION MARK</span> </p>
+<p class="level1">Question mark matches any (exactly one) character. </p><pre class="level1">
+ftp://example.com/some/path/photo?.jpg
+</pre>
+<p class="level0"><a name=""></a><span class="nroffip">[ - BRACKET EXPRESSION</span> </p>
+<p class="level1">The left bracket opens a bracket expression. The question mark and asterisk have no special meaning in a bracket expression. Each bracket expression ends by the right bracket and matches exactly one character. Some examples follow: </p>
+<p class="level1"><span Class="bold">[a-zA-Z0-9]</span> or <span Class="bold">[f-gF-G]</span> - character interval </p>
+<p class="level1"><span Class="bold">[abc]</span> - character enumeration </p>
+<p class="level1"><span Class="bold">[^abc]</span> or <span Class="bold">[!abc]</span> - negation </p>
+<p class="level1"><span Class="bold">[[:name:]]</span> class expression. Supported classes are <span Class="bold">alnum</span>,<span Class="bold">lower</span>, <span Class="bold">space</span>, <span Class="bold">alpha</span>, <span Class="bold">digit</span>, <span Class="bold">print</span>, <span Class="bold">upper</span>, <span Class="bold">blank</span>, <span Class="bold">graph</span>, <span Class="bold">xdigit</span>. </p>
+<p class="level1"><span Class="bold">[][-!^]</span> - special case - matches only &apos;-&apos;, &apos;]&apos;, &apos;[&apos;, &apos;!&apos; or &apos;^&apos;. These characters have no special purpose. </p>
+<p class="level1"><a class="bold" href="#">[[]]</a> - escape syntax. Matches &apos;[&apos;, &apos;]&apos; or &apos;e&apos;. </p>
+<p class="level1">Using the rules above, a filename pattern can be constructed: </p><pre class="level1">
+ftp://example.com/some/path/[a-z[:upper:]&bsol;].jpg
+</pre>
+<a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects ftp only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+extern long begin_cb(struct curl_fileinfo &#x2a;, void &#x2a;, int);
+extern long end_cb(void &#x2a;ptr);
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   /&#x2a; turn on wildcard matching &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_WILDCARDMATCH.html">CURLOPT_WILDCARDMATCH</a>, 1L);
+&nbsp;
+&nbsp;   /&#x2a; callback is called before download of concrete file started &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_CHUNK_BGN_FUNCTION.html">CURLOPT_CHUNK_BGN_FUNCTION</a>, begin_cb);
+&nbsp;
+&nbsp;   /&#x2a; callback is called after data from the file have been transferred &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_CHUNK_END_FUNCTION.html">CURLOPT_CHUNK_END_FUNCTION</a>, end_cb);
+&nbsp;
+&nbsp;   /&#x2a; See more on https://curl.se/libcurl/c/ftp-wildcard.html &#x2a;/
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.21.0.html">7.21.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_CHUNK_BGN_FUNCTION.html">CURLOPT_CHUNK_BGN_FUNCTION</a>(3), <a Class="bold" href="./CURLOPT_CHUNK_END_FUNCTION.html">CURLOPT_CHUNK_END_FUNCTION</a>(3), <a Class="bold" href="./CURLOPT_FNMATCH_FUNCTION.html">CURLOPT_FNMATCH_FUNCTION</a>(3), <a Class="bold" href="./CURLOPT_URL.html">CURLOPT_URL</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

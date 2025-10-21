@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_TRAILERFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_TRAILERFUNCTION</b></div>
+<h1> CURLOPT_TRAILERFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_TRAILERFUNCTION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_TRAILERFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_TRAILERFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_TRAILERFUNCTION - callback for sending trailing headers </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl.h&gt;
+&nbsp;
+int curl_trailer_callback(struct curl_slist &#x2a;&#x2a; list, void &#x2a;userdata);
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_TRAILERFUNCTION.html">CURLOPT_TRAILERFUNCTION</a>,
+&nbsp;                         curl_trailer_callback &#x2a;func);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to a callback function. </p>
+<p class="level0">This callback function is called once right before sending the final CR LF in an HTTP chunked transfer to fill a list of trailing headers to be sent before finishing the HTTP transfer. </p>
+<p class="level0">You can set the userdata argument with the <a Class="emphasis" href="./CURLOPT_TRAILERDATA.html">CURLOPT_TRAILERDATA</a> option. </p>
+<p class="level0">The trailing headers included in the linked list must not be CRLF-terminated, because libcurl adds the appropriate line termination characters after each header item. </p>
+<p class="level0">If you use <a Class="emphasis" href="./curl_slist_append.html">curl_slist_append</a> to add trailing headers to the <span Class="emphasis">curl_slist</span> then libcurl duplicates the strings, and frees the <span Class="emphasis">curl_slist</span> once the trailers have been sent. </p>
+<p class="level0">If one of the trailing header fields is not formatted correctly it is ignored and an info message is emitted. </p>
+<p class="level0">The return value can either be <span Class="bold">CURL_TRAILERFUNC_OK</span> or <span Class="bold">CURL_TRAILERFUNC_ABORT</span> which would respectively instruct libcurl to either continue with sending the trailers or to abort the request. </p>
+<p class="level0">If you set this option to NULL, then the transfer proceeds as usual without any interruptions. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+extern size_t read_cb(char &#x2a;ptr, size_t size,
+&nbsp;                     size_t nmemb, void &#x2a;userdata);
+&nbsp;
+static int trailer_cb(struct curl_slist &#x2a;&#x2a;tr, void &#x2a;data)
+{
+&nbsp; /&#x2a; libcurl frees the list &#x2a;/
+&nbsp; &#x2a;tr = <a href="curl_slist_append.html">curl_slist_append</a>(&#x2a;tr, &quot;My-super-awesome-trailer: trailer-stuff&quot;);
+&nbsp; return CURL_TRAILERFUNC_OK;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;
+&nbsp;   /&#x2a; Set the URL of the request &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/&quot;);
+&nbsp;   /&#x2a; Now set it as a put &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_UPLOAD.html">CURLOPT_UPLOAD</a>, 1L);
+&nbsp;
+&nbsp;   /&#x2a; Assuming we have a function that returns the data to be pushed
+&nbsp;      Let that function be read_cb &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_READFUNCTION.html">CURLOPT_READFUNCTION</a>, read_cb);
+&nbsp;
+&nbsp;   struct curl_slist &#x2a;headers = NULL;
+&nbsp;   headers = <a href="curl_slist_append.html">curl_slist_append</a>(headers, &quot;Trailer: My-super-awesome-trailer&quot;);
+&nbsp;   res = <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a>, headers);
+&nbsp;
+&nbsp;   /&#x2a; Set the trailers filling callback &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_TRAILERFUNCTION.html">CURLOPT_TRAILERFUNCTION</a>, trailer_cb);
+&nbsp;
+&nbsp;   /&#x2a; Perform the transfer &#x2a;/
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp;
+&nbsp;   <a href="curl_slist_free_all.html">curl_slist_free_all</a>(headers);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.64.0.html">7.64.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_TRAILERDATA.html">CURLOPT_TRAILERDATA</a>(3), <a Class="bold" href="./CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

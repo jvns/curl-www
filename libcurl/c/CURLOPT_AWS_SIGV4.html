@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_AWS_SIGV4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_AWS_SIGV4</b></div>
+<h1> CURLOPT_AWS_SIGV4 explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_AWS_SIGV4%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_AWS_SIGV4.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_AWS_SIGV4.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_AWS_SIGV4 - V4 signature </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_AWS_SIGV4.html">CURLOPT_AWS_SIGV4</a>, char &#x2a;param);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Provides AWS V4 signature authentication on HTTP(S) header. </p>
+<p class="level0">Pass a char pointer that is the collection of specific arguments are used for creating outgoing authentication headers. The format of the <span Class="emphasis">param</span> option is: </p>
+<p class="level0"><a name="provider1provider2regionservice"></a><span class="nroffip">provider1[:provider2[:region[:service]]]</span> </p>
+<p class="level0"><a name="provider1"></a><a name="provider2"></a><span class="nroffip">provider1, provider2</span> </p>
+<p class="level1">The providers arguments are used for generating some authentication parameters such as &quot;Algorithm&quot;, &quot;date&quot;, &quot;request type&quot; and &quot;signed headers&quot;. </p>
+<p class="level0"><a name="region"></a><span class="nroffip">region</span> </p>
+<p class="level1">The argument is a geographic area of a resources collection. It is extracted from the hostname specified in the URL if omitted. </p>
+<p class="level0"><a name="service"></a><span class="nroffip">service</span> </p>
+<p class="level1">The argument is a function provided by a cloud. It is extracted from the hostname specified in the URL if omitted. </p>
+<p class="level0">NOTE: This call set <a Class="emphasis" href="./CURLOPT_HTTPAUTH.html">CURLOPT_HTTPAUTH</a> to CURLAUTH_AWS_SIGV4. Calling <a Class="emphasis" href="./CURLOPT_HTTPAUTH.html">CURLOPT_HTTPAUTH</a> with CURLAUTH_AWS_SIGV4 is the same as calling this with <span Class="bold">&quot;aws:amz&quot;</span> in parameter. </p>
+<p class="level0">Example with &quot;Test:Try&quot;, when curl uses the algorithm, it generates <span Class="bold">&quot;TEST-HMAC-SHA256&quot;</span> for &quot;Algorithm&quot;, <span Class="bold">&quot;x-try-date&quot;</span> and <span Class="bold">&quot;X-Try-Date&quot;</span> for &quot;date&quot;, <span Class="bold">&quot;test4_request&quot;</span> for &quot;request type&quot;, <span Class="bold">&quot;SignedHeaders=content-type;host;x-try-date&quot;</span> for &quot;signed headers&quot; </p>
+<p class="level0">If you use just &quot;test&quot;, instead of &quot;test:try&quot;, test is used for every generated string. </p>
+<p class="level0">Setting <a Class="emphasis" href="./CURLOPT_HTTPAUTH.html">CURLOPT_HTTPAUTH</a> with the CURLAUTH_AWS_SIGV4 bit set is the same as setting this option with a <span Class="bold">&quot;aws:amz&quot;</span> parameter. </p>
+<p class="level0">The application does not have to keep the string around after setting this option. </p>
+<p class="level0">Using this option multiple times makes the last set string override the previous ones. Set it to NULL to disable its use again. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp;
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>,
+&nbsp;                   &quot;https://service.region.example.com/uri&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_AWS_SIGV4.html">CURLOPT_AWS_SIGV4</a>, &quot;provider1:provider2&quot;);
+&nbsp;
+&nbsp;   /&#x2a; service and region can also be set in <a href="CURLOPT_AWS_SIGV4.html">CURLOPT_AWS_SIGV4</a> &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/uri&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_AWS_SIGV4.html">CURLOPT_AWS_SIGV4</a>,
+&nbsp;                    &quot;provider1:provider2:region:service&quot;);
+&nbsp;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_USERPWD.html">CURLOPT_USERPWD</a>, &quot;MY_ACCESS_KEY:MY_SECRET_KEY&quot;);
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="NOTES"></a><h2 class="nroffsh">Notes</h2>
+<p class="level0">This option overrides the other auth types you might have set in <a Class="emphasis" href="./CURLOPT_HTTPAUTH.html">CURLOPT_HTTPAUTH</a> which should be highlighted as this makes this auth method special. This method cannot be combined with other auth types. </p>
+<p class="level0">A sha256 checksum of the request payload is used as input to the signature calculation. For POST requests, this is a checksum of the provided <a Class="emphasis" href="./CURLOPT_POSTFIELDS.html">CURLOPT_POSTFIELDS</a>. Otherwise, it is the checksum of an empty buffer. For requests like PUT, you can provide your own checksum in an HTTP header named <span Class="bold">x-provider2-content-sha256</span>. </p>
+<p class="level0">For <span Class="bold">aws:s3</span>, a <span Class="bold">x-amz-content-sha256</span> header is added to every request if not already present. For s3 requests with unknown payload, this header takes the special value &quot;UNSIGNED-PAYLOAD&quot;. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.75.0.html">7.75.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_HEADEROPT.html">CURLOPT_HEADEROPT</a>(3), <a Class="bold" href="./CURLOPT_HTTPAUTH.html">CURLOPT_HTTPAUTH</a>(3), <a Class="bold" href="./CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a>(3), <a Class="bold" href="./CURLOPT_PROXYAUTH.html">CURLOPT_PROXYAUTH</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Thread-safe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">libcurl API</a> / <b>Thread-safe</b></div>
+<h1> libcurl thread safety </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="features.html">Features</a>
+<br><a href="../security.html">Security</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">libcurl-thread - libcurl thread safety </p><a name="Multi-threading"></a><h2 class="nroffsh">Multi-threading with libcurl</h2>
+<p class="level0">libcurl is thread safe but has no internal thread synchronization. You may have to provide your own locking should you meet any of the thread safety exceptions below. </p><a name="Handles"></a><h2 class="nroffsh">Handles</h2>
+<p class="level0">You must <span Class="bold">never</span> share the same handle in multiple threads. You can pass the handles around among threads, but you must never use a single handle from more than one thread at any given time. </p><a name="Shared"></a><h2 class="nroffsh">Shared objects</h2>
+<p class="level0">You can share certain data between multiple handles by using the share interface but you must provide your own locking and set <a Class="emphasis" href="./curl_share_setopt.html">curl_share_setopt</a> <a href="CURLSHOPT_LOCKFUNC.html">CURLSHOPT_LOCKFUNC</a> and <a href="CURLSHOPT_UNLOCKFUNC.html">CURLSHOPT_UNLOCKFUNC</a>. </p>
+<p class="level0">Note that some items are specifically documented as not thread-safe in the share API (the connection pool and HSTS cache for example). </p><a name="TLS"></a><h2 class="nroffsh">Tls</h2>
+<p class="level0">All current TLS libraries libcurl supports are thread-safe. </p>
+<p class="level0"><a name="OpenSSL"></a><span class="nroffip">OpenSSL</span> </p>
+<p class="level1">OpenSSL 1.1.0+ can be safely used in multi-threaded applications provided that support for the underlying OS threading API is built-in. For older versions of OpenSSL, the user must set mutex callbacks. </p>
+<p class="level1">libcurl may not be able to fully clean up after multi-threaded OpenSSL depending on how OpenSSL was built and loaded as a library. It is possible in some rare circumstances a memory leak could occur unless you implement your own OpenSSL thread cleanup. </p>
+<p class="level1">For example, on Windows if both libcurl and OpenSSL are linked statically to a DLL or application then OpenSSL may leak memory unless the DLL or application calls OPENSSL_thread_stop() before each thread terminates. If OpenSSL is built as a DLL then it does this cleanup automatically and there is no leak. If libcurl is built as a DLL and OpenSSL is linked statically to it then libcurl does this cleanup automatically and there is no leak (added in libcurl <a href="/ch/8.8.0.html">8.8.0</a>). </p>
+<p class="level1">Please review the OpenSSL documentation for a full list of circumstances: <a href="https://docs.openssl.org/3.0/man3/OPENSSL_init_crypto/&#35;notes">https://docs.openssl.org/3.0/man3/OPENSSL_init_crypto/&#35;notes</a> </p><a name="Signals"></a><h2 class="nroffsh">Signals</h2>
+<p class="level0">Signals are used for timing out name resolves (during DNS lookup) - when built without using either the c-ares or threaded resolver backends. On systems that have a signal concept. </p>
+<p class="level0">When using multiple threads you should set the <a Class="emphasis" href="./CURLOPT_NOSIGNAL.html">CURLOPT_NOSIGNAL</a> option to 1L for all handles. Everything works fine except that timeouts cannot be honored during DNS lookups - which you can work around by building libcurl with c-ares or threaded-resolver support. c-ares is a library that provides asynchronous name resolves. On some platforms, libcurl simply cannot function properly multi-threaded unless the <a Class="emphasis" href="./CURLOPT_NOSIGNAL.html">CURLOPT_NOSIGNAL</a> option is set. </p>
+<p class="level0">When <a Class="emphasis" href="./CURLOPT_NOSIGNAL.html">CURLOPT_NOSIGNAL</a> is set to 1L, your application needs to deal with the risk of a SIGPIPE (that at least the OpenSSL backend can trigger). Note that setting <a Class="emphasis" href="./CURLOPT_NOSIGNAL.html">CURLOPT_NOSIGNAL</a> to 0L does not work in a threaded situation as there is a race condition where libcurl risks restoring the former signal handler while another thread should still ignore it. </p><a name="Name"></a><h2 class="nroffsh">Name resolving</h2>
+<p class="level0">The <span Class="bold">gethostbyname</span> or <span Class="bold">getaddrinfo</span> and other name resolving system calls used by libcurl are provided by your operating system and must be thread safe. It is important that libcurl can find and use thread safe versions of these and other system calls, as otherwise it cannot function fully thread safe. Some operating systems are known to have faulty thread implementations. We have previously received problem reports on &#x2a;BSD (at least in the past, they may be working fine these days). Some operating systems that are known to have solid and working thread support are Linux, Solaris and Windows. </p><a name="curlglobal"></a><h2 class="nroffsh">Curl_global_&#x2a; functions</h2>
+<p class="level0">These functions are thread-safe since libcurl <a href="/ch/7.84.0.html">7.84.0</a> if <a Class="emphasis" href="./curl_version_info.html">curl_version_info</a> has the <span Class="bold">CURL_VERSION_THREADSAFE</span> feature bit set (most platforms). </p>
+<p class="level0">If these functions are not thread-safe and you are using libcurl with multiple threads it is especially important that before use you call <a Class="emphasis" href="./curl_global_init.html">curl_global_init</a> or <a Class="emphasis" href="./curl_global_init_mem.html">curl_global_init_mem</a> to explicitly initialize the library and its dependents, rather than rely on the &quot;lazy&quot; fail-safe initialization that takes place the first time <a Class="emphasis" href="./curl_easy_init.html">curl_easy_init</a> is called. For an in-depth explanation refer to <a Class="emphasis" href="./libcurl.html">libcurl</a> section <span Class="bold">GLOBAL CONSTANTS</span>. </p><a name="Memory"></a><h2 class="nroffsh">Memory functions</h2>
+<p class="level0">These functions, provided either by your operating system or your own replacements, must be thread safe. You can use <a Class="emphasis" href="./curl_global_init_mem.html">curl_global_init_mem</a> to set your own replacement memory functions. </p><a name="Non-safe"></a><h2 class="nroffsh">Non-safe functions</h2>
+<p class="level0"><a Class="emphasis" href="./CURLOPT_DNS_USE_GLOBAL_CACHE.html">CURLOPT_DNS_USE_GLOBAL_CACHE</a> is not thread-safe. </p>
+<p class="level0"><a Class="emphasis" href="./curl_version_info.html">curl_version_info</a> is not thread-safe before libcurl initialization. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./libcurl-security.html">libcurl-security</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

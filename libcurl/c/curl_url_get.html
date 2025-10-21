@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_url_get()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_url_get</b></div>
+<h1> curl_url_get - extract a part from a URL </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_url_get%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_url_get.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_url_get.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_url_get - extract a part from a URL </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLUcode <a href="curl_url_get.html">curl_url_get</a>(const CURLU &#x2a;url,
+&nbsp;                      CURLUPart part,
+&nbsp;                      char &#x2a;&#x2a;content,
+&nbsp;                      unsigned int flags);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Given a <span Class="emphasis">url</span> handle of a URL object, this function extracts an individual piece or the full URL from it. </p>
+<p class="level0">The <span Class="emphasis">part</span> argument specifies which part to extract (see list below) and <span Class="emphasis">content</span> points to a &apos;char &#x2a;&apos; to get updated to point to a newly allocated string with the contents. </p>
+<p class="level0">The <span Class="emphasis">flags</span> argument is a bitmask with individual features. </p>
+<p class="level0">The returned content pointer must be freed with <a Class="emphasis" href="./curl_free.html">curl_free</a> after use. </p><a name="FLAGS"></a><h2 class="nroffsh">Flags</h2>
+<p class="level0">The flags argument is zero, one or more bits set in a bitmask. </p>
+<p class="level0"><a name="CURLUDEFAULTPORT"></a><span class="nroffip">CURLU_DEFAULT_PORT</span> </p>
+<p class="level1">If the handle has no port stored, this option makes <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> return the default port for the used scheme. </p>
+<p class="level0"><a name="CURLUDEFAULTSCHEME"></a><span class="nroffip">CURLU_DEFAULT_SCHEME</span> </p>
+<p class="level1">If the handle has no scheme stored, this option makes <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> return the default scheme instead of error. </p>
+<p class="level0"><a name="CURLUNODEFAULTPORT"></a><span class="nroffip">CURLU_NO_DEFAULT_PORT</span> </p>
+<p class="level1">Instructs <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> to not return a port number if it matches the default port for the scheme. </p>
+<p class="level0"><a name="CURLUURLDECODE"></a><span class="nroffip">CURLU_URLDECODE</span> </p>
+<p class="level1">Asks <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> to URL decode the contents before returning it. It does not decode the scheme, the port number or the full URL. </p>
+<p class="level1">The query component also gets plus-to-space conversion as a bonus when this bit is set. </p>
+<p class="level1">Note that this URL decoding is charset unaware and you get a null-terminated string back with data that could be intended for a particular encoding. </p>
+<p class="level1">If there are byte values lower than 32 in the decoded string, the get operation returns an error instead. </p>
+<p class="level0"><a name="CURLUURLENCODE"></a><span class="nroffip">CURLU_URLENCODE</span> </p>
+<p class="level1">If set, <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> URL encodes the hostname part when a full URL is retrieved. If not set (default), libcurl returns the URL with the hostname raw to support IDN names to appear as-is. IDN hostnames are typically using non-ASCII bytes that otherwise gets percent-encoded. </p>
+<p class="level1">Note that even when not asking for URL encoding, the &apos;%&apos; (byte 37) is URL encoded to make sure the hostname remains valid. </p>
+<p class="level0"><a name="CURLUPUNYCODE"></a><span class="nroffip">CURLU_PUNYCODE</span> </p>
+<p class="level1">If set and <a class="emphasis" href="#CURLUURLENCODE">CURLU_URLENCODE</a> is not set, and asked to retrieve the <a class="bold" href="#CURLUPARTHOST">CURLUPART_HOST</a> or <a class="bold" href="#CURLUPARTURL">CURLUPART_URL</a> parts, libcurl returns the host name in its punycode version if it contains any non-ASCII octets (and is an IDN name). </p>
+<p class="level1">If libcurl is built without IDN capabilities, using this bit makes <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> return <span Class="emphasis"><a href="libcurl-errors.html#CURLUELACKSIDN">CURLUE_LACKS_IDN</a></span> if the hostname contains anything outside the ASCII range. </p>
+<p class="level1">(Added in curl <a href="/ch/7.88.0.html">7.88.0</a>) </p>
+<p class="level0"><a name="CURLUPUNY2IDN"></a><span class="nroffip">CURLU_PUNY2IDN</span> </p>
+<p class="level1">If set and asked to retrieve the <a class="bold" href="#CURLUPARTHOST">CURLUPART_HOST</a> or <a class="bold" href="#CURLUPARTURL">CURLUPART_URL</a> parts, libcurl returns the hostname in its IDN (International Domain Name) UTF-8 version if it otherwise is a punycode version. If the punycode name cannot be converted to IDN correctly, libcurl returns <span Class="emphasis"><a href="libcurl-errors.html#CURLUEBADHOSTNAME">CURLUE_BAD_HOSTNAME</a></span>. </p>
+<p class="level1">If libcurl is built without IDN capabilities, using this bit makes <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> return <span Class="emphasis"><a href="libcurl-errors.html#CURLUELACKSIDN">CURLUE_LACKS_IDN</a></span> if the hostname is using punycode. </p>
+<p class="level1">(Added in curl <a href="/ch/8.3.0.html">8.3.0</a>) </p>
+<p class="level0"><a name="CURLUGETEMPTY"></a><span class="nroffip">CURLU_GET_EMPTY</span> </p>
+<p class="level1">When this flag is used in <a href="curl_url_get.html">curl_url_get</a>(), it makes the function return empty query and fragments parts or when used in the full URL. By default, libcurl otherwise considers empty parts non-existing. </p>
+<p class="level1">An empty query part is one where this is nothing following the question mark (before the possible fragment). An empty fragments part is one where there is nothing following the hash sign. </p>
+<p class="level1">(Added in curl <a href="/ch/8.8.0.html">8.8.0</a>) </p>
+<p class="level0"><a name="CURLUNOGUESSSCHEME"></a><span class="nroffip">CURLU_NO_GUESS_SCHEME</span> </p>
+<p class="level1">When this flag is used in <a href="curl_url_get.html">curl_url_get</a>(), it treats the scheme as non-existing if it was set as a result of a previous guess; when CURLU_GUESS_SCHEME was used parsing a URL. </p>
+<p class="level1">Using this flag when getting CURLUPART_SCHEME if the scheme was set as the result of a guess makes <a href="curl_url_get.html">curl_url_get</a>() return <a href="libcurl-errors.html#CURLUENOSCHEME">CURLUE_NO_SCHEME</a>. </p>
+<p class="level1">Using this flag when getting CURLUPART_URL if the scheme was set as the result of a guess makes <a href="curl_url_get.html">curl_url_get</a>() return the full URL without the scheme component. Such a URL can then only be parsed with <a href="curl_url_set.html">curl_url_set</a>() if CURLU_GUESS_SCHEME is used. </p>
+<p class="level1">(Added in curl <a href="/ch/8.9.0.html">8.9.0</a>) </p><a name="PARTS"></a><h2 class="nroffsh">Parts</h2>
+<p class="level0"><a name="CURLUPARTURL"></a><span class="nroffip">CURLUPART_URL</span> </p>
+<p class="level1">When asked to return the full URL, <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a> returns a slightly cleaned up version of the complete URL using all available parts. </p>
+<p class="level1">We advise using the <a class="emphasis" href="#CURLUPUNYCODE">CURLU_PUNYCODE</a> option to get the URL as &quot;normalized&quot; as possible since IDN allows hostnames to be written in many different ways that still end up the same punycode version. </p>
+<p class="level1">Zero-length queries and fragments are excluded from the URL unless CURLU_GET_EMPTY is set. </p>
+<p class="level0"><a name="CURLUPARTSCHEME"></a><span class="nroffip">CURLUPART_SCHEME</span> </p>
+<p class="level1">Scheme cannot be URL decoded on get. </p>
+<p class="level0"><a name="CURLUPARTUSER"></a><span class="nroffip">CURLUPART_USER</span> </p>
+<p class="level0"><a name="CURLUPARTPASSWORD"></a><span class="nroffip">CURLUPART_PASSWORD</span> </p>
+<p class="level0"><a name="CURLUPARTOPTIONS"></a><span class="nroffip">CURLUPART_OPTIONS</span> </p>
+<p class="level1">The options field is an optional field that might follow the password in the userinfo part. It is only recognized/used when parsing URLs for the following schemes: pop3, smtp and imap. The URL API still allows users to set and get this field independently of scheme when not parsing full URLs. </p>
+<p class="level0"><a name="CURLUPARTHOST"></a><span class="nroffip">CURLUPART_HOST</span> </p>
+<p class="level1">The hostname. If it is an IPv6 numeric address, the zone id is not part of it but is provided separately in <a class="emphasis" href="#CURLUPARTZONEID">CURLUPART_ZONEID</a>. IPv6 numerical addresses are returned within brackets ([]). </p>
+<p class="level1">IPv6 names are normalized when set, which should make them as short as possible while maintaining correct syntax. </p>
+<p class="level0"><a name="CURLUPARTZONEID"></a><span class="nroffip">CURLUPART_ZONEID</span> </p>
+<p class="level1">If the hostname is a numeric IPv6 address, this field might also be set. </p>
+<p class="level0"><a name="CURLUPARTPORT"></a><span class="nroffip">CURLUPART_PORT</span> </p>
+<p class="level1">A port cannot be URL decoded on get. This number is returned in a string just like all other parts. That string is guaranteed to hold a valid port number in ASCII using base 10. </p>
+<p class="level0"><a name="CURLUPARTPATH"></a><span class="nroffip">CURLUPART_PATH</span> </p>
+<p class="level1">The <span Class="emphasis">part</span> is always at least a slash (&apos;/&apos;) even if no path was supplied in the URL. A URL path always starts with a slash. </p>
+<p class="level0"><a name="CURLUPARTQUERY"></a><span class="nroffip">CURLUPART_QUERY</span> </p>
+<p class="level1">The initial question mark that denotes the beginning of the query part is a delimiter only. It is not part of the query contents. </p>
+<p class="level1">A not-present query returns <span Class="emphasis">part</span> set to NULL. </p>
+<p class="level1">A zero-length query returns <span Class="emphasis">part</span> as NULL unless CURLU_GET_EMPTY is set. </p>
+<p class="level1">The query part gets pluses converted to space when asked to URL decode on get with the CURLU_URLDECODE bit. </p>
+<p class="level0"><a name="CURLUPARTFRAGMENT"></a><span class="nroffip">CURLUPART_FRAGMENT</span> </p>
+<p class="level1">The initial hash sign that denotes the beginning of the fragment is a delimiter only. It is not part of the fragment contents. </p>
+<p class="level1">A not-present fragment returns <span Class="emphasis">part</span> set to NULL. </p>
+<p class="level1">A zero-length fragment returns <span Class="emphasis">part</span> as NULL unless CURLU_GET_EMPTY is set. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURLUcode rc;
+&nbsp; CURLU &#x2a;url = <a href="curl_url.html">curl_url</a>();
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(url, CURLUPART_URL, &quot;https://example.com&quot;, 0);
+&nbsp; if(!rc) {
+&nbsp;   char &#x2a;scheme;
+&nbsp;   rc = <a href="curl_url_get.html">curl_url_get</a>(url, CURLUPART_SCHEME, &amp;scheme, 0);
+&nbsp;   if(!rc) {
+&nbsp;     printf(&quot;the scheme is %s&bsol;n&quot;, scheme);
+&nbsp;     <a href="curl_free.html">curl_free</a>(scheme);
+&nbsp;   }
+&nbsp;   <a href="curl_url_cleanup.html">curl_url_cleanup</a>(url);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.62.0.html">7.62.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">Returns a CURLUcode error value, which is <a href="libcurl-errors.html#CURLUEOK">CURLUE_OK</a> (0) if everything went fine. See the <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a> man page for the full list with descriptions. </p>
+<p class="level0">If this function returns an error, no URL part is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_CURLU.html">CURLOPT_CURLU</a>(3), <a Class="bold" href="./curl_url.html">curl_url</a>(3), <a Class="bold" href="./curl_url_cleanup.html">curl_url_cleanup</a>(3), <a Class="bold" href="./curl_url_dup.html">curl_url_dup</a>(3), <a Class="bold" href="./curl_url_set.html">curl_url_set</a>(3), <a Class="bold" href="./curl_url_strerror.html">curl_url_strerror</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

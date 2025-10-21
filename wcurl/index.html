@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head> <title>wcurl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/">curl.se</a>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">wcurl</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/wcurl">GitHub repo</a>
+    <a href="/wcurl/code-review.html">manpage</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/trurl/">trurl</a>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <b>wcurl</b></div>
+<center><img src="/logo/wcurl-logo.svg" alt="wcurl logo" style="width:70%; padding-top: 8px; padding-bottom: 30px;">
+</center>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="https://github.com/curl/wcurl">GitHub repo</a>
+<br><a href="manual.html">man page</a>
+</div>
+<p>
+wcurl is a command line tool which lets you download URLs without having to
+remember any parameters.
+<p>
+Invoke wcurl with a list of URLs you want to download and wcurl will pick sane
+defaults; using curl under the hood. See
+the <a href="manual.html">man page</a>.
+<h2> Install </h2>
+<p>
+ Starting with curl 8.14.0, <b>wcurl</b> comes bundled in the regular curl
+release tarballs. Building and installing curl then also installs <b>wcurl</b>
+and its man page.
+<h2> Manual install </h2>
+<p>
+  Install wcurl manually like this:
+<pre style="white-space: pre-wrap; word-break: keep-all; color: #e0e080; background: #000000; padding: 8px 8px 8px 8px;">
+$ curl -fLO https://github.com/curl/wcurl/releases/latest/download/wcurl
+$ chmod +x wcurl
+$ sudo mv wcurl /usr/local/bin/wcurl
+</pre>
+<p>
+  Install wcurl's manpage manually like this:
+<pre style="white-space: pre-wrap; word-break: keep-all; color: #e0e080; background: #000000; padding: 8px 8px 8px 8px;">
+$ curl -fLO https://github.com/curl/wcurl/releases/latest/download/wcurl.1
+$ sudo mkdir -p /usr/local/share/man/man1/
+$ sudo mv wcurl.1 /usr/local/share/man/man1/wcurl.1
+$ sudo mandb
+</pre>
+<h2> Pronunciation </h2>
+<p>
+ "double-u curl"
+</div>
+</div>
+</body>
+</html>

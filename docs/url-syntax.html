@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - URL syntax</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/protdocs.html">Protocols</a> / <b>URL syntax</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="http-cookies.html">HTTP cookies</a>
+<br><a href="/trurl/">trurl</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="url-syntax-and-their-use-in-curl">URL syntax and their use in
+curl</h1>
+<h2 id="specifications">Specifications</h2>
+<p>The official "URL syntax" is primarily defined in these two different
+specifications:</p>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986</a>
+(although URL is called "URI" in there)</li>
+<li><a href="https://url.spec.whatwg.org/">The WHATWG URL
+Specification</a></li>
+</ul>
+<p>RFC 3986 is the earlier one, and curl has always tried to adhere to
+that one (since it shipped in January 2005).</p>
+<p>The WHATWG URL spec was written later, is incompatible with the RFC
+3986 and changes over time.</p>
+<h2 id="variations">Variations</h2>
+<p>URL parsers as implemented in browsers, libraries and tools usually
+opt to support one of the mentioned specifications. Bugs, differences in
+interpretations and the moving nature of the WHATWG spec does however
+make it unlikely that multiple parsers treat URLs the same way.</p>
+<h2 id="security">Security</h2>
+<p>Due to the inherent differences between URL parser implementations,
+it is considered a security risk to mix different implementations and
+assume the same behavior.</p>
+<p>For example, if you use one parser to check if a URL uses a good
+hostname or the correct auth field, and then pass on that same URL to a
+<em>second</em> parser, there is always a risk it treats the same URL
+differently. There is no right and wrong in URL land, only differences
+of opinions.</p>
+<p>libcurl offers a separate API to its URL parser for this reason,
+among others.</p>
+<p>Applications may at times find it convenient to allow users to
+specify URLs for various purposes and that string would then end up fed
+to curl. Getting a URL from an external untrusted party and using it
+with curl brings several security concerns:</p>
+<ol type="1">
+<li><p>If you have an application that runs as or in a server
+application, getting an unfiltered URL can trick your application to
+access a local resource instead of a remote resource. Protecting
+yourself against localhost accesses is hard when accepting user provided
+URLs.</p></li>
+<li><p>Such custom URLs can access other ports than you planned as port
+numbers are part of the regular URL format. The combination of a local
+host and a custom port number can allow external users to play tricks
+with your local services.</p></li>
+<li><p>Such a URL might use other schemes than you thought of or planned
+for.</p></li>
+</ol>
+<h2 id="rfc-3986-plus">"RFC 3986 plus"</h2>
+<p>curl recognizes a URL syntax that we call "RFC 3986 plus". It is
+grounded on the well established RFC 3986 to make sure previously
+written command lines and curl using scripts remain working.</p>
+<p>curl's URL parser allows a few deviations from the spec in order to
+inter-operate better with URLs that appear in the wild.</p>
+<h3 id="spaces">Spaces</h3>
+<p>A URL provided to curl cannot contain spaces. They need to be
+provided URL encoded to be accepted in a URL by curl.</p>
+<p>An exception to this rule: <code>Location:</code> response headers
+that indicate to a client where a resource has been redirected to,
+sometimes contain spaces. This is a violation of RFC 3986 but is fine in
+the WHATWG spec. curl handles these by re-encoding them to
+<code>%20</code>.</p>
+<h3 id="non-ascii">Non-ASCII</h3>
+<p>Byte values in a provided URL that are outside of the printable ASCII
+range are percent-encoded by curl.</p>
+<h3 id="multiple-slashes">Multiple slashes</h3>
+<p>An absolute URL always starts with a "scheme" followed by a colon.
+For all the schemes curl supports, the colon must be followed by two
+slashes according to RFC 3986 but not according to the WHATWG spec -
+which allows one to infinity amount.</p>
+<p>curl allows one, two or three slashes after the colon to still be
+considered a valid URL.</p>
+<h3 id="scheme-less">"scheme-less"</h3>
+<p>curl supports "URLs" that do not start with a scheme. This is not
+supported by any of the specifications. This is a shortcut to entering
+URLs that was supported by browsers early on and has been mimicked by
+curl.</p>
+<p>Based on what the hostname starts with, curl "guesses" what protocol
+to use:</p>
+<ul>
+<li><code>ftp.</code> means FTP</li>
+<li><code>dict.</code> means DICT</li>
+<li><code>ldap.</code> means LDAP</li>
+<li><code>imap.</code> means IMAP</li>
+<li><code>smtp.</code> means SMTP</li>
+<li><code>pop3.</code> means POP3</li>
+<li>all other means HTTP</li>
+</ul>
+<h3 id="globbing-letters">Globbing letters</h3>
+<p>The curl command line tool supports "globbing" of URLs. It means that
+you can create ranges and lists using <code>[N-M]</code> and
+<code>{one,two,three}</code> sequences. The letters used for this
+(<code>[]{}</code>) are reserved in RFC 3986 and can therefore not
+legitimately be part of such a URL.</p>
+<p>They are however not reserved or special in the WHATWG specification,
+so globbing can mess up such URLs. Globbing can be turned off for such
+occasions (using <code>--globoff</code>).</p>
+<h1 id="url-syntax-details">URL syntax details</h1>
+<p>A URL may consist of the following components - many of them are
+optional:</p>
+<pre><code>[scheme][divider][userinfo][hostname][port number][path][query][fragment]</code></pre>
+<p>Each component is separated from the following component with a
+divider character or string.</p>
+<p>For example, this could look like:</p>
+<pre><code>http://user:password@www.example.com:80/index.html?foo=bar#top</code></pre>
+<h2 id="scheme">Scheme</h2>
+<p>The scheme specifies the protocol to use. A curl build can support a
+few or many different schemes. You can limit what schemes curl should
+accept.</p>
+<p>curl supports the following schemes on URLs specified to transfer.
+They are matched case insensitively:</p>
+<p><code>dict</code>, <code>file</code>, <code>ftp</code>,
+<code>ftps</code>, <code>gopher</code>, <code>gophers</code>,
+<code>http</code>, <code>https</code>, <code>imap</code>,
+<code>imaps</code>, <code>ldap</code>, <code>ldaps</code>,
+<code>mqtt</code>, <code>pop3</code>, <code>pop3s</code>,
+<code>rtmp</code>, <code>rtmpe</code>, <code>rtmps</code>,
+<code>rtmpt</code>, <code>rtmpte</code>, <code>rtmpts</code>,
+<code>rtsp</code>, <code>smb</code>, <code>smbs</code>,
+<code>smtp</code>, <code>smtps</code>, <code>telnet</code>,
+<code>tftp</code></p>
+<p>When the URL is specified to identify a proxy, curl recognizes the
+following schemes:</p>
+<p><code>http</code>, <code>https</code>, <code>socks4</code>,
+<code>socks4a</code>, <code>socks5</code>, <code>socks5h</code>,
+<code>socks</code></p>
+<h2 id="userinfo">Userinfo</h2>
+<p>The userinfo field can be used to set username and password for
+authentication purposes in this transfer. The use of this field is
+discouraged since it often means passing around the password in plain
+text and is thus a security risk.</p>
+<p>URLs for IMAP, POP3 and SMTP also support <em>login options</em> as
+part of the userinfo field. They are provided as a semicolon after the
+password and then the options.</p>
+<h2 id="hostname">Hostname</h2>
+<p>The hostname part of the URL contains the address of the server that
+you want to connect to. This can be the fully qualified domain name of
+the server, the local network name of the machine on your network or the
+IP address of the server or machine represented by either an IPv4 or
+IPv6 address (within brackets). For example:</p>
+<pre><code>http://www.example.com/
+http://hostname/
+http://192.168.0.1/
+http://[2001:1890:1112:1::20]/</code></pre>
+<h3 id="localhost">"localhost"</h3>
+<p>Starting in curl 7.77.0, curl uses loopback IP addresses for the name
+<code>localhost</code>: <code>127.0.0.1</code> and <code>::1</code>. It
+does not resolve the name using the resolver functions.</p>
+<p>This is done to make sure the host accessed is truly the localhost -
+the local machine.</p>
+<h3 id="idna">IDNA</h3>
+<p>If curl was built with International Domain Name (IDN) support, it
+can also handle hostnames using non-ASCII characters.</p>
+<p>When built with libidn2, curl uses the IDNA 2008 standard. This is
+equivalent to the WHATWG URL spec, but differs from certain browsers
+that use IDNA 2003 Transitional Processing. The two standards have a
+huge overlap but differ slightly, perhaps most famously in how they deal
+with the <a href="https://en.wikipedia.org/wiki/%c3%9f">German "double
+s"</a>.</p>
+<p>When WinIDN is used, curl uses IDNA 2003 Transitional Processing,
+like the rest of Windows.</p>
+<h2 id="port-number">Port number</h2>
+<p>If there is a colon after the hostname, that should be followed by
+the port number to use. 1 - 65535. curl also supports a blank port
+number field - but only if the URL starts with a scheme.</p>
+<p>If the port number is not specified in the URL, curl uses a default
+port number based on the provide scheme:</p>
+<p>DICT 2628, FTP 21, FTPS 990, GOPHER 70, GOPHERS 70, HTTP 80, HTTPS
+443, IMAP 132, IMAPS 993, LDAP 369, LDAPS 636, MQTT 1883, POP3 110,
+POP3S 995, RTMP 1935, RTMPS 443, RTMPT 80, RTSP 554, SCP 22, SFTP 22,
+SMB 445, SMBS 445, SMTP 25, SMTPS 465, TELNET 23, TFTP 69</p>
+<h1 id="scheme-specific-behaviors">Scheme specific behaviors</h1>
+<h2 id="ftp">FTP</h2>
+<p>The path part of an FTP request specifies the file to retrieve and
+from which directory. If the file part is omitted then libcurl downloads
+the directory listing for the directory specified. If the directory is
+omitted then the directory listing for the root / home directory is
+returned.</p>
+<p>FTP servers typically put the user in its "home directory" after
+login, which then differs between users. To explicitly specify the root
+directory of an FTP server, start the path with double slash
+<code>//</code> or <code>/%2f</code> (2F is the hexadecimal value of the
+ASCII code for the slash).</p>
+<h2 id="file">FILE</h2>
+<p>When a <code>FILE://</code> URL is accessed on Windows systems, it
+can be crafted in a way so that Windows attempts to connect to a
+(remote) machine when curl wants to read or write such a path.</p>
+<p>curl only allows the hostname part of a FILE URL to be one out of
+these three alternatives: <code>localhost</code>, <code>127.0.0.1</code>
+or blank ("", zero characters). Anything else makes curl fail to parse
+the URL.</p>
+<h3 id="windows-specific-file-details">Windows-specific FILE
+details</h3>
+<p>curl accepts that the FILE URL's path starts with a "drive letter".
+That is a single letter <code>a</code> to <code>z</code> followed by a
+colon or a pipe character (<code>|</code>).</p>
+<p>The Windows operating system itself converts some file accesses to
+perform network accesses over SMB/CIFS, through several different file
+path patterns. This way, a <code>file://</code> URL passed to curl
+<em>might</em> be converted into a network access inadvertently and
+unknowingly to curl. This is a Windows feature curl cannot control or
+disable.</p>
+<h2 id="imap">IMAP</h2>
+<p>The path part of an IMAP request not only specifies the mailbox to
+list or select, but can also be used to check the
+<code>UIDVALIDITY</code> of the mailbox, to specify the
+<code>UID</code>, <code>SECTION</code> and <code>PARTIAL</code> octets
+of the message to fetch and to specify what messages to search for.</p>
+<p>A top level folder list:</p>
+<pre><code>imap://user:password@mail.example.com</code></pre>
+<p>A folder list on the user's inbox:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX</code></pre>
+<p>Select the user's inbox and fetch message with
+<code>uid = 1</code>:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX/;UID=1</code></pre>
+<p>Select the user's inbox and fetch the first message in the mail
+box:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX/;MAILINDEX=1</code></pre>
+<p>Select the user's inbox, check the <code>UIDVALIDITY</code> of the
+mailbox is 50 and fetch message 2 if it is:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX;UIDVALIDITY=50/;UID=2</code></pre>
+<p>Select the user's inbox and fetch the text portion of message 3:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX/;UID=3/;SECTION=TEXT</code></pre>
+<p>Select the user's inbox and fetch the first 1024 octets of message
+4:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX/;UID=4/;PARTIAL=0.1024</code></pre>
+<p>Select the user's inbox and check for NEW messages:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX?NEW</code></pre>
+<p>Select the user's inbox and search for messages containing "shadows"
+in the subject line:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX?SUBJECT%20shadows</code></pre>
+<p>Searching via the query part of the URL <code>?</code> is a search
+request for the results to be returned as message sequence numbers
+(<code>MAILINDEX</code>). It is possible to make a search request for
+results to be returned as unique ID numbers (<code>UID</code>) by using
+a custom curl request via <code>-X</code>. <code>UID</code> numbers are
+unique per session (and multiple sessions when <code>UIDVALIDITY</code>
+is the same). For example, if you are searching for
+<code>"foo bar"</code> in header+body (<code>TEXT</code>) and you want
+the matching <code>MAILINDEX</code> numbers returned then you could
+search via URL:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX?TEXT%20%22foo%20bar%22</code></pre>
+<p>If you want matching <code>UID</code> numbers you have to use a
+custom request:</p>
+<pre><code>imap://user:password@mail.example.com/INBOX -X &quot;UID SEARCH TEXT \&quot;foo bar\&quot;&quot;</code></pre>
+<p>For more information about IMAP commands please see RFC 9051. For
+more information about the individual components of an IMAP URL please
+see RFC 5092.</p>
+<ul>
+<li>Note old curl versions would <code>FETCH</code> by message sequence
+number when <code>UID</code> was specified in the URL. That was a bug
+fixed in 7.62.0, which added <code>MAILINDEX</code> to
+<code>FETCH</code> by mail sequence number.</li>
+</ul>
+<h2 id="ldap">LDAP</h2>
+<p>The path part of an LDAP request can be used to specify the:
+Distinguished Name, Attributes, Scope, Filter and Extension for an LDAP
+search. Each field is separated by a question mark and when that field
+is not required an empty string with the question mark separator should
+be included.</p>
+<p>Search for the <code>DN</code> as <code>My Organization</code>:</p>
+<pre><code>ldap://ldap.example.com/o=My%20Organization</code></pre>
+<p>the same search but only return <code>postalAddress</code>
+attributes:</p>
+<pre><code>ldap://ldap.example.com/o=My%20Organization?postalAddress</code></pre>
+<p>Search for an empty <code>DN</code> and request information about the
+<code>rootDomainNamingContext</code> attribute for an Active Directory
+server:</p>
+<pre><code>ldap://ldap.example.com/?rootDomainNamingContext</code></pre>
+<p>For more information about the individual components of an LDAP URL
+please see <a href="https://datatracker.ietf.org/doc/html/rfc4516">RFC
+4516</a>.</p>
+<h2 id="pop3">POP3</h2>
+<p>The path part of a POP3 request specifies the message ID to retrieve.
+If the ID is not specified then a list of waiting messages is returned
+instead.</p>
+<h2 id="scp">SCP</h2>
+<p>The path part of an SCP URL specifies the path and file to retrieve
+or upload. The file is taken as an absolute path from the root directory
+on the server.</p>
+<p>To specify a path relative to the user's home directory on the
+server, prepend <code>~/</code> to the path portion.</p>
+<h2 id="sftp">SFTP</h2>
+<p>The path part of an SFTP URL specifies the file to retrieve or
+upload. If the path ends with a slash (<code>/</code>) then a directory
+listing is returned instead of a file. If the path is omitted entirely
+then the directory listing for the root / home directory is
+returned.</p>
+<h2 id="smb">SMB</h2>
+<p>The path part of an SMB request specifies the file to retrieve and
+from what share and directory or the share to upload to and as such, may
+not be omitted. If the username is embedded in the URL then it must
+contain the domain name and as such, the backslash must be URL encoded
+as %2f.</p>
+<p>When uploading to SMB, the size of the file needs to be known ahead
+of time, meaning that you can upload a file passed to curl over a pipe
+like stdin.</p>
+<p>curl supports SMB version 1 (only)</p>
+<h2 id="smtp">SMTP</h2>
+<p>The path part of an SMTP request specifies the hostname to present
+during communication with the mail server. If the path is omitted, then
+libcurl attempts to resolve the local computer's hostname. However, this
+may not return the fully qualified domain name that is required by some
+mail servers and specifying this path allows you to set an alternative
+name, such as your machine's fully qualified domain name, which you
+might have obtained from an external function such as gethostname or
+getaddrinfo.</p>
+<p>The default smtp port is 25. Some servers use port 587 as an
+alternative.</p>
+<h2 id="rtmp">RTMP</h2>
+<p>There is no official URL spec for RTMP so libcurl uses the URL syntax
+supported by the underlying librtmp library. It has a syntax where it
+wants a traditional URL, followed by a space and a series of
+space-separated <code>name=value</code> pairs.</p>
+<p>While space is not typically a "legal" letter, libcurl accepts them.
+When a user wants to pass in a <code>#</code> (hash) character it is
+treated as a fragment and it gets cut off by libcurl if provided
+literally. You have to escape it by providing it as backslash and its
+ASCII value in hexadecimal: <code>\23</code>.</p>
+</div>
+</div>
+</body>
+</html>

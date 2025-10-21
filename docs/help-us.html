@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Help us!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/projdocs.html">Project</a> / <b>Help us</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/dev/contribute.html">Contribute</a>
+<br><a href="/mail/">Mailing Lists</a>
+<br><a href="/dev/internals.html">Internals</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="how-to-get-started-helping-out-in-the-curl-project">How to get
+started helping out in the curl project</h1>
+<p>We are always in need of more help. If you are new to the project and
+are looking for ways to contribute and help out, this document aims to
+give a few good starting points.</p>
+<p>You may subscribe to the <a
+href="https://lists.haxx.se/listinfo/curl-library">curl-library mailing
+list</a> to keep track of the current discussion topics; or if you are
+registered on GitHub, you can use the <a
+href="https://github.com/curl/curl/discussions">Discussions section</a>
+on the main curl repository.</p>
+<h2 id="scratch-your-own-itch">Scratch your own itch</h2>
+<p>One of the best ways is to start working on any problems or issues
+you have found yourself or perhaps got annoyed at in the past. It can be
+a spelling error in an error text or a weirdly phrased section in a man
+page. Hunt it down and report the bug. Or make your first pull request
+with a fix for that.</p>
+<h2 id="smaller-tasks">Smaller tasks</h2>
+<p>Some projects mark small issues as "beginner friendly", "bite-sized"
+or similar. We do not do that in curl since such issues never linger
+around long enough. Simple issues get handled fast.</p>
+<p>If you are looking for a smaller or simpler task in the project to
+help out with as an entry-point into the project, perhaps because you
+are a newcomer or even maybe not a terribly experienced developer,
+here's our advice:</p>
+<ul>
+<li>Read through this document to get a grasp on a general approach to
+use</li>
+<li>Consider adding a test case for something not currently tested
+(correctly)</li>
+<li>Consider updating or adding documentation</li>
+<li>One way to get started gently in the project, is to participate in
+an existing issue/PR and help out by reproducing the issue, review the
+code in the PR etc.</li>
+</ul>
+<h2 id="help-wanted">Help wanted</h2>
+<p>In the issue tracker we occasionally mark bugs with <a
+href="https://github.com/curl/curl/labels/help%20wanted">help
+wanted</a>, as a sign that the bug is acknowledged to exist and that
+there is nobody known to work on this issue for the moment. Those are
+bugs that are fine to "grab" and provide a pull request for. The
+complexity level of these of course varies, so pick one that piques your
+interest.</p>
+<h2 id="work-on-known-bugs">Work on known bugs</h2>
+<p>Some bugs are known and have not yet received attention and work
+enough to get fixed. We collect such known existing flaws in the <a
+href="https://curl.se/docs/knownbugs.html">KNOWN_BUGS</a> page. Many of
+them link to the original bug report with some additional details, but
+some may also have aged a bit and may require some verification that the
+bug still exists in the same way and that what was said about it in the
+past is still valid.</p>
+<h2 id="fix-autobuild-problems">Fix autobuild problems</h2>
+<p>On the <a href="https://curl.se/dev/builds.html">autobuilds page</a>
+we show a collection of test results from the automatic curl build and
+tests that are performed by volunteers. Fixing compiler warnings and
+errors shown there is something we value greatly. Also, if you own or
+run systems or architectures that are not already tested in the
+autobuilds, we also appreciate more volunteers running builds
+automatically to help us keep curl portable.</p>
+<h2 id="todo-items">TODO items</h2>
+<p>Ideas for features and functions that we have considered worthwhile
+to implement and provide are kept in the <a
+href="https://curl.se/docs/todo.html">TODO</a> file. Some of the ideas
+are rough. Some are well thought out. Some probably are not really
+suitable anymore.</p>
+<p>Before you invest a lot of time on a TODO item, do bring it up for
+discussion on the mailing list. For discussion on applicability but also
+for ideas and brainstorming on specific ways to do the implementation
+etc.</p>
+<h2 id="you-decide">You decide</h2>
+<p>You can also come up with a completely new thing you think we should
+do. Or not do. Or fix. Or add to the project. You then either bring it
+to the mailing list first to see if people shoot down the idea at once,
+or you bring a first draft of the idea as a pull request and take the
+discussion there around the specific implementation. Either way is
+fine.</p>
+<h2 id="contribute">CONTRIBUTE</h2>
+<p>We offer <a href="https://curl.se/dev/contribute.html">guidelines</a>
+that are suitable to be familiar with before you decide to contribute to
+curl. If you are used to open source development, you probably do not
+find many surprises there.</p>
+</div>
+</div>
+</body>
+</html>

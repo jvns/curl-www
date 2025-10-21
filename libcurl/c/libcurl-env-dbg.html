@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - environment debug variables</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>Environment debug variables</b></div>
+<h1> Environment variables libcurl DEBUGBUILD understands </h1>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">libcurl-env-dbg - environment variables libcurl DEBUGBUILD understands </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This is a set of variables only recognized and used if libcurl was built &quot;debug enabled&quot;, which should never be true for a library used in production. These variables are intended for internal use only, subject to change and have many effects on the behavior of libcurl. Refer to the source code to determine how exactly they are being used. </p>
+<p class="level0"><a name="CURLALTSVCHTTP"></a><span class="nroffip">CURL_ALTSVC_HTTP</span> </p>
+<p class="level1">Bypass the AltSvc HTTPS protocol restriction if this variable exists. </p>
+<p class="level0"><a name="CURLDBGSOCKRBLOCK"></a><span class="nroffip">CURL_DBG_SOCK_RBLOCK</span> </p>
+<p class="level1">The percentage of recv() calls that should be answered with an EAGAIN at random. For TCP/UNIX sockets. </p>
+<p class="level0"><a name="CURLDBGSOCKRMAX"></a><span class="nroffip">CURL_DBG_SOCK_RMAX</span> </p>
+<p class="level1">The maximum data that shall be received from the network in one recv() call. For TCP/UNIX sockets. This is applied to every recv. </p>
+<p class="level1">Example: <span Class="bold">CURL_DBG_SOCK_RMAX=400</span> means recv buffer size is limited to a maximum of 400 bytes. </p>
+<p class="level0"><a name="CURLDBGSOCKWBLOCK"></a><span class="nroffip">CURL_DBG_SOCK_WBLOCK</span> </p>
+<p class="level1">The percentage of send() calls that should be answered with an EAGAIN at random. For TCP/UNIX sockets. </p>
+<p class="level0"><a name="CURLDBGSOCKWPARTIAL"></a><span class="nroffip">CURL_DBG_SOCK_WPARTIAL</span> </p>
+<p class="level1">The percentage of data that shall be written to the network. For TCP/UNIX sockets. This is applied to every send. </p>
+<p class="level1">Example: <span Class="bold">CURL_DBG_SOCK_WPARTIAL=80</span> means a send with 1000 bytes would only send 800. </p>
+<p class="level0"><a name="CURLDBGQUICWBLOCK"></a><span class="nroffip">CURL_DBG_QUIC_WBLOCK</span> </p>
+<p class="level1">The percentage of send() calls that should be answered with EAGAIN at random. QUIC only. </p>
+<p class="level0"><a name="CURLDEBUG"></a><span class="nroffip">CURL_DEBUG</span> </p>
+<p class="level1">Trace logging behavior as an alternative to calling <a Class="emphasis" href="./curl_global_trace.html">curl_global_trace</a>. </p>
+<p class="level1">Example: <span Class="bold">CURL_DEBUG=http/2</span> means trace details about HTTP/2 handling. </p>
+<p class="level1">In the curl command line tool, built with <span Class="emphasis">--enable-debug</span>, this environment variable adds to arguments like <span Class="emphasis">--verbose</span>, <span Class="emphasis">-vvv</span>. At least a single <span Class="emphasis">-v</span> is needed to make the run emit trace output, but when it does, the contents of <a class="emphasis" href="#CURLDEBUG">CURL_DEBUG</a> are added and can override existing options. </p>
+<p class="level1">Example: <span Class="bold">CURL_DEBUG=tcp,-http/2 curl -vv url</span> means trace protocol details, triggered by <span Class="emphasis">-vv</span>, add tracing of TCP in addition and remove tracing of HTTP/2. </p>
+<p class="level0"><a name="CURLDEBUGSIZE"></a><span class="nroffip">CURL_DEBUG_SIZE</span> </p>
+<p class="level1">Fake the size returned by <a href="CURLINFO_HEADER_SIZE.html">CURLINFO_HEADER_SIZE</a> and <a href="CURLINFO_REQUEST_SIZE.html">CURLINFO_REQUEST_SIZE</a>. </p>
+<p class="level0"><a name="CURLDNSSERVER"></a><span class="nroffip">CURL_DNS_SERVER</span> </p>
+<p class="level1">When built with c-ares for name resolving, setting this environment variable to <span Class="emphasis">[IP:port]</span> makes libcurl use that DNS server instead of the system default. This is used by the curl test suite. </p>
+<p class="level0"><a name="CURLFTPPWDSTOP"></a><span class="nroffip">CURL_FTP_PWD_STOP</span> </p>
+<p class="level1">When set, the first transfer - when using ftp: - returns before sending the <span Class="emphasis">PWD</span> command and stop any further progress. This is used to test an edge case </p>
+<p class="level0"><a name="CURLGETHOSTNAME"></a><span class="nroffip">CURL_GETHOSTNAME</span> </p>
+<p class="level1">Fake the local machine&apos;s unqualified hostname for NTLM and SMTP. </p>
+<p class="level0"><a name="CURLHSTSHTTP"></a><span class="nroffip">CURL_HSTS_HTTP</span> </p>
+<p class="level1">Bypass the HSTS HTTPS protocol restriction if this variable exists. </p>
+<p class="level0"><a name="CURLFORCETIME"></a><span class="nroffip">CURL_FORCETIME</span> </p>
+<p class="level1">A time of 0 is used for AWS signatures and NTLM if this variable exists. </p>
+<p class="level0"><a name="CURLENTROPY"></a><span class="nroffip">CURL_ENTROPY</span> </p>
+<p class="level1">A fixed faked value to use instead of a proper random number so that functions in libcurl that are otherwise getting random outputs can be tested for what they generate. </p>
+<p class="level0"><a name="CURLSMALLREQSEND"></a><span class="nroffip">CURL_SMALLREQSEND</span> </p>
+<p class="level1">An alternative size of HTTP data to be sent at a time only if smaller than the current. </p>
+<p class="level0"><a name="CURLSMALLSENDS"></a><span class="nroffip">CURL_SMALLSENDS</span> </p>
+<p class="level1">An alternative size of socket data to be sent at a time only if smaller than the current. </p>
+<p class="level0"><a name="CURLTIME"></a><span class="nroffip">CURL_TIME</span> </p>
+<p class="level1">Fake Unix timestamp to use for AltSvc, HSTS and CURLINFO variables that are time related. </p>
+<p class="level1">This variable can also be used to fake the data returned by some CURLINFO variables that are not time-related (such as <a href="CURLINFO_LOCAL_PORT.html">CURLINFO_LOCAL_PORT</a>), and in that case the value is not a timestamp. </p>
+<p class="level0"><a name="CURLTRACE"></a><span class="nroffip">CURL_TRACE</span> </p>
+<p class="level1">LDAP tracing is enabled if this variable exists and its value is 1 or greater. </p>
+<p class="level1">OpenLDAP tracing is separate. Refer to CURL_OPENLDAP_TRACE. </p>
+<p class="level0"><a name="CURLOPENLDAPTRACE"></a><span class="nroffip">CURL_OPENLDAP_TRACE</span> </p>
+<p class="level1">OpenLDAP tracing is enabled if this variable exists and its value is 1 or greater. There is a number of debug levels, refer to <span Class="emphasis">openldap.c</span> comments. </p>
+<p class="level0"><a name="CURLWSCHUNKSIZE"></a><span class="nroffip">CURL_WS_CHUNK_SIZE</span> </p>
+<p class="level1">Used to influence the buffer chunk size used for WebSocket encoding and decoding. </p>
+<p class="level0"><a name="CURLWSCHUNKEAGAIN"></a><span class="nroffip">CURL_WS_CHUNK_EAGAIN</span> </p>
+<p class="level1">Used to simulate blocking sends after this chunk size for WebSocket connections. </p>
+<p class="level0"><a name="CURLWSFORCEZEROMASK"></a><span class="nroffip">CURL_WS_FORCE_ZERO_MASK</span> </p>
+<p class="level1">Used to set the bitmask of all sent WebSocket frames to zero. The value of the environment variable does not matter. </p>
+<p class="level0"><a name="CURLFORBIDREUSE"></a><span class="nroffip">CURL_FORBID_REUSE</span> </p>
+<p class="level1">Used to set the <a href="CURLOPT_FORBID_REUSE.html">CURLOPT_FORBID_REUSE</a> flag on each transfer initiated by the curl command line tool. The value of the environment variable does not matter. </p>
+<p class="level0"><a name="CURLGRACEFULSHUTDOWN"></a><span class="nroffip">CURL_GRACEFUL_SHUTDOWN</span> </p>
+<p class="level1">Make a blocking, graceful shutdown of all remaining connections when a multi handle is destroyed. This implicitly triggers for easy handles that are run via easy_perform. The value of the environment variable gives the shutdown timeout in milliseconds. </p>
+<p class="level0"><a name="CURLH2STREAMWINMAX"></a><span class="nroffip">CURL_H2_STREAM_WIN_MAX</span> </p>
+<p class="level1">Set to a positive 32-bit number to override the HTTP/2 stream window&apos;s default of 10MB. Used in testing to verify correct window update handling. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./libcurl-env.html">libcurl-env</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

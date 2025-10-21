@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Specifications</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>Specifications</b></div>
+<h1> Specifications that Concerns Curl </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/docs/manpage.html">manpage</a>
+<br><a href="/docs/tutorial.html">Tutorial</a>
+<br><a href="/docs/faq.html">FAQ</a>
+</div>
+<p>
+ This is an incomplete list with some of the specifications, standards and
+ other helpful documents that are useful for curl hackers and users.
+<ul><li class="even"><a href="/rfc/cookie_spec.html">cookie_spec</a> - Netscape's cookie specification
+<li class="odd"><a href="/rfc/draft-brezak-spnego-http-04.txt">draft-brezak-spnego-http-04</a> - SPNEGO Access Authentication
+<li class="even"><a href="/rfc/draft-earhart-url-smtp-00.txt">draft-earhart-url-smtp-00</a> - An SMTP URL Interface (expired)
+<li class="odd"><a href="/rfc/draft-ietf-secsh-scp-sftp-ssh-uri-04.txt">draft-ietf-secsh-scp-sftp-ssh-uri-04</a> - Uniform Resource Identifier (URI) Scheme for Secure File Transfer Protocol (SFTP) and Secure Shell (SSH)
+<li class="even"><a href="/rfc/draft-luotonen-web-proxy-tunneling-01.txt">draft-luotonen-web-proxy-tunneling-01</a> - Tunneling TCP based protocols through Web proxy servers
+<li class="odd"><a href="/rfc/draft-murchison-sasl-login-00.txt">draft-murchison-sasl-login-00</a> - The LOGIN SASL Mechanism (expired)
+<li class="even"><a href="/rfc/draft-murray-auth-ftp-ssl-16.txt">draft-murray-auth-ftp-ssl-16</a> - Securing FTP with TLS (Obsoleted by RFC4217)
+<li class="odd"><a href="/rfc/ntlm.html">ntlm</a> - Eric Glass' NTLM Authentication Protocol specification
+<li class="even"><a href="/rfc/rfc0821.txt">rfc0821</a> - Simple Mail Transfer Protocol (obsoleted by RFC2821)
+<li class="odd"><a href="/rfc/rfc0822.txt">rfc0822</a> - Arpa Internet Text Messages (mostly for the date format)
+<li class="even"><a href="/rfc/rfc0850.txt">rfc0850</a> - Interchange of USENET Messages (mostly for the date format)
+<li class="odd"><a href="/rfc/rfc0854.txt">rfc0854</a> - Telnet Protocol Specification
+<li class="even"><a href="/rfc/rfc0959.txt">rfc0959</a> - File Transfer Protocol (FTP)
+<li class="odd"><a href="/rfc/rfc0974.txt">rfc0974</a> - Mail Routing And The Domain System (obsoleted by RFC2821)
+<li class="even"><a href="/rfc/rfc1035.txt">rfc1035</a> - Domain Names - Implementation and Specification
+<li class="odd"><a href="/rfc/rfc1081.txt">rfc1081</a> - Post Office Protocol - Version 3 (obsoleted by RFC1225)
+<li class="even"><a href="/rfc/rfc1123.txt">rfc1123</a> - Requirements for Internet Hosts
+<li class="odd"><a href="/rfc/rfc1225.txt">rfc1225</a> - Post Office Protocol - Version 3 (obsoleted by RFC1460)
+<li class="even"><a href="/rfc/rfc1350.txt">rfc1350</a> - The TFTP Protocol (Revision 2)
+<li class="odd"><a href="/rfc/rfc1425.txt">rfc1425</a> - SMTP Service Extensions (obsoleted by RFC1651)
+<li class="even"><a href="/rfc/rfc1427.txt">rfc1427</a> - SMTP Service Extension for Message Size Declaration (obsoleted by RFC1653)
+<li class="odd"><a href="/rfc/rfc1436.txt">rfc1436</a> - The Internet Gopher Protocol
+<li class="even"><a href="/rfc/rfc1460.txt">rfc1460</a> - Post Office Protocol - Version 3 (obsoleted by RFC1725)
+<li class="odd"><a href="/rfc/rfc1510.txt">rfc1510</a> - The Kerberos Network Authentication Service (V5) (obsoleted by RFC4120)
+<li class="even"><a href="/rfc/rfc1635.txt">rfc1635</a> - How to Use Anonymous FTP
+<li class="odd"><a href="/rfc/rfc1639.txt">rfc1639</a> - FTP Operation Over Big Address Records (FOOBAR)
+<li class="even"><a href="/rfc/rfc1651.txt">rfc1651</a> - SMTP Service Extensions (obsoleted by RFC1869)
+<li class="odd"><a href="/rfc/rfc1653.txt">rfc1653</a> - SMTP Service Extension for Message Size Declaration (obsoleted by RFC1870)
+<li class="even"><a href="/rfc/rfc1725.txt">rfc1725</a> - Post Office Protocol - Version 3 (obsoleted by RFC1939)
+<li class="odd"><a href="/rfc/rfc1730.txt">rfc1730</a> - Internet Message Access Protocol - Version 4 (obsoleted by RFC2060, RFC2061)
+<li class="even"><a href="/rfc/rfc1734.txt">rfc1734</a> - POP3 AUTHentication command (obsoleted by RFC5034)
+<li class="odd"><a href="/rfc/rfc1738.txt">rfc1738</a> - Uniform Resource Locators (updated by RFC2396)
+<li class="even"><a href="/rfc/rfc1777.txt">rfc1777</a> - Lightweight Directory Access Protocol
+<li class="odd"><a href="/rfc/rfc1808.txt">rfc1808</a> - Relative Uniform Resource Locators (updated by RFC2396)
+<li class="even"><a href="/rfc/rfc1867.txt">rfc1867</a> - Form-based File Upload in HTML
+<li class="odd"><a href="/rfc/rfc1869.txt">rfc1869</a> - SMTP Service Extensions (obsoleted by RFC2821)
+<li class="even"><a href="/rfc/rfc1870.txt">rfc1870</a> - SMTP Service Extension for Message Size Declaration (obsoletes RFC1653)
+<li class="odd"><a href="/rfc/rfc1884.txt">rfc1884</a> - IP Version 6 Addressing Architecture (obsolete)
+<li class="even"><a href="/rfc/rfc1928.txt">rfc1928</a> - SOCKS Protocol Version 5
+<li class="odd"><a href="/rfc/rfc1939.txt">rfc1939</a> - Post Office Protocol - Version 3
+<li class="even"><a href="/rfc/rfc1945.txt">rfc1945</a> - Hypertext Transfer Protocol -- HTTP/1.0
+<li class="odd"><a href="/rfc/rfc1950.txt">rfc1950</a> - ZLIB Compressed Data Format Specification
+<li class="even"><a href="/rfc/rfc1951.txt">rfc1951</a> - DEFLATE Compressed Data Format Specification
+<li class="odd"><a href="/rfc/rfc1952.txt">rfc1952</a> - gzip compression format
+<li class="even"><a href="/rfc/rfc1959.txt">rfc1959</a> - LDAP URL Format (obsoleted by RFC 2255)
+<li class="odd"><a href="/rfc/rfc1964.txt">rfc1964</a> - The Kerberos Version 5 GSS-API Mechanism
+<li class="even"><a href="/rfc/rfc2045.txt">rfc2045</a> - (MIME) Part One: Format of Internet Message Bodies
+<li class="odd"><a href="/rfc/rfc2046.txt">rfc2046</a> - (MIME) Part Two: Media Types
+<li class="even"><a href="/rfc/rfc2047.txt">rfc2047</a> - (MIME) Part Three: Message Header Extensions for Non-ASCII Text
+<li class="odd"><a href="/rfc/rfc2048.txt">rfc2048</a> - (MIME) Part Four: Registration Procedures
+<li class="even"><a href="/rfc/rfc2049.txt">rfc2049</a> - (MIME) Part Five: Conformance Criteria and Examples
+<li class="odd"><a href="/rfc/rfc2060.txt">rfc2060</a> - Internet Message Access Protocol - Version 4rev1 (obsoleted by RFC1730)
+<li class="even"><a href="/rfc/rfc2061.txt">rfc2061</a> - IMAP4 Compatibility With Imap2Bis (obsoletes RFC1730)
+<li class="odd"><a href="/rfc/rfc2068.txt">rfc2068</a> - Hypertext Transfer Protocol -- HTTP 1.1 (obsoleted by RFC 2616)
+<li class="even"><a href="/rfc/rfc2095.txt">rfc2095</a> - IMAP/POP AUTHorize Extension for Simple Challenge/Response (obsoleted by RFC2195)
+<li class="odd"><a href="/rfc/rfc2104.txt">rfc2104</a> - HMAC: Keyed-Hashing for Message Authentication
+<li class="even"><a href="/rfc/rfc2109.txt">rfc2109</a> - HTTP State Management Mechanism (obsoleted by RFC 2964)
+<li class="odd"><a href="/rfc/rfc2133.txt">rfc2133</a> - Basic Socket Interface Extensions for IPv6 (see RFC3493)
+<li class="even"><a href="/rfc/rfc2145.txt">rfc2145</a> - Use and Interpretation of HTTP Version Numbers (obsoleted by RFC7230)
+<li class="odd"><a href="/rfc/rfc2183.txt">rfc2183</a> - The Content-Disposition Header Field
+<li class="even"><a href="/rfc/rfc2184.txt">rfc2184</a> - MIME Parameter Value and Encoded Word Extensions
+<li class="odd"><a href="/rfc/rfc2192.txt">rfc2192</a> - IMAP URL Scheme (obsoleted by RFC5092)
+<li class="even"><a href="/rfc/rfc2195.txt">rfc2195</a> - IMAP/POP AUTHorize Extension for Simple Challenge/Response (obsoletes RFC2095)
+<li class="odd"><a href="/rfc/rfc2222.txt">rfc2222</a> - Simple Authentication and Security Layer (SASL) (obsoleted by RFC4422)
+<li class="even"><a href="/rfc/rfc2228.txt">rfc2228</a> - FTP Security Extensions
+<li class="odd"><a href="/rfc/rfc2229.txt">rfc2229</a> - A Dictionary Server Protocol
+<li class="even"><a href="/rfc/rfc2231.txt">rfc2231</a> - MIME Parameter Value and Encoded Word Extensions:  Character Sets, Languages, and Continuations
+<li class="odd"><a href="/rfc/rfc2246.txt">rfc2246</a> - The TLS Protocol
+<li class="even"><a href="/rfc/rfc2255.txt">rfc2255</a> - LDAP URL Format (obsoleted by RFC 4516)
+<li class="odd"><a href="/rfc/rfc2326.txt">rfc2326</a> - Real Time Streaming Protocol (RTSP)
+<li class="even"><a href="/rfc/rfc2373.txt">rfc2373</a> - IP Version 6 Addressing Architecture (obsolete)
+<li class="odd"><a href="/rfc/rfc2384.txt">rfc2384</a> - POP URL Scheme
+<li class="even"><a href="/rfc/rfc2388.txt">rfc2388</a> - Returning Values from Forms: multipart/form-data (Obsoleted by RFC7578)
+<li class="odd"><a href="/rfc/rfc2389.txt">rfc2389</a> - Feature negotiation mechanism for FTP
+<li class="even"><a href="/rfc/rfc2396.txt">rfc2396</a> - Uniform Resource Identifiers: Generic Syntax (see RFC3986)
+<li class="odd"><a href="/rfc/rfc2428.txt">rfc2428</a> - FTP Extensions for IPv6 and NATs
+<li class="even"><a href="/rfc/rfc2449.txt">rfc2449</a> - POP3 Extension Mechanism
+<li class="odd"><a href="/rfc/rfc2459.txt">rfc2459</a> - Internet X.509 Public Key Infrastructure Certificate and CRL Profile
+<li class="even"><a href="/rfc/rfc2478.txt">rfc2478</a> - The Simple and Protected GSS-API Negotiation Mechanism (obsoleted by RFC4178)
+<li class="odd"><a href="/rfc/rfc2487.txt">rfc2487</a> - SMTP Service Extension for Secure SMTP over TLS (obsoleted by RFC3207)
+<li class="even"><a href="/rfc/rfc2518.txt">rfc2518</a> - HTTP Extensions for Distributed Authoring -- WEBDAV
+<li class="odd"><a href="/rfc/rfc2553.txt">rfc2553</a> - Basic Socket Interface Extensions for IPv6 (see RFC3493)
+<li class="even"><a href="/rfc/rfc2554.txt">rfc2554</a> - SMTP Service Extension for Authentication (obsoleted by RFC4954)
+<li class="odd"><a href="/rfc/rfc2577.txt">rfc2577</a> - FTP Security Considerations
+<li class="even"><a href="/rfc/rfc2595.txt">rfc2595</a> - Using TLS with IMAP, POP3 and ACAP
+<li class="odd"><a href="/rfc/rfc2616.txt">rfc2616</a> - Hypertext Transfer Protocol -- HTTP 1.1 (obsoleted by RFC7230)
+<li class="even"><a href="/rfc/rfc2617.txt">rfc2617</a> - HTTP Authentication
+<li class="odd"><a href="/rfc/rfc2640.txt">rfc2640</a> - Internationalization of FTP
+<li class="even"><a href="/rfc/rfc2718.txt">rfc2718</a> - Guidelines for new URL Schemes
+<li class="odd"><a href="/rfc/rfc2732.txt">rfc2732</a> - Format for Literal IPv6 Addresses in URL's
+<li class="even"><a href="/rfc/rfc2817.txt">rfc2817</a> - Upgrading to TLS Within HTTP/1.1
+<li class="odd"><a href="/rfc/rfc2818.txt">rfc2818</a> - HTTP Over TLS (TLS is the successor to SSL)
+<li class="even"><a href="/rfc/rfc2821.txt">rfc2821</a> - Simple Mail Transfer Protocol (obsoletes RFC821, RFC974, RFC1869)
+<li class="odd"><a href="/rfc/rfc2831.txt">rfc2831</a> - Using Digest Authentication as a SASL Mechanism (historic by RFC6331)
+<li class="even"><a href="/rfc/rfc2854.txt">rfc2854</a> - The 'text/html' Media Type
+<li class="odd"><a href="/rfc/rfc2936.txt">rfc2936</a> - HTTP MIME Type Handler Detection
+<li class="even"><a href="/rfc/rfc2964.txt">rfc2964</a> - Use of HTTP State Management
+<li class="odd"><a href="/rfc/rfc2965.txt">rfc2965</a> - HTTP State Management Mechanism. Cookies. (Obsoletes RFC2109)
+<li class="even"><a href="/rfc/rfc3207.txt">rfc3207</a> - SMTP Service Extension for Secure SMTP over Transport Layer Security (obsoletes RFC2487)
+<li class="odd"><a href="/rfc/rfc3280.txt">rfc3280</a> - Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile
+<li class="even"><a href="/rfc/rfc3490.txt">rfc3490</a> - Internationalized Domain Names for Applications (IDNA) (obsoleted by RFC5890)
+<li class="odd"><a href="/rfc/rfc3493.txt">rfc3493</a> - Basic Socket Interface Extensions for IPv6
+<li class="even"><a href="/rfc/rfc3501.txt">rfc3501</a> - Internet Message Access Protocol - Version 4rev1 (obsoletes RFC2060)
+<li class="odd"><a href="/rfc/rfc3513.txt">rfc3513</a> - IP Version 6 Addressing Architecture
+<li class="even"><a href="/rfc/rfc3617.txt">rfc3617</a> - Uniform Resource Identifier (URI) Scheme for TFTP
+<li class="odd"><a href="/rfc/rfc3659.txt">rfc3659</a> - Extensions to FTP
+<li class="even"><a href="/rfc/rfc3961.txt">rfc3961</a> - Encryption and Checksum Specifications for Kerberos 5
+<li class="odd"><a href="/rfc/rfc3986.txt">rfc3986</a> - Uniform Resource Identifier (URI): Generic Syntax
+<li class="even"><a href="/rfc/rfc4120.txt">rfc4120</a> - The Kerberos Network Authentication Service (V5) (obsoletes RFC1510)
+<li class="odd"><a href="/rfc/rfc4121.txt">rfc4121</a> - The Kerberos Version 5 Generic Security Service Application Program Interface (GSS-API) Mechanism: Version 2
+<li class="even"><a href="/rfc/rfc4178.txt">rfc4178</a> - The Simple and Protected Generic Security Service Application Program Interface (GSS-API) Negotiation Mechanism (obsoletes RFC2478)
+<li class="odd"><a href="/rfc/rfc4217.txt">rfc4217</a> - Securing FTP with TLS
+<li class="even"><a href="/rfc/rfc4248.txt">rfc4248</a> - The telnet URI Scheme
+<li class="odd"><a href="/rfc/rfc4346.txt">rfc4346</a> - TLS/1.1 (obsoletes RFC 2246)
+<li class="even"><a href="/rfc/rfc4366.txt">rfc4366</a> - TLS Extensions (server name, client certificate URLs, etc.)
+<li class="odd"><a href="/rfc/rfc4422.txt">rfc4422</a> - Simple Authentication and Security Layer (SASL) (obsoletes RFC2222)
+<li class="even"><a href="/rfc/rfc4511.txt">rfc4511</a> - Lightweight Directory Access Protocol (LDAP): The Protocol
+<li class="odd"><a href="/rfc/rfc4516.txt">rfc4516</a> - LDAP Uniform Resource Locator (obsoletes RFC 2255)
+<li class="even"><a href="/rfc/rfc4559.txt">rfc4559</a> - SPNEGO-based Kerberos and NTLM HTTP Authentication in Microsoft Windows
+<li class="odd"><a href="/rfc/rfc4616.txt">rfc4616</a> - The PLAIN Simple Authentication and Security Layer (SASL) Mechanism
+<li class="even"><a href="/rfc/rfc4954.txt">rfc4954</a> - SMTP Service Extension for Authentication (obsoletes RFC2554)
+<li class="odd"><a href="/rfc/rfc4959.txt">rfc4959</a> - IMAP Extension for Simple Authentication and Security Layer (SASL) Initial Client Response
+<li class="even"><a href="/rfc/rfc5034.txt">rfc5034</a> - The Post Office Protocol (POP3) Simple Authentication and Security Layer (SASL) Authentication Mechanism (obsoletes RFC1734)
+<li class="odd"><a href="/rfc/rfc5092.txt">rfc5092</a> - IMAP URL Scheme (obsoletes RFC2192)
+<li class="even"><a href="/rfc/rfc5321.txt">rfc5321</a> - Simple Mail Transfer Protocol (obsoletes RFC2821)
+<li class="odd"><a href="/rfc/rfc5322.txt">rfc5322</a> - Internet Message Format
+<li class="even"><a href="/rfc/rfc5335.txt">rfc5335</a> - Internationalized Email Headers (obsoleted by RFC6532)
+<li class="odd"><a href="/rfc/rfc5336.txt">rfc5336</a> - SMTP Extension for Internationalized Email Addresses (obsoleted by RFC6531)
+<li class="even"><a href="/rfc/rfc5849.txt">rfc5849</a> - The OAuth 1.0 Protocol (obsoleted by RFC6749)
+<li class="odd"><a href="/rfc/rfc5890.txt">rfc5890</a> - Internationalized Domain Names for Applications (IDNA) (obsoletes RFC3490)
+<li class="even"><a href="/rfc/rfc6531.txt">rfc6531</a> - SMTP Extension for Internationalized Email (obsoletes RFC5336)
+<li class="odd"><a href="/rfc/rfc6532.txt">rfc6532</a> - Internationalized Email Headers (obsoletes RFC5335)
+<li class="even"><a href="/rfc/rfc6749.txt">rfc6749</a> - The OAuth 2.0 Authorization Framework (obsoletes RFC5849)
+<li class="odd"><a href="/rfc/rfc7230.txt">rfc7230</a> - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing (obsoletes RFC2145, RFC2616)
+<li class="even"><a href="/rfc/rfc7231.txt">rfc7231</a> - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content (obsoletes RFC2616)
+<li class="odd"><a href="/rfc/rfc7232.txt">rfc7232</a> - Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests (obsoletes RFC2616)
+<li class="even"><a href="/rfc/rfc7233.txt">rfc7233</a> - Hypertext Transfer Protocol (HTTP/1.1): Range Requests (obsoletes RFC2616)
+<li class="odd"><a href="/rfc/rfc7234.txt">rfc7234</a> - Hypertext Transfer Protocol (HTTP/1.1): Caching (obsoletes RFC2616)
+<li class="even"><a href="/rfc/rfc7235.txt">rfc7235</a> - Hypertext Transfer Protocol (HTTP/1.1): Authentication (obsoletes RFC2616)
+<li class="odd"><a href="/rfc/rfc7238.txt">rfc7238</a> - The Hypertext Transfer Protocol Status Code 308 (Permanent Redirect)
+<li class="even"><a href="/rfc/rfc7540.txt">rfc7540</a> - Hypertext Transfer Protocol Version 2 (HTTP/2)
+<li class="odd"><a href="/rfc/rfc7541.txt">rfc7541</a> - HPACK: Header Compression for HTTP/2
+<li class="even"><a href="/rfc/rfc7628.txt">rfc7628</a> - A Set of Simple Authentication and Security Layer (SASL) Mechanisms for OAuth
+<li class="odd"><a href="/rfc/rfc7838.txt">rfc7838</a> - HTTP Alternative Services
+<li class="even"><a href="/rfc/rfc8314.txt">rfc8314</a> - Cleartext Considered Obsolete: Use of Transport Layer Security (TLS) for Email Submission and Access
+<li class="odd"><a href="/rfc/rfc8446.txt">rfc8446</a> - The Transport Layer Security (TLS) Protocol Version 1.3
+<li class="even"><a href="/rfc/rfc8484.txt">rfc8484</a> - DNS Queries over HTTPS (DoH)
+<li class="odd"><a href="/rfc/rfc8999.txt">rfc8999</a> -
+<li class="even"><a href="/rfc/rfc9000.txt">rfc9000</a> -
+<li class="odd"><a href="/rfc/rfc9001.txt">rfc9001</a> -
+<li class="even"><a href="/rfc/rfc9002.txt">rfc9002</a> -
+<li class="odd"><a href="/rfc/rfc9110.txt">rfc9110</a> -
+<li class="even"><a href="/rfc/rfc9111.txt">rfc9111</a> -
+<li class="odd"><a href="/rfc/rfc9112.txt">rfc9112</a> -
+<li class="even"><a href="/rfc/rfc9113.txt">rfc9113</a> -
+<li class="odd"><a href="/rfc/rfc9114.txt">rfc9114</a> -
+<li class="even"><a href="/rfc/rfc9204.txt">rfc9204</a> -
+</ul>
+</div>
+</div>
+</body>
+</html>

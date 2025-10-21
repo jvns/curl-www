@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Cheat Sheet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="cheat-sheet.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <b>Cheat Sheet</b></div>
+<h1> curl HTTP cheat sheet </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="manpage.html">curl man page</a>
+<br><a href="tutorial.html">Tutorial</a>
+</div>
+<section>
+  <h2>GET requests</h2>
+  <div class="item">
+    <h3>GET a website</h3>
+    <code>curl https://example.com</code>
+  </div>
+  <div class="item">
+    <h3>Follow redirects</h3>
+    <code>curl <a href="https://curl.se/docs/manpage.html#-L"><em>-L</em></a> https://example.com</code>
+  </div>
+  <div class="item">
+    <h3>Hide the progress bar</h3>
+    <code>curl <a href="https://curl.se/docs/manpage.html#-s"><em>-s</em></a> https://example.com</code>
+  </div>
+  <div class="item">
+    <h3>Output to a file</h3>
+    <code>curl <a href="https://curl.se/docs/manpage.html#-o"><em>-o</em></a> out.html https://example.com/ </code>
+  </div>
+</section>
+<section>
+  <h2> Set or view headers </h2>
+  <div class="item">
+    <h3>Show response headers</h3>
+    <code>curl <a href="https://curl.se/docs/manpage.html#-i"><em>-i</em></a> https://example.com</code>
+  </div>
+  <div class="item">
+    <h3>Make a HEAD request</h3>
+    <code>curl <a href="https://curl.se/docs/manpage.html#-I"><em>-I</em></a> https://example.com</code>
+  </div>
+  <div class="item">
+    <h3>Set a header</h3>
+    <code>curl https://pages.github.io
+      <span class="nobreak"><a href="https://curl.se/docs/manpage.html#-H">
+    <em>-H</em></a> "Host: raytracing.github.io"</span>
+    </code>
+  </div>
+</section>
+<section>
+  <h2>POST requests</h2>
+  <div class="item">
+    <h3>POST some JSON</h3>
+    <code>
+      curl -v httpbin.io/post
+      <span class="nobreak"><a href="https://curl.se/docs/manpage.html#--json"><em>--json</em></a> '{"key":"value"}'</span>
+    </code>
+  </div>
+  <div class="item">
+    <h3>POST JSON from a file</h3>
+    <code>
+      curl -v httpbin.io/post
+      <span class="nobreak"><a href="https://curl.se/docs/manpage.html#--json"><em>--json</em></a> @file.json</span>
+    </code>
+  </div>
+  <div class="item">
+    <h3>POST application/url-encoded data</h3>
+    <code>
+      curl -v httpbin.io/post
+      <span class="nobreak"><a href="https://curl.se/docs/manpage.html#--data-urlencode"><em>--data-urlencode</em></a> name=maya</span>
+      <span class="nobreak"><a href="https://curl.se/docs/manpage.html#--data-urlencode"><em>--data-urlencode</em></a> date=2024-01-01</span>
+    </code>
+  </div>
+</section>
+<section>
+  <h2>More</h2>
+  <div class="item">
+    <h3>Make a DELETE request</h3>
+    <code>curl <a href="https://curl.se/docs/manpage.html#-X"><em>-X</em></a> DELETE example.com</code>
+  </div>
+  <div class="item">
+    <h3>Override DNS resolution</h3>
+    <code>curl example.com <a href="https://curl.se/docs/manpage.html#--resolve"><em>--resolve</em></a> <span class="nobreak">example.com:443:23.220.75.245</span></code>
+  </div>
+  <div class="item">
+    <h3>Do basic authentication</h3>
+    <code>
+      curl <a href="https://curl.se/docs/manpage.html#-u"><em>-u</em></a> user:pass
+      example.com
+    </code>
+  </div>
+</section>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - environment variables</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>Environment variables</b></div>
+<h1> Environment variables libcurl understands </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="allfuncs.html">All functions</a>
+<br><a href="libcurl-errors.html">Errors</a>
+<br><a href="example.html">Examples</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">libcurl-env - environment variables libcurl understands </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">libcurl reads and understands a set of environment variables that if set controls and changes behaviors. This is the full list of variables to set and description of what they do. Also note that curl, the command line tool, supports a set of additional environment variables independently of this. </p>
+<p class="level0"><a name="schemeproxy"></a><span class="nroffip">[scheme]_proxy</span> </p>
+<p class="level1">When libcurl is given a URL to use in a transfer, it first extracts the scheme part from the URL and checks if there is a given proxy set for that in its corresponding environment variable. A URL like <a href="https://example.com">https://example.com</a> makes libcurl use the <span Class="bold">http_proxy</span> variable, while a URL like <a href="ftp://example.com">ftp://example.com</a> uses the <span Class="bold">ftp_proxy</span> variable. </p>
+<p class="level1">These proxy variables are also checked for in their uppercase versions, except the <span Class="bold">http_proxy</span> one which is only used lowercase. Note also that some systems actually have a case insensitive handling of environment variables and then of course <span Class="bold">HTTP_PROXY</span> still works. </p>
+<p class="level1">An exception exists for the WebSocket <span Class="bold">ws</span> and <span Class="bold">wss</span> URL schemes, where libcurl first checks <span Class="bold">ws_proxy</span> or <span Class="bold">wss_proxy</span> but if they are not set, it falls back and tries the http and https versions instead if set. </p>
+<p class="level0"><a name="ALLPROXY"></a><span class="nroffip">ALL_PROXY</span> </p>
+<p class="level1">This is a setting to set proxy for all URLs, independently of what scheme is being used. Note that the scheme specific variables overrides this one if set. </p>
+<p class="level0"><a name="CURLSSLBACKEND"></a><span class="nroffip">CURL_SSL_BACKEND</span> </p>
+<p class="level1">When libcurl is built to support multiple SSL backends, it selects a specific backend at first use. If no selection is done by the program using libcurl, this variable&apos;s selection is used. Setting a name that is not a built-in alternative makes libcurl stay with the default. </p>
+<p class="level1">SSL backend names (case-insensitive): GnuTLS, mbedTLS, OpenSSL, Rustls, Schannel, wolfSSL </p>
+<p class="level0"><a name="HOME"></a><span class="nroffip">HOME</span> </p>
+<p class="level1">When the netrc feature is used (<a Class="emphasis" href="./CURLOPT_NETRC.html">CURLOPT_NETRC</a>), this variable is checked as the primary way to find the &quot;current&quot; home directory in which the .netrc file is likely to exist. </p>
+<p class="level0"><a name="USERPROFILE"></a><span class="nroffip">USERPROFILE</span> </p>
+<p class="level1">When the netrc feature is used (<a Class="emphasis" href="./CURLOPT_NETRC.html">CURLOPT_NETRC</a>), this variable is checked as the secondary way to find the &quot;current&quot; home directory (on Windows only) in which the .netrc file is likely to exist. </p>
+<p class="level0"><a name="NETRC"></a><span class="nroffip">NETRC</span> </p>
+<p class="level1">The filename used as netrc file when <a Class="emphasis" href="./CURLOPT_NETRC.html">CURLOPT_NETRC</a> is used without <a Class="emphasis" href="./CURLOPT_NETRC_FILE.html">CURLOPT_NETRC_FILE</a>. (Added in <a href="/ch/8.16.0.html">8.16.0</a>) </p>
+<p class="level0"><a name="NOPROXY"></a><span class="nroffip">NO_PROXY</span> </p>
+<p class="level1">This has the same functionality as the <a Class="emphasis" href="./CURLOPT_NOPROXY.html">CURLOPT_NOPROXY</a> option: it gives libcurl a comma-separated list of hostname patterns for which libcurl should not use a proxy. </p>
+<p class="level0"><a name="SSLKEYLOGFILE"></a><span class="nroffip">SSLKEYLOGFILE</span> </p>
+<p class="level1">When set and libcurl runs with an SSL backend that supports this feature, libcurl saves SSL secrets into the given filename. Using those SSL secrets, other tools (such as Wireshark) can decrypt the SSL communication and analyze/view the traffic. </p>
+<p class="level1">These secrets and this file might be sensitive. Users are advised to take precautions so that they are not stolen or otherwise inadvertently revealed. </p><a name="Debug"></a><h2 class="nroffsh">Debug variables</h2>
+<p class="level0">Debug variables are intended for internal use and are documented in <a Class="emphasis" href="./libcurl-env-dbg.html">libcurl-env-dbg</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./libcurl-env-dbg.html">libcurl-env-dbg</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

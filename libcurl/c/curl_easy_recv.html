@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_easy_recv()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_recv</b></div>
+<h1> curl_easy_recv - receives raw data from connection </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_easy_recv%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_easy_recv.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_easy_recv.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_easy_recv - receives raw data on an &quot;easy&quot; connection </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_recv.html">curl_easy_recv</a>(CURL &#x2a;curl, void &#x2a;buffer, size_t buflen, size_t &#x2a;n);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function receives raw data from the established connection. You may use it together with <a Class="emphasis" href="./curl_easy_send.html">curl_easy_send</a> to implement custom protocols using libcurl. This functionality can be particularly useful if you use proxies and/or SSL encryption: libcurl takes care of proxy negotiation and connection setup. </p>
+<p class="level0"><span Class="bold">buffer</span> is a pointer to your buffer memory that gets populated by the received data. <span Class="bold">buflen</span> is the maximum amount of data you can get in that buffer. The variable <span Class="bold">n</span> points to receives the number of received bytes. </p>
+<p class="level0">To establish the connection, set <a Class="emphasis" href="./CURLOPT_CONNECT_ONLY.html">CURLOPT_CONNECT_ONLY</a> option before calling <a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a> or <a Class="emphasis" href="./curl_multi_perform.html">curl_multi_perform</a>. Note that <a Class="emphasis" href="./curl_easy_recv.html">curl_easy_recv</a> does not work on connections that were created without this option. </p>
+<p class="level0">The call returns <span Class="bold"><a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a></span> if there is no data to read - the socket is used in non-blocking mode internally. When <span Class="bold"><a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a></span> is returned, use your operating system facilities like <span Class="emphasis">select(2)</span> to wait for data. The socket may be obtained using <a Class="emphasis" href="./curl_easy_getinfo.html">curl_easy_getinfo</a> with <a Class="emphasis" href="./CURLINFO_ACTIVESOCKET.html">CURLINFO_ACTIVESOCKET</a>. </p>
+<p class="level0">Wait on the socket only if <a Class="emphasis" href="./curl_easy_recv.html">curl_easy_recv</a> returns <span Class="bold"><a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a></span>. The reason for this is libcurl or the SSL library may internally cache some data, therefore you should call <a Class="emphasis" href="./curl_easy_recv.html">curl_easy_recv</a> until all data is read which would include any cached data. </p>
+<p class="level0">Furthermore if you wait on the socket and it tells you there is data to read, <a Class="emphasis" href="./curl_easy_recv.html">curl_easy_recv</a> may return <span Class="bold"><a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a></span> if the only data that was read was for internal SSL processing, and no other data is available. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;   /&#x2a; Do not do the transfer - only connect to host &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_CONNECT_ONLY.html">CURLOPT_CONNECT_ONLY</a>, 1L);
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   if(res == <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>) {
+&nbsp;     char buf[256];
+&nbsp;     size_t nread;
+&nbsp;     curl_socket_t sockfd;
+&nbsp;
+&nbsp;     /&#x2a; Extract the socket from the curl handle - we need it for waiting. &#x2a;/
+&nbsp;     res = <a href="curl_easy_getinfo.html">curl_easy_getinfo</a>(curl, <a href="CURLINFO_ACTIVESOCKET.html">CURLINFO_ACTIVESOCKET</a>, &amp;sockfd);
+&nbsp;
+&nbsp;     /&#x2a; read data &#x2a;/
+&nbsp;     res = <a href="curl_easy_recv.html">curl_easy_recv</a>(curl, buf, sizeof(buf), &amp;nread);
+&nbsp;   }
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.18.2.html">7.18.2</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">On success, returns <span Class="bold"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a></span>, stores the received data into <span Class="bold">buffer</span>, and the number of bytes it actually read into <span Class="bold">&#x2a;n</span>. </p>
+<p class="level0">On failure, returns the appropriate error code. </p>
+<p class="level0">The function may return <span Class="bold"><a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a></span>. In this case, use your operating system facilities to wait until data can be read, and retry. </p>
+<p class="level0">Reading exactly 0 bytes indicates a closed connection. </p>
+<p class="level0">If there is no socket available to use from the previous transfer, this function returns <span Class="bold"><a href="libcurl-errors.html#CURLEUNSUPPORTEDPROTOCOL">CURLE_UNSUPPORTED_PROTOCOL</a></span>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_getinfo.html">curl_easy_getinfo</a>(3), <a Class="bold" href="./curl_easy_perform.html">curl_easy_perform</a>(3), <a Class="bold" href="./curl_easy_send.html">curl_easy_send</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

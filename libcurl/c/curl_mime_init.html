@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_mime_init()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_mime_init</b></div>
+<h1> curl_mime_init - create a mime handle </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_mime_init%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_mime_init.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_mime_init.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_mime_init - create a mime handle </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+curl_mime &#x2a;<a href="curl_mime_init.html">curl_mime_init</a>(CURL &#x2a;easy_handle);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><a Class="emphasis" href="./curl_mime_init.html">curl_mime_init</a> creates a handle to a new empty mime structure. This mime structure can be subsequently filled using the mime API, then attached to some easy handle using option <a Class="emphasis" href="./CURLOPT_MIMEPOST.html">CURLOPT_MIMEPOST</a> within a <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> call or added as a multipart in another mime handle&apos;s part using <a Class="emphasis" href="./curl_mime_subparts.html">curl_mime_subparts</a>. </p>
+<p class="level0"><span Class="emphasis">easy_handle</span> is used for part separator randomization and error reporting. Since <a href="/ch/7.87.0.html">7.87.0</a>, it does not need to be the final target handle. </p>
+<p class="level0">Using a mime handle is the recommended way to post an HTTP form, format and send a multi-part email with SMTP or upload such an email to an IMAP server. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http, imap and smtp </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;easy = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; curl_mime &#x2a;mime;
+&nbsp; curl_mimepart &#x2a;part;
+&nbsp;
+&nbsp; /&#x2a; Build an HTTP form with a single field named &quot;data&quot;, &#x2a;/
+&nbsp; mime = <a href="curl_mime_init.html">curl_mime_init</a>(easy);
+&nbsp; part = <a href="curl_mime_addpart.html">curl_mime_addpart</a>(mime);
+&nbsp; <a href="curl_mime_data.html">curl_mime_data</a>(part, &quot;This is the field data&quot;, CURL_ZERO_TERMINATED);
+&nbsp; <a href="curl_mime_name.html">curl_mime_name</a>(part, &quot;data&quot;);
+&nbsp;
+&nbsp; /&#x2a; Post and send it. &#x2a;/
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(easy, <a href="CURLOPT_MIMEPOST.html">CURLOPT_MIMEPOST</a>, mime);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(easy, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp; <a href="curl_easy_perform.html">curl_easy_perform</a>(easy);
+&nbsp;
+&nbsp; /&#x2a; Clean-up. &#x2a;/
+&nbsp; <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(easy);
+&nbsp; <a href="curl_mime_free.html">curl_mime_free</a>(mime);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.56.0.html">7.56.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">A mime struct handle, or NULL upon failure. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_MIMEPOST.html">CURLOPT_MIMEPOST</a>(3), <a Class="bold" href="./curl_mime_addpart.html">curl_mime_addpart</a>(3), <a Class="bold" href="./curl_mime_free.html">curl_mime_free</a>(3), <a Class="bold" href="./curl_mime_subparts.html">curl_mime_subparts</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

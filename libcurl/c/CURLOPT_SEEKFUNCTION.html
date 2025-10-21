@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_SEEKFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_SEEKFUNCTION</b></div>
+<h1> CURLOPT_SEEKFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_SEEKFUNCTION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_SEEKFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_SEEKFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_SEEKFUNCTION - user callback for seeking in input stream </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+/&#x2a; These are the return codes for the seek callbacks &#x2a;/
+&#35;define CURL_SEEKFUNC_OK       0
+&#35;define CURL_SEEKFUNC_FAIL     1 /&#x2a; fail the entire transfer &#x2a;/
+&#35;define CURL_SEEKFUNC_CANTSEEK 2 /&#x2a; tell libcurl seeking cannot be done, so
+&nbsp;                                   libcurl might try other means instead &#x2a;/
+&nbsp;
+int seek_callback(void &#x2a;clientp, curl_off_t offset, int origin);
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_SEEKFUNCTION.html">CURLOPT_SEEKFUNCTION</a>, seek_callback);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to your callback function, which should match the prototype shown above. </p>
+<p class="level0">This function gets called by libcurl to seek to a certain position in the input stream and can be used to fast forward a file in a resumed upload (instead of reading all uploaded bytes with the normal read function/callback). It is also called to rewind a stream when data has already been sent to the server and needs to be sent again. This may happen when doing an HTTP PUT or POST with a multi-pass authentication method, or when an existing HTTP connection is reused too late and the server closes the connection. The function shall work like fseek(3) or lseek(3) and it gets SEEK_SET, SEEK_CUR or SEEK_END as argument for <span Class="emphasis">origin</span>, although libcurl currently only passes SEEK_SET. </p>
+<p class="level0"><span Class="emphasis">clientp</span> is the pointer you set with <a Class="emphasis" href="./CURLOPT_SEEKDATA.html">CURLOPT_SEEKDATA</a>. </p>
+<p class="level0">The callback function must return <span Class="emphasis">CURL_SEEKFUNC_OK</span> on success, <span Class="emphasis">CURL_SEEKFUNC_FAIL</span> to cause the upload operation to fail or <span Class="emphasis">CURL_SEEKFUNC_CANTSEEK</span> to indicate that while the seek failed, libcurl is free to work around the problem if possible. The latter can sometimes be done by instead reading from the input or similar. </p>
+<p class="level0">If you forward the input arguments directly to fseek(3) or lseek(3), note that the data type for <span Class="emphasis">offset</span> is not the same as defined for curl_off_t on many systems. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects ftp, http and sftp </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+&#35;include &lt;unistd.h&gt; /&#x2a; for lseek &#x2a;/
+&nbsp;
+struct data {
+&nbsp; int our_fd;
+};
+static int seek_cb(void &#x2a;clientp, curl_off_t offset, int origin)
+{
+&nbsp; struct data &#x2a;d = (struct data &#x2a;)clientp;
+&nbsp; lseek(d-&gt;our_fd, offset, origin);
+&nbsp; return CURL_SEEKFUNC_OK;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; struct data seek_data;
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_SEEKFUNCTION.html">CURLOPT_SEEKFUNCTION</a>, seek_cb);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_SEEKDATA.html">CURLOPT_SEEKDATA</a>, &amp;seek_data);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.18.0.html">7.18.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_DEBUGFUNCTION.html">CURLOPT_DEBUGFUNCTION</a>(3), <a Class="bold" href="./CURLOPT_IOCTLFUNCTION.html">CURLOPT_IOCTLFUNCTION</a>(3), <a Class="bold" href="./CURLOPT_SEEKDATA.html">CURLOPT_SEEKDATA</a>(3), <a Class="bold" href="./CURLOPT_STDERR.html">CURLOPT_STDERR</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

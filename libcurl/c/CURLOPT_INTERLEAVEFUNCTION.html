@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_INTERLEAVEFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_INTERLEAVEFUNCTION</b></div>
+<h1> CURLOPT_INTERLEAVEFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_INTERLEAVEFUNCTION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_INTERLEAVEFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_INTERLEAVEFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_INTERLEAVEFUNCTION - callback for RTSP interleaved data </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+size_t interleave_callback(void &#x2a;ptr, size_t size, size_t nmemb,
+&nbsp;                          void &#x2a;userdata);
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_INTERLEAVEFUNCTION.html">CURLOPT_INTERLEAVEFUNCTION</a>,
+&nbsp;                         interleave_callback);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to your callback function, which should match the prototype shown above. </p>
+<p class="level0">This callback function gets called by libcurl as soon as it has received interleaved RTP data. This function gets called for each $ block and therefore contains exactly one upper-layer protocol unit (e.g. one RTP packet). curl writes the interleaved header as well as the included data for each call. The first byte is always an ASCII dollar sign. The dollar sign is followed by a one byte channel identifier and then a 2 byte integer length in network byte order. See <a href="https://www.ietf.org/rfc/rfc2326.txt">RFC 2326</a> Section 10.12 for more information on how RTP interleaving behaves. If unset or set to NULL, curl uses the default write function. </p>
+<p class="level0">Interleaved RTP poses some challenges for the client application. Since the stream data is sharing the RTSP control connection, it is critical to service the RTP in a timely fashion. If the RTP data is not handled quickly, subsequent response processing may become unreasonably delayed and the connection may close. The application may use <span Class="emphasis">CURL_RTSPREQ_RECEIVE</span> to service RTP data when no requests are desired. If the application makes a request, (e.g. <span Class="emphasis">CURL_RTSPREQ_PAUSE</span>) then the response handler processes any pending RTP data before marking the request as finished. </p>
+<p class="level0">The <a Class="emphasis" href="./CURLOPT_INTERLEAVEDATA.html">CURLOPT_INTERLEAVEDATA</a> is passed in the <span Class="emphasis">userdata</span> argument in the callback. </p>
+<p class="level0">Your callback should return the number of bytes actually taken care of. If that amount differs from the amount passed to your callback function, it signals an error condition to the library. This causes the transfer to abort and the libcurl function used returns <span Class="emphasis"><a href="libcurl-errors.html#CURLEWRITEERROR">CURLE_WRITE_ERROR</a></span>. </p>
+<p class="level0">You can also abort the transfer by returning CURL_WRITEFUNC_ERROR. (<a href="/ch/7.87.0.html">7.87.0</a>) </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL, the interleave data is then passed to the regular write function: <a Class="emphasis" href="./CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects rtsp only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+struct local {
+&nbsp; void &#x2a;custom;
+};
+&nbsp;
+static size_t rtp_write(void &#x2a;ptr, size_t size, size_t nmemb, void &#x2a;userp)
+{
+&nbsp; struct local &#x2a;l = userp;
+&nbsp; printf(&quot;our ptr: %p&bsol;n&quot;, l-&gt;custom);
+&nbsp; /&#x2a; take care of the packet in &#39;ptr&#39;, then return... &#x2a;/
+&nbsp; return size &#x2a; nmemb;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; struct local rtp_data;
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_INTERLEAVEFUNCTION.html">CURLOPT_INTERLEAVEFUNCTION</a>, rtp_write);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_INTERLEAVEDATA.html">CURLOPT_INTERLEAVEDATA</a>, &amp;rtp_data);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.20.0.html">7.20.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_INTERLEAVEDATA.html">CURLOPT_INTERLEAVEDATA</a>(3), <a Class="bold" href="./CURLOPT_RTSP_REQUEST.html">CURLOPT_RTSP_REQUEST</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

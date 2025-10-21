@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_formget()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_formget</b></div>
+<h1> curl_formget - serialize a multipart/formdata HTTP POST chain </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_formget%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_formget.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_formget.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_formget - serialize a multipart form POST chain </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+int <a href="curl_formget.html">curl_formget</a>(struct curl_httppost &#x2a; form, void &#x2a;userp,
+&nbsp;                curl_formget_callback append);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">The form API (including this function) is deprecated since libcurl <a href="/ch/7.56.0.html">7.56.0</a>. </p>
+<p class="level0">curl_formget() serializes data previously built with <a Class="emphasis" href="./curl_formadd.html">curl_formadd</a>. It accepts a void pointer as second argument named <span Class="emphasis">userp</span> which is passed as the first argument to the curl_formget_callback function. </p><pre class="level0">
+&nbsp;typedef size_t (&#x2a;curl_formget_callback)(void &#x2a;userp, const char &#x2a;buf,
+&nbsp;                                        size_t len);&quot;
+</pre>
+<p class="level0">The <span Class="emphasis">curl_formget_callback</span> is invoked for each part of the HTTP POST chain. The character buffer passed to the callback must not be freed. The callback should return the buffer length passed to it on success. </p>
+<p class="level0">If the <span Class="bold">CURLFORM_STREAM</span> option is used in the formpost, it prevents <a Class="emphasis" href="./curl_formget.html">curl_formget</a> from working until you have performed the actual HTTP request. This, because first then does libcurl known which actual read callback to use. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+size_t print_httppost_callback(void &#x2a;arg, const char &#x2a;buf, size_t len)
+{
+&nbsp; fwrite(buf, len, 1, stdout);
+&nbsp; (&#x2a;(size_t &#x2a;) arg) += len;
+&nbsp; return len;
+}
+&nbsp;
+size_t print_httppost(struct curl_httppost &#x2a;post)
+{
+&nbsp; size_t total_size = 0;
+&nbsp; if(<a href="curl_formget.html">curl_formget</a>(post, &amp;total_size, print_httppost_callback)) {
+&nbsp;   return (size_t) -1;
+&nbsp; }
+&nbsp; return total_size;
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.15.5.html">7.15.5</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">0 means everything was OK, non-zero means an error occurred </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_formadd.html">curl_formadd</a>(3), <a Class="bold" href="./curl_mime_init.html">curl_mime_init</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

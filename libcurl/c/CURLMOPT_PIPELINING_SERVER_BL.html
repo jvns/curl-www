@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLMOPT_PIPELINING_SERVER_BL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a> / <b>CURLMOPT_PIPELINING_SERVER_BL</b></div>
+<h1> CURLMOPT_PIPELINING_SERVER_BL explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=@template%20manpage:@&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLMOPT_PIPELINING_SERVER_BL.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLMOPT_PIPELINING_SERVER_BL.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLMOPT_PIPELINING_SERVER_BL - pipelining server block list </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_setopt.html">curl_multi_setopt</a>(CURLM &#x2a;handle, <a href="CURLMOPT_PIPELINING_SERVER_BL.html">CURLMOPT_PIPELINING_SERVER_BL</a>,
+&nbsp;                           char &#x2a;&#x2a;servers);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">No function since pipelining was removed in <a href="/ch/7.62.0.html">7.62.0</a>. </p>
+<p class="level0">Pass a <span Class="bold">servers</span> array of char &#x2a;, ending with a NULL entry. This is a list of server types prefixes (in the Server: HTTP header) that are blocked from pipelining, i.e server types that are known to not support HTTP pipelining. The array is copied by libcurl. </p>
+<p class="level0">Note that the comparison matches if the Server: header begins with the string in the block list, i.e &quot;Server: Ninja 1.2.3&quot; and &quot;Server: Ninja 1.4.0&quot; can both be blocked by having &quot;Ninja&quot; in the list. </p>
+<p class="level0">Pass a NULL pointer to clear the block list. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL, which means that there is no block list. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+static char &#x2a;server_block_list[] =
+{
+&nbsp; &quot;Microsoft-IIS/6.0&quot;,
+&nbsp; &quot;nginx/0.<a href="/ch/8.54.html">8.54</a>&quot;,
+&nbsp; NULL
+};
+int main(void)
+{
+&nbsp; CURLM &#x2a;m = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(m, <a href="CURLMOPT_PIPELINING_SERVER_BL.html">CURLMOPT_PIPELINING_SERVER_BL</a>, server_block_list);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.30.0.html">7.30.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_multi_setopt.html">curl_multi_setopt</a> returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLMOPT_PIPELINING.html">CURLMOPT_PIPELINING</a>(3), <a Class="bold" href="./CURLMOPT_PIPELINING_SITE_BL.html">CURLMOPT_PIPELINING_SITE_BL</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl for Windows</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="term.css">
+<style type="text/css">
+a.windl {
+  font-size: 200%;
+}
+p.windl {
+  //padding-left: 2em;
+}
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/download.html">Download</a> / <b>Windows downloads</b></div>
+<h1> curl DEP_CURL for Windows </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/ch/">Changelog</a>
+<br><a href="/download.html">Downloads</a>
+<br><a href="/docs/faq.html">FAQ</a>
+<br><a href="/docs/copyright.html">License</a>
+<br><a href="/docs/manpage.html">Manual</a>
+</div>
+<p>
+ These are the latest and most up to date <b>official</b> curl binary builds
+ for Microsoft Windows.
+<p>
+<!-- version: DEP_CURL -->
+ <b>curl version</b>: DEP_CURL <br>
+ <b>Build</b>: CURL_WINDOWS_VERSION <br>
+ <b>Date</b>: CURL_WIN64_ZIP_DATE <br>
+ <b>Changes</b>: <a href="/ch/DEP_CURL.html">DEP_CURL changelog</a><br>
+ <b>Supported Windows versions</b>: Vista, 7, 8, 10, 11
+<p class="windl">
+  <a href="CURL_WIN64_ZIP"><img src="../pix/GS-Download-icon.svg" alt="Download 64-bit curl" width="90" height="90" style="float:left;"></a>
+  <a href="CURL_WIN64_ZIP" class="windl">curl for 64-bit</a> <br>
+Size: CURL_WIN64_ZIP_SIZE<br>
+<a href="CURL_WIN64_ZIP.asc">pgp</a> /
+<a href="CURL_WIN64_ZIP.cosign">cosign</a> /
+<a href="CURL_WIN64_ZIP.txt">sha256</a>: SHA256_CURL_WIN64<br>
+<h2> Fixed URLs </h2>
+<p>
+  These links automatically provide the latest curl package:
+<p>
+<a download="curl-win64-latest.zip" href="latest.cgi?p=win64-mingw.zip">curl for win64</a>
+/ <a download="curl-win64-latest.zip.asc" href="latest.cgi?p=win64-mingw.zip.asc">pgp</a>
+/ <a download="curl-win64-latest.zip.cosign" href="latest.cgi?p=win64-mingw.zip.cosign">cosign</a>
+/ <a download="curl-win64-latest.zip.txt" href="latest.cgi?p=win64-mingw.zip.txt">sha256</a><br>
+<h2> Specifications </h2>
+<p>
+  curl CURL_WINDOWS_VERSION was built and statically linked with
+  <ul>
+
+  </ul>
+<p>
+  The following tools/compilers were used in the build process:
+<ul>
+
+</ul>
+<p>
+ The <a href="BUILD_LOGURL">log from the build</a>.
+<p>
+ Get further details about these curl builds in
+ the <a href="https://github.com/curl/curl-for-win">curl-for-win github
+ repo</a>
+<h2> Microsoft ships curl too </h2>
+<p>
+ curl is also <a href="microsoft.html">shipped by Microsoft</a> as part of
+ Windows 10 and 11.
+</div>
+</div>
+</body>
+</html>

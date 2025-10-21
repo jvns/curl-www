@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_HTTPAUTH</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_HTTPAUTH</b></div>
+<h1> CURLOPT_HTTPAUTH explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_HTTPAUTH%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_HTTPAUTH.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_HTTPAUTH.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_HTTPAUTH - HTTP server authentication methods to try </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_HTTPAUTH.html">CURLOPT_HTTPAUTH</a>, long bitmask);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a long as parameter, which is set to a bitmask, to tell libcurl which authentication method(s) you want it to use speaking to the remote server. </p>
+<p class="level0">The available bits are listed below. If more than one bit is set, libcurl first queries the host to see which authentication methods it supports and then picks the best one you allow it to use. For some methods, this induces an extra network round-trip. Set the actual name and password with the <a Class="emphasis" href="./CURLOPT_USERPWD.html">CURLOPT_USERPWD</a> option or with the <a Class="emphasis" href="./CURLOPT_USERNAME.html">CURLOPT_USERNAME</a> and the <a Class="emphasis" href="./CURLOPT_PASSWORD.html">CURLOPT_PASSWORD</a> options. </p>
+<p class="level0">For authentication with a proxy, see <a Class="emphasis" href="./CURLOPT_PROXYAUTH.html">CURLOPT_PROXYAUTH</a>. </p>
+<p class="level0"><a name="CURLAUTHBASIC"></a><span class="nroffip">CURLAUTH_BASIC</span> </p>
+<p class="level1">HTTP Basic authentication. This is the default choice, and the only method that is in wide-spread use and supported virtually everywhere. This sends the username and password over the network in plain text, easily captured by others. </p>
+<p class="level0"><a name="CURLAUTHDIGEST"></a><span class="nroffip">CURLAUTH_DIGEST</span> </p>
+<p class="level1">HTTP Digest authentication. Digest authentication is defined in <a href="https://www.ietf.org/rfc/rfc2617.txt">RFC 2617</a> and is a more secure way to do authentication over public networks than the regular old-fashioned Basic method. </p>
+<p class="level0"><a name="CURLAUTHDIGESTIE"></a><span class="nroffip">CURLAUTH_DIGEST_IE</span> </p>
+<p class="level1">HTTP Digest authentication with an IE flavor. Digest authentication is defined in <a href="https://www.ietf.org/rfc/rfc2617.txt">RFC 2617</a> and is a more secure way to do authentication over public networks than the regular old-fashioned Basic method. The IE flavor is simply that libcurl uses a special &quot;quirk&quot; that IE is known to have used before version 7 and that some servers require the client to use. </p>
+<p class="level0"><a name="CURLAUTHBEARER"></a><span class="nroffip">CURLAUTH_BEARER</span> </p>
+<p class="level1">HTTP Bearer token authentication, used primarily in OAuth 2.0 protocol. </p>
+<p class="level1">You can set the Bearer token to use with <a Class="emphasis" href="./CURLOPT_XOAUTH2_BEARER.html">CURLOPT_XOAUTH2_BEARER</a>. </p>
+<p class="level0"><a name="CURLAUTHNEGOTIATE"></a><span class="nroffip">CURLAUTH_NEGOTIATE</span> </p>
+<p class="level1">HTTP Negotiate (SPNEGO) authentication. Negotiate authentication is defined in <a href="https://www.ietf.org/rfc/rfc4559.txt">RFC 4559</a> and is the most secure way to perform authentication over HTTP. </p>
+<p class="level1">You need to build libcurl with a suitable GSS-API library or SSPI on Windows for this to work. </p>
+<p class="level0"><a name="CURLAUTHNTLM"></a><span class="nroffip">CURLAUTH_NTLM</span> </p>
+<p class="level1">HTTP NTLM authentication. A proprietary protocol invented and used by Microsoft. It uses a challenge-response and hash concept similar to Digest, to prevent the password from being eavesdropped. </p>
+<p class="level1">NTLM uses weak cryptographic algorithms and is not considered secure. </p>
+<p class="level0"><a name="CURLAUTHNTLMWB"></a><span class="nroffip">CURLAUTH_NTLM_WB</span> </p>
+<p class="level1">Support for this is removed since libcurl <a href="/ch/8.8.0.html">8.8.0</a>. </p>
+<p class="level1">NTLM delegating to winbind helper. Authentication is performed by a separate binary application that is executed when needed. The name of the application is specified at compile time but is typically <span Class="bold">/usr/bin/ntlm_auth</span>. </p>
+<p class="level1">Note that libcurl forks when necessary to run the winbind application and kill it when complete, calling <span Class="bold">waitpid()</span> to await its exit when done. On POSIX operating systems, killing the process causes a SIGCHLD signal to be raised (regardless of whether <a Class="emphasis" href="./CURLOPT_NOSIGNAL.html">CURLOPT_NOSIGNAL</a> is set), which must be handled intelligently by the application. In particular, the application must not unconditionally call wait() in its SIGCHLD signal handler to avoid being subject to a race condition. This behavior is subject to change in future versions of libcurl. </p>
+<p class="level0"><a name="CURLAUTHANY"></a><span class="nroffip">CURLAUTH_ANY</span> </p>
+<p class="level1">This is a convenience macro that sets all bits and thus makes libcurl pick any it finds suitable. libcurl automatically selects the one it finds most secure. </p>
+<p class="level0"><a name="CURLAUTHANYSAFE"></a><span class="nroffip">CURLAUTH_ANYSAFE</span> </p>
+<p class="level1">This is a convenience macro that sets all bits except Basic and thus makes libcurl pick any it finds suitable. libcurl automatically selects the one it finds most secure. </p>
+<p class="level0"><a name="CURLAUTHONLY"></a><span class="nroffip">CURLAUTH_ONLY</span> </p>
+<p class="level1">This is a meta symbol. OR this value together with a single specific auth value to force libcurl to probe for unrestricted auth and if not, only that single auth algorithm is acceptable. </p>
+<p class="level0"><a name="CURLAUTHAWSSIGV4"></a><span class="nroffip">CURLAUTH_AWS_SIGV4</span> </p>
+<p class="level1">provides AWS V4 signature authentication on HTTPS header see <a Class="emphasis" href="./CURLOPT_AWS_SIGV4.html">CURLOPT_AWS_SIGV4</a>. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">CURLAUTH_BASIC </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode ret;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/&quot;);
+&nbsp;   /&#x2a; allow whatever auth the server speaks &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_HTTPAUTH.html">CURLOPT_HTTPAUTH</a>, CURLAUTH_ANY);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_USERPWD.html">CURLOPT_USERPWD</a>, &quot;james:bond&quot;);
+&nbsp;   ret = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">CURLAUTH_DIGEST_IE was added in <a href="/ch/7.19.3.html">7.19.3</a> </p>
+<p class="level0">CURLAUTH_ONLY was added in <a href="/ch/7.21.3.html">7.21.3</a> </p>
+<p class="level0">CURLAUTH_NTLM_WB was added in <a href="/ch/7.22.0.html">7.22.0</a> </p>
+<p class="level0"><span Class="bold">CURLAUTH_</span>&#x2a; macros became <span Class="emphasis">long</span> types in <a href="/ch/7.26.0.html">7.26.0</a>, prior to this version a <span Class="emphasis">long</span> cast was necessary when passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>. </p>
+<p class="level0">CURLAUTH_BEARER was added in <a href="/ch/7.61.0.html">7.61.0</a> </p>
+<p class="level0">CURLAUTH_AWS_SIGV4 was added in <a href="/ch/7.74.0.html">7.74.0</a> </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.10.6.html">7.10.6</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_PASSWORD.html">CURLOPT_PASSWORD</a>(3), <a Class="bold" href="./CURLOPT_PROXYAUTH.html">CURLOPT_PROXYAUTH</a>(3), <a Class="bold" href="./CURLOPT_USERNAME.html">CURLOPT_USERNAME</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

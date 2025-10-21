@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_easy_pause()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_pause</b></div>
+<h1> curl_easy_pause - pause and unpause a connection </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_easy_pause%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_easy_pause.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_easy_pause.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_easy_pause - pause and unpause a connection </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_pause.html">curl_easy_pause</a>(CURL &#x2a;handle, int bitmask );
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Using this function, you can explicitly mark a running connection to get paused, and you can unpause a connection that was previously paused. Unlike most other libcurl functions, <a Class="emphasis" href="./curl_easy_pause.html">curl_easy_pause</a> can be used from within callbacks. </p>
+<p class="level0">A connection can be paused by using this function or by letting the read or the write callbacks return the proper magic return code (<span Class="emphasis">CURL_READFUNC_PAUSE</span> and <span Class="emphasis">CURL_WRITEFUNC_PAUSE</span>). A write callback that returns pause signals to the library that it could not take care of any data at all, and that data is then delivered again to the callback when the transfer is unpaused. </p>
+<p class="level0">While it may feel tempting, take care and notice that you cannot call this function from another thread. To unpause, you may for example call it from the progress callback (<a Class="emphasis" href="./CURLOPT_PROGRESSFUNCTION.html">CURLOPT_PROGRESSFUNCTION</a>). </p>
+<p class="level0">When this function is called to unpause receiving, the write callback might get called before this function returns to deliver cached content. When libcurl delivers such cached data to the write callback, it is delivered as fast as possible, which may overstep the boundary set in <a Class="emphasis" href="./CURLOPT_MAX_RECV_SPEED_LARGE.html">CURLOPT_MAX_RECV_SPEED_LARGE</a> etc. </p>
+<p class="level0">The <span Class="bold">handle</span> argument identifies the transfer you want to pause or unpause. </p>
+<p class="level0">A paused transfer is excluded from low speed cancels via the <a Class="emphasis" href="./CURLOPT_LOW_SPEED_LIMIT.html">CURLOPT_LOW_SPEED_LIMIT</a> option and unpausing a transfer resets the time period required for the low speed limit to be met. </p>
+<p class="level0">The <span Class="bold">bitmask</span> argument is a set of bits that sets the new state of the connection. The following bits can be used: </p>
+<p class="level0"><a name="CURLPAUSERECV"></a><span class="nroffip">CURLPAUSE_RECV</span> </p>
+<p class="level1">Pause receiving data. There is no data received on this connection until this function is called again without this bit set. Thus, the write callback (<a Class="emphasis" href="./CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>) is not called. </p>
+<p class="level0"><a name="CURLPAUSESEND"></a><span class="nroffip">CURLPAUSE_SEND</span> </p>
+<p class="level1">Pause sending data. There is no data sent on this connection until this function is called again without this bit set. Thus, the read callback (<a Class="emphasis" href="./CURLOPT_READFUNCTION.html">CURLOPT_READFUNCTION</a>) is not called. </p>
+<p class="level0"><a name="CURLPAUSEALL"></a><span class="nroffip">CURLPAUSE_ALL</span> </p>
+<p class="level1">Convenience define that pauses both directions. </p>
+<p class="level0"><a name="CURLPAUSECONT"></a><span class="nroffip">CURLPAUSE_CONT</span> </p>
+<p class="level1">Convenience define that unpauses both directions. </p><a name="LIMITATIONS"></a><h2 class="nroffsh">Limitations</h2>
+<p class="level0">The pausing of transfers does not work with protocols that work without network connectivity, like FILE://. Trying to pause such a transfer, in any direction, might cause problems or error. </p><a name="MULTIPLEXED"></a><h2 class="nroffsh">Multiplexed</h2>
+<p class="level0">When a connection is used multiplexed, like for HTTP/2, and one of the transfers over the connection is paused and the others continue flowing, libcurl might end up buffering contents for the paused transfer. It has to do this because it needs to drain the socket for the other transfers and the already announced window size for the paused transfer allows the server to continue sending data up to that window size amount. By default, libcurl announces a 32 megabyte window size, which thus can make libcurl end up buffering 32 megabyte of data for a paused stream. </p>
+<p class="level0">When such a paused stream is unpaused again, any buffered data is delivered first. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   /&#x2a; pause a transfer in both directions &#x2a;/
+&nbsp;   <a href="curl_easy_pause.html">curl_easy_pause</a>(curl, CURLPAUSE_RECV | CURLPAUSE_SEND);
+&nbsp;
+&nbsp; }
+}
+</pre>
+<a name="MEMORY"></a><h2 class="nroffsh">Memory use</h2>
+<p class="level0">When pausing a download transfer by returning the magic return code from a write callback, the read data is already in libcurl&apos;s internal buffers so it has to keep it in an allocated buffer until the receiving is again unpaused using this function. </p>
+<p class="level0">If the downloaded data is compressed and is asked to get uncompressed automatically on download, libcurl continues to uncompress the entire downloaded chunk and it caches the data uncompressed. This has the side- effect that if you download something that is compressed a lot, it can result in a large data amount needing to be allocated to save the data during the pause. Consider not using paused receiving if you allow libcurl to uncompress data automatically. </p>
+<p class="level0">If the download is done with HTTP/2 or HTTP/3, there is up to a stream window size worth of data that curl cannot stop but instead needs to cache while the transfer is paused. This means that if a window size of 64 MB is used, libcurl might end up having to cache 64 MB of data. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.18.0.html">7.18.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_cleanup.html">curl_easy_cleanup</a>(3), <a Class="bold" href="./curl_easy_reset.html">curl_easy_reset</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

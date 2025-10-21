@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_DOH_URL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_DOH_URL</b></div>
+<h1> CURLOPT_DOH_URL explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_DOH_URL%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_DOH_URL.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_DOH_URL.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_DOH_URL - provide the DNS-over-HTTPS URL </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_DOH_URL.html">CURLOPT_DOH_URL</a>, char &#x2a;URL);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass in a pointer to a <span Class="emphasis">URL</span> for the DoH server to use for name resolving. The parameter should be a char pointer to a null-terminated string which must be a valid and correct HTTPS URL. </p>
+<p class="level0">libcurl does not validate the syntax or use this variable until the transfer is issued. Even if you set a crazy value here, <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> still returns <span Class="emphasis"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a></span>. </p>
+<p class="level0">curl sends POST requests to the given DNS-over-HTTPS URL. </p>
+<p class="level0">To find the DoH server itself, which might be specified using a name, libcurl uses the default name lookup function. You can bootstrap that by providing the address for the DoH server with <a Class="emphasis" href="./CURLOPT_RESOLVE.html">CURLOPT_RESOLVE</a>. </p>
+<p class="level0">The application does not have to keep the string around after setting this option. </p>
+<p class="level0">Using this option multiple times makes the last set string override the previous ones. Set it to NULL to disable its use again. </p><a name="INHERIT"></a><h2 class="nroffsh">Inherit options</h2>
+<p class="level0">DoH lookups use SSL and some SSL settings from your transfer are inherited, like <a Class="emphasis" href="./CURLOPT_SSL_CTX_FUNCTION.html">CURLOPT_SSL_CTX_FUNCTION</a>. </p>
+<p class="level0">The hostname and peer certificate verification settings are not inherited but can be controlled separately via <a Class="emphasis" href="./CURLOPT_DOH_SSL_VERIFYHOST.html">CURLOPT_DOH_SSL_VERIFYHOST</a> and <a Class="emphasis" href="./CURLOPT_DOH_SSL_VERIFYPEER.html">CURLOPT_DOH_SSL_VERIFYPEER</a>. </p>
+<p class="level0">A set <a Class="emphasis" href="./CURLOPT_OPENSOCKETFUNCTION.html">CURLOPT_OPENSOCKETFUNCTION</a> callback is not inherited. </p><a name="KNOWN"></a><h2 class="nroffsh">Known bugs</h2>
+<p class="level0">Even when DoH is set to be used with this option, there are still some name resolves that are performed without it, using the default name resolver mechanism. This includes name resolves done for <a Class="emphasis" href="./CURLOPT_INTERFACE.html">CURLOPT_INTERFACE</a>, <a Class="emphasis" href="./CURLOPT_FTPPORT.html">CURLOPT_FTPPORT</a>, a proxy type set to <span Class="bold">CURLPROXY_SOCKS4</span> or <span Class="bold">CURLPROXY_SOCKS5</span> and probably some more. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_DOH_URL.html">CURLOPT_DOH_URL</a>, &quot;https://dns.example.com&quot;);
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.62.0.html">7.62.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p>
+<p class="level0">Note that <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> does immediately parse the given string so when given a bad DoH URL, libcurl might not detect the problem until it later tries to resolve a name with it. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_DNS_CACHE_TIMEOUT.html">CURLOPT_DNS_CACHE_TIMEOUT</a>(3), <a Class="bold" href="./CURLOPT_RESOLVE.html">CURLOPT_RESOLVE</a>(3), <a Class="bold" href="./CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

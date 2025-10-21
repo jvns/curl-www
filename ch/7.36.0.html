@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.36.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.36.0</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.35.0.html">🠰 7.35.0</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.37.0.html">7.37.0 🠲</a>
+</span>
+<h1> Changes in 7.36.0 - March 26 2014 </h1>
+<div class="vulnbox"><a href=/docs/vuln-7.36.0.html>7.36.0</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+ <li> <a href="https://curl.se/mail/lib-2014-01/0183.html">ntlm: Added support for NTLMv2</a>
+ <li> <a href="https://curl.se/mail/archive-2013-11/0006.html">tool: Added support for URL specific options</a>
+ <li> openssl: add ALPN support
+ <li> gtls: add ALPN support
+ <li> nss: add ALPN and NPN support
+ <li> <a href="https://curl.se/libcurl/c/curl_easy_setopt.html#CURLOPTEXPECT100TIMEOUTMS">added CURLOPT_EXPECT_100_TIMEOUT_MS</a>
+ <li> tool: add --no-alpn and --no-npn
+ <li> added CURLOPT_SSL_ENABLE_NPN and CURLOPT_SSL_ENABLE_ALPN
+ <li> winssl: enable TLSv1.1 and TLSv1.2 by default
+ <li> winssl: TLSv1.2 disables certificate signatures using MD5 hash
+ <li> <a href="https://curl.se/mail/lib-2014-02/0243.html">winssl: enable hostname verification of IP address using SAN or CN</a>
+ <li> <a href="https://curl.se/bug/?i=93">darwinssl: Don&#39;t omit CN verification when an IP address is used</a>
+ <li> http2: build with current nghttp2 version
+ <li> polarssl: dropped support for PolarSSL &lt; 1.3.0
+ <li> openssl: info message with SSL version used
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> <a href="https://curl.se/docs/CVE-2014-0138.html">SECURITY ADVISORY: wrong re-use of connections</a>
+ <li> <a href="https://curl.se/docs/CVE-2014-0139.html">SECURITY ADVISORY: IP address wildcard certificate validation</a>
+ <li> <a href="https://curl.se/docs/CVE-2014-1263.html">SECURITY ADVISORY: not verifying certs for TLS to IP address / Darwinssl</a>
+ <li> <a href="https://curl.se/docs/CVE-2014-2522.html">SECURITY ADVISORY: not verifying certs for TLS to IP address / Winssl</a>
+ <li> <a href="https://bugzilla.redhat.com/1058776">nss: allow to use ECC ciphers if NSS implements them</a>
+ <li> netrc: Fixed a memory leak in an OOM condition
+ <li> ftp: fixed a memory leak on wildcard error path
+ <li> pipeline: Fixed a NULL pointer dereference on OOM
+ <li> nss: prefer highest available TLS version
+ <li> <a href="https://curl.se/bug/view.cgi?id=1334">100-continue: fix timeout condition</a>
+ <li> ssh: Fixed a NULL pointer dereference on OOM condition
+ <li> <a href="https://curl.se/bug/view.cgi?id=1333">formpost: use semicolon in multipart/mixaed</a>
+ <li> --help: add missing --tlsv1.x options
+ <li> formdata: Fixed memory leak on OOM condition
+ <li> <a href="https://curl.se/mail/lib-2014-02/0100.html">ConnectionExists: reusing possible HTTP+NTLM connections better</a>
+ <li> mingw32: fix compilation
+ <li> <a href="https://curl.se/mail/lib-2014-02/0097.html">chunked decoder: track overflows correctly</a>
+ <li> curl_easy_setopt.3: add CURL_HTTP_VERSION_2_0
+ <li> dict: fix memory leak in OOM exit path
+ <li> valgrind: added suppression on optimized code
+ <li> curl: output protocol headers using binary mode
+ <li> tool: Added URL index to password prompt for multiple operations
+ <li> <a href="http://thread.gmane.org/gmane.comp.version-control.git/242213">ConnectionExists: re-use non-NTLM connections better</a>
+ <li> axtls: call ssl_read repeatedly
+ <li> multi: make MAXCONNECTS default 4 x number of easy handles function
+ <li> configure: Fix the --disable-crypto-auth option
+ <li> multi: ignore SIGPIPE internally
+ <li> curl.1: update the description of --tlsv1
+ <li> <a href="https://curl.se/mail/lib-2014-02/0155.html">SFTP: skip reading the dir when NOBODY=1</a>
+ <li> easy: Fixed a memory leak on OOM condition
+ <li> tool: Fixed incorrect return code when setting HTTP request fails
+ <li> configure: Tiny fix to honor POSIX
+ <li> tool: Do not output libcurl source for the information only parameters
+ <li> Rework Open Watcom make files to use standard Wmake features
+ <li> x509asn: moved out Curl_verifyhost from NSS builds
+ <li> configure: call it GSS-API
+ <li> hostcheck: Curl_cert_hostcheck is not used by NSS builds
+ <li> <a href="https://curl.se/mail/lib-2014-02/0036.html">multi_runsingle: move timestamp into INIT</a>
+ <li> remote_port: allow connect to port 0
+ <li> parse_remote_port: error out on illegal port numbers better
+ <li> ssh: Pass errors from libssh2_sftp_read up the stack
+ <li> docs: remove documentation on setting up krb4 support
+ <li> polarssl: build fixes to work with PolarSSL 1.3.x
+ <li> polarssl: fix possible handshake timeout issue in multi
+ <li> nss: allow to enable/disable cipher-suites better
+ <li> ssh: prevent a logic error that could result in an infinite loop
+ <li> http2: free resources on disconnect
+ <li> polarssl: avoid extra newlines in debug messages
+ <li> <a href="https://curl.se/mail/lib-2014-03/0134.html">rtsp: parse "Session:" header properly</a>
+ <li> <a href="https://curl.se/bug/view.cgi?id=1337">trynextip: don&#39;t store &#39;ai&#39; on failed connects</a>
+ <li> Curl_cert_hostcheck: strip trailing dots in hostname and wildcard
+</ul>
+<h2> Further </h2>
+The previous release was 7.35.0.
+The next release was 7.37.0.

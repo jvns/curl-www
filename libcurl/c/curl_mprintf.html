@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_mprintf()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_mprintf</b></div>
+<h1> curl_mprintf - formatted output </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_mprintf%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_mprintf.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_mprintf.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_maprintf, curl_mfprintf, curl_mprintf, curl_msnprintf, curl_msprintf, curl_mvaprintf, curl_mvfprintf, curl_mvprintf, curl_mvsnprintf, curl_mvsprintf - formatted output conversion </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/mprintf.h&gt;
+&nbsp;
+int <a href="curl_mprintf.html">curl_mprintf</a>(const char &#x2a;format, ...);
+int <a href="curl_mprintf.html">curl_mfprintf</a>(FILE &#x2a;fd, const char &#x2a;format, ...);
+int <a href="curl_mprintf.html">curl_msprintf</a>(char &#x2a;buffer, const char &#x2a;format, ...);
+int <a href="curl_mprintf.html">curl_msnprintf</a>(char &#x2a;buffer, size_t maxlength, const char &#x2a;format, ...);
+int <a href="curl_mprintf.html">curl_mvprintf</a>(const char &#x2a;format, va_list args);
+int <a href="curl_mprintf.html">curl_mvfprintf</a>(FILE &#x2a;fd, const char &#x2a;format, va_list args);
+int <a href="curl_mprintf.html">curl_mvsprintf</a>(char &#x2a;buffer, const char &#x2a;format, va_list args);
+int <a href="curl_mprintf.html">curl_mvsnprintf</a>(char &#x2a;buffer, size_t maxlength, const char &#x2a;format,
+&nbsp;                   va_list args);
+char &#x2a;<a href="curl_mprintf.html">curl_maprintf</a>(const char &#x2a;format , ...);
+char &#x2a;<a href="curl_mprintf.html">curl_mvaprintf</a>(const char &#x2a;format, va_list args);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">These functions produce output according to the format string and given arguments. They are mostly clones of the well-known C-style functions but there are slight differences in behavior. </p>
+<p class="level0">We discourage users from using any of these functions in new applications. </p>
+<p class="level0">Functions in the <a href="curl_mprintf.html">curl_mprintf</a>() family produce output according to a format as described below. The functions <span Class="bold">curl_mprintf()</span> and <span Class="bold">curl_mvprintf()</span> write output to stdout, the standard output stream; <span Class="bold">curl_mfprintf()</span> and <span Class="bold">curl_mvfprintf()</span> write output to the given output stream; <span Class="bold">curl_msprintf()</span>, <span Class="bold">curl_msnprintf()</span>, <span Class="bold">curl_mvsprintf()</span>, and <span Class="bold">curl_mvsnprintf()</span> write to the character string <span Class="bold">buffer</span>. </p>
+<p class="level0">The functions <span Class="bold">curl_msnprintf()</span> and <span Class="bold">curl_mvsnprintf()</span> write at most <span Class="emphasis">maxlength</span> bytes (including the terminating null byte (&apos;0&apos;)) to <span Class="emphasis">buffer</span>. </p>
+<p class="level0">The functions <span Class="bold">curl_mvprintf()</span>, <span Class="bold">curl_mvfprintf()</span>, <span Class="bold">curl_mvsprintf()</span>, <span Class="bold">curl_mvsnprintf()</span> are equivalent to the functions <span Class="bold">curl_mprintf()</span>, <span Class="bold">curl_mfprintf()</span>, <span Class="bold">curl_msprintf()</span>, <span Class="bold">curl_msnprintf()</span>, respectively, except that they are called with a <span Class="emphasis">va_list</span> instead of a variable number of arguments. These functions do not call the <span Class="emphasis">va_end</span> macro. Because they invoke the <span Class="emphasis">va_arg</span> macro, the value of <span Class="emphasis">ap</span> is undefined after the call. </p>
+<p class="level0">The functions <span Class="bold">curl_maprintf()</span> and <span Class="bold">curl_mvaprintf()</span> return the output string as pointer to a newly allocated memory area. The returned string must be <a Class="emphasis" href="./curl_free.html">curl_free</a>ed by the receiver. </p>
+<p class="level0">All of these functions write the output under the control of a format string that specifies how subsequent arguments are converted for output. </p><a name="FORMAT"></a><h2 class="nroffsh">Format string</h2>
+<p class="level0">The format string is composed of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments. Each conversion specification is introduced by the character %, and ends with a conversion specifier. In between there may be (in this order) zero or more <span Class="emphasis">flags</span>, an optional minimum <span Class="emphasis">field width</span>, an optional <span Class="emphasis">precision</span> and an optional <span Class="emphasis">length modifier</span>. </p><a name="The"></a><h2 class="nroffsh">The $ modifier</h2>
+<p class="level0">The arguments must correspond properly with the conversion specifier. By default, the arguments are used in the order given, where each &apos;&#x2a;&apos; (see Field width and Precision below) and each conversion specifier asks for the next argument (and it is an error if insufficiently many arguments are given). One can also specify explicitly which argument is taken, at each place where an argument is required, by writing &quot;%m$&quot; instead of &apos;%&apos; and &quot;&#x2a;m$&quot; instead of &apos;&#x2a;&apos;, where the decimal integer m denotes the position in the argument list of the desired argument, indexed starting from 1. Thus, </p><pre class="level0">
+&nbsp;   <a href="curl_mprintf.html">curl_mprintf</a>(&quot;%&#x2a;d&quot;, width, num);
+</pre>
+<p class="level0">and </p><pre class="level0">
+&nbsp;   <a href="curl_mprintf.html">curl_mprintf</a>(&quot;%2$&#x2a;1$d&quot;, width, num);
+</pre>
+<p class="level0">are equivalent. The second style allows repeated references to the same argument. </p>
+<p class="level0">If the style using &apos;$&apos; is used, it must be used throughout for all conversions taking an argument and all width and precision arguments, but it may be mixed with &quot;%%&quot; formats, which do not consume an argument. There may be no gaps in the numbers of arguments specified using &apos;$&apos;; for example, if arguments 1 and 3 are specified, argument 2 must also be specified somewhere in the format string. </p><a name="Flag"></a><h2 class="nroffsh">Flag characters</h2>
+<p class="level0">The character % is followed by zero or more of the following flags: </p>
+<p class="level0"><a name=""></a><span class="nroffip">&#35;</span> </p>
+<p class="level1">The value should be converted to its &quot;alternate form&quot;. </p>
+<p class="level0"><a name="0"></a><span class="nroffip">0</span> </p>
+<p class="level1">The value should be zero padded. </p>
+<p class="level0"><a name="-"></a><span class="nroffip">-</span> </p>
+<p class="level1">The converted value is to be left adjusted on the field boundary. (The default is right justification.) The converted value is padded on the right with blanks, rather than on the left with blanks or zeros. A &apos;-&apos; overrides a &amp;&apos;0&apos; if both are given. </p>
+<p class="level0"><a name="space"></a><span class="nroffip">(space)</span> </p>
+<p class="level1">(a space: &apos; &apos;) A blank should be left before a positive number (or empty string) produced by a signed conversion. </p>
+<p class="level0"><a name=""></a><span class="nroffip">+</span> </p>
+<p class="level1">A sign (+ or -) should always be placed before a number produced by a signed conversion. By default, a sign is used only for negative numbers. A &apos;+&apos; overrides a space if both are used. </p><a name="Field"></a><h2 class="nroffsh">Field width</h2>
+<p class="level0">An optional decimal digit string (with nonzero first digit) specifying a minimum field width. If the converted value has fewer characters than the field width, it gets padded with spaces on the left (or right, if the left-adjustment flag has been given). Instead of a decimal digit string one may write &quot;<span Class="emphasis">&quot; or &quot;</span>m$&quot; (for some decimal integer m) to specify that the field width is given in the next argument, or in the <span Class="emphasis">m-th</span> argument, respectively, which must be of type int. A negative field width is taken as a &apos;-&apos; flag followed by a positive field width. In no case does a nonexistent or small field width cause truncation of a field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result. </p><a name="Precision"></a><h2 class="nroffsh">Precision</h2>
+<p class="level0">An optional precision in the form of a period (&apos;.&apos;) followed by an optional decimal digit string. Instead of a decimal digit string one may write &quot;&#x2a;&quot; or &quot;&#x2a;m$&quot; (for some decimal integer m) to specify that the precision is given in the next argument, or in the <span Class="emphasis">m-th</span> argument, respectively, which must be of type int. If the precision is given as just &apos;.&apos;, the precision is taken to be zero. A negative precision is taken as if the precision were omitted. This gives the minimum number of digits to appear for <a class="bold" href="#d">d</a>, <a class="bold" href="#i">i</a>, <a class="bold" href="#o">o</a>, <a class="bold" href="#u">u</a>, <a class="bold" href="#x">x</a>, and <a class="bold" href="#X">X</a> conversions, the number of digits to appear after the radix character for <span Class="bold">a</span>, <span Class="bold">A</span>, <a class="bold" href="#e">e</a>, <a class="bold" href="#E">E</a>, <a class="bold" href="#f">f</a>, and <a class="bold" href="#F">F</a> conversions, the maximum number of significant digits for <a class="bold" href="#g">g</a> and <a class="bold" href="#G">G</a> conversions, or the maximum number of characters to be printed from a string for <a class="bold" href="#s">s</a> and <span Class="bold">S</span> conversions. </p><a name="Length"></a><h2 class="nroffsh">Length modifier</h2>
+<p class="level0"><a name="h"></a><span class="nroffip">h</span> </p>
+<p class="level1">A following integer conversion corresponds to a <span Class="emphasis">short</span> or <span Class="emphasis">unsigned short</span> argument. </p>
+<p class="level0"><a name="l"></a><span class="nroffip">l</span> </p>
+<p class="level1">(ell) A following integer conversion corresponds to a <span Class="emphasis">long</span> or <span Class="emphasis">unsigned long</span> argument, or a following n conversion corresponds to a pointer to a long argument </p>
+<p class="level0"><a name="ll"></a><span class="nroffip">ll</span> </p>
+<p class="level1">(ell-ell). A following integer conversion corresponds to a <span Class="emphasis">long long</span> or <span Class="emphasis">unsigned long long</span> argument, or a following n conversion corresponds to a pointer to a <span Class="emphasis">long long</span> argument. </p>
+<p class="level0"><a name="q"></a><span class="nroffip">q</span> </p>
+<p class="level1">A synonym for <a class="bold" href="#ll">ll</a>. </p>
+<p class="level0"><a name="L"></a><span class="nroffip">L</span> </p>
+<p class="level1">A following a, A, e, E, f, F, g, or G conversion corresponds to a long double argument. </p>
+<p class="level0"><a name="z"></a><span class="nroffip">z</span> </p>
+<p class="level1">A following integer conversion corresponds to a <span Class="emphasis">size_t</span> or <span Class="emphasis">ssize_t</span> argument. </p><a name="Conversion"></a><h2 class="nroffsh">Conversion specifiers</h2>
+<p class="level0">A character that specifies the type of conversion to be applied. The conversion specifiers and their meanings are: </p>
+<p class="level0"><a name="d"></a><a name="i"></a><span class="nroffip">d, i</span> </p>
+<p class="level1">The int argument is converted to signed decimal notation. The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits, it is padded on the left with zeros. The default precision is 1. When 0 is printed with an explicit precision 0, the output is empty. </p>
+<p class="level0"><a name="o"></a><a name="u"></a><a name="x"></a><a name="X"></a><span class="nroffip">o, u, x, X</span> </p>
+<p class="level1">The unsigned int argument is converted to unsigned octal (o), unsigned decimal (u), or unsigned hexadecimal (<a class="bold" href="#x">x</a> and <a class="bold" href="#X">X</a>) notation. The letters <span Class="emphasis">abcdef</span> are used for <a class="bold" href="#x">x</a> conversions; the letters <span Class="emphasis">ABCDEF</span> are used for <a class="bold" href="#X">X</a> conversions. The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits, it is padded on the left with zeros. The default precision is 1. When 0 is printed with an explicit precision 0, the output is empty. </p>
+<p class="level0"><a name="e"></a><a name="E"></a><span class="nroffip">e, E</span> </p>
+<p class="level1">The double argument is rounded and output in the style <span Class="bold">&quot;[-]d.ddde{+|-}dd&quot;</span> </p>
+<p class="level0"><a name="f"></a><a name="F"></a><span class="nroffip">f, F</span> </p>
+<p class="level1">The double argument is rounded and output to decimal notation in the style <span Class="bold">&quot;[-]ddd.ddd&quot;</span>. </p>
+<p class="level0"><a name="g"></a><a name="G"></a><span class="nroffip">g, G</span> </p>
+<p class="level1">The double argument is converted in style f or e. </p>
+<p class="level0"><a name="c"></a><span class="nroffip">c</span> </p>
+<p class="level1">The int argument is converted to an unsigned char, and the resulting character is written. </p>
+<p class="level0"><a name="s"></a><span class="nroffip">s</span> </p>
+<p class="level1">The <span Class="emphasis">const char </span>&#x2a; argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to (but not including) a terminating null byte. If a precision is specified, no more than the number specified are written. If a precision is given, no null byte need be present; if the precision is not specified, or is greater than the size of the array, the array must contain a terminating null byte. </p>
+<p class="level0"><a name="p"></a><span class="nroffip">p</span> </p>
+<p class="level1">The <span Class="emphasis">void </span>&#x2a; pointer argument is printed in hexadecimal. </p>
+<p class="level0"><a name="n"></a><span class="nroffip">n</span> </p>
+<p class="level1">The number of characters written so far is stored into the integer pointed to by the corresponding argument. </p>
+<p class="level0"><a name=""></a><span class="nroffip">%</span> </p>
+<p class="level1">A &apos;%&apos; symbol is written. No argument is converted. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+const char &#x2a;name = &quot;John&quot;;
+&nbsp;
+int main(void)
+{
+&nbsp; <a href="curl_mprintf.html">curl_mprintf</a>(&quot;My name is %s&bsol;n&quot;, name);
+&nbsp; <a href="curl_mprintf.html">curl_mprintf</a>(&quot;Pi is almost %f&bsol;n&quot;, (double)25.0/8);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">The <span Class="bold">curl_maprintf</span> and <span Class="bold">curl_mvaprintf</span> functions return a pointer to a newly allocated string, or NULL if it failed. </p>
+<p class="level0">All other functions return the number of characters actually printed (excluding the null byte used to end output to strings). Note that this sometimes differ from how the POSIX versions of these functions work. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><span Class="bold">fprintf</span>(3), <span Class="bold">printf</span>(3), <span Class="bold">sprintf</span>(3), <span Class="bold">vprintf</span>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

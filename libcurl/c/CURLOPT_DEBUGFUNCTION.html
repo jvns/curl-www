@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_DEBUGFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_DEBUGFUNCTION</b></div>
+<h1> CURLOPT_DEBUGFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_DEBUGFUNCTION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_DEBUGFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_DEBUGFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_DEBUGFUNCTION - debug callback </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+typedef enum {
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_TEXT</a> = 0,
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_HEADER_IN</a>,    /&#x2a; 1 &#x2a;/
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_HEADER_OUT</a>,   /&#x2a; 2 &#x2a;/
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_DATA_IN</a>,      /&#x2a; 3 &#x2a;/
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_DATA_OUT</a>,     /&#x2a; 4 &#x2a;/
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_SSL_DATA_IN</a>,  /&#x2a; 5 &#x2a;/
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_SSL_DATA_OUT</a>, /&#x2a; 6 &#x2a;/
+&nbsp; <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_END</a>
+} curl_infotype;
+&nbsp;
+int debug_callback(CURL &#x2a;handle,
+&nbsp;                  curl_infotype type,
+&nbsp;                  char &#x2a;data,
+&nbsp;                  size_t size,
+&nbsp;                  void &#x2a;clientp);
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_DEBUGFUNCTION.html">CURLOPT_DEBUGFUNCTION</a>,
+&nbsp;                         debug_callback);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to your callback function, which should match the prototype shown above. </p>
+<p class="level0"><a Class="emphasis" href="./CURLOPT_DEBUGFUNCTION.html">CURLOPT_DEBUGFUNCTION</a> replaces the standard debug function used when <a Class="emphasis" href="./CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a> is in effect. This callback receives debug information, as specified in the <span Class="emphasis">type</span> argument. This function must return 0. The <span Class="emphasis">data</span> pointed to by the char &#x2a; passed to this function is not null-terminated, but is exactly of the <span Class="emphasis">size</span> as told by the <span Class="emphasis">size</span> argument. </p>
+<p class="level0"><span Class="bold">WARNING</span> this callback may receive sensitive contents from headers and data, including information sent as <a class="bold" href="#CURLINFOTEXT">CURLINFO_TEXT</a>. </p>
+<p class="level0">The <span Class="emphasis">clientp</span> argument is the pointer set with <a Class="emphasis" href="./CURLOPT_DEBUGDATA.html">CURLOPT_DEBUGDATA</a>. </p>
+<p class="level0">Available <span Class="bold">curl_infotype</span> values: </p>
+<p class="level0"><a name="CURLINFOTEXT"></a><span class="nroffip">CURLINFO_TEXT</span> </p>
+<p class="level1">The data is informational text. </p>
+<p class="level0"><a name="CURLINFOHEADERIN"></a><span class="nroffip">CURLINFO_HEADER_IN</span> </p>
+<p class="level1">The data is header (or header-like) data received from the peer. </p>
+<p class="level0"><a name="CURLINFOHEADEROUT"></a><span class="nroffip">CURLINFO_HEADER_OUT</span> </p>
+<p class="level1">The data is header (or header-like) data sent to the peer. </p>
+<p class="level0"><a name="CURLINFODATAIN"></a><span class="nroffip">CURLINFO_DATA_IN</span> </p>
+<p class="level1">The data is the unprocessed protocol data received from the peer. Even if the data is encoded or compressed, it is not provided decoded nor decompressed to this callback. If you need the data in decoded and decompressed form, use <a Class="emphasis" href="./CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>. </p>
+<p class="level0"><a name="CURLINFODATAOUT"></a><span class="nroffip">CURLINFO_DATA_OUT</span> </p>
+<p class="level1">The data is protocol data sent to the peer. </p>
+<p class="level0"><a name="CURLINFOSSLDATAOUT"></a><span class="nroffip">CURLINFO_SSL_DATA_OUT</span> </p>
+<p class="level1">The data is SSL/TLS (binary) data sent to the peer. </p>
+<p class="level0"><a name="CURLINFOSSLDATAIN"></a><span class="nroffip">CURLINFO_SSL_DATA_IN</span> </p>
+<p class="level1">The data is SSL/TLS (binary) data received from the peer. </p>
+<p class="level0">WARNING: This callback may be called with the curl <span Class="emphasis">handle</span> set to an internal handle. (Added in <a href="/ch/8.4.0.html">8.4.0</a>) </p>
+<p class="level0">If you need to distinguish your curl <span Class="emphasis">handle</span> from internal handles then set <a Class="emphasis" href="./CURLOPT_PRIVATE.html">CURLOPT_PRIVATE</a> on your handle. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+static
+void dump(const char &#x2a;text,
+&nbsp;         FILE &#x2a;stream, unsigned char &#x2a;ptr, size_t size)
+{
+&nbsp; size_t i;
+&nbsp; size_t c;
+&nbsp; unsigned int width = 0x10;
+&nbsp;
+&nbsp; fprintf(stream, &quot;%s, %10.10ld bytes (0x%8.8lx)&bsol;n&quot;,
+&nbsp;         text, (long)size, (long)size);
+&nbsp;
+&nbsp; for(i = 0; i &lt; size; i += width) {
+&nbsp;   fprintf(stream, &quot;%4.4lx: &quot;, (long)i);
+&nbsp;
+&nbsp;   /&#x2a; show hex to the left &#x2a;/
+&nbsp;   for(c = 0; c &lt; width; c++) {
+&nbsp;     if(i + c &lt; size)
+&nbsp;       fprintf(stream, &quot;%02x &quot;, ptr[i + c]);
+&nbsp;     else
+&nbsp;       fputs(&quot;   &quot;, stream);
+&nbsp;   }
+&nbsp;
+&nbsp;   /&#x2a; show data on the right &#x2a;/
+&nbsp;   for(c = 0; (c &lt; width) &amp;&amp; (i + c &lt; size); c++) {
+&nbsp;     char x = (ptr[i + c] &gt;= 0x20 &amp;&amp; ptr[i + c] &lt; 0x80) ? ptr[i + c] : &#39;.&#39;;
+&nbsp;     fputc(x, stream);
+&nbsp;   }
+&nbsp;
+&nbsp;   fputc(&#39;&bsol;n&#39;, stream); /&#x2a; newline &#x2a;/
+&nbsp; }
+}
+&nbsp;
+static
+int my_trace(CURL &#x2a;handle, curl_infotype type,
+&nbsp;            char &#x2a;data, size_t size,
+&nbsp;            void &#x2a;clientp)
+{
+&nbsp; const char &#x2a;text;
+&nbsp; (void)handle;
+&nbsp; (void)clientp;
+&nbsp;
+&nbsp; switch(type) {
+&nbsp; case <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_TEXT</a>:
+&nbsp;   fputs(&quot;== Info: &quot;, stderr);
+&nbsp;   fwrite(data, size, 1, stderr);
+&nbsp; default: /&#x2a; in case a new one is introduced to shock us &#x2a;/
+&nbsp;   return 0;
+&nbsp;
+&nbsp; case <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_HEADER_OUT</a>:
+&nbsp;   text = &quot;=&gt; Send header&quot;;
+&nbsp;   break;
+&nbsp; case <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_DATA_OUT</a>:
+&nbsp;   text = &quot;=&gt; Send data&quot;;
+&nbsp;   break;
+&nbsp; case <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_SSL_DATA_OUT</a>:
+&nbsp;   text = &quot;=&gt; Send SSL data&quot;;
+&nbsp;   break;
+&nbsp; case <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_HEADER_IN</a>:
+&nbsp;   text = &quot;&lt;= Recv header&quot;;
+&nbsp;   break;
+&nbsp; case <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_DATA_IN</a>:
+&nbsp;   text = &quot;&lt;= Recv data&quot;;
+&nbsp;   break;
+&nbsp; case <a href="CURLOPT_DEBUGFUNCTION.html#DESCRIPTION">CURLINFO_SSL_DATA_IN</a>:
+&nbsp;   text = &quot;&lt;= Recv SSL data&quot;;
+&nbsp;   break;
+&nbsp; }
+&nbsp;
+&nbsp; dump(text, stderr, (unsigned char &#x2a;)data, size);
+&nbsp; return 0;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;curl;
+&nbsp; CURLcode res;
+&nbsp;
+&nbsp; curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_DEBUGFUNCTION.html">CURLOPT_DEBUGFUNCTION</a>, my_trace);
+&nbsp;
+&nbsp;   /&#x2a; the DEBUGFUNCTION has no effect until we enable VERBOSE &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a>, 1L);
+&nbsp;
+&nbsp;   /&#x2a; example.com is redirected, so we tell libcurl to follow redirection &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>, 1L);
+&nbsp;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com/&quot;);
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;   /&#x2a; Check for errors &#x2a;/
+&nbsp;   if(res != <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>)
+&nbsp;     fprintf(stderr, &quot;<a href="curl_easy_perform.html">curl_easy_perform</a>() failed: %s&bsol;n&quot;,
+&nbsp;             <a href="curl_easy_strerror.html">curl_easy_strerror</a>(res));
+&nbsp;
+&nbsp;   /&#x2a; always cleanup &#x2a;/
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+&nbsp; return 0;
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.9.6.html">7.9.6</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLINFO_CONN_ID.html">CURLINFO_CONN_ID</a>(3), <a Class="bold" href="./CURLINFO_XFER_ID.html">CURLINFO_XFER_ID</a>(3), <a Class="bold" href="./CURLOPT_DEBUGDATA.html">CURLOPT_DEBUGDATA</a>(3), <a Class="bold" href="./CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a>(3), <a Class="bold" href="./curl_global_trace.html">curl_global_trace</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

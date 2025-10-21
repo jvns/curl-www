@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Contribute to the curl project!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Dev-related docs</a>
+  <div class="dropdown-content">
+    <a href="/dev/code-review.html">Code Review</a>
+    <a href="/dev/code-style.html">Code Style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/new-protocol.html">New protocol</a>
+    <a href="/dev/release-procedure.html">Release procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run tests</a>
+    <a href="/dev/source.html">Source code</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="https://testclutch.curl.se/">Test Clutch</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/test-fileformat.html">Test case file format</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/./">Current status</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/snapshots/">Daily snapshots</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/feature-window.html">Feature window</a>
+    <a href="/gitstats/">git stats</a>
+    <a href="https://github.com/curl/curl/issues" target="_blank">Issues (github)</a>
+    <a href="https://github.com/curl/curl/pulls" target="_blank">Pull requests (github)</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/dev/">Development</a> / <b>Contribute</b></div>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/mail/">Mailing Lists</a>
+<br><a href="internals.html">Internals</a>
+<br><a href="/docs/bugs.html">Report Bugs</a>
+</div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="contributing-to-the-curl-project">Contributing to the curl
+project</h1>
+<p>This document is intended to offer guidelines on how to best
+contribute to the curl project. This concerns new features as well as
+corrections to existing flaws or bugs.</p>
+<h2 id="join-the-community">Join the Community</h2>
+<p>Skip over to <a
+href="https://curl.se/mail/"><span>https://curl.se/mail/</span></a> and
+join the appropriate mailing list(s). Read up on details before you post
+questions. Read this file before you start sending patches. We prefer
+questions sent to and discussions being held on the mailing list(s), not
+sent to individuals.</p>
+<p>Before posting to one of the curl mailing lists, please read up on
+the <a href="https://curl.se/mail/etiquette.html">mailing list
+etiquette</a>.</p>
+<p>We also hang out on IRC in #curl on libera.chat</p>
+<p>If you are at all interested in the code side of things, consider
+clicking 'watch' on the <a href="https://github.com/curl/curl">curl
+repository on GitHub</a> to be notified of pull requests and new issues
+posted there.</p>
+<h2 id="license-and-copyright">License and copyright</h2>
+<p>When contributing with code, you agree to put your changes and new
+code under the same license curl and libcurl is already using unless
+stated and agreed otherwise.</p>
+<p>If you add a larger piece of code, you can opt to make that file or
+set of files to use a different license as long as they do not enforce
+any changes to the rest of the package and they make sense. Such
+"separate parts" can not be GPL licensed (as we do not want copyleft to
+affect users of libcurl) but they must use "GPL compatible" licenses (as
+we want to allow users to use libcurl properly in GPL licensed
+environments).</p>
+<p>When changing existing source code, you do not alter the copyright of
+the original file(s). The copyright is still owned by the original
+creator(s) or those who have been assigned copyright by the original
+author(s).</p>
+<p>By submitting a patch to the curl project, you are assumed to have
+the right to the code and to be allowed by your employer or whatever to
+hand over that patch/code to us. We credit you for your changes as far
+as possible, to give credit but also to keep a trace back to who made
+what changes. Please always provide us with your full real name when
+contributing,</p>
+<h2 id="what-to-read">What To Read</h2>
+<p>Source code, the man pages, the <a
+href="https://curl.se/dev/internals.html">INTERNALS document</a>, <a
+href="https://curl.se/docs/todo.html">TODO</a>, <a
+href="https://curl.se/docs/knownbugs.html">KNOWN_BUGS</a> and the <a
+href="https://curl.se/dev/sourceactivity.html">most recent changes</a>
+in git. Just lurking on the <a
+href="https://curl.se/mail/list.cgi?list=curl-library">curl-library
+mailing list</a> gives you a lot of insights on what's going on right
+now. Asking there is a good idea too.</p>
+<h2 id="write-a-good-patch">Write a good patch</h2>
+<h3 id="follow-code-style">Follow code style</h3>
+<p>When writing C code, follow the <a
+href="https://curl.se/dev/code-style.html">CODE_STYLE</a> already
+established in the project. Consistent style makes code easier to read
+and mistakes less likely to happen. Run <code>make checksrc</code>
+before you submit anything, to make sure you follow the basic style.
+That script does not verify everything, but if it complains you know you
+have work to do.</p>
+<h3 id="non-clobbering-all-over">Non-clobbering All Over</h3>
+<p>When you write new functionality or fix bugs, it is important that
+you do not fiddle all over the source files and functions. Remember that
+it is likely that other people have done changes in the same source
+files as you have and possibly even in the same functions. If you bring
+completely new functionality, try writing it in a new source file. If
+you fix bugs, try to fix one bug at a time and send them as separate
+patches.</p>
+<h3 id="write-separate-changes">Write Separate Changes</h3>
+<p>It is annoying when you get a huge patch from someone that is said to
+fix 11 odd problems, but discussions and opinions do not agree with 10
+of them - or 9 of them were already fixed in a different way. Then the
+person merging this change needs to extract the single interesting patch
+from somewhere within the huge pile of source, and that creates a lot of
+extra work.</p>
+<p>Preferably, each fix that corrects a problem should be in its own
+patch/commit with its own description/commit message stating exactly
+what they correct so that all changes can be selectively applied by the
+maintainer or other interested parties.</p>
+<p>Also, separate changes enable bisecting much better for tracking
+problems and regression in the future.</p>
+<h3 id="patch-against-recent-sources">Patch Against Recent Sources</h3>
+<p>Please try to get the latest available sources to make your patches
+against. It makes the lives of the developers so much easier. The best
+is if you get the most up-to-date sources from the git repository, but
+the latest release archive is quite OK as well.</p>
+<h3 id="documentation">Documentation</h3>
+<p>Writing docs is dead boring and one of the big problems with many
+open source projects but someone's gotta do it. It makes things a lot
+easier if you submit a small description of your fix or your new
+features with every contribution so that it can be swiftly added to the
+package documentation.</p>
+<p>Documentation is mostly provided as manpages or plain ASCII files.
+The manpages are rendered from their source files that are usually
+written using markdown. Most HTML files on the website and in the
+release archives are generated from corresponding markdown and ASCII
+files.</p>
+<h3 id="test-cases">Test Cases</h3>
+<p>Since the introduction of the test suite, we can quickly verify that
+the main features are working as they are supposed to. To maintain this
+situation and improve it, all new features and functions that are added
+need to be tested in the test suite. Every feature that is added should
+get at least one valid test case that verifies that it works as
+documented. If every submitter also posts a few test cases, it does not
+end up a heavy burden on a single person.</p>
+<p>If you do not have test cases or perhaps you have done something that
+is hard to write tests for, do explain exactly how you have otherwise
+tested and verified your changes.</p>
+<h1 id="submit-your-changes">Submit Your Changes</h1>
+<h2 id="get-your-changes-merged">Get your changes merged</h2>
+<p>Ideally you file a <a href="https://github.com/curl/curl/pulls">pull
+request on GitHub</a>, but you can also send your plain patch to <a
+href="https://curl.se/mail/list.cgi?list=curl-library">the curl-library
+mailing list</a>.</p>
+<p>If you opt to post a patch on the mailing list, chances are someone
+converts it into a pull request for you, to have the CI jobs verify it
+proper before it can be merged. Be prepared that some feedback on the
+proposed change might then come on GitHub.</p>
+<p>Your changes be reviewed and discussed and you are expected to
+correct flaws pointed out and update accordingly, or the change risks
+stalling and eventually just getting deleted without action. As a
+submitter of a change, you are the owner of that change until it has
+been merged.</p>
+<p>Respond on the list or on GitHub about the change and answer
+questions and/or fix nits/flaws. This is important. We take lack of
+replies as a sign that you are not anxious to get your patch accepted
+and we tend to simply drop such changes.</p>
+<h2 id="about-pull-requests">About pull requests</h2>
+<p>With GitHub it is easy to send a <a
+href="https://github.com/curl/curl/pulls">pull request</a> to the curl
+project to have changes merged.</p>
+<p>We strongly prefer pull requests to mailed patches, as it makes it a
+proper git commit that is easy to merge and they are easy to track and
+not that easy to lose in the flood of many emails, like they sometimes
+do on the mailing lists.</p>
+<p>Every pull request submitted is automatically tested in several
+different ways. <a
+href="https://github.com/curl/curl/blob/master/docs/tests/CI.md">See the
+CI document for more information</a>.</p>
+<p>Sometimes the tests fail due to a dependency service temporarily
+being offline or otherwise unavailable, e.g. package downloads. In this
+case you can just try to update your pull requests to rerun the tests
+later as described below.</p>
+<p>You can update your pull requests by pushing new commits or
+force-pushing changes to existing commits. Force-pushing an amended
+commit without any actual content changed also allows you to retrigger
+the tests for that commit.</p>
+<p>When you adjust your pull requests after review, consider squashing
+the commits so that we can review the full updated version more
+easily.</p>
+<p>A pull request sent to the project might get labeled
+<code>needs-votes</code> by a project maintainer. This label means that
+in addition to meeting all other checks and qualifications this pull
+request must also receive more "votes" of user support. More signs that
+people want this to happen. It could be in the form of messages saying
+so, or thumbs-up reactions on GitHub.</p>
+<h2 id="when-the-pull-request-is-approved">When the pull request is
+approved</h2>
+<p>If it does not seem to get approved when you think it is ready - feel
+free to ask for approval.</p>
+<p>Once your pull request has been approved it can be merged by a
+maintainer.</p>
+<p>For new features, or changes, we require that the <em>feature
+window</em> is open for the pull request to be merged. This is typically
+a three week period that starts ten days after a previous release. New
+features submitted as pull requests while the window is closed simply
+have to wait until it opens to get merged.</p>
+<p>If time passes without your approved pull request gets merged: feel
+free to ask what more you can do to make it happen.</p>
+<h2 id="making-quality-changes">Making quality changes</h2>
+<p>Make the patch against as recent source versions as possible.</p>
+<p>If you have followed the tips in this document and your patch still
+has not been incorporated or responded to after some weeks, consider
+resubmitting it to the list or better yet: change it to a pull
+request.</p>
+<h2 id="commit-messages">Commit messages</h2>
+<p>How to write git commit messages in the curl project.</p>
+<pre><code>---- start ----
+[area]: [short line describing the main effect]
+       -- empty line --
+[full description, no wider than 72 columns that describes as much as
+possible as to why this change is made, and possibly what things
+it fixes and everything else that is related,
+-- end --</code></pre>
+<p>The first line is a succinct description of the change and should
+ideally work as a single line in the RELEASE NOTES.</p>
+<ul>
+<li>use the imperative, present tense: <strong>change</strong> not
+"changed" nor "changes"</li>
+<li>do not capitalize the first letter</li>
+<li>no period (.) at the end</li>
+</ul>
+<p>The <code>[area]</code> in the first line can be <code>http2</code>,
+<code>cookies</code>, <code>openssl</code> or similar. There is no fixed
+list to select from but using the same "area" as other related changes
+could make sense.</p>
+<h2 id="commit-message-keywords">Commit message keywords</h2>
+<p>Use the following ways to improve the message and provide pointers to
+related work.</p>
+<ul>
+<li><p><code>Follow-up to {shorthash}</code> - if this fixes or
+continues a previous commit; add a <code>Ref:</code> that commit's PR or
+issue if it is not a small, obvious fix; followed by an empty
+line</p></li>
+<li><p><code>Bug: URL</code> to the source of the report or more related
+discussion; use <code>Fixes</code> for GitHub issues instead when that
+is appropriate.</p></li>
+<li><p><code>Approved-by: John Doe</code> - credit someone who approved
+the PR.</p></li>
+<li><p><code>Authored-by: John Doe</code> - credit the original author
+of the code; only use this if you cannot use
+<code>git commit --author=...</code>.</p></li>
+<li><p><code>Signed-off-by: John Doe</code> - we do not use this, but do
+not bother removing it.</p></li>
+<li><p><code>whatever-else-by:</code> credit all helpers, finders,
+doers; try to use one of the following keywords if at all possible, for
+consistency: <code>Acked-by:</code>, <code>Assisted-by:</code>,
+<code>Co-authored-by:</code>, <code>Found-by:</code>,
+<code>Reported-by:</code>, <code>Reviewed-by:</code>,
+<code>Suggested-by:</code>, <code>Tested-by:</code>.</p></li>
+<li><p><code>Ref: #1234</code> - if this is related to a GitHub issue or
+PR, possibly one that has already been closed.</p></li>
+<li><p><code>Ref: URL</code> to more information about the commit; use
+<code>Bug:</code> instead for a reference to a bug on another bug
+tracker]</p></li>
+<li><p><code>Fixes #1234</code> - if this fixes a GitHub issue; GitHub
+closes the issue once this commit is merged.</p></li>
+<li><p><code>Closes #1234</code> - if this merges a GitHub PR; GitHub
+closes the PR once this commit is merged.</p></li>
+</ul>
+<p>Do not forget to use commit with <code>--author</code> if you commit
+someone else's work, and make sure that you have your own user and email
+setup correctly in git before you commit.</p>
+<p>Add whichever header lines as appropriate, with one line per person
+if more than one person was involved. There is no need to credit
+yourself unless you are using <code>--author</code> which hides your
+identity. Do not include people's email addresses in headers to avoid
+spam, unless they are already public from a previous commit; saying
+<code>{userid} on github</code> is OK.</p>
+<h2 id="push-access">Push Access</h2>
+<p>If you are a frequent contributor, you may be given push access to
+the git repository and then you are able to push your changes straight
+into the git repository instead of sending changes as pull requests or
+by mail as patches.</p>
+<p>Just ask if this is what you would want. You are required to have
+posted several high quality patches first, before you can be granted
+push access.</p>
+<h2 id="useful-resources">Useful resources</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=QmZ3W1d6LQI">Webinar on
+getting code into cURL</a></li>
+</ul>
+<h1 id="update-copyright-and-license-information">Update copyright and
+license information</h1>
+<p>There is a CI job called <strong>REUSE compliance / check</strong>
+that runs on every pull request and commit to verify that the <em>REUSE
+state</em> of all files are still fine.</p>
+<p>This means that all files need to have their license and copyright
+information clearly stated. Ideally by having the standard curl source
+code header, with the <code>SPDX-License-Identifier</code> included. If
+the header does not work, you can use a smaller header or add the
+information for a specific file to the <code>REUSE.toml</code> file.</p>
+<p>You can manually verify the copyright and compliance status by
+running the <a href="https://github.com/fsfe/reuse-tool">REUSE helper
+tool</a>: <code>reuse lint</code></p>
+<h1 id="on-ai-use-in-curl">On AI use in curl</h1>
+<p>Guidelines for AI use when contributing to curl.</p>
+<h2 id="for-security-reports-and-other-issues">For security reports and
+other issues</h2>
+<p>If you asked an AI tool to find problems in curl, you
+<strong>must</strong> make sure to reveal this fact in your report.</p>
+<p>You must also double-check the findings carefully before reporting
+them to us to validate that the issues are indeed existing and working
+exactly as the AI says. AI-based tools frequently generate inaccurate or
+fabricated results.</p>
+<p>Further: it is <em>rarely</em> a good idea to just copy and paste an
+AI generated report to the project. Those generated reports typically
+are too wordy and rarely to the point (in addition to the common
+fabricated details). If you actually find a problem with an AI and you
+have verified it yourself to be true: write the report yourself and
+explain the problem as you have learned it. This makes sure the
+AI-generated inaccuracies and invented issues are filtered out early
+before they waste more people's time.</p>
+<p>As we take security reports seriously, we investigate each report
+with priority. This work is both time and energy consuming and pulls us
+away from doing other meaningful work. Fake and otherwise made up
+security problems effectively prevent us from doing real project work
+and make us waste time and resources.</p>
+<p>We ban users immediately who submit made up fake reports to the
+project.</p>
+<h2 id="for-pull-requests">For pull requests</h2>
+<p>When contributing content to the curl project, you give us permission
+to use it as-is and you must make sure you are allowed to distribute it
+to us. By submitting a change to us, you agree that the changes can and
+should be adopted by curl and get redistributed under the curl license.
+Authors should be explicitly aware that the burden is on them to ensure
+no unlicensed code is submitted to the project.</p>
+<p>This is independent if AI is used or not.</p>
+<p>When contributing a pull request you should of course always make
+sure that the proposal is good quality and a best effort that follows
+our guidelines. A basic rule of thumb is that if someone can spot that
+the contribution was made with the help of AI, you have more work to
+do.</p>
+<p>We can accept code written with the help of AI into the project, but
+the code must still follow coding standards, be written clearly, be
+documented, feature test cases and adhere to all the normal requirements
+we have.</p>
+<h2 id="for-translation">For translation</h2>
+<p>Translation services help users write reports, texts and
+documentation in non-native languages and we encourage and welcome such
+contributors and contributions.</p>
+<p>As AI-based translation tools sometimes have a way to make the output
+sound a little robotic and add an "AI tone" to the text, you may want to
+consider mentioning that you used such a tool. Failing to do so risks
+that maintainers wrongly dismiss translated texts as AI slop.</p>
+</div>
+</div>
+</body>
+</html>

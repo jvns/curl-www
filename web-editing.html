@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - Website Editing Guidelines</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<h1> Website Editing Guidelines </h1>
+<h2> How to build </h2>
+<p>
+ Documented in the website's
+ <a href="https://github.com/curl/curl-www/blob/master/README.md">GitHub
+ repository</a>.
+<h2> To think of </h2>
+<p> The pages are preprocessed before they are finalized. The preprocessor
+  is a simple C-style one, but please take care so that #if and #ifdefs
+  have an ending #endif and so on.
+<p> The website contents is synced automatically from git every 20 minutes.
+  Even if you fix a mistake, it will stay that way at least until next update.
+  Do not panic!
+<p> The site is hosted by CDN front-ends that fetch content from the master
+  server and cache it. It makes some updates to the content to take a while
+  until truly visible to end users.
+<h2> Lots of content come from the source repository </h2>
+<p>
+  Large portions of the website is generated content that comes from the
+  <a href="https://github.com/curl/curl">source code repository</a> (often as
+  markdown). The website build directory needs a symlink to a checkout for
+  that purpose.
+<p>
+  Lot of content is also generated data/tables etc that uses content from the
+  source repository and that rerun the scripts when the source changes. The
+  Makefiles of course have all the details.
+<h2> What to edit/update </h2>
+<p> Add news items whenever you have interesting "news" you think the curl
+  community might enjoy. The news section also serves a purpose of making it
+  apparent that the site is living. Try to follow the tradition and style of
+  previous news items. Note the use of the macros.
+<p> The download page is maintained at <a href="/dl">dl</a> and needs
+  special access rights.
+<p> Edit bad language use, bad spelling or confusing use of words.
+<p> If the problem is in a page out of control from the website, chances
+  are that the page is generated automatically from a file in the source code
+  archive and then <i>that</i> file could be corrected instead.
+<h2> Pull requests </h2>
+<p>
+  Submit proposed changes as
+  regular <a href="https://github.com/curl/curl-www/pulls">pull-requests</a>.
+  CI jobs will do basic verifications.
+<h2> Not in the git repo </h2>
+<p>
+ Site content that is not mirrored and thus only available from <a
+ href="//curl.se/">curl.se</a>:
+<ul>
+<li> <tt>/mail/</tt> Mailing list archives
+<li> <tt>/download/</tt> Curl release archives/packages
+<li> <tt>/snapshots/</tt> daily snapshots
+</ul>
+</div>
+</div>
+</body>
+</html>

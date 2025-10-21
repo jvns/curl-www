@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_global_sslset()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_global_sslset</b></div>
+<h1> curl_global_sslset - select SSL backend </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_global_sslset%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_global_sslset.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_global_sslset.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_global_sslset - select SSL backend to use </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLsslset <a href="curl_global_sslset.html">curl_global_sslset</a>(curl_sslbackend id,
+&nbsp;                             const char &#x2a;name,
+&nbsp;                             const curl_ssl_backend &#x2a;&#x2a;&#x2a;avail);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function configures at runtime which SSL backend to use with libcurl. This function can only be used to select an SSL backend once, and it must be called <span Class="bold">before</span> <a Class="emphasis" href="./curl_global_init.html">curl_global_init</a>. </p>
+<p class="level0">The backend can be identified by the <span Class="emphasis">id</span> (e.g. <span Class="bold">CURLSSLBACKEND_OPENSSL</span>). The backend can also be specified via the <span Class="emphasis">name</span> parameter for a case insensitive match (passing <span Class="bold">CURLSSLBACKEND_NONE</span> as <span Class="emphasis">id</span>). If both <span Class="emphasis">id</span> and <span Class="emphasis">name</span> are specified, the <span Class="emphasis">name</span> is ignored. </p>
+<p class="level0">If neither <span Class="emphasis">id</span> nor <span Class="emphasis">name</span> are specified, the function fails with <span Class="bold">CURLSSLSET_UNKNOWN_BACKEND</span> and set the <span Class="emphasis">avail</span> pointer to the NULL-terminated list of available backends. The available backends are those that this particular build of libcurl supports. </p>
+<p class="level0">Since libcurl <a href="/ch/7.60.0.html">7.60.0</a>, the <span Class="emphasis">avail</span> pointer is always set to the list of alternatives if non-NULL. </p>
+<p class="level0">Upon success, the function returns <span Class="bold">CURLSSLSET_OK</span>. </p>
+<p class="level0">If the specified SSL backend is not available, the function returns <span Class="bold">CURLSSLSET_UNKNOWN_BACKEND</span> and sets the <span Class="emphasis">avail</span> pointer to a NULL-terminated list of available SSL backends. In this case, you may call the function again to try to select a different backend. </p>
+<p class="level0">The SSL backend can be set only once. If it has already been set, a subsequent attempt to change it results in a <span Class="bold">CURLSSLSET_TOO_LATE</span> getting returned. </p>
+<p class="level0">This function is thread-safe since libcurl <a href="/ch/7.84.0.html">7.84.0</a> if <a Class="emphasis" href="./curl_version_info.html">curl_version_info</a> has the CURL_VERSION_THREADSAFE feature bit set (most platforms). </p>
+<p class="level0">If this is not thread-safe, you must not call this function when any other thread in the program (i.e. a thread sharing the same memory) is running. This does not just mean no other thread that is using libcurl. </p><a name="Names"></a><h2 class="nroffsh">Names</h2>
+<p class="level0">SSL backend names (case-insensitive): GnuTLS, mbedTLS, OpenSSL, Rustls, Schannel, wolfSSL </p>
+<p class="level0">The name &quot;OpenSSL&quot; is used for all versions of OpenSSL and its associated forks/flavors in this function. OpenSSL, BoringSSL, LibreSSL, quictls and AmiSSL are all supported by libcurl, but in the eyes of <a Class="emphasis" href="./curl_global_sslset.html">curl_global_sslset</a> they are all just &quot;OpenSSL&quot;. They all mostly provide the same API. <a Class="emphasis" href="./curl_version_info.html">curl_version_info</a> can return more specific info about the exact OpenSSL flavor and version number in use. </p><a name="struct"></a><h2 class="nroffsh">Struct</h2><pre class="level0">
+typedef struct {
+&nbsp; curl_sslbackend id;
+&nbsp; const char &#x2a;name;
+} curl_ssl_backend;
+&nbsp;
+typedef enum {
+&nbsp; CURLSSLBACKEND_NONE = 0,
+&nbsp; CURLSSLBACKEND_OPENSSL = 1, /&#x2a; or one of its forks &#x2a;/
+&nbsp; CURLSSLBACKEND_GNUTLS = 2,
+&nbsp; CURLSSLBACKEND_NSS = 3,
+&nbsp; CURLSSLBACKEND_GSKIT = 5, /&#x2a; deprecated &#x2a;/
+&nbsp; CURLSSLBACKEND_POLARSSL = 6, /&#x2a; deprecated &#x2a;/
+&nbsp; CURLSSLBACKEND_WOLFSSL = 7,
+&nbsp; CURLSSLBACKEND_SCHANNEL = 8,
+&nbsp; CURLSSLBACKEND_SECURETRANSPORT = 9, /&#x2a; deprecated &#x2a;/
+&nbsp; CURLSSLBACKEND_AXTLS = 10, /&#x2a; deprecated &#x2a;/
+&nbsp; CURLSSLBACKEND_MBEDTLS = 11,
+&nbsp; CURLSSLBACKEND_MESALINK = 12, /&#x2a; deprecated &#x2a;/
+&nbsp; CURLSSLBACKEND_BEARSSL = 13, /&#x2a; deprecated &#x2a;/
+&nbsp; CURLSSLBACKEND_RUSTLS = 14
+} curl_sslbackend;
+</pre>
+<a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; int i;
+&nbsp; /&#x2a; choose a specific backend &#x2a;/
+&nbsp; <a href="curl_global_sslset.html">curl_global_sslset</a>(CURLSSLBACKEND_WOLFSSL, NULL, NULL);
+&nbsp;
+&nbsp; /&#x2a; list the available ones &#x2a;/
+&nbsp; const curl_ssl_backend &#x2a;&#x2a;list;
+&nbsp; <a href="curl_global_sslset.html">curl_global_sslset</a>(CURLSSLBACKEND_NONE, NULL, &amp;list);
+&nbsp;
+&nbsp; for(i = 0; list[i]; i++)
+&nbsp;   printf(&quot;SSL backend &#35;%d: &#39;%s&#39; (ID: %d)&bsol;n&quot;,
+&nbsp;          i, list[i]-&gt;name, list[i]-&gt;id);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.56.0.html">7.56.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">If this function returns <span Class="emphasis">CURLSSLSET_OK</span>, the backend was successfully selected. </p>
+<p class="level0">If the chosen backend is unknown (or support for the chosen backend has not been compiled into libcurl), the function returns <span Class="emphasis">CURLSSLSET_UNKNOWN_BACKEND</span>. </p>
+<p class="level0">If the backend had been configured previously, or if <a Class="emphasis" href="./curl_global_init.html">curl_global_init</a> has already been called, the function returns <span Class="emphasis">CURLSSLSET_TOO_LATE</span>. </p>
+<p class="level0">If this libcurl was built completely without SSL support, with no backends at all, this function returns <span Class="emphasis">CURLSSLSET_NO_BACKENDS</span>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_global_init.html">curl_global_init</a>(3), <a Class="bold" href="./libcurl.html">libcurl</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

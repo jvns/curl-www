@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head> <title>IPFS with curl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/protdocs.html">Protocols</a> / <b>IPFS with curl</b></div>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h1 id="ipfs">IPFS</h1>
+<p>For an overview about IPFS, visit the <a
+href="https://ipfs.tech/">IPFS project site</a>.</p>
+<p>In IPFS there are two protocols. IPFS and IPNS (their workings are
+explained in detail <a
+href="https://docs.ipfs.tech/concepts/">here</a>). The ideal way to
+access data on the IPFS network is through those protocols. For example
+to access the Big Buck Bunny video the ideal way to access it is like:
+<code>ipfs://bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi</code></p>
+<h2 id="ipfs-gateways">IPFS Gateways</h2>
+<p>IPFS Gateway acts as a bridge between traditional HTTP clients and
+IPFS. IPFS Gateway specifications of HTTP semantics can be found <a
+href="https://specs.ipfs.tech/http-gateways/">here</a>.</p>
+<h3 id="deserialized-responses">Deserialized responses</h3>
+<p>By default, a gateway acts as a bridge between traditional HTTP
+clients and IPFS and performs necessary hash verification and
+deserialization. Through such gateway, users can download files,
+directories, and other content-addressed data stored with IPFS or IPNS
+as if they were stored in a traditional web server.</p>
+<h3 id="verifiable-responses">Verifiable responses</h3>
+<p>By explicitly requesting <a
+href="https://www.iana.org/assignments/media-types/application/vnd.ipld.raw">application/vnd.ipld.raw</a>
+or <a
+href="https://www.iana.org/assignments/media-types/application/vnd.ipld.car">application/vnd.ipld.car</a>
+responses, by means defined in <a
+href="https://specs.ipfs.tech/http-gateways/trustless-gateway/">Trustless
+Gateway Specification</a>, the user is able to fetch raw
+content-addressed data and <a
+href="https://docs.ipfs.tech/reference/http/gateway/#trustless-verifiable-retrieval">perform
+hash verification themselves</a>.</p>
+<p>This enables users to use untrusted, public gateways without worrying
+they might return invalid/malicious bytes.</p>
+<h2 id="ipfs-and-ipns-protocol-handling">IPFS and IPNS protocol
+handling</h2>
+<p>There are various ways to access data from the IPFS network. One such
+way is through the concept of public "<a
+href="https://docs.ipfs.tech/concepts/ipfs-gateway/#overview">gateways</a>".
+The short version is that entities can offer gateway services. An
+example here that is hosted by Protocol Labs (who also makes IPFS) is
+<code>dweb.link</code> and <code>ipfs.io</code>. Both sites expose
+gateway functionality. Getting a file through <code>ipfs.io</code> looks
+like this:
+<code>https://ipfs.io/ipfs/bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi</code></p>
+<p>If you were to be <a
+href="https://docs.ipfs.tech/how-to/command-line-quick-start/">running
+your own IPFS node</a> then you, by default, also have a <a
+href="https://specs.ipfs.tech/http-gateways/">local gateway</a> running.
+In its default configuration the earlier example would then also work in
+this link:</p>
+<p><code>http://127.0.0.1:8080/ipfs/bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi</code></p>
+<h2 id="curl-handling-of-the-ipfs-protocols">cURL handling of the IPFS
+protocols</h2>
+<p>The IPFS integration in cURL hides this gateway logic for you.
+Instead of providing a full URL to a file on IPFS like this:</p>
+<pre><code>curl http://127.0.0.1:8080/ipfs/bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi</code></pre>
+<p>You can provide it with the IPFS protocol instead:</p>
+<pre><code>curl ipfs://bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi</code></pre>
+<p>With the IPFS protocol way of asking a file, cURL still needs to know
+the gateway. curl essentially just rewrites the IPFS based URL to a
+gateway URL.</p>
+<h3 id="ipfs_gateway-environment-variable">IPFS_GATEWAY environment
+variable</h3>
+<p>If the <code>IPFS_GATEWAY</code> environment variable is found, its
+value is used as gateway.</p>
+<h3 id="automatic-gateway-detection">Automatic gateway detection</h3>
+<p>When you provide no additional details to cURL then it:</p>
+<ol type="1">
+<li>First looks for the <code>IPFS_GATEWAY</code> environment variable
+and use that if it is set.</li>
+<li>Looks for the file: <code>~/.ipfs/gateway</code>. If it can find
+that file then it means that you have a local gateway running and that
+file contains the URL to your local gateway.</li>
+</ol>
+<p>If cURL fails, you are presented with an error message and a link to
+this page to the option most applicable to solving the issue.</p>
+<h3 id="--ipfs-gateway-argument"><code>--ipfs-gateway</code>
+argument</h3>
+<p>You can also provide a <code>--ipfs-gateway</code> argument to cURL.
+This overrules any other gateway setting. curl does not fallback to the
+other options if the provided gateway did not work.</p>
+<h2 id="gateway-redirects">Gateway redirects</h2>
+<p>A gateway could redirect to another place. For example,
+<code>dweb.link</code> redirects <a
+href="https://docs.ipfs.tech/how-to/address-ipfs-on-web/#path-gateway">path
+based</a> requests to <a
+href="https://docs.ipfs.tech/how-to/address-ipfs-on-web/#subdomain-gateway">subdomain
+based</a> ones. A request using:</p>
+<pre><code>curl ipfs://bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi --ipfs-gateway https://dweb.link</code></pre>
+<p>Which would be translated to:</p>
+<pre><code>https://dweb.link/ipfs/bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi</code></pre>
+<p>redirects to:</p>
+<pre><code>https://bafybeigagd5nmnn2iys2f3doro7ydrevyr2mzarwidgadawmamiteydbzi.ipfs.dweb.link</code></pre>
+<p>If you trust this behavior from your gateway of choice then passing
+the <code>-L</code> option follows the redirect.</p>
+<h2 id="error-messages-and-hints">Error messages and hints</h2>
+<p>Depending on the arguments, cURL could present the user with an
+error.</p>
+<h3 id="gateway-file-and-environment-variable">Gateway file and
+environment variable</h3>
+<p>cURL tried to look for the file: <code>~/.ipfs/gateway</code> but
+could not find it. It also tried to look for the
+<code>IPFS_GATEWAY</code> environment variable but could not find that
+either. This happens when no extra arguments are passed to cURL and
+letting it try to figure it out <a
+href="#automatic-gateway-detection">automatically</a>.</p>
+<p>Any IPFS implementation that has gateway support should expose its
+URL in <code>~/.ipfs/gateway</code>. If you are already running a
+gateway, make sure it exposes the file where cURL expects to find
+it.</p>
+<p>Alternatively you could set the <code>IPFS_GATEWAY</code> environment
+variable or pass the <code>--ipfs-gateway</code> flag to the cURL
+command.</p>
+<h3 id="malformed-gateway-url">Malformed gateway URL</h3>
+<p>The command executed evaluates in an invalid URL. This could be
+anywhere in the URL, but a likely point is a wrong gateway URL.</p>
+<p>Inspect the URL set via the <code>IPFS_GATEWAY</code> environment
+variable or passed with the <code>--ipfs-gateway</code> flag.
+Alternatively opt to go for the <a
+href="#automatic-gateway-detection">automatic</a> gateway detection.</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head> <title>SSL ciphers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/protdocs.html">Protocols</a> / <b>Ciphers</b></div>
+<h1> SSL Ciphers </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="ssl-compared.html">Compare SSL libs</a>
+<br><a href="sslcerts.html">SSL Certificates</a>
+<br><a href="caextract.html">CA certs extracted</a>
+<br><a href="/docs/faq.html">FAQ</a>
+</div>
+<p>
+<!--
+Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+SPDX-License-Identifier: curl
+-->
+<h2 id="curl-cipher-options">curl cipher options</h2>
+<p>A TLS handshake involves many parameters which take part in the
+negotiation between client and server in order to agree on the TLS
+version and set of algorithms to use for a connection.</p>
+<p>What has become known as a "cipher" or better "cipher suite" in TLS
+are names for specific combinations of <a
+href="https://en.wikipedia.org/wiki/Key_exchange">key exchange</a>, <a
+href="https://en.wikipedia.org/wiki/Link_encryption">bulk
+encryption</a>, <a
+href="https://en.wikipedia.org/wiki/Message_authentication_code">message
+authentication code</a> and with TLSv1.3 the <a
+href="https://en.wikipedia.org/wiki/Authenticated_encryption">authenticated
+encryption</a>. In addition, there are other parameters that influence
+the TLS handshake, like <a
+href="https://en.wikipedia.org/wiki/Diffie%e2%80%93Hellman_key_exchange">DHE</a>
+"groups" and <a
+href="https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%e2%80%93Hellman">ECDHE</a>
+with its "curves".</p>
+<h3 id="history">History</h3>
+<p>curl's way of letting users configure these settings closely followed
+OpenSSL in its API. TLS learned new parameters, OpenSSL added new API
+functions and curl added command line options.</p>
+<p>Several other TLS backends followed the OpenSSL approach, more or
+less closely, and curl maps the command line options to these TLS
+backends. Some TLS backends do not support all of it and command line
+options are either ignored or lead to an error.</p>
+<p>Many examples below show the OpenSSL-like use of these options.
+GnuTLS however chose a different approach. These are described in a
+separate section further below.</p>
+<h2 id="ciphers-the-openssl-way">ciphers, the OpenSSL way</h2>
+<p>With curl's option <a
+href="https://curl.se/docs/manpage.html#--tls13-ciphers"><code>--tls13-ciphers</code></a>
+or <a
+href="https://curl.se/libcurl/c/CURLOPT_TLS13_CIPHERS.html"><code>CURLOPT_TLS13_CIPHERS</code></a>
+users can control which cipher suites to consider when negotiating TLS
+1.3 connections. With option <a
+href="https://curl.se/docs/manpage.html#--ciphers"><code>--ciphers</code></a>
+or <a
+href="https://curl.se/libcurl/c/CURLOPT_SSL_CIPHER_LIST.html"><code>CURLOPT_SSL_CIPHER_LIST</code></a>
+users can control which cipher suites to consider when negotiating TLS
+1.2 (1.1, 1.0) connections.</p>
+<p>By default, curl may negotiate TLS 1.3 and TLS 1.2 connections, so
+the cipher suites considered when negotiating a TLS connection are a
+union of the TLS 1.3 and TLS 1.2 cipher suites. If you want curl to
+consider only TLS 1.3 cipher suites for the connection, you have to set
+the minimum TLS version to 1.3 by using <a
+href="https://curl.se/docs/manpage.html#--tlsv13"><code>--tlsv1.3</code></a>
+or <a
+href="https://curl.se/libcurl/c/CURLOPT_SSLVERSION.html"><code>CURLOPT_SSLVERSION</code></a>
+with <code>CURL_SSLVERSION_TLSv1_3</code>.</p>
+<p>Both the TLS 1.3 and TLS 1.2 cipher options expect a list of cipher
+suites separated by colons (<code>:</code>). This list is parsed
+opportunistically, cipher suites that are not recognized or implemented
+are ignored. As long as there is at least one recognized cipher suite in
+the list, the list is considered valid.</p>
+<p>For both the TLS 1.3 and TLS 1.2 cipher options, the order in which
+the cipher suites are specified determine the preference of them. When
+negotiating a TLS connection the server picks a cipher suite from the
+intersection of the cipher suites supported by the server and the cipher
+suites sent by curl. If the server is configured to honor the client's
+cipher preference, the first common cipher suite in the list sent by
+curl is chosen.</p>
+<h3 id="tls-13-cipher-suites">TLS 1.3 cipher suites</h3>
+<p>Setting TLS 1.3 cipher suites is supported by curl with OpenSSL
+(1.1.1+, curl 7.61.0+), LibreSSL (3.4.1+, curl 8.3.0+), wolfSSL (curl
+8.10.0+) and mbedTLS (3.6.0+, curl 8.10.0+).</p>
+<p>The list of cipher suites that can be used for the
+<code>--tls13-ciphers</code> option:</p>
+<pre><code>TLS_AES_128_GCM_SHA256
+TLS_AES_256_GCM_SHA384
+TLS_CHACHA20_POLY1305_SHA256
+TLS_AES_128_CCM_SHA256
+TLS_AES_128_CCM_8_SHA256</code></pre>
+<h4 id="wolfssl-notes">wolfSSL notes</h4>
+<p>In addition to above list the following cipher suites can be used:
+<code>TLS_SM4_GCM_SM3</code> <code>TLS_SM4_CCM_SM3</code>
+<code>TLS_SHA256_SHA256</code> <code>TLS_SHA384_SHA384</code>. Usage of
+these cipher suites is not recommended. (The last two cipher suites are
+NULL ciphers, offering no encryption whatsoever.)</p>
+<h3 id="tls-12-11-10-cipher-suites">TLS 1.2 (1.1, 1.0) cipher
+suites</h3>
+<p>Setting TLS 1.2 cipher suites is supported by curl with OpenSSL,
+LibreSSL, BoringSSL, mbedTLS (curl 8.8.0+), wolfSSL (curl 7.53.0+).
+Schannel does not support setting cipher suites directly, but does
+support setting algorithms (curl 7.61.0+), see Schannel notes below.</p>
+<p>For TLS 1.2 cipher suites there are multiple naming schemes, the two
+most used are with OpenSSL names (e.g.
+<code>ECDHE-RSA-AES128-GCM-SHA256</code>) and IANA names (e.g.
+<code>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</code>). IANA names of TLS
+1.2 cipher suites look similar to TLS 1.3 cipher suite names, to
+distinguish them note that TLS 1.2 names contain <code>_WITH_</code>,
+while TLS 1.3 names do not. When setting TLS 1.2 cipher suites with curl
+it is recommended that you use OpenSSL names as these are most widely
+recognized by the supported SSL backends.</p>
+<p>The complete list of cipher suites that may be considered for the
+<code>--ciphers</code> option is extensive, it consists of more than 300
+ciphers suites. However, nowadays for most of them their usage is
+discouraged, and support for a lot of them have been removed from the
+various SSL backends, if ever implemented at all.</p>
+<p>A shortened list (based on <a
+href="https://wiki.mozilla.org/Security/Server_Side_TLS">recommendations
+by Mozilla</a>) of cipher suites, which are (mostly) supported by all
+SSL backends, that can be used for the <code>--ciphers</code>
+option:</p>
+<pre><code>ECDHE-ECDSA-AES128-GCM-SHA256
+ECDHE-RSA-AES128-GCM-SHA256
+ECDHE-ECDSA-AES256-GCM-SHA384
+ECDHE-RSA-AES256-GCM-SHA384
+ECDHE-ECDSA-CHACHA20-POLY1305
+ECDHE-RSA-CHACHA20-POLY1305
+DHE-RSA-AES128-GCM-SHA256
+DHE-RSA-AES256-GCM-SHA384
+DHE-RSA-CHACHA20-POLY1305
+ECDHE-ECDSA-AES128-SHA256
+ECDHE-RSA-AES128-SHA256
+ECDHE-ECDSA-AES128-SHA
+ECDHE-RSA-AES128-SHA
+ECDHE-ECDSA-AES256-SHA384
+ECDHE-RSA-AES256-SHA384
+ECDHE-ECDSA-AES256-SHA
+ECDHE-RSA-AES256-SHA
+DHE-RSA-AES128-SHA256
+DHE-RSA-AES256-SHA256
+AES128-GCM-SHA256
+AES256-GCM-SHA384
+AES128-SHA256
+AES256-SHA256
+AES128-SHA
+AES256-SHA
+DES-CBC3-SHA</code></pre>
+<p>See this <a
+href="https://github.com/curl/curl/blob/master/docs/CIPHERS-TLS12.md">list</a>
+for a complete list of TLS 1.2 cipher suites.</p>
+<h4 id="openssl-notes">OpenSSL notes</h4>
+<p>In addition to specifying a list of cipher suites, OpenSSL also
+accepts a format with specific cipher strings (like
+<code>TLSv1.2</code>, <code>AESGCM</code>, <code>CHACHA20</code>) and
+<code>!</code>, <code>-</code> and <code>+</code> operators. Refer to
+the <a
+href="https://docs.openssl.org/master/man1/openssl-ciphers/#cipher-list-format">OpenSSL
+cipher documentation</a> for further information on that format.</p>
+<h4 id="schannel-notes">Schannel notes</h4>
+<p>Schannel does not support setting individual TLS 1.2 cipher suites
+directly. It only allows the enabling and disabling of encryption
+algorithms. These are in the form of <code>CALG_xxx</code>, see the <a
+href="https://learn.microsoft.com/windows/win32/seccrypto/alg-id">Schannel
+<code>ALG_ID</code> documentation</a> for a list of these algorithms.
+Also, (since curl 7.77.0) <code>SCH_USE_STRONG_CRYPTO</code> can be
+given to pass that flag to Schannel, lookup the <a
+href="https://learn.microsoft.com/windows/win32/secauthn/cipher-suites-in-schannel">documentation
+for the Windows version in use</a> to see how that affects the cipher
+suite selection. When not specifying the <code>--ciphers</code> and
+<code>--tls13-ciphers</code> options curl passes this flag by
+default.</p>
+<h3 id="examples">Examples</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--tls13-ciphers</span> TLS_AES_128_GCM_SHA256:TLS_CHACHA20_POLY1305_SHA256 <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ciphers</span> ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:<span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305 <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  https://example.com/</span></code></pre></div>
+<p>Restrict ciphers to <code>aes128-gcm</code> and
+<code>chacha20</code>. Works with OpenSSL, LibreSSL, mbedTLS and
+wolfSSL.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--tlsv1.3</span> <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--tls13-ciphers</span> TLS_AES_128_GCM_SHA256:TLS_CHACHA20_POLY1305_SHA256 <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  https://example.com/</span></code></pre></div>
+<p>Restrict to only TLS 1.3 with <code>aes128-gcm</code> and
+<code>chacha20</code> ciphers. Works with OpenSSL, LibreSSL, mbedTLS,
+wolfSSL and Schannel.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ciphers</span> ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:<span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305 <span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  https://example.com/</span></code></pre></div>
+<p>Restrict TLS 1.2 ciphers to <code>aes128-gcm</code> and
+<code>chacha20</code>, use default TLS 1.3 ciphers (if TLS 1.3 is
+available). Works with OpenSSL, LibreSSL, BoringSSL, mbedTLS and
+wolfSSL.</p>
+<h2 id="ciphers-the-gnutls-way">ciphers, the GnuTLS way</h2>
+<p>With GnuTLS, curl allows configuration of all TLS parameters via
+option <a
+href="https://curl.se/docs/manpage.html#--ciphers"><code>--ciphers</code></a>
+or <a
+href="https://curl.se/libcurl/c/CURLOPT_SSL_CIPHER_LIST.html"><code>CURLOPT_SSL_CIPHER_LIST</code></a>
+only. The option <a
+href="https://curl.se/docs/manpage.html#--tls13-ciphers"><code>--tls13-ciphers</code></a>
+or <a
+href="https://curl.se/libcurl/c/CURLOPT_TLS13_CIPHERS.html"><code>CURLOPT_TLS13_CIPHERS</code></a>
+is being ignored.</p>
+<p><code>--ciphers</code> is used to set the GnuTLS <strong>priority
+string</strong> in the following way:</p>
+<ul>
+<li>When the set string starts with '+', '-' or '!' it is
+<em>appended</em> to the priority string libcurl itself generates
+(separated by ':'). This initial priority depends other settings such as
+CURLOPT_SSLVERSION(3), CURLOPT_TLSAUTH_USERNAME(3) (for SRP) or if
+HTTP/3 (QUIC) is being negotiated.</li>
+<li>Otherwise, the set string fully <em>replaces</em> the libcurl
+generated one. While giving full control to the application, the set
+priority needs to provide for everything the transfer may need to
+negotiate. Example: if the set priority only allows TLSv1.2, all HTTP/3
+attempts fail.</li>
+</ul>
+<p>Users may specify via <code>--ciphers</code> anything that GnuTLS
+supports: ciphers, key exchange, MAC, compression, TLS versions,
+signature algorithms, groups, elliptic curves, certificate types. In
+addition, GnuTLS has a variety of other keywords that tweak its
+operations. Applications or a system may define new alias names for
+priority strings that can then be used here.</p>
+<p>Since the order of items in priority strings is significant, it makes
+no sense for curl to puzzle other ssl options somehow together.
+<code>--ciphers</code> is the single way to change priority.</p>
+<h3 id="examples-1">Examples</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="dt">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ciphers</span> <span class="st">&#39;-CIPHER_ALL:+AES-128-GCM:+CHACHA20-POLY1305&#39;</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  https://example.com/</span></code></pre></div>
+<p>Restrict ciphers to <code>aes128-gcm</code> and <code>chacha20</code>
+in GnuTLS.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ciphers</span> <span class="st">&#39;NORMAL:-VERS-ALL:+TLS1.3:-AES-256-GCM&#39;</span> <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  https://example.com/</span></code></pre></div>
+<p>Restrict to only TLS 1.3 without the <code>aes256-gcm</code>
+cipher.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ciphers</span> <span class="st">&#39;NORMAL:-VERS-ALL:+TLS1.2:-CIPHER_ALL:+CAMELLIA-128-GCM&#39;</span> <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  https://example.com/</span></code></pre></div>
+<p>Restrict to only TLS 1.2 with the <code>CAMELLIA-128-GCM</code>
+cipher.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul>
+<li><a
+href="https://docs.openssl.org/master/man1/openssl-ciphers/#cipher-suite-names">OpenSSL
+cipher suite names documentation</a></li>
+<li><a
+href="https://www.wolfssl.com/documentation/manuals/wolfssl/chapter04.html#cipher-support">wolfSSL
+cipher support documentation</a></li>
+<li><a
+href="https://mbed-tls.readthedocs.io/projects/api/en/development/api/file/ssl__ciphersuites_8h/">mbedTLS
+cipher suites reference</a></li>
+<li><a
+href="https://learn.microsoft.com/windows/win32/secauthn/cipher-suites-in-schannel">Schannel
+cipher suites documentation</a></li>
+<li><a
+href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4">IANA
+cipher suites list</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cipher_suite">Wikipedia
+cipher suite article</a></li>
+<li><a
+href="https://gnutls.org/manual/html_node/Priority-Strings.html">GnuTLS
+Priority Strings</a></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

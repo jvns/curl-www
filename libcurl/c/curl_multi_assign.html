@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl_multi_assign</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>libcurl</b></div>
+<h1> curl_multi_assign - set association with an internal socket </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_multi_assign%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_multi_assign.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_multi_assign.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_multi_assign - set data to associate with an internal socket </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_assign.html">curl_multi_assign</a>(CURLM &#x2a;multi_handle, curl_socket_t sockfd,
+&nbsp;                           void &#x2a;sockptr);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function creates an association in the multi handle between the given socket and a private pointer of the application. This is designed for <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> uses. </p>
+<p class="level0">When set, the <span Class="emphasis">sockptr</span> pointer is passed to all future socket callbacks for the specific <span Class="emphasis">sockfd</span> socket. </p>
+<p class="level0">If the given <span Class="emphasis">sockfd</span> is not already in use by libcurl, this function returns an error. </p>
+<p class="level0">libcurl only keeps one single pointer associated with a socket, so calling this function several times for the same socket makes the last set pointer get used. </p>
+<p class="level0">The idea here being that this association (socket to private pointer) is something that just about every application that uses this API needs and then libcurl can just as well do it since it already has the necessary functionality. </p>
+<p class="level0">It is acceptable to call this function from your multi callback functions. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp; int private = 123;
+&nbsp; curl_socket_t fd = 0; /&#x2a; file descriptor to associate our data with &#x2a;/
+&nbsp;
+&nbsp; /&#x2a; make our struct pointer associated with socket fd &#x2a;/
+&nbsp; CURLMcode mc = <a href="curl_multi_assign.html">curl_multi_assign</a>(multi, fd, &amp;private);
+&nbsp; if(mc)
+&nbsp;   printf(&quot;error: %s&bsol;n&quot;, <a href="curl_multi_strerror.html">curl_multi_strerror</a>(mc));
+}
+</pre>
+<a name="TYPICAL"></a><h2 class="nroffsh">Typical usage</h2>
+<p class="level0">In a typical application you allocate a struct or at least use some kind of semi-dynamic data for each socket that we must wait for action on when using the <a Class="emphasis" href="./curl_multi_socket_action.html">curl_multi_socket_action</a> approach. </p>
+<p class="level0">When our socket-callback gets called by libcurl and we get to know about yet another socket to wait for, we can use <a Class="emphasis" href="./curl_multi_assign.html">curl_multi_assign</a> to point out the particular data so that when we get updates about this same socket again, we do not have to find the struct associated with this socket by ourselves. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.15.5.html">7.15.5</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_multi_setopt.html">curl_multi_setopt</a>(3), <a Class="bold" href="./curl_multi_socket_action.html">curl_multi_socket_action</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_global_init()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_global_init</b></div>
+<h1> curl_global_init - global libcurl initialisation </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_global_init%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_global_init.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_global_init.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_global_init - global libcurl initialization </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_global_init.html">curl_global_init</a>(long flags);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function sets up the program environment that libcurl needs. Think of it as an extension of the library loader. </p>
+<p class="level0">This function must be called at least once within a program (a program is all the code that shares a memory space) before the program calls any other function in libcurl. The environment it sets up is constant for the life of the program and is the same for every program, so multiple calls have the same effect as one call. </p>
+<p class="level0">The flags option is a bit pattern that tells libcurl exactly what features to init, as described below. Set the desired bits by ORing the values together. In normal operation, you must specify CURL_GLOBAL_ALL. Do not use any other value unless you are familiar with it and mean to control internal operations of libcurl. </p>
+<p class="level0">This function is thread-safe on most platforms. Then <a Class="emphasis" href="./curl_version_info.html">curl_version_info</a> has the <span Class="emphasis">threadsafe</span> feature set (added in <a href="/ch/7.84.0.html">7.84.0</a>). </p>
+<p class="level0">If this is not thread-safe (the bit mentioned above is not set), you must not call this function when any other thread in the program (i.e. a thread sharing the same memory) is running. This does not just mean no other thread that is using libcurl. Because <a Class="emphasis" href="./curl_global_init.html">curl_global_init</a> calls functions of other libraries that are similarly thread unsafe, it could conflict with any other thread that uses these other libraries. </p>
+<p class="level0">If you are initializing libcurl from a Windows DLL you should not initialize it from <span Class="emphasis">DllMain</span> or a static initializer because Windows holds the loader lock during that time and it could cause a deadlock. </p>
+<p class="level0">See the description in <a Class="emphasis" href="./libcurl.html">libcurl</a> of global environment requirements for details of how to use this function. </p><a name="FLAGS"></a><h2 class="nroffsh">Flags</h2>
+<p class="level0"><a name="CURLGLOBALALL"></a><span class="nroffip">CURL_GLOBAL_ALL</span> </p>
+<p class="level1">Initialize everything possible. This sets all known bits except <a class="bold" href="#CURLGLOBALACKEINTR">CURL_GLOBAL_ACK_EINTR</a>. </p>
+<p class="level0"><a name="CURLGLOBALSSL"></a><span class="nroffip">CURL_GLOBAL_SSL</span> </p>
+<p class="level1">(This flag&apos;s presence or absence serves no meaning since <a href="/ch/7.57.0.html">7.57.0</a>. The description below is for older libcurl versions.) </p>
+<p class="level1">Initialize SSL. </p>
+<p class="level1">The implication here is that if this bit is not set, the initialization of the SSL layer needs to be done by the application or at least outside of libcurl. The exact procedure how to do SSL initialization depends on the TLS backend libcurl uses. </p>
+<p class="level1">Doing TLS based transfers without having the TLS layer initialized may lead to unexpected behaviors. </p>
+<p class="level0"><a name="CURLGLOBALWIN32"></a><span class="nroffip">CURL_GLOBAL_WIN32</span> </p>
+<p class="level1">Initialize the Win32 socket libraries. </p>
+<p class="level1">The implication here is that if this bit is not set, the initialization of Winsock has to be done by the application or you risk getting undefined behaviors. This option exists for when the initialization is handled outside of libcurl so there is no need for libcurl to do it again. </p>
+<p class="level0"><a name="CURLGLOBALNOTHING"></a><span class="nroffip">CURL_GLOBAL_NOTHING</span> </p>
+<p class="level1">Initialize nothing extra. This sets no bit. </p>
+<p class="level0"><a name="CURLGLOBALDEFAULT"></a><span class="nroffip">CURL_GLOBAL_DEFAULT</span> </p>
+<p class="level1">A sensible default. It initializes both SSL and Win32. Right now, this equals the functionality of the <a class="bold" href="#CURLGLOBALALL">CURL_GLOBAL_ALL</a> mask. </p>
+<p class="level0"><a name="CURLGLOBALACKEINTR"></a><span class="nroffip">CURL_GLOBAL_ACK_EINTR</span> </p>
+<p class="level1">This bit has no point since <a href="/ch/7.69.0.html">7.69.0</a> but its behavior is instead the default. </p>
+<p class="level1">Before <a href="/ch/7.69.0.html">7.69.0</a>: when this flag is set, curl acknowledges EINTR condition when connecting or when waiting for data. Otherwise, curl waits until full timeout elapses. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; <a href="curl_global_init.html">curl_global_init</a>(CURL_GLOBAL_DEFAULT);
+&nbsp;
+&nbsp; /&#x2a; use libcurl, then before exiting... &#x2a;/
+&nbsp;
+&nbsp; <a href="curl_global_cleanup.html">curl_global_cleanup</a>();
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.8 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">If this function returns non-zero, something went wrong and you cannot use the other curl functions. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_init.html">curl_easy_init</a>(3), <a Class="bold" href="./curl_global_cleanup.html">curl_global_cleanup</a>(3), <a Class="bold" href="./curl_global_init_mem.html">curl_global_init_mem</a>(3), <a Class="bold" href="./curl_global_sslset.html">curl_global_sslset</a>(3), <a Class="bold" href="./curl_global_trace.html">curl_global_trace</a>(3), <a Class="bold" href="./libcurl.html">libcurl</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

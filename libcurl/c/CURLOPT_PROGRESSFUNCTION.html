@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_PROGRESSFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_PROGRESSFUNCTION</b></div>
+<h1> CURLOPT_PROGRESSFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_PROGRESSFUNCTION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_PROGRESSFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_PROGRESSFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_PROGRESSFUNCTION - progress meter callback </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+int progress_callback(void &#x2a;clientp,
+&nbsp;                     double dltotal,
+&nbsp;                     double dlnow,
+&nbsp;                     double ultotal,
+&nbsp;                     double ulnow);
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_PROGRESSFUNCTION.html">CURLOPT_PROGRESSFUNCTION</a>,
+&nbsp;                         progress_callback);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to your callback function, which should match the prototype shown above. </p>
+<p class="level0">This option is deprecated and we encourage users to use the newer <a Class="emphasis" href="./CURLOPT_XFERINFOFUNCTION.html">CURLOPT_XFERINFOFUNCTION</a> instead, if you can. </p>
+<p class="level0">This function gets called by libcurl instead of its internal equivalent with a frequent interval. While data is being transferred it is invoked frequently, and during slow periods like when nothing is being transferred it can slow down to about one call per second. </p>
+<p class="level0"><span Class="emphasis">clientp</span> is the pointer set with <a Class="emphasis" href="./CURLOPT_PROGRESSDATA.html">CURLOPT_PROGRESSDATA</a>, it is not used by libcurl but is only passed along from the application to the callback. </p>
+<p class="level0">The callback gets told how much data libcurl is about to transfer and has transferred, in number of bytes. <span Class="emphasis">dltotal</span> is the total number of bytes libcurl expects to download in this transfer. <span Class="emphasis">dlnow</span> is the number of bytes downloaded so far. <span Class="emphasis">ultotal</span> is the total number of bytes libcurl expects to upload in this transfer. <span Class="emphasis">ulnow</span> is the number of bytes uploaded so far. </p>
+<p class="level0">Unknown/unused argument values passed to the callback are be set to zero (like if you only download data, the upload size remains 0). Many times the callback is called one or more times first, before it knows the data sizes so a program must be made to handle that. </p>
+<p class="level0">Return zero from the callback if everything is fine. </p>
+<p class="level0">If your callback function returns CURL_PROGRESSFUNC_CONTINUE it causes libcurl to continue executing the default progress function. </p>
+<p class="level0">Return 1 from this callback to make libcurl abort the transfer and return <span Class="emphasis"><a href="libcurl-errors.html#CURLEABORTEDBYCALLBACK">CURLE_ABORTED_BY_CALLBACK</a></span>. </p>
+<p class="level0">If you transfer data with the multi interface, this function is not called during periods of idleness unless you call the appropriate libcurl function that performs transfers. </p>
+<p class="level0"><a Class="emphasis" href="./CURLOPT_NOPROGRESS.html">CURLOPT_NOPROGRESS</a> must be set to 0 to make this function actually get called. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL. libcurl has an internal progress meter. That is rarely wanted by users. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+struct progress {
+&nbsp; char &#x2a;private;
+&nbsp; size_t size;
+};
+&nbsp;
+static int progress_callback(void &#x2a;clientp,
+&nbsp;                            double dltotal,
+&nbsp;                            double dlnow,
+&nbsp;                            double ultotal,
+&nbsp;                            double ulnow)
+{
+&nbsp; struct progress &#x2a;memory = clientp;
+&nbsp; printf(&quot;private: %p&bsol;n&quot;, memory-&gt;private);
+&nbsp;
+&nbsp; /&#x2a; use the values &#x2a;/
+&nbsp;
+&nbsp; return 0; /&#x2a; all is good &#x2a;/
+}
+&nbsp;
+int main(void)
+{
+&nbsp; struct progress data;
+&nbsp;
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   /&#x2a; pass struct to callback  &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROGRESSDATA.html">CURLOPT_PROGRESSDATA</a>, &amp;data);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_PROGRESSFUNCTION.html">CURLOPT_PROGRESSFUNCTION</a>, progress_callback);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="DEPRECATED"></a><h2 class="nroffsh">Deprecated</h2>
+<p class="level0">Deprecated since <a href="/ch/7.32.0.html">7.32.0</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_NOPROGRESS.html">CURLOPT_NOPROGRESS</a>(3), <a Class="bold" href="./CURLOPT_VERBOSE.html">CURLOPT_VERBOSE</a>(3), <a Class="bold" href="./CURLOPT_XFERINFOFUNCTION.html">CURLOPT_XFERINFOFUNCTION</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

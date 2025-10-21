@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_SOCKOPTFUNCTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_SOCKOPTFUNCTION</b></div>
+<h1> CURLOPT_SOCKOPTFUNCTION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_SOCKOPTFUNCTION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_SOCKOPTFUNCTION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_SOCKOPTFUNCTION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_SOCKOPTFUNCTION - callback for setting socket options </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+typedef enum  {
+&nbsp; CURLSOCKTYPE_IPCXN,  /&#x2a; socket created for a specific IP connection &#x2a;/
+&nbsp; CURLSOCKTYPE_ACCEPT, /&#x2a; socket created by accept() call &#x2a;/
+&nbsp; CURLSOCKTYPE_LAST    /&#x2a; never use &#x2a;/
+} curlsocktype;
+&nbsp;
+&#35;define CURL_SOCKOPT_OK 0
+&#35;define CURL_SOCKOPT_ERROR 1 /&#x2a; causes libcurl to abort and return
+&nbsp;                               <a href="libcurl-errors.html#CURLEABORTEDBYCALLBACK">CURLE_ABORTED_BY_CALLBACK</a> &#x2a;/
+&#35;define CURL_SOCKOPT_ALREADY_CONNECTED 2
+&nbsp;
+int sockopt_callback(void &#x2a;clientp,
+&nbsp;                    curl_socket_t curlfd,
+&nbsp;                    curlsocktype purpose);
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_SOCKOPTFUNCTION.html">CURLOPT_SOCKOPTFUNCTION</a>, sockopt_callback);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to your callback function, which should match the prototype shown above. </p>
+<p class="level0">When set, this callback function gets called by libcurl when the socket has been created, but before the connect call to allow applications to change specific socket options. The callback&apos;s <span Class="emphasis">purpose</span> argument identifies the exact purpose for this particular socket: </p>
+<p class="level0"><span Class="emphasis">CURLSOCKTYPE_IPCXN</span> for actively created connections or since <a href="/ch/7.28.0.html">7.28.0</a> <span Class="emphasis">CURLSOCKTYPE_ACCEPT</span> for FTP when the connection was setup with PORT/EPSV (in earlier versions these sockets were not passed to this callback). </p>
+<p class="level0">Future versions of libcurl may support more purposes. libcurl passes the newly created socket descriptor to the callback in the <span Class="emphasis">curlfd</span> parameter so additional setsockopt() calls can be done at the user&apos;s discretion. </p>
+<p class="level0">The <span Class="emphasis">clientp</span> pointer contains whatever user-defined value set using the <a Class="emphasis" href="./CURLOPT_SOCKOPTDATA.html">CURLOPT_SOCKOPTDATA</a> function. </p>
+<p class="level0">Return <span Class="emphasis">CURL_SOCKOPT_OK</span> from the callback on success. Return <span Class="emphasis">CURL_SOCKOPT_ERROR</span> from the callback function to signal an unrecoverable error to the library and it closes the socket and returns <span Class="emphasis"><a href="libcurl-errors.html#CURLECOULDNTCONNECT">CURLE_COULDNT_CONNECT</a></span> for <span Class="emphasis">CURLSOCKTYPE_IPCXN</span> and <span Class="emphasis"><a href="libcurl-errors.html#CURLEABORTEDBYCALLBACK">CURLE_ABORTED_BY_CALLBACK</a></span> for <span Class="emphasis">CURLSOCKTYPE_ACCEPT</span>. </p>
+<p class="level0">The callback function may return <span Class="emphasis">CURL_SOCKOPT_ALREADY_CONNECTED</span> for <span Class="emphasis">CURLSOCKTYPE_IPCXN</span>, to tell libcurl that the socket is already connected and then libcurl does no attempt to connect. This allows an application to pass in an already connected socket with <a Class="emphasis" href="./CURLOPT_OPENSOCKETFUNCTION.html">CURLOPT_OPENSOCKETFUNCTION</a> and then have this function make libcurl not attempt to connect (again). </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+/&#x2a; make libcurl use the already established socket &#39;sockfd&#39; &#x2a;/
+&nbsp;
+static curl_socket_t opensocket(void &#x2a;clientp,
+&nbsp;                               curlsocktype purpose,
+&nbsp;                               struct curl_sockaddr &#x2a;address)
+{
+&nbsp; curl_socket_t sockfd;
+&nbsp; sockfd = &#x2a;(curl_socket_t &#x2a;)clientp;
+&nbsp; /&#x2a; the actual externally set socket is passed in via the OPENSOCKETDATA
+&nbsp;    option &#x2a;/
+&nbsp; return sockfd;
+}
+&nbsp;
+static int sockopt_callback(void &#x2a;clientp, curl_socket_t curlfd,
+&nbsp;                           curlsocktype purpose)
+{
+&nbsp; return CURL_SOCKOPT_ALREADY_CONNECTED;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode res;
+&nbsp;   int sockfd; /&#x2a; our custom file descriptor &#x2a;/
+&nbsp;   /&#x2a; libcurl thinks that you connect to the host
+&nbsp;    &#x2a; and port that you specify in the URL option. &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;http://99.99.99.99:9999&quot;);
+&nbsp;   /&#x2a; call this function to get a socket &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_OPENSOCKETFUNCTION.html">CURLOPT_OPENSOCKETFUNCTION</a>, opensocket);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_OPENSOCKETDATA.html">CURLOPT_OPENSOCKETDATA</a>, &amp;sockfd);
+&nbsp;
+&nbsp;   /&#x2a; call this function to set options for the socket &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_SOCKOPTFUNCTION.html">CURLOPT_SOCKOPTFUNCTION</a>, sockopt_callback);
+&nbsp;
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.16.0.html">7.16.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_OPENSOCKETFUNCTION.html">CURLOPT_OPENSOCKETFUNCTION</a>(3), <a Class="bold" href="./CURLOPT_SEEKFUNCTION.html">CURLOPT_SEEKFUNCTION</a>(3), <a Class="bold" href="./CURLOPT_SOCKOPTDATA.html">CURLOPT_SOCKOPTDATA</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

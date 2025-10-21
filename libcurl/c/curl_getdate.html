@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_getdate()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_getdate</b></div>
+<h1> curl_getdate - convert a date string to number of seconds </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_getdate%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_getdate.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_getdate.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_getdate - convert date string to number of seconds </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+time_t <a href="curl_getdate.html">curl_getdate</a>(const char &#x2a;datestring, const time_t &#x2a;now);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><a Class="emphasis" href="./curl_getdate.html">curl_getdate</a> returns the number of seconds since the Epoch, January 1st 1970 00:00:00 in the UTC time zone, for the date and time that the <span Class="emphasis">datestring</span> parameter specifies. The <span Class="emphasis">now</span> parameter is not used, pass a NULL there. </p>
+<p class="level0">This function works with valid dates and does not always detect and reject wrong dates, such as February 30. </p><a name="PARSING"></a><h2 class="nroffsh">Parsing dates and times</h2>
+<p class="level0">A &quot;date&quot; is a string containing several items separated by whitespace. The order of the items is immaterial. A date string may contain many flavors of items: </p>
+<p class="level0"><a name="calendar"></a><span class="nroffip">calendar date items</span> </p>
+<p class="level1">Can be specified several ways. Month names can only be three-letter English abbreviations, numbers can be zero-prefixed and the year may use 2 or 4 digits. Examples: 06 Nov 1994, 06-Nov-94 and Nov-94 6. </p>
+<p class="level1">If the year appears to be below 100 (two-digit), any year after 70 is assumed to be 1900 + the given year. All others are 2000 + the given year. </p>
+<p class="level0"><a name="time"></a><span class="nroffip">time of the day items</span> </p>
+<p class="level1">This string specifies the time on a given day. You must specify it with 6 digits with two colons: HH:MM:SS. If there is no time given in a provided date string, 00:00:00 is assumed. Example: 18:19:21. </p>
+<p class="level0"><a name="time"></a><span class="nroffip">time zone items</span> </p>
+<p class="level1">Specifies international time zone. There are a few acronyms supported, but in general you should instead use the specific relative time compared to UTC. Supported formats include: -1200, MST, +0100. </p>
+<p class="level0"><a name="day"></a><span class="nroffip">day of the week items</span> </p>
+<p class="level1">Specifies a day of the week. Days of the week may be spelled out in full (using English): &apos;Sunday&apos;, &apos;Monday&apos;, etc or they may be abbreviated to their first three letters. This is usually not info that adds anything. </p>
+<p class="level0"><a name="pure"></a><span class="nroffip">pure numbers</span> </p>
+<p class="level1">If a decimal number of the form YYYYMMDD appears, then YYYY is read as the year, MM as the month number and DD as the day of the month, for the specified calendar date. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; time_t t;
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sun, 06 Nov 1994 08:49:37 GMT&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sunday, 06-Nov-94 08:49:37 GMT&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sun Nov  6 08:49:37 1994&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;06 Nov 1994 08:49:37 GMT&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;06-Nov-94 08:49:37 GMT&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Nov  6 08:49:37 1994&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;06 Nov 1994 08:49:37&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;06-Nov-94 08:49:37&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;1994 Nov 6 08:49:37&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;GMT 08:49:37 06-Nov-94 Sunday&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;94 6 Nov 08:49:37&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;1994 Nov 6&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;06-Nov-94&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sun Nov 6 94&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;1994.Nov.6&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sun/Nov/6/94/GMT&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sun, 06 Nov 1994 08:49:37 CET&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;06 Nov 1994 08:49:37 EST&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sun, 12 Sep 2004 15:05:58 -0700&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;Sat, 11 Sep 2004 21:32:11 +0200&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;20040912 15:05:58 -0700&quot;, NULL);
+&nbsp; t = <a href="curl_getdate.html">curl_getdate</a>(&quot;20040911 +0200&quot;, NULL);
+}
+</pre>
+<a name="STANDARDS"></a><h2 class="nroffsh">Standards</h2>
+<p class="level0">This parser handles date formats specified in <a href="https://www.ietf.org/rfc/rfc822.txt">RFC 822</a> (including the update in <a href="https://www.ietf.org/rfc/rfc1123.txt">RFC 1123</a>) using time zone name or time zone delta and <a href="https://www.ietf.org/rfc/rfc850.txt">RFC 850</a> (obsoleted by <a href="https://www.ietf.org/rfc/rfc1036.txt">RFC 1036</a>) and ANSI C&apos;s <span Class="emphasis">asctime()</span> format. </p>
+<p class="level0">These formats are the only ones <a href="https://www.ietf.org/rfc/rfc7231.txt">RFC 7231</a> says HTTP applications may use. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns -1 when it fails to parse the date string. Otherwise it returns the number of seconds as described. </p>
+<p class="level0">On systems with a signed 32-bit time_t: if the year is larger than 2037 or less than 1903, this function returns -1. </p>
+<p class="level0">On systems with an unsigned 32-bit time_t: if the year is larger than 2106 or less than 1970, this function returns -1. </p>
+<p class="level0">On systems with 64-bit time_t: if the year is less than 1583, this function returns -1. (The Gregorian calendar was first introduced 1582 so no &quot;real&quot; dates in this way of doing dates existed before then.) </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_TIMECONDITION.html">CURLOPT_TIMECONDITION</a>(3), <a Class="bold" href="./CURLOPT_TIMEVALUE.html">CURLOPT_TIMEVALUE</a>(3), <a Class="bold" href="./curl_easy_escape.html">curl_easy_escape</a>(3), <a Class="bold" href="./curl_easy_unescape.html">curl_easy_unescape</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - Libwww Comparison</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/" class="menuitem" title="Front page of the libcurl section">libcurl</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/abi.html">ABI</a>
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/bindings.html">Bindings</a>
+    <a href="/libcurl/competitors.html">Competitors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/relatedlibs.html">Related libs</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <a href="/libcurl/theysay.html">Testimonials</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <b>Libwww Comparison</b></div>
+<h1> Notes About Libwww compared to libcurl </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/docs/features.html">libcurl Features</a>
+<br><a href="competitors.html">Compare HTTP Libraries</a>
+<br><a href="wininet.html">WinInet comparison</a>
+</div>
+<p>
+ These are only some quick notes. If you have additional experiencies and
+comments you want to share with the world, we are all ears!
+<ul>
+ <li> libcurl is (far) more portable
+ <li> libcurl is supported and has a living community (compare traffic on the
+ mailing lists, release frequency or similar)
+ <li> programs need less code to transfer files using libcurl than a libwww-
+ based equivalent
+ <li> libcurl is thread-safe, libwww is not
+ <li> libcurl has a different feature-set and offers several features not
+ present in libwww, like several HTTP authentication types and gzip support
+ <li> libcurl supports more protocols
+ <li> libwww offers caching and HTML parsing, which libcurl does not
+</ul>
+<p>
+ Quote from a usenet posting by <a
+ href="https://groups.google.com/groups?q=libcurl&hl=en&lr=&scoring=d&selm=%23Uj9HDaxEHA.3336%40TK2MSFTNGP11.phx.gbl&rnum=1">Carl Daniel</a>:
+<div class="quote">
+<i>
+Having used both, I would recommend libcurl and definitely not libwww.
+<p>
+libcurl is easy to use and gives good performance. libwww is a nightmare to
+use, performs poorly (no overlapped I/O support, for example), and is
+practically undocumented (on top of which it is a very complex library).
+libwww is really a platform for network protocol development, not a library
+for basic access to well known network protocol stacks.
+</i>
+</div>
+<p>
+ Quote from the libwww-mailing list by <a href="https://lists.w3.org/Archives/Public/www-lib/2004OctDec/0013.html">Akritidis Xristoforos</a>:
+<div class="quote">
+<i>
+I devoted a full man-month trying to understand libwww, writing a function of
+intermediate complexity (supporting post requests, xml parsing, authentication
+etc.)  and figuring out that the problems I encountered were due to libwww and
+not my code.
+<p>
+I switched to libcurl, rewrote the same code in a week and have not
+looked back.
+<p>
+Perhaps this library has some features that libcurl does not, though I did not
+have to use them for my needs. However, for libwww to survive, someone has to
+focus on these features and let libcurl do the rest.
+<p>
+Personally, I cannot find any reason to suggest libwww to anyone.
+</i>
+</div>
+</div>
+</div>
+</body>
+</html>

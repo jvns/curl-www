@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_CONNECTTIMEOUT_MS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_CONNECTTIMEOUT_MS</b></div>
+<h1> CURLOPT_CONNECTTIMEOUT_MS explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_CONNECTTIMEOUT_MS%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_CONNECTTIMEOUT_MS.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_CONNECTTIMEOUT_MS.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_CONNECTTIMEOUT_MS - timeout for the connect phase </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_CONNECTTIMEOUT_MS.html">CURLOPT_CONNECTTIMEOUT_MS</a>,
+&nbsp;                         long timeout);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a long. It sets the maximum time in milliseconds that you allow the connection phase to take. This timeout only limits the connection phase, it has no impact once libcurl has connected. The connection phase includes the name resolve (DNS) and all protocol handshakes and negotiations until there is an established connection with the remote side. </p>
+<p class="level0">Set this option to zero to switch to the default built-in connection timeout - 300 seconds. See also the <a Class="emphasis" href="./CURLOPT_TIMEOUT_MS.html">CURLOPT_TIMEOUT_MS</a> option. </p>
+<p class="level0"><a Class="emphasis" href="./CURLOPT_CONNECTTIMEOUT.html">CURLOPT_CONNECTTIMEOUT</a> is the same function but set in seconds. </p>
+<p class="level0">If both <a Class="emphasis" href="./CURLOPT_CONNECTTIMEOUT.html">CURLOPT_CONNECTTIMEOUT</a> and <a Class="emphasis" href="./CURLOPT_CONNECTTIMEOUT_MS.html">CURLOPT_CONNECTTIMEOUT_MS</a> are set, the value set last is used. </p>
+<p class="level0">The connection timeout is included in the general all-covering <a Class="emphasis" href="./CURLOPT_TIMEOUT_MS.html">CURLOPT_TIMEOUT_MS</a>: </p>
+<p class="level0">With <a Class="emphasis" href="./CURLOPT_CONNECTTIMEOUT_MS.html">CURLOPT_CONNECTTIMEOUT_MS</a> set to 3000 and <a Class="emphasis" href="./CURLOPT_TIMEOUT_MS.html">CURLOPT_TIMEOUT_MS</a> set to 5000, the operation can never last longer than 5000 milliseconds, and the connection phase cannot last longer than 3000 milliseconds. </p>
+<p class="level0">With <a Class="emphasis" href="./CURLOPT_CONNECTTIMEOUT_MS.html">CURLOPT_CONNECTTIMEOUT_MS</a> set to 4000 and <a Class="emphasis" href="./CURLOPT_TIMEOUT_MS.html">CURLOPT_TIMEOUT_MS</a> set to 2000, the operation can never last longer than 2000 milliseconds. Including the connection phase. </p>
+<p class="level0">This option may cause libcurl to use the SIGALRM signal to timeout system calls on builds not using asynch DNS. In Unix-like systems, this might cause signals to be used unless <a Class="emphasis" href="./CURLOPT_NOSIGNAL.html">CURLOPT_NOSIGNAL</a> is set. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">300000 </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   /&#x2a; complete connection within 10000 milliseconds &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_CONNECTTIMEOUT_MS.html">CURLOPT_CONNECTTIMEOUT_MS</a>, 10000L);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.16.2.html">7.16.2</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_LOW_SPEED_LIMIT.html">CURLOPT_LOW_SPEED_LIMIT</a>(3), <a Class="bold" href="./CURLOPT_MAX_RECV_SPEED_LARGE.html">CURLOPT_MAX_RECV_SPEED_LARGE</a>(3), <a Class="bold" href="./CURLOPT_TIMEOUT_MS.html">CURLOPT_TIMEOUT_MS</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

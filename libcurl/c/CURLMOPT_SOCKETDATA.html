@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLMOPT_SOCKETDATA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a> / <b>CURLMOPT_SOCKETDATA</b></div>
+<h1> CURLMOPT_SOCKETDATA explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=@template%20manpage:@&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLMOPT_SOCKETDATA.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLMOPT_SOCKETDATA.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLMOPT_SOCKETDATA - custom pointer passed to the socket callback </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_setopt.html">curl_multi_setopt</a>(CURLM &#x2a;handle, <a href="CURLMOPT_SOCKETDATA.html">CURLMOPT_SOCKETDATA</a>, void &#x2a;pointer);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">A data <span Class="emphasis">pointer</span> to pass to the socket callback set with the <a Class="emphasis" href="./CURLMOPT_SOCKETFUNCTION.html">CURLMOPT_SOCKETFUNCTION</a> option. </p>
+<p class="level0">This pointer is not touched by libcurl but is only passed in as the socket callback&apos;s <span Class="bold">clientp</span> argument. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+struct priv {
+&nbsp; void &#x2a;ours;
+};
+&nbsp;
+static int sock_cb(CURL &#x2a;e, curl_socket_t s, int what, void &#x2a;cbp, void &#x2a;sockp)
+{
+&nbsp; struct priv &#x2a;p = sockp;
+&nbsp; printf(&quot;my ptr: %p&bsol;n&quot;, p-&gt;ours);
+&nbsp;
+&nbsp; if(what == CURL_POLL_REMOVE) {
+&nbsp;   /&#x2a; remove the socket from our collection &#x2a;/
+&nbsp; }
+&nbsp; if(what &amp; CURL_POLL_IN) {
+&nbsp;   /&#x2a; wait for read on this socket &#x2a;/
+&nbsp; }
+&nbsp; if(what &amp; CURL_POLL_OUT) {
+&nbsp;   /&#x2a; wait for write on this socket &#x2a;/
+&nbsp; }
+&nbsp;
+&nbsp; return 0;
+}
+&nbsp;
+int main(void)
+{
+&nbsp; struct priv setup;
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp; /&#x2a; ... use socket callback and custom pointer &#x2a;/
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_SOCKETFUNCTION.html">CURLMOPT_SOCKETFUNCTION</a>, sock_cb);
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_SOCKETDATA.html">CURLMOPT_SOCKETDATA</a>, &amp;setup);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.15.4.html">7.15.4</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">Returns <a href="libcurl-errors.html#CURLMOK">CURLM_OK</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLMOPT_SOCKETFUNCTION.html">CURLMOPT_SOCKETFUNCTION</a>(3), <a Class="bold" href="./CURLMOPT_TIMERFUNCTION.html">CURLMOPT_TIMERFUNCTION</a>(3), <a Class="bold" href="./curl_multi_socket_action.html">curl_multi_socket_action</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

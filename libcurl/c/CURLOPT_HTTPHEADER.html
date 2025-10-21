@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_HTTPHEADER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_HTTPHEADER</b></div>
+<h1> CURLOPT_HTTPHEADER explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_HTTPHEADER%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_HTTPHEADER.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_HTTPHEADER.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_HTTPHEADER - set of HTTP headers </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a>,
+&nbsp;                         struct curl_slist &#x2a;headers);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to a linked list of HTTP headers to pass to the server and/or proxy in your HTTP request. The same list can be used for both host and proxy requests. </p>
+<p class="level0">When used within an IMAP or SMTP request to upload a MIME mail, the given header list establishes the document-level MIME headers to prepend to the uploaded document described by <a Class="emphasis" href="./CURLOPT_MIMEPOST.html">CURLOPT_MIMEPOST</a>. This does not affect raw mail uploads. </p>
+<p class="level0">When used with HTTP, this option can add new headers, replace internal headers and remove internal headers. </p>
+<p class="level0">The linked list should be a valid list of <span Class="bold">struct curl_slist</span> entries properly filled in. Use <a Class="emphasis" href="./curl_slist_append.html">curl_slist_append</a> to create the list and <a Class="emphasis" href="./curl_slist_free_all.html">curl_slist_free_all</a> to free it again after use. </p>
+<p class="level0">If you provide a header that is otherwise generated and used by libcurl internally, your header alternative is used instead. If you provide a header without content (no data on the right side of the colon) as in <span Class="emphasis">Accept:</span>, the internally used header is removed. To forcibly add a header without content (nothing after the colon), use the form <span Class="emphasis">name;</span> (using a trailing semicolon). </p>
+<p class="level0">There are exceptions when suppressing headers. The <span Class="emphasis">Connection:</span> header in HTTP/1.1 cannot be overridden. You can provide values for it, but should a request require specific ones, they are always added to your own. </p>
+<p class="level0">The headers included in the linked list <span Class="bold">must not</span> be CRLF-terminated, since libcurl adds CRLF after each header item itself. Failure to comply with this might result in strange behavior. libcurl passes on the verbatim strings you give it, without any filter or other safe guards. That includes white space and control characters. </p>
+<p class="level0">The first line in an HTTP request (containing the method, usually a GET or POST) is not a header and cannot be replaced using this option. Only the lines following the request-line are headers. Adding this method line in this list of headers only causes your request to send an invalid header. Use <a Class="emphasis" href="./CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a> to change the method. </p>
+<p class="level0">When this option is passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>, libcurl does not copy the entire list so you <span Class="bold">must</span> keep it around until you no longer use this <span Class="emphasis">handle</span> for a transfer before you call <a Class="emphasis" href="./curl_slist_free_all.html">curl_slist_free_all</a> on the list. </p>
+<p class="level0">Using this option multiple times makes the last set list override the previous ones. Set it to NULL to disable its use again. </p>
+<p class="level0">The most commonly replaced HTTP headers have &quot;shortcuts&quot; in the options <a Class="emphasis" href="./CURLOPT_COOKIE.html">CURLOPT_COOKIE</a>, <a Class="emphasis" href="./CURLOPT_USERAGENT.html">CURLOPT_USERAGENT</a> and <a Class="emphasis" href="./CURLOPT_REFERER.html">CURLOPT_REFERER</a>. We recommend using those. </p>
+<p class="level0">There is an alternative option that sets or replaces headers only for requests that are sent with CONNECT to a proxy: <a Class="emphasis" href="./CURLOPT_PROXYHEADER.html">CURLOPT_PROXYHEADER</a>. Use <a Class="emphasis" href="./CURLOPT_HEADEROPT.html">CURLOPT_HEADEROPT</a> to control the behavior. </p><a name="SPECIFIC"></a><h2 class="nroffsh">Specific http headers</h2>
+<p class="level0">Setting some specific headers causes libcurl to act differently. </p>
+<p class="level0"><a name="Host"></a><span class="nroffip">Host:</span> </p>
+<p class="level1">The specified hostname is used for cookie matching if the cookie engine is also enabled for this transfer. If the request is done over HTTP/2 or HTTP/3, the custom hostname is instead used in the &quot;:authority&quot; header field and Host: is not sent at all over the wire. </p>
+<p class="level0"><a name="Transfer-Encoding"></a><span class="nroffip">Transfer-Encoding: chunked</span> </p>
+<p class="level1">Tells libcurl the upload is to be done using this chunked encoding instead of providing the Content-Length: field in the request. </p><a name="SPECIFIC"></a><h2 class="nroffsh">Specific mime headers</h2>
+<p class="level0">When used to build a MIME email for IMAP or SMTP, the following document-level headers can be set to override libcurl-generated values: </p>
+<p class="level0"><a name="Mime-Version"></a><span class="nroffip">Mime-Version:</span> </p>
+<p class="level1">Tells the parser at the receiving site how to interpret the MIME framing. It defaults to &quot;1.0&quot; and should normally not be altered. </p>
+<p class="level0"><a name="Content-Type"></a><span class="nroffip">Content-Type:</span> </p>
+<p class="level1">Indicates the document&apos;s global structure type. By default, libcurl sets it to &quot;multipart/mixed&quot;, describing a document made of independent parts. When a MIME mail is only composed of alternative representations of the same data (i.e.: HTML and plain text), this header must be set to &quot;multipart/alternative&quot;. In all cases the value must be of the form &quot;multipart/&#x2a;&quot; to respect the document structure and may not include the &quot;boundary=&quot; parameter. </p>
+<p class="level0">Other specific headers that do not have a libcurl default value but are strongly desired by mail delivery and user agents should also be included. These are <span Class="emphasis">From:</span>, <span Class="emphasis">To:</span>, <span Class="emphasis">Date:</span> and <span Class="emphasis">Subject:</span> among others and their presence and value is generally checked by anti-spam utilities. </p><a name="SECURITY"></a><h2 class="nroffsh">Security concerns</h2>
+<p class="level0">By default, this option makes libcurl send the given headers in all HTTP requests done by this handle. You should therefore use this option with caution if you for example connect to the remote site using a proxy and a CONNECT request, you should to consider if that proxy is supposed to also get the headers. They may be private or otherwise sensitive to leak. </p>
+<p class="level0">Use <a Class="emphasis" href="./CURLOPT_HEADEROPT.html">CURLOPT_HEADEROPT</a> to make the headers only get sent to where you intend them to get sent. </p>
+<p class="level0">Custom headers are sent in all requests done by the easy handle, which implies that if you tell libcurl to follow redirects (<a Class="emphasis" href="./CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>), the same set of custom headers is sent in the subsequent request. Redirects can of course go to other hosts and thus those servers get all the contents of your custom headers too. </p>
+<p class="level0">Starting in <a href="/ch/7.58.0.html">7.58.0</a>, libcurl specifically prevents &quot;Authorization:&quot; headers from being sent to other hosts than the first used one, unless specifically permitted with the <a Class="emphasis" href="./CURLOPT_UNRESTRICTED_AUTH.html">CURLOPT_UNRESTRICTED_AUTH</a> option. </p>
+<p class="level0">Starting in <a href="/ch/7.64.0.html">7.64.0</a>, libcurl specifically prevents &quot;Cookie:&quot; headers from being sent to other hosts than the first used one, unless specifically permitted with the <a Class="emphasis" href="./CURLOPT_UNRESTRICTED_AUTH.html">CURLOPT_UNRESTRICTED_AUTH</a> option. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http, imap and smtp </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp;
+&nbsp; struct curl_slist &#x2a;list = NULL;
+&nbsp;
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   /&#x2a; add this header &#x2a;/
+&nbsp;   list = <a href="curl_slist_append.html">curl_slist_append</a>(list, &quot;Shoesize: 10&quot;);
+&nbsp;
+&nbsp;   /&#x2a; remove this header &#x2a;/
+&nbsp;   list = <a href="curl_slist_append.html">curl_slist_append</a>(list, &quot;Accept:&quot;);
+&nbsp;
+&nbsp;   /&#x2a; change this header &#x2a;/
+&nbsp;   list = <a href="curl_slist_append.html">curl_slist_append</a>(list, &quot;Host: example.net&quot;);
+&nbsp;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_HTTPHEADER.html">CURLOPT_HTTPHEADER</a>, list);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   <a href="curl_slist_free_all.html">curl_slist_free_all</a>(list); /&#x2a; free the list &#x2a;/
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">Use for MIME mail added in <a href="/ch/7.56.0.html">7.56.0</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_CUSTOMREQUEST.html">CURLOPT_CUSTOMREQUEST</a>(3), <a Class="bold" href="./CURLOPT_HEADER.html">CURLOPT_HEADER</a>(3), <a Class="bold" href="./CURLOPT_HEADEROPT.html">CURLOPT_HEADEROPT</a>(3), <a Class="bold" href="./CURLOPT_MIMEPOST.html">CURLOPT_MIMEPOST</a>(3), <a Class="bold" href="./CURLOPT_PROXYHEADER.html">CURLOPT_PROXYHEADER</a>(3), <a Class="bold" href="./curl_mime_init.html">curl_mime_init</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

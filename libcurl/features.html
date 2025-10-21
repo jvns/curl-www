@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - What Makes It Special</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/" class="menuitem" title="Front page of the libcurl section">libcurl</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/abi.html">ABI</a>
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/bindings.html">Bindings</a>
+    <a href="/libcurl/competitors.html">Competitors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/relatedlibs.html">Related libs</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <a href="/libcurl/theysay.html">Testimonials</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <b>What Makes It Special</b></div>
+<h1> libcurl - What Makes It Special </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/docs/copyright.html">License</a>
+</div>
+<a name="reliable"></a>
+<h2> Solid and Reliable </h2>
+<p>
+ libcurl was released in its current "incarnation" in the year 2000 and it has
+ been in constant use by a large number of applications
+ and <a href="/docs/companies.html">companies</a> ever since. Sure there have
+ been bugs and even a few <a href="/docs/security.html">security-related</a>
+ flaws, but it has remained a very solid and reliable library and lots of
+ users are still using libcurl versions released many years ago as they stick
+ with what works.
+<a name="widelyused"></a>
+<h2> Widely Used </h2>
+<p>
+ libcurl is the most used C-based highly portable transfer library in the
+ world. Some of the world's
+ biggest <a href="/docs/companies.html">companies</a> use libcurl in high
+ volume applications. Some of the open source applications using libcurl are
+ very widely used.
+<p>
+ We estimate that every internet connected human on the globe uses (lib)curl,
+ knowingly or not, every day.
+<a name="portable"></a>
+<h2> Portable </h2>
+<p>
+ libcurl has been ported to numerous platforms and CPUs. libcurl offers the
+ same API and feature set on all of them. Using libcurl assures you that you
+ can write your application to work on very large amount of systems, including
+ but not limited to Solaris, NetBSD, FreeBSD, OpenBSD, Darwin, HPUX, IRIX,
+ AIX, Tru64, Linux, UnixWare, HURD, Windows, Amiga, OS/2, BeOs, macOS,
+ Ultrix, QNX, OpenVMS, RISC OS, Novell NetWare, DOS and more...
+<a name="thread"></a>
+<h2> Thread Safe </h2>
+<p>
+ libcurl is thread safe but there are a few exceptions. Refer to <a
+ href="//curl.se/libcurl/c/libcurl-thread.html">libcurl-thread(3)</a>
+ for more information.
+<a name="features"></a>
+<h2> Unmatched Set of Features </h2>
+<p>
+ There simply is no other HTTP and FTP library that can boast the same amount
+ and set of <a href="/docs/features.html">features</a> that libcurl does. Be
+ it free or commercial.
+<p>
+ Also, libcurl's unique offer of both a pull and push interface allows
+ applications to use it exactly the way they please.
+<p>
+ libcurl also offers an unmatched set of bindings, enabling you to access and
+ use libcurl from basically whatever language you can think of.
+<a name="ipv6"></a>
+<h2> Supports IPv6 </h2>
+<p>
+ If compiled with IPv6 support enabled, <b>All protocols</b> work splendidly
+ on IPv6 stacks. There are some minor quirks to keep in mind: kerberos4 does
+ not work over IPv6 by design and the SOCKS4 support is not properly adapted
+ for IPv6.
+<p> There is nothing in particular needed to get IPv6 to be used, the library
+ API remains exactly the same and adjusts to IPv4/IPv6 dynamically. You can
+ use hostnames that only have AAAA DNS records, or you can use IPv6 IP-only
+ style addresses like <tt>[::1]</tt>.
+<a name="support"></a>
+<h2> Well Supported </h2>
+<p>
+ We claim libcurl is well supported because you can get help on one of the
+ mailing lists, very quickly and accurately. Often within a few hours. Having
+ the mailing list archives available on the web also makes them searchable and
+ allows you to find already mentioned solutions and answers.
+<p>
+ We have a public bug tracker and known bugs are mostly fixed very swiftly.
+<p>
+ We also provide very detailed documentation on all operations, not just in
+ every release archive but also available on the website(s).
+<p>
+ You can get paid support from one of the listed <a href="/support.html">curl
+ support</a> companies.
+<p>
+ Since the code is free and available, any skilled programmer can fix and
+ improve the tool and library whenever. If you cannot, you can hire one.
+<a name="fast"></a>
+<h2> Fast </h2>
+<p>
+ Tests performed by independent users, have repeatedly proved libcurl to be
+ fast.
+<p>
+ When using libcurl bindings, you will get unmatched speeds due to libcurl
+ being programmed in C and very often the language-specific alternatives (be
+ it perl, Python, PHP, tcl or whatever) are <i>much</i> slower.
+<a name="docs"></a>
+<h2> Thoroughly Documented </h2>
+<p> All functions in libcurl have their own detailed <a
+ href="/libcurl/c/allfuncs.html">manpages</a> describing their actual
+ functionality and purpose.
+<p> All interfaces have overview-style manpages describing the concepts that
+ glue all the functions together: <a
+ href="/libcurl/c/libcurl-easy.html">easy</a>, <a
+ href="/libcurl/c/libcurl-multi.html">multi</a>, <a
+ href="/libcurl/c/libcurl-share.html">share</a> and <a
+ href="/libcurl/c/libcurl-url.html">URL parsing</a>.
+<p> There is a <a href="/libcurl/c/libcurl-tutorial.html">libcurl tutorial</a>.
+<p> We have numerous commented <a href="/libcurl/c/example.html">source code
+examples</a>.
+<a name="stableapi"></a>
+<h2> Stable API and ABI </h2>
+<p>
+ In the libcurl development we take API and ABI stability <b>very
+ seriously</b>. We have a few rules when it comes to API and ABI compatibility
+ and they are:<ol>
+<li> We do not break API or ABI compatibility
+<li> Seriously, we really do not and we work very hard to provide alternatives
+that introduce new ways instead of breaking old
+<li> A few times in the beginning of our project we felt forced to break
+existing behavior and we did API and ABI bumps. It was painful and hard and
+bad and we <b>really really</b> do not want to do it again. Ever. We have not
+done it since 2006.
+</ol>
+</div>
+</div>
+</body>
+</html>

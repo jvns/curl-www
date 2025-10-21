@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_CONNECT_TO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_CONNECT_TO</b></div>
+<h1> CURLOPT_CONNECT_TO explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_CONNECT_TO%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_CONNECT_TO.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_CONNECT_TO.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_CONNECT_TO - connect to another host and port instead </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_CONNECT_TO.html">CURLOPT_CONNECT_TO</a>,
+&nbsp;                         struct curl_slist &#x2a;connect_to);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to a linked list of strings with &quot;connect to&quot; information to use for establishing network connections with this handle. The linked list should be a fully valid list of <span Class="bold">struct curl_slist</span> structs properly filled in. Use <a Class="emphasis" href="./curl_slist_append.html">curl_slist_append</a> to create the list and <a Class="emphasis" href="./curl_slist_free_all.html">curl_slist_free_all</a> to clean up an entire list. </p>
+<p class="level0">Each single string should be written using the format HOST:PORT:CONNECT-TO-HOST:CONNECT-TO-PORT where HOST is the host of the request, PORT is the port of the request, CONNECT-TO-HOST is the hostname to connect to, and CONNECT-TO-PORT is the port to connect to. </p>
+<p class="level0">The first string that matches the request&apos;s host and port is used. </p>
+<p class="level0">Dotted numerical IP addresses are supported for HOST and CONNECT-TO-HOST. A numerical IPv6 address must be written within [brackets]. </p>
+<p class="level0">Any of the four values may be empty. When the HOST or PORT is empty, the host or port always match (the request&apos;s host or port is ignored). When CONNECT-TO-HOST or CONNECT-TO-PORT is empty, the &quot;connect to&quot; feature is disabled for the host or port, and the request&apos;s host or port are used to establish the network connection. </p>
+<p class="level0">This option is suitable to direct the request at a specific server, e.g. at a specific cluster node in a cluster of servers. </p>
+<p class="level0">The &quot;connect to&quot; host and port are only used to establish the network connection. They do NOT affect the host and port that are used for TLS/SSL (e.g. SNI, certificate verification) or for the application protocols. </p>
+<p class="level0">In contrast to <a Class="emphasis" href="./CURLOPT_RESOLVE.html">CURLOPT_RESOLVE</a>, the option <a Class="emphasis" href="./CURLOPT_CONNECT_TO.html">CURLOPT_CONNECT_TO</a> does not pre-populate the DNS cache and therefore it does not affect future transfers of other easy handles that have been added to the same multi handle. </p>
+<p class="level0">The &quot;connect to&quot; host and port are ignored if they are equal to the host and the port in the request URL, because connecting to the host and the port in the request URL is the default behavior. </p>
+<p class="level0">If an HTTP proxy is used for a request having a special &quot;connect to&quot; host or port, and the &quot;connect to&quot; host or port differs from the request&apos;s host and port, the HTTP proxy is automatically switched to tunnel mode for this specific request. This is necessary because it is not possible to connect to a specific host or port in normal (non-tunnel) mode. </p>
+<p class="level0">When this option is passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>, libcurl does not copy the list so you <span Class="bold">must</span> keep it around until you no longer use this <span Class="emphasis">handle</span> for a transfer before you call <a Class="emphasis" href="./curl_slist_free_all.html">curl_slist_free_all</a> on the list. </p>
+<p class="level0">Using this option multiple times makes the last set list override the previous ones. Set it to NULL to disable its use again. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl;
+&nbsp; struct curl_slist &#x2a;connect_to = NULL;
+&nbsp; connect_to = <a href="curl_slist_append.html">curl_slist_append</a>(NULL, &quot;example.com::server1.example.com:&quot;);
+&nbsp;
+&nbsp; curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_CONNECT_TO.html">CURLOPT_CONNECT_TO</a>, connect_to);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp;   /&#x2a; always cleanup &#x2a;/
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+&nbsp;
+&nbsp; <a href="curl_slist_free_all.html">curl_slist_free_all</a>(connect_to);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.49.0.html">7.49.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_FOLLOWLOCATION.html">CURLOPT_FOLLOWLOCATION</a>(3), <a Class="bold" href="./CURLOPT_HTTPPROXYTUNNEL.html">CURLOPT_HTTPPROXYTUNNEL</a>(3), <a Class="bold" href="./CURLOPT_RESOLVE.html">CURLOPT_RESOLVE</a>(3), <a Class="bold" href="./CURLOPT_URL.html">CURLOPT_URL</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

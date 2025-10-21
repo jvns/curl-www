@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - URL parsing interface overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>URL parsing interface</b></div>
+<h1> URL parsing interface overview </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="allfuncs.html">All functions</a>
+<br><a href="./">API</a>
+<br><a href="example.html">Examples</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">libcurl-url - URL interface overview </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">The URL interface provides functions for parsing and generating URLs. </p><a name="INCLUDE"></a><h2 class="nroffsh">Include</h2>
+<p class="level0">You still only include &lt;curl/curl.h&gt; in your code. </p><a name="CREATE"></a><h2 class="nroffsh">Create</h2>
+<p class="level0">Create a handle that holds URL info and resources with <a Class="emphasis" href="./curl_url.html">curl_url</a>: </p><pre class="level0">
+&nbsp; CURLU &#x2a;h = <a href="curl_url.html">curl_url</a>();
+</pre>
+<a name="CLEANUP"></a><h2 class="nroffsh">Cleanup</h2>
+<p class="level0">When done with it, clean it up with <a Class="emphasis" href="./curl_url_cleanup.html">curl_url_cleanup</a> </p><pre class="level0">
+&nbsp; <a href="curl_url_cleanup.html">curl_url_cleanup</a>(h);
+</pre>
+<a name="DUPLICATE"></a><h2 class="nroffsh">Duplicate</h2>
+<p class="level0">When you need a copy of a handle, just duplicate it with <a Class="emphasis" href="./curl_url_dup.html">curl_url_dup</a>: </p><pre class="level0">
+&nbsp; CURLU &#x2a;nh = <a href="curl_url_dup.html">curl_url_dup</a>(h);
+</pre>
+<a name="PARSING"></a><h2 class="nroffsh">Parsing</h2>
+<p class="level0">By setting a URL to the handle with <a Class="emphasis" href="./curl_url_set.html">curl_url_set</a>, the URL is parsed and stored in the handle. If the URL is not syntactically correct it returns an error instead. </p><pre class="level0">
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(h, CURLUPART_URL,
+&nbsp;                   &quot;https://example.com:449/foo/bar?name=moo&quot;, 0);
+</pre>
+<p class="level0">The zero in the fourth argument is a bitmask for changing specific features. </p>
+<p class="level0">If successful, this stores the URL in its individual parts within the handle. </p><a name="REDIRECT"></a><h2 class="nroffsh">Redirect</h2>
+<p class="level0">When a handle already contains info about a URL, setting a relative URL makes it &quot;redirect&quot; to that. </p><pre class="level0">
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(h, CURLUPART_URL, &quot;../test?another&quot;, 0);
+</pre>
+<a name="GET"></a><h2 class="nroffsh">Get url</h2>
+<p class="level0">The <span Class="bold">CURLU</span> handle represents a URL and you can easily extract that with <a Class="emphasis" href="./curl_url_get.html">curl_url_get</a>: </p><pre class="level0">
+&nbsp; char &#x2a;url;
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_URL, &amp;url, 0);
+&nbsp; <a href="curl_free.html">curl_free</a>(url);
+</pre>
+<p class="level0">The zero in the fourth argument is a bitmask for changing specific features. </p><a name="GET"></a><h2 class="nroffsh">Get parts</h2>
+<p class="level0">When a URL has been parsed or parts have been set, you can extract those pieces from the handle at any time. </p><pre class="level0">
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_FRAGMENT, &amp;fragment, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_HOST, &amp;host, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_PASSWORD, &amp;password, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_PATH, &amp;path, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_PORT, &amp;port, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_QUERY, &amp;query, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_SCHEME, &amp;scheme, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_USER, &amp;user, 0);
+&nbsp; rc = <a href="curl_url_get.html">curl_url_get</a>(h, CURLUPART_ZONEID, &amp;zoneid, 0);
+</pre>
+<p class="level0">Extracted parts are not URL decoded unless the user also asks for it with the <span Class="emphasis">CURLU_URLDECODE</span> flag set in the fourth bitmask argument. </p>
+<p class="level0">Remember to free the returned string with <a Class="emphasis" href="./curl_free.html">curl_free</a> when you are done with it. </p><a name="SET"></a><h2 class="nroffsh">Set parts</h2>
+<p class="level0">A user set individual URL parts, either after having parsed a full URL or instead of parsing such. </p><pre class="level0">
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_FRAGMENT, &quot;anchor&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_HOST, &quot;www.example.com&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_PASSWORD, &quot;doe&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_PATH, &quot;/index.html&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_PORT, &quot;443&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_QUERY, &quot;name=john&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_SCHEME, &quot;https&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_USER, &quot;john&quot;, 0);
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_ZONEID, &quot;eth0&quot;, 0);
+</pre>
+<p class="level0">Set parts are not URL encoded unless the user asks for it with the <span Class="emphasis">CURLU_URLENCODE</span> flag. </p><a name="CURLUAPPENDQUERY"></a><h2 class="nroffsh">Curlu_appendquery</h2>
+<p class="level0">An application can append a string to the right end of the query part with the <a class="emphasis" href="#CURLUAPPENDQUERY">CURLU_APPENDQUERY</a> flag to <a Class="emphasis" href="./curl_url_set.html">curl_url_set</a>. </p>
+<p class="level0">Imagine a handle that holds the URL &quot;<a href="https://example.com/?shoes=2&quot;.">https://example.com/?shoes=2&quot;.</a> An application can then add the string &quot;hat=1&quot; to the query part like this: </p><pre class="level0">
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_QUERY, &quot;hat=1&quot;, CURLU_APPENDQUERY);
+</pre>
+<p class="level0">It notices the lack of an ampersand (&amp;) separator and injects one, and the handle&apos;s full URL then equals &quot;<a href="https://example.com/?shoes=2&amp;hat=1&quot;.">https://example.com/?shoes=2&amp;hat=1&quot;.</a> </p>
+<p class="level0">The appended string can of course also get URL encoded on add, and if asked to URL encode, the encoding process skips the &apos;=&apos; character. For example, append &quot;candy=N&amp;N&quot; to what we already have, and URL encode it to deal with the ampersand in the data: </p><pre class="level0">
+&nbsp; rc = <a href="curl_url_set.html">curl_url_set</a>(urlp, CURLUPART_QUERY, &quot;candy=N&amp;N&quot;,
+&nbsp;                   CURLU_APPENDQUERY | CURLU_URLENCODE);
+</pre>
+<p class="level0">Now the URL looks like </p><pre class="level0">
+&nbsp; https://example.com/?shoes=2&amp;hat=1&amp;candy=N%26N
+</pre>
+<a name="NOTES"></a><h2 class="nroffsh">Notes</h2>
+<p class="level0">A URL with a literal IPv6 address can be parsed even when IPv6 support is not enabled. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_URL.html">CURLOPT_URL</a>(3), <a Class="bold" href="./curl_url.html">curl_url</a>(3), <a Class="bold" href="./curl_url_cleanup.html">curl_url_cleanup</a>(3), <a Class="bold" href="./curl_url_dup.html">curl_url_dup</a>(3), <a Class="bold" href="./curl_url_get.html">curl_url_get</a>(3), <a Class="bold" href="./curl_url_set.html">curl_url_set</a>(3), <a Class="bold" href="./curl_url_strerror.html">curl_url_strerror</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

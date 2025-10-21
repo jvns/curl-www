@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLSHOPT_SHARE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_share_setopt.html">curl_share_setopt</a> / <b>CURLSHOPT_SHARE</b></div>
+<h1> CURLSHOPT_SHARE explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="curl_share_setopt.html">share options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=@template%20manpage:@&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLSHOPT_SHARE.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLSHOPT_SHARE.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLSHOPT_SHARE - add data to share </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLSHcode <a href="curl_share_setopt.html">curl_share_setopt</a>(CURLSH &#x2a;share, <a href="CURLSHOPT_SHARE.html">CURLSHOPT_SHARE</a>, long type);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">The <span Class="emphasis">type</span> parameter specifies what specific data that should be shared and kept in the share object that was created with <a Class="emphasis" href="./curl_share_init.html">curl_share_init</a>. The given <span Class="emphasis">type</span> must be one of the values described below. You can set <a Class="emphasis" href="./CURLSHOPT_SHARE.html">CURLSHOPT_SHARE</a> multiple times with different data arguments to have the share object share multiple types of data. Unset a type again by setting <a Class="emphasis" href="./CURLSHOPT_UNSHARE.html">CURLSHOPT_UNSHARE</a>. </p>
+<p class="level0">If any of the data is to be shared in multiple threads then mutex callbacks must be set as well. See <a Class="emphasis" href="./CURLSHOPT_LOCKFUNC.html">CURLSHOPT_LOCKFUNC</a> and <a Class="emphasis" href="./CURLSHOPT_UNLOCKFUNC.html">CURLSHOPT_UNLOCKFUNC</a>. </p>
+<p class="level0"><a name="CURLLOCKDATACOOKIE"></a><span class="nroffip">CURL_LOCK_DATA_COOKIE</span> </p>
+<p class="level1">Cookie data is shared across the easy handles using this shared object. Note that this does not activate an easy handle&apos;s cookie handling. You can do that separately by using <a Class="emphasis" href="./CURLOPT_COOKIEFILE.html">CURLOPT_COOKIEFILE</a> for example. </p>
+<p class="level1">It is not supported to share cookies between multiple concurrent threads. </p>
+<p class="level0"><a name="CURLLOCKDATADNS"></a><span class="nroffip">CURL_LOCK_DATA_DNS</span> </p>
+<p class="level1">Cached DNS hosts are shared across the easy handles using this shared object. Note that when you use the multi interface, all easy handles added to the same multi handle share the DNS cache by default without using this option. </p>
+<p class="level0"><a name="CURLLOCKDATASSLSESSION"></a><span class="nroffip">CURL_LOCK_DATA_SSL_SESSION</span> </p>
+<p class="level1">SSL sessions are shared across the easy handles using this shared object. This reduces the time spent in the SSL handshake when reconnecting to the same server. </p>
+<p class="level1">Note that when you use the multi interface, all easy handles added to the same multi handle share the SSL session cache by default without using this option. </p>
+<p class="level0"><a name="CURLLOCKDATACONNECT"></a><span class="nroffip">CURL_LOCK_DATA_CONNECT</span> </p>
+<p class="level1">Put the connection cache in the share object and make all easy handles using this share object share the connection cache. </p>
+<p class="level1">It is not supported to share connections between multiple concurrent threads. </p>
+<p class="level1">Connections that are used for HTTP/2 or HTTP/3 multiplexing only get additional transfers added to them if the existing connection is held by the same multi or easy handle. libcurl does not support doing multiplexed streams in different threads using a shared connection. </p>
+<p class="level1">Note that when you use the multi interface, all easy handles added to the same multi handle share the connection cache by default without using this option. </p>
+<p class="level0"><a name="CURLLOCKDATAPSL"></a><span class="nroffip">CURL_LOCK_DATA_PSL</span> </p>
+<p class="level1">The Public Suffix List stored in the share object is made available to all easy handle bound to the later. Since the Public Suffix List is periodically refreshed, this avoids updates in too many different contexts. </p>
+<p class="level1">Added in <a href="/ch/7.61.0.html">7.61.0</a>. </p>
+<p class="level1">Note that when you use the multi interface, all easy handles added to the same multi handle share the PSL cache by default without using this option. </p>
+<p class="level0"><a name="CURLLOCKDATAHSTS"></a><span class="nroffip">CURL_LOCK_DATA_HSTS</span> </p>
+<p class="level1">The in-memory HSTS cache. </p>
+<p class="level1">It is not supported to share the HSTS between multiple concurrent threads. </p>
+<p class="level1">Added in <a href="/ch/7.88.0.html">7.88.0</a> </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURLSHcode sh;
+&nbsp; CURLSH &#x2a;share = <a href="curl_share_init.html">curl_share_init</a>();
+&nbsp; sh = <a href="curl_share_setopt.html">curl_share_setopt</a>(share, <a href="CURLSHOPT_SHARE.html">CURLSHOPT_SHARE</a>, CURL_LOCK_DATA_COOKIE);
+&nbsp; if(sh)
+&nbsp;   printf(&quot;Error: %s&bsol;n&quot;, <a href="curl_share_strerror.html">curl_share_strerror</a>(sh));
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.10.3.html">7.10.3</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a href="libcurl-errors.html#CURLSHEOK">CURLSHE_OK</a> (zero) means that the option was set properly, non-zero means an error occurred. See <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a> for the full list with descriptions. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLSHOPT_UNSHARE.html">CURLSHOPT_UNSHARE</a>(3), <a Class="bold" href="./curl_share_cleanup.html">curl_share_cleanup</a>(3), <a Class="bold" href="./curl_share_init.html">curl_share_init</a>(3), <a Class="bold" href="./curl_share_setopt.html">curl_share_setopt</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

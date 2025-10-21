@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_SSLVERSION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_SSLVERSION</b></div>
+<h1> CURLOPT_SSLVERSION explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_SSLVERSION%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_SSLVERSION.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_SSLVERSION.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_SSLVERSION - preferred TLS/SSL version </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_SSLVERSION.html">CURLOPT_SSLVERSION</a>, long version);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a long as parameter to control which version range of SSL/TLS versions to use. </p>
+<p class="level0">The SSL and TLS versions have typically developed from the most insecure version to be more and more secure in this order through history: SSL v2, SSLv3, TLS v1.0, TLS v1.1, TLS v1.2 and the most recent TLS v1.3. </p>
+<p class="level0">Use one of the available defines for this purpose. The available options are: </p>
+<p class="level0"><a name="CURLSSLVERSIONDEFAULT"></a><span class="nroffip">CURL_SSLVERSION_DEFAULT</span> </p>
+<p class="level1">The default acceptable version range. The minimum acceptable version is by default TLS v1.2 since <a href="/ch/8.16.0.html">8.16.0</a> (unless the TLS library has a stricter rule). </p>
+<p class="level0"><a name="CURLSSLVERSIONTLSv1"></a><span class="nroffip">CURL_SSLVERSION_TLSv1</span> </p>
+<p class="level1">TLS v1.0 or later </p>
+<p class="level0"><a name="CURLSSLVERSIONSSLv2"></a><span class="nroffip">CURL_SSLVERSION_SSLv2</span> </p>
+<p class="level1">SSL v2 - refused </p>
+<p class="level0"><a name="CURLSSLVERSIONSSLv3"></a><span class="nroffip">CURL_SSLVERSION_SSLv3</span> </p>
+<p class="level1">SSL v3 - refused </p>
+<p class="level0"><a name="CURLSSLVERSIONTLSv10"></a><span class="nroffip">CURL_SSLVERSION_TLSv1_0</span> </p>
+<p class="level1">TLS v1.0 or later </p>
+<p class="level0"><a name="CURLSSLVERSIONTLSv11"></a><span class="nroffip">CURL_SSLVERSION_TLSv1_1</span> </p>
+<p class="level1">TLS v1.1 or later </p>
+<p class="level0"><a name="CURLSSLVERSIONTLSv12"></a><span class="nroffip">CURL_SSLVERSION_TLSv1_2</span> </p>
+<p class="level1">TLS v1.2 or later </p>
+<p class="level0"><a name="CURLSSLVERSIONTLSv13"></a><span class="nroffip">CURL_SSLVERSION_TLSv1_3</span> </p>
+<p class="level1">TLS v1.3 or later </p>
+<p class="level0">The maximum TLS version can be set by using <span Class="emphasis">one</span> of the CURL_SSLVERSION_MAX_ macros below. It is also possible to OR <span Class="emphasis">one</span> of the CURL_SSLVERSION_ macros with <span Class="emphasis">one</span> of the CURL_SSLVERSION_MAX_ macros. </p>
+<p class="level0"><a name="CURLSSLVERSIONMAXDEFAULT"></a><span class="nroffip">CURL_SSLVERSION_MAX_DEFAULT</span> </p>
+<p class="level1">The flag defines the maximum supported TLS version by libcurl, or the default value from the SSL library is used. libcurl uses a sensible default maximum, which was TLS v1.2 up to before <a href="/ch/7.61.0.html">7.61.0</a> and is TLS v1.3 since then - assuming the TLS library support it. </p>
+<p class="level0"><a name="CURLSSLVERSIONMAXTLSv10"></a><span class="nroffip">CURL_SSLVERSION_MAX_TLSv1_0</span> </p>
+<p class="level1">The flag defines maximum supported TLS version as TLS v1.0. </p>
+<p class="level0"><a name="CURLSSLVERSIONMAXTLSv11"></a><span class="nroffip">CURL_SSLVERSION_MAX_TLSv1_1</span> </p>
+<p class="level1">The flag defines maximum supported TLS version as TLS v1.1. </p>
+<p class="level0"><a name="CURLSSLVERSIONMAXTLSv12"></a><span class="nroffip">CURL_SSLVERSION_MAX_TLSv1_2</span> </p>
+<p class="level1">The flag defines maximum supported TLS version as TLS v1.2. </p>
+<p class="level0"><a name="CURLSSLVERSIONMAXTLSv13"></a><span class="nroffip">CURL_SSLVERSION_MAX_TLSv1_3</span> </p>
+<p class="level1">The flag defines maximum supported TLS version as TLS v1.3. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">CURL_SSLVERSION_DEFAULT </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all TLS based protocols: HTTPS, FTPS, IMAPS, POP3S, SMTPS etc. </p>
+<p class="level0">All TLS backends support this option. </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;
+&nbsp;   /&#x2a; ask libcurl to use TLS version 1.0 or later &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_SSLVERSION.html">CURLOPT_SSLVERSION</a>, CURL_SSLVERSION_TLSv1);
+&nbsp;
+&nbsp;   /&#x2a; Perform the request &#x2a;/
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">SSLv2 is disabled by default since <a href="/ch/7.18.1.html">7.18.1</a>. Other SSL versions availability may vary depending on which backend libcurl has been built to use. </p>
+<p class="level0">SSLv3 is disabled by default since <a href="/ch/7.39.0.html">7.39.0</a>. </p>
+<p class="level0">SSLv2 and SSLv3 are refused completely since curl <a href="/ch/7.77.0.html">7.77.0</a> </p>
+<p class="level0">Since <a href="/ch/8.10.0.html">8.10.0</a> wolfSSL is fully supported. Before <a href="/ch/8.10.0.html">8.10.0</a> the MAX macros were not supported with wolfSSL and the other macros did not set a minimum, but restricted the TLS version to only the specified one. </p>
+<p class="level0">Rustls support added in <a href="/ch/8.10.0.html">8.10.0</a>. </p>
+<p class="level0"><span Class="bold">CURL_SSLVERSION_</span>&#x2a; macros became <span Class="emphasis">long</span> types in <a href="/ch/8.16.0.html">8.16.0</a>, prior to this version a <span Class="emphasis">long</span> cast was necessary when passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_HTTP_VERSION.html">CURLOPT_HTTP_VERSION</a>(3), <a Class="bold" href="./CURLOPT_IPRESOLVE.html">CURLOPT_IPRESOLVE</a>(3), <a Class="bold" href="./CURLOPT_PROXY_SSLVERSION.html">CURLOPT_PROXY_SSLVERSION</a>(3), <a Class="bold" href="./CURLOPT_USE_SSL.html">CURLOPT_USE_SSL</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

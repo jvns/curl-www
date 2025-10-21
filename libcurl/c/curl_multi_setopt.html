@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl_multi_setopt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>libcurl</b></div>
+<h1> curl_multi_setopt - set options for a curl multi handle </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_multi_setopt%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_multi_setopt.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_multi_setopt.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_multi_setopt - set options for a curl multi handle </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLMcode <a href="curl_multi_setopt.html">curl_multi_setopt</a>(CURLM &#x2a;multi, CURLMoption option, parameter);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><a Class="emphasis" href="./curl_multi_setopt.html">curl_multi_setopt</a> is used to tell a libcurl multi handle how to behave. By using the appropriate options to <a Class="emphasis" href="./curl_multi_setopt.html">curl_multi_setopt</a>, you can change libcurl&apos;s behavior when using that multi handle. All options are set with the <span Class="emphasis">option</span> followed by the <span Class="emphasis">parameter</span>. That parameter can be a <span Class="bold">long</span>, a <span Class="bold">function pointer</span>, an <span Class="bold">object pointer</span> or a <span Class="bold">curl_off_t</span> type, depending on what the specific option expects. Read this manual carefully as bad input values may cause libcurl to behave badly. You can only set one option in each function call. </p><a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
+<p class="level0"><a name="CURLMOPTCHUNKLENGTHPENALTYSIZE"></a><span class="nroffip">CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE</span> </p>
+<p class="level1"><span Class="bold">deprecated</span> See <a Class="emphasis" href="./CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE.html">CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE</a> </p>
+<p class="level0"><a name="CURLMOPTCONTENTLENGTHPENALTYSIZE"></a><span class="nroffip">CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE</span> </p>
+<p class="level1"><span Class="bold">deprecated</span> See <a Class="emphasis" href="./CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE.html">CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE</a> </p>
+<p class="level0"><a name="CURLMOPTMAXCONNECTS"></a><span class="nroffip">CURLMOPT_MAXCONNECTS</span> </p>
+<p class="level1">Size of connection cache. See <a Class="emphasis" href="./CURLMOPT_MAXCONNECTS.html">CURLMOPT_MAXCONNECTS</a> </p>
+<p class="level0"><a name="CURLMOPTMAXCONCURRENTSTREAMS"></a><span class="nroffip">CURLMOPT_MAX_CONCURRENT_STREAMS</span> </p>
+<p class="level1">Max concurrent streams for http2. See <a Class="emphasis" href="./CURLMOPT_MAX_CONCURRENT_STREAMS.html">CURLMOPT_MAX_CONCURRENT_STREAMS</a> </p>
+<p class="level0"><a name="CURLMOPTMAXHOSTCONNECTIONS"></a><span class="nroffip">CURLMOPT_MAX_HOST_CONNECTIONS</span> </p>
+<p class="level1">Max number of connections to a single host. See <a Class="emphasis" href="./CURLMOPT_MAX_HOST_CONNECTIONS.html">CURLMOPT_MAX_HOST_CONNECTIONS</a> </p>
+<p class="level0"><a name="CURLMOPTMAXPIPELINELENGTH"></a><span class="nroffip">CURLMOPT_MAX_PIPELINE_LENGTH</span> </p>
+<p class="level1"><span Class="bold">deprecated</span>. See <a Class="emphasis" href="./CURLMOPT_MAX_PIPELINE_LENGTH.html">CURLMOPT_MAX_PIPELINE_LENGTH</a> </p>
+<p class="level0"><a name="CURLMOPTMAXTOTALCONNECTIONS"></a><span class="nroffip">CURLMOPT_MAX_TOTAL_CONNECTIONS</span> </p>
+<p class="level1">Max simultaneously open connections. See <a Class="emphasis" href="./CURLMOPT_MAX_TOTAL_CONNECTIONS.html">CURLMOPT_MAX_TOTAL_CONNECTIONS</a> </p>
+<p class="level0"><a name="CURLMOPTNETWORKCHANGED"></a><span class="nroffip">CURLMOPT_NETWORK_CHANGED</span> </p>
+<p class="level1">Signal that the network has changed. See <a Class="emphasis" href="./CURLMOPT_NETWORK_CHANGED.html">CURLMOPT_NETWORK_CHANGED</a> </p>
+<p class="level0"><a name="CURLMOPTNOTIFYDATA"></a><span class="nroffip">CURLMOPT_NOTIFYDATA</span> </p>
+<p class="level1">Custom pointer passed to the notify callback. See <a Class="emphasis" href="./CURLMOPT_NOTIFYDATA.html">CURLMOPT_NOTIFYDATA</a> </p>
+<p class="level0"><a name="CURLMOPTNOTIFYFUNCTION"></a><span class="nroffip">CURLMOPT_NOTIFYFUNCTION</span> </p>
+<p class="level1">Callback that receives notifications. See <a Class="emphasis" href="./CURLMOPT_NOTIFYFUNCTION.html">CURLMOPT_NOTIFYFUNCTION</a> </p>
+<p class="level0"><a name="CURLMOPTPIPELINING"></a><span class="nroffip">CURLMOPT_PIPELINING</span> </p>
+<p class="level1">Enable HTTP multiplexing. See <a Class="emphasis" href="./CURLMOPT_PIPELINING.html">CURLMOPT_PIPELINING</a> </p>
+<p class="level0"><a name="CURLMOPTPIPELININGSERVERBL"></a><span class="nroffip">CURLMOPT_PIPELINING_SERVER_BL</span> </p>
+<p class="level1"><span Class="bold">deprecated</span>. See <a Class="emphasis" href="./CURLMOPT_PIPELINING_SERVER_BL.html">CURLMOPT_PIPELINING_SERVER_BL</a> </p>
+<p class="level0"><a name="CURLMOPTPIPELININGSITEBL"></a><span class="nroffip">CURLMOPT_PIPELINING_SITE_BL</span> </p>
+<p class="level1"><span Class="bold">deprecated</span>. See <a Class="emphasis" href="./CURLMOPT_PIPELINING_SITE_BL.html">CURLMOPT_PIPELINING_SITE_BL</a> </p>
+<p class="level0"><a name="CURLMOPTPUSHDATA"></a><span class="nroffip">CURLMOPT_PUSHDATA</span> </p>
+<p class="level1">Pointer to pass to push callback. See <a Class="emphasis" href="./CURLMOPT_PUSHDATA.html">CURLMOPT_PUSHDATA</a> </p>
+<p class="level0"><a name="CURLMOPTPUSHFUNCTION"></a><span class="nroffip">CURLMOPT_PUSHFUNCTION</span> </p>
+<p class="level1">Callback that approves or denies server pushes. See <a Class="emphasis" href="./CURLMOPT_PUSHFUNCTION.html">CURLMOPT_PUSHFUNCTION</a> </p>
+<p class="level0"><a name="CURLMOPTSOCKETDATA"></a><span class="nroffip">CURLMOPT_SOCKETDATA</span> </p>
+<p class="level1">Custom pointer passed to the socket callback. See <a Class="emphasis" href="./CURLMOPT_SOCKETDATA.html">CURLMOPT_SOCKETDATA</a> </p>
+<p class="level0"><a name="CURLMOPTSOCKETFUNCTION"></a><span class="nroffip">CURLMOPT_SOCKETFUNCTION</span> </p>
+<p class="level1">Callback informed about what to wait for. See <a Class="emphasis" href="./CURLMOPT_SOCKETFUNCTION.html">CURLMOPT_SOCKETFUNCTION</a> </p>
+<p class="level0"><a name="CURLMOPTTIMERDATA"></a><span class="nroffip">CURLMOPT_TIMERDATA</span> </p>
+<p class="level1">Custom pointer to pass to timer callback. See <a Class="emphasis" href="./CURLMOPT_TIMERDATA.html">CURLMOPT_TIMERDATA</a> </p>
+<p class="level0"><a name="CURLMOPTTIMERFUNCTION"></a><span class="nroffip">CURLMOPT_TIMERFUNCTION</span> </p>
+<p class="level1">Callback to receive timeout values. See <a Class="emphasis" href="./CURLMOPT_TIMERFUNCTION.html">CURLMOPT_TIMERFUNCTION</a> </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+&nbsp;
+&#35;define MAX_PARALLEL 45
+&nbsp;
+int main(void)
+{
+&nbsp; CURLM &#x2a;multi = <a href="curl_multi_init.html">curl_multi_init</a>();
+&nbsp;
+&nbsp; /&#x2a; Limit the amount of simultaneous connections curl should allow: &#x2a;/
+&nbsp; <a href="curl_multi_setopt.html">curl_multi_setopt</a>(multi, <a href="CURLMOPT_MAXCONNECTS.html">CURLMOPT_MAXCONNECTS</a>, (long)MAX_PARALLEL);
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.15.4.html">7.15.4</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLMcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLMOK">CURLM_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p>
+<p class="level0">Note that it returns a <a href="libcurl-errors.html#CURLMUNKNOWNOPTION">CURLM_UNKNOWN_OPTION</a> if you try setting an option that this version of libcurl does not know of. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_multi_cleanup.html">curl_multi_cleanup</a>(3), <a Class="bold" href="./curl_multi_info_read.html">curl_multi_info_read</a>(3), <a Class="bold" href="./curl_multi_init.html">curl_multi_init</a>(3), <a Class="bold" href="./curl_multi_socket.html">curl_multi_socket</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

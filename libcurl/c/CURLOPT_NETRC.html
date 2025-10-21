@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_NETRC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_NETRC</b></div>
+<h1> CURLOPT_NETRC explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_NETRC%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_NETRC.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_NETRC.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_NETRC - enable use of .netrc </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_NETRC.html">CURLOPT_NETRC</a>, long level);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This parameter controls the preference <span Class="emphasis">level</span> of libcurl between using usernames and passwords from your <span Class="emphasis">~/.netrc</span> file, relative to usernames and passwords in the URL supplied with <a Class="emphasis" href="./CURLOPT_URL.html">CURLOPT_URL</a>. If the <span Class="emphasis">NETRC</span> environment variable is set, that filename is used as the netrc file. (Added in <a href="/ch/8.16.0.html">8.16.0</a>) </p>
+<p class="level0">On Windows, libcurl primarily checks for <span Class="emphasis">.netrc</span> in <span Class="emphasis">%HOME%</span>. If <span Class="emphasis">%HOME%</span> is not set on Windows, libcurl falls back to <span Class="emphasis">%USERPROFILE%</span>. If the file does not exist, it falls back to check if there is instead a file named <span Class="emphasis">_netrc</span> - using an underscore instead of period. </p>
+<p class="level0">You can also tell libcurl a different filename to use with <a Class="emphasis" href="./CURLOPT_NETRC_FILE.html">CURLOPT_NETRC_FILE</a>. </p>
+<p class="level0">libcurl uses a username (and supplied or prompted password) supplied with <a Class="emphasis" href="./CURLOPT_USERPWD.html">CURLOPT_USERPWD</a> or <a Class="emphasis" href="./CURLOPT_USERNAME.html">CURLOPT_USERNAME</a> in preference to any of the options controlled by this parameter. </p>
+<p class="level0">Only machine name, username and password are taken into account (init macros and similar things are not supported). </p>
+<p class="level0">The netrc file provides credentials for a hostname independent of which protocol and port number that are used. </p>
+<p class="level0">libcurl does not verify that the file has the correct properties set (as the standard Unix ftp client does). It should only be readable by user. </p>
+<p class="level0"><span Class="emphasis">level</span> is a long that should be set to one of the values described below. </p>
+<p class="level0"><a name="CURLNETRCIGNORED"></a><span class="nroffip">CURL_NETRC_IGNORED (0)</span> </p>
+<p class="level1">libcurl ignores the <span Class="emphasis">.netrc</span> file. This is the default. </p>
+<p class="level0"><a name="CURLNETRCOPTIONAL"></a><span class="nroffip">CURL_NETRC_OPTIONAL (1)</span> </p>
+<p class="level1">The use of the <span Class="emphasis">.netrc</span> file is optional, and information in the URL is to be preferred. The file is scanned for the host and username (to find the password only) or for the host only, to find the first username and password after that <a class="emphasis" href="#machine">machine</a>, which ever information is not specified. </p>
+<p class="level0"><a name="CURLNETRCREQUIRED"></a><span class="nroffip">CURL_NETRC_REQUIRED (2)</span> </p>
+<p class="level1">The use of the <span Class="emphasis">.netrc</span> file is required, and any credential information present in the URL is ignored. The file is scanned for the host and username (to find the password only) or for the host only, to find the first username and password after that <a class="emphasis" href="#machine">machine</a>, which ever information is not specified. </p><a name="FILE"></a><h2 class="nroffsh">File format</h2>
+<p class="level0">The <span Class="bold">.netrc</span> file format is simple: you specify lines with a machine name and follow the login and password that are associated with that machine. </p>
+<p class="level0">Each field is provided as a sequence of letters that ends with a space or newline. Starting in <a href="/ch/7.84.0.html">7.84.0</a>, libcurl also supports quoted strings. They start and end with double quotes and support the escaped special letters &quot;, n, r, and t. Quoted strings are the only way a space character can be used in a username or password. </p>
+<p class="level0"><a name="machine"></a><span class="nroffip">machine \&lt;name\&gt;</span> </p>
+<p class="level1">Provides credentials for a host called <span Class="bold">name</span>. libcurl searches the .netrc file for a machine token that matches the hostname specified in the URL. Once a match is made, the subsequent tokens are processed, stopping when the end of file is reached or another &quot;machine&quot; is encountered. </p>
+<p class="level0"><a name="default"></a><span class="nroffip">default</span> </p>
+<p class="level1">This is the same as machine name except that default matches any name. There can be only one default token, and it must be after all machine tokens. To provide a default anonymous login for hosts that are not otherwise matched, add a line similar to this in the end: </p><pre class="level1">
+default login anonymous password user@domain
+</pre>
+<p class="level0"><a name="login"></a><span class="nroffip">login \&lt;name\&gt;</span> </p>
+<p class="level1">The username string for the remote machine. </p>
+<p class="level0"><a name="password"></a><span class="nroffip">password \&lt;secret\&gt;</span> </p>
+<p class="level1">Supply a password. If this token is present, curl supplies the specified string if the remote server requires a password as part of the login process. Note that if this token is present in the .netrc file you really should make sure the file is not readable by anyone besides the user. </p>
+<p class="level0"><a name="macdef"></a><span class="nroffip">macdef \&lt;name\&gt;</span> </p>
+<p class="level1">Define a macro. This feature is not supported by libcurl. In order for the rest of the .netrc to still work fine, libcurl properly skips every definition done with &quot;macdef&quot; that it finds. </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">CURL_NETRC_IGNORED </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   CURLcode ret;
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;ftp://example.com/&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_NETRC.html">CURLOPT_NETRC</a>, CURL_NETRC_OPTIONAL);
+&nbsp;   ret = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp; }
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0"><span Class="bold">CURL_NETRC_</span>&#x2a; enums became <span Class="emphasis">long</span> types in <a href="/ch/8.13.0.html">8.13.0</a>, prior to this version a <span Class="emphasis">long</span> cast was necessary when passed to <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a>. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl 7.1 </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLOPT_NETRC_FILE.html">CURLOPT_NETRC_FILE</a>(3), <a Class="bold" href="./CURLOPT_USERNAME.html">CURLOPT_USERNAME</a>(3), <a Class="bold" href="./CURLOPT_USERPWD.html">CURLOPT_USERPWD</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

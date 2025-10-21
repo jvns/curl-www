@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLINFO_TLS_SSL_PTR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a> / <b>CURLINFO_TLS_SSL_PTR</b></div>
+<h1> CURLINFO_TLS_SSL_PTR explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_getinfo_options.html">info options</a>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=@template%20manpage:@&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLINFO_TLS_SSL_PTR.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLINFO_TLS_SSL_PTR.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLINFO_TLS_SESSION, <a href="CURLINFO_TLS_SSL_PTR.html">CURLINFO_TLS_SSL_PTR</a> - get TLS session info </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_getinfo.html">curl_easy_getinfo</a>(CURL &#x2a;handle, <a href="CURLINFO_TLS_SSL_PTR.html">CURLINFO_TLS_SSL_PTR</a>,
+&nbsp;                          struct curl_tlssessioninfo &#x2a;&#x2a;session);
+&nbsp;
+/&#x2a; if you need compatibility with libcurl &lt; <a href="/ch/7.48.0.html">7.48.0</a> use
+&nbsp;  <a href="CURLINFO_TLS_SESSION.html">CURLINFO_TLS_SESSION</a> instead: &#x2a;/
+&nbsp;
+CURLcode <a href="curl_easy_getinfo.html">curl_easy_getinfo</a>(CURL &#x2a;handle, <a href="CURLINFO_TLS_SESSION.html">CURLINFO_TLS_SESSION</a>,
+&nbsp;                          struct curl_tlssessioninfo &#x2a;&#x2a;session);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a pointer to a <span Class="emphasis">struct curl_tlssessioninfo </span>&#x2a;. The pointer is initialized to refer to a <span Class="emphasis">struct curl_tlssessioninfo </span>&#x2a; that contains an enum indicating the SSL library used for the handshake and a pointer to the respective internal TLS session structure of this underlying SSL library. </p>
+<p class="level0">This option may be useful for example to extract certificate information in a format convenient for further processing, such as manual validation. Refer to the <a class="bold" href="#LIMITATIONS">LIMITATIONS</a> section. </p><pre class="level0">
+struct curl_tlssessioninfo {
+&nbsp; curl_sslbackend backend;
+&nbsp; void &#x2a;internals;
+};
+</pre>
+<p class="level0">The <span Class="emphasis">backend</span> struct member is one of these defines: CURLSSLBACKEND_NONE (when built without TLS support), CURLSSLBACKEND_WOLFSSL, CURLSSLBACKEND_SECURETRANSPORT, CURLSSLBACKEND_GNUTLS, CURLSSLBACKEND_MBEDTLS, CURLSSLBACKEND_NSS, CURLSSLBACKEND_OPENSSL or CURLSSLBACKEND_SCHANNEL. (Note that the OpenSSL forks are all reported as just OpenSSL here.) </p>
+<p class="level0">The <span Class="emphasis">internals</span> struct member points to a TLS library specific pointer for the active (&quot;in use&quot;) SSL connection, with the following underlying types: </p>
+<p class="level0"><a name="GnuTLS"></a><span class="nroffip">GnuTLS</span> </p>
+<p class="level1"><span Class="bold">gnutls_session_t</span> </p>
+<p class="level0"><a name="OpenSSL"></a><span class="nroffip">OpenSSL</span> </p>
+<p class="level1"><a Class="emphasis" href="./CURLINFO_TLS_SESSION.html">CURLINFO_TLS_SESSION</a>: <span Class="bold">SSL_CTX </span>&#x2a; </p>
+<p class="level1"><a Class="emphasis" href="./CURLINFO_TLS_SSL_PTR.html">CURLINFO_TLS_SSL_PTR</a>: <span Class="bold">SSL </span>&#x2a; Since <a href="/ch/7.48.0.html">7.48.0</a> the <span Class="emphasis">internals</span> member can point to these other SSL backends as well: </p>
+<p class="level0"><a name="mbedTLS"></a><span class="nroffip">mbedTLS</span> </p>
+<p class="level1"><span Class="bold">mbedTLS_ssl_context </span>&#x2a; </p>
+<p class="level0"><a name="Secure"></a><span class="nroffip">Secure Channel</span> </p>
+<p class="level1"><span Class="bold">CtxtHandle </span>&#x2a; </p>
+<p class="level0"><a name="wolfSSL"></a><span class="nroffip">wolfSSL</span> </p>
+<p class="level1"><span Class="bold">SSL </span>&#x2a; </p>
+<p class="level0">If the <span Class="emphasis">internals</span> pointer is NULL then either the SSL backend is not supported, an SSL session has not yet been established or the connection is no longer associated with the easy handle (e.g. <a Class="emphasis" href="./curl_easy_perform.html">curl_easy_perform</a> has returned). </p><a name="LIMITATIONS"></a><h2 class="nroffsh">Limitations</h2>
+<p class="level0">This option has some limitations that could make it unsafe when it comes to the manual verification of certificates. </p>
+<p class="level0">This option only retrieves the first in-use SSL session pointer for your easy handle, however your easy handle may have more than one in-use SSL session if using FTP over SSL. That is because the FTP protocol has a control channel and a data channel and one or both may be over SSL. Currently there is no way to retrieve a second in-use SSL session associated with an easy handle. </p>
+<p class="level0">This option has not been thoroughly tested with clear text protocols that can be upgraded/downgraded to/from SSL: FTP, SMTP, POP3, IMAP when used with <a Class="emphasis" href="./CURLOPT_USE_SSL.html">CURLOPT_USE_SSL</a>. Though you can to retrieve the SSL pointer, it is possible that before you can do that, data (including auth) may have already been sent over a connection after it was upgraded. </p>
+<p class="level0">Renegotiation. If unsafe renegotiation or renegotiation in a way that the certificate is allowed to change is allowed by your SSL library this may occur and the certificate may change, and data may continue to be sent or received after renegotiation but before you are able to get the (possibly) changed SSL pointer, with the (possibly) changed certificate information. </p>
+<p class="level0">Instead of using this option to poll for certificate changes use <a Class="emphasis" href="./CURLOPT_SSL_CTX_FUNCTION.html">CURLOPT_SSL_CTX_FUNCTION</a> to set a verification callback, if supported. That is safer and does not suffer from any of the problems above. </p>
+<p class="level0">How are you using this option? Are you affected by any of these limitations? Please let us know by making a comment at <a href="https://github.com/curl/curl/issues/685">https://github.com/curl/curl/issues/685</a> </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all TLS based protocols: HTTPS, FTPS, IMAPS, POP3S, SMTPS etc. </p>
+<p class="level0">This option works only with the following TLS backends: GnuTLS, OpenSSL, Schannel, mbedTLS and wolfSSL </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&#35;include &lt;openssl/ssl.h&gt;
+&nbsp;
+CURL &#x2a;curl;
+static size_t wf(void &#x2a;ptr, size_t size, size_t nmemb, void &#x2a;stream)
+{
+&nbsp; const struct curl_tlssessioninfo &#x2a;info = NULL;
+&nbsp; CURLcode res = <a href="curl_easy_getinfo.html">curl_easy_getinfo</a>(curl, <a href="CURLINFO_TLS_SSL_PTR.html">CURLINFO_TLS_SSL_PTR</a>, &amp;info);
+&nbsp; if(info &amp;&amp; !res) {
+&nbsp;   if(CURLSSLBACKEND_OPENSSL == info-&gt;backend) {
+&nbsp;     printf(&quot;OpenSSL ver. %s&bsol;n&quot;, SSL_get_version((SSL&#x2a;)info-&gt;internals));
+&nbsp;   }
+&nbsp; }
+&nbsp; return size &#x2a; nmemb;
+}
+&nbsp;
+int main(int argc, char &#x2a;&#x2a;argv)
+{
+&nbsp; CURLcode res;
+&nbsp; curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;https://example.com&quot;);
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>, wf);
+&nbsp;   res = <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; }
+&nbsp; return res;
+}
+</pre>
+<a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0">This option supersedes <a Class="emphasis" href="./CURLINFO_TLS_SESSION.html">CURLINFO_TLS_SESSION</a> which was added in <a href="/ch/7.34.0.html">7.34.0</a>. This option is exactly the same as that option except in the case of OpenSSL. </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.48.0.html">7.48.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_getinfo.html">curl_easy_getinfo</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLINFO_TLS_SESSION.html">CURLINFO_TLS_SESSION</a>(3), <a Class="bold" href="./curl_easy_getinfo.html">curl_easy_getinfo</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

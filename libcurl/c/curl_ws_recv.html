@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_ws_recv()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_init</b></div>
+<h1> curl_ws_recv - receive websocket data </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_ws_recv%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_ws_recv.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_ws_recv.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_ws_recv - receive WebSocket data </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_ws_recv.html">curl_ws_recv</a>(CURL &#x2a;curl, void &#x2a;buffer, size_t buflen,
+&nbsp;                     size_t &#x2a;recv, const struct curl_ws_frame &#x2a;&#x2a;meta);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Retrieves as much as possible of a received WebSocket frame into the <span Class="emphasis">buffer</span>, but not more than <span Class="emphasis">buflen</span> bytes. <span Class="emphasis">recv</span> is set to the number of bytes actually stored. </p>
+<p class="level0">If the function call is successful, the <span Class="emphasis">meta</span> pointer gets set to point to a <span Class="emphasis">const struct curl_ws_frame</span> that contains information about the received data. That struct must not be freed and its contents must not be relied upon anymore once another WebSocket function is called. See <a Class="emphasis" href="./curl_ws_meta.html">curl_ws_meta</a> for more details on that struct. </p>
+<p class="level0">The application must check <span Class="emphasis">meta-&gt;bytesleft</span> to determine whether the complete frame has been received. If more payload is pending, the application must call this function again with an updated <span Class="emphasis">buffer</span> and <span Class="emphasis">buflen</span> to resume receiving. This may for example happen when the data does not fit into the provided buffer or when not all frame data has been delivered over the network yet. </p>
+<p class="level0">If the application wants to read the metadata without consuming any payload, it may call this function with a <span Class="emphasis">buflen</span> of zero. Setting <span Class="emphasis">buffer</span> to a NULL pointer is permitted in this case. Note that frames without payload are consumed by this action. </p>
+<p class="level0">If the received message consists of multiple fragments, the <span Class="emphasis">CURLWS_CONT</span> bit is set in all frames except the final one. The appropriate <span Class="emphasis">CURLWS_TEXT</span> or <span Class="emphasis">CURLWS_BINARY</span> flag is set in every frame, regardless whether it is the first fragment, an intermediate fragment or the final fragment. The application is responsible for reassembling fragmented messages. Special care must be taken to correctly handle control frames (i.e. CLOSE, PING and PONG) arriving in between consecutive fragments of a fragmented TEXT or BINARY message. See <a Class="emphasis" href="./curl_ws_meta.html">curl_ws_meta</a> for more details on <span Class="emphasis">CURLWS_CONT</span>. </p>
+<p class="level0">The WebSocket protocol consists of <span Class="emphasis">messages</span> that can be delivered over the wire as one or more <span Class="emphasis">frames</span> - but since a frame can be too large to buffer in memory, libcurl may need to deliver partial frames to the application. Fragments, or chunks, of frames. </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects ws only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; char buffer[256];
+&nbsp; size_t offset = 0;
+&nbsp; CURLcode res = <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>;
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp;
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_URL.html">CURLOPT_URL</a>, &quot;wss://example.com/&quot;);
+&nbsp; <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_CONNECT_ONLY.html">CURLOPT_CONNECT_ONLY</a>, 2L);
+&nbsp; /&#x2a; start HTTPS connection and upgrade to WSS, then return control &#x2a;/
+&nbsp; <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);
+&nbsp;
+&nbsp; /&#x2a; Note: This example neglects fragmented messages. (CURLWS_CONT bit)
+&nbsp;          A real application must handle them appropriately. &#x2a;/
+&nbsp;
+&nbsp; while(!res) {
+&nbsp;   size_t recv;
+&nbsp;   const struct curl_ws_frame &#x2a;meta;
+&nbsp;   res = <a href="curl_ws_recv.html">curl_ws_recv</a>(curl, buffer + offset, sizeof(buffer) - offset, &amp;recv,
+&nbsp;                      &amp;meta);
+&nbsp;   offset += recv;
+&nbsp;
+&nbsp;   if(res == <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>) {
+&nbsp;     if(meta-&gt;bytesleft == 0)
+&nbsp;       break; /&#x2a; finished receiving &#x2a;/
+&nbsp;     if(meta-&gt;bytesleft &gt; sizeof(buffer) - offset)
+&nbsp;       res = <a href="libcurl-errors.html#CURLETOOLARGE">CURLE_TOO_LARGE</a>;
+&nbsp;   }
+&nbsp;
+&nbsp;   if(res == <a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a>)
+&nbsp;     /&#x2a; in real application: wait for socket here, e.g. using select() &#x2a;/
+&nbsp;     res = <a href="libcurl-errors.html#CURLEOK">CURLE_OK</a>;
+&nbsp; }
+&nbsp;
+&nbsp; <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);
+&nbsp; return (int)res;
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.86.0.html">7.86.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">This function returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. If <a Class="emphasis" href="./CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a> was set with <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> there can be an error message stored in the error buffer when non-zero is returned. </p>
+<p class="level0">Returns <span Class="bold"><a href="libcurl-errors.html#CURLEGOTNOTHING">CURLE_GOT_NOTHING</a></span> if the associated connection is closed. </p>
+<p class="level0">Instead of blocking, the function returns <span Class="bold"><a href="libcurl-errors.html#CURLEAGAIN">CURLE_AGAIN</a></span>. The correct behavior is then to wait for the socket to signal readability before calling this function again. </p>
+<p class="level0">Any other non-zero return value indicates an error. See the <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a> man page for the full list with descriptions. </p>
+<p class="level0">Returns <span Class="bold"><a href="libcurl-errors.html#CURLEGOTNOTHING">CURLE_GOT_NOTHING</a></span> if the associated connection is closed. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_getinfo.html">curl_easy_getinfo</a>(3), <a Class="bold" href="./curl_easy_perform.html">curl_easy_perform</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3), <a Class="bold" href="./curl_ws_send.html">curl_ws_send</a>(3), <a Class="bold" href="./libcurl-ws.html">libcurl-ws</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

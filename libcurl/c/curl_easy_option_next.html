@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - curl_easy_option_next()</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <b>curl_easy_option_next</b></div>
+<h1> curl_easy_option_next - get next option </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="symbols-in-versions.html">Symbols</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=curl_easy_option_next%20manpage:&amp;labels=documentation&amp;template=docs.yml&amp;source=curl_easy_option_next.md" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/curl_easy_option_next.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">curl_easy_option_next - iterate over easy setopt options </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+const struct curl_easyoption &#x2a;
+<a href="curl_easy_option_next.html">curl_easy_option_next</a>(const struct curl_easyoption &#x2a;prev);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">This function returns a pointer to the first or the next <span Class="emphasis">curl_easyoption</span> struct, providing an ability to iterate over all known options for <a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> in this instance of libcurl. </p>
+<p class="level0">Pass a <span Class="bold">NULL</span> argument as <span Class="bold">prev</span> to get the first option returned, or pass in the current option to get the next one returned. If there is no more option to return, <a Class="emphasis" href="./curl_easy_option_next.html">curl_easy_option_next</a> returns NULL. </p>
+<p class="level0">The options returned by this functions are the ones known to this libcurl and information about what argument type they want. </p>
+<p class="level0">If the <span Class="bold">CURLOT_FLAG_ALIAS</span> bit is set in the flags field, it means the name is provided for backwards compatibility as an alias. </p><a name="struct"></a><h2 class="nroffsh">Struct</h2><pre class="level0">
+typedef enum {
+&nbsp; CURLOT_LONG,    /&#x2a; long (a range of values) &#x2a;/
+&nbsp; CURLOT_VALUES,  /&#x2a;      (a defined set or bitmask) &#x2a;/
+&nbsp; CURLOT_OFF_T,   /&#x2a; curl_off_t (a range of values) &#x2a;/
+&nbsp; CURLOT_OBJECT,  /&#x2a; pointer (void &#x2a;) &#x2a;/
+&nbsp; CURLOT_STRING,  /&#x2a;         (char &#x2a; to null-terminated buffer) &#x2a;/
+&nbsp; CURLOT_SLIST,   /&#x2a;         (struct curl_slist &#x2a;) &#x2a;/
+&nbsp; CURLOT_CBPTR,   /&#x2a;         (void &#x2a; passed as-is to a callback) &#x2a;/
+&nbsp; CURLOT_BLOB,    /&#x2a; blob (struct curl_blob &#x2a;) &#x2a;/
+&nbsp; CURLOT_FUNCTION /&#x2a; function pointer &#x2a;/
+} curl_easytype;
+&nbsp;
+/&#x2a; The CURLOPTTYPE_&#x2a; id ranges can still be used to figure out what type/size
+&nbsp;  to use for <a href="curl_easy_setopt.html">curl_easy_setopt</a>() for the given id &#x2a;/
+struct curl_easyoption {
+&nbsp; const char &#x2a;name;
+&nbsp; CURLoption id;
+&nbsp; curl_easytype type;
+&nbsp; unsigned int flags;
+};
+</pre>
+<a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects all supported protocols </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+int main(void)
+{
+&nbsp; /&#x2a; iterate over all available options &#x2a;/
+&nbsp; const struct curl_easyoption &#x2a;opt;
+&nbsp; opt = <a href="curl_easy_option_next.html">curl_easy_option_next</a>(NULL);
+&nbsp; while(opt) {
+&nbsp;   printf(&quot;Name: %s&bsol;n&quot;, opt-&gt;name);
+&nbsp;   opt = <a href="curl_easy_option_next.html">curl_easy_option_next</a>(opt);
+&nbsp; }
+}
+</pre>
+<a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.73.0.html">7.73.0</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0">A pointer to the <span Class="emphasis">curl_easyoption</span> struct for the next option or NULL if no more options. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./curl_easy_option_by_id.html">curl_easy_option_by_id</a>(3), <a Class="bold" href="./curl_easy_option_by_name.html">curl_easy_option_by_name</a>(3), <a Class="bold" href="./curl_easy_setopt.html">curl_easy_setopt</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

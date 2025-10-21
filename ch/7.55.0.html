@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.55.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.55.0</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.54.1.html">🠰 7.54.1</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.55.1.html">7.55.1 🠲</a>
+</span>
+<h1> Changes in 7.55.0 - August 9 2017 </h1>
+<div class="vulnbox"><a href=/docs/vuln-7.55.0.html>7.55.0</a></div> <div style="clear: both;">&nbsp;</div>
+<p> Changes:
+<ul class="changes">
+ <li> <a href="https://curl.se/bug/?i=1486">curl: allow --header and --proxy-header read from file</a>
+ <li> <a href="https://curl.se/bug/?i=1511">getinfo: provide sizes as curl_off_t</a>
+ <li> <a href="https://curl.se/bug/?i=1512">curl: prevent binary output spewed to terminal</a>
+ <li> <a href="https://curl.se/bug/?i=1593">curl: added --request-target</a>
+ <li> <a href="https://curl.se/bug/?i=1593">libcurl: added CURLOPT_REQUEST_TARGET</a>
+ <li> <a href="https://curl.se/bug/?i=1454">curl: added --socks5-{basic,gssapi}: control socks5 auth</a>
+ <li> <a href="https://curl.se/bug/?i=1454">libcurl: added CURLOPT_SOCKS5_AUTH</a>
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> <a href="https://curl.se/docs/CVE-2017-1000101.html">glob: do not parse after a strtoul() overflow range (CVE-2017-1000101)</a>
+ <li> <a href="https://curl.se/docs/CVE-2017-1000100.html">tftp: reject filename lengths that don&#39;t fit (CVE-2017-1000100)</a>
+ <li> <a href="https://curl.se/docs/CVE-2017-1000099.html">file: output the correct buffer to the user (CVE-2017-1000099)</a>
+ <li> <a href="https://daniel.haxx.se/blog/2017/06/15/target-independent-libcurl-headers/">includes: remove curl/curlbuild.h and curl/curlrules.h</a>
+ <li> <a href="https://curl.se/bug/?i=1565">dist: make the hugehelp.c not get regenerated unnecessarily</a>
+ <li> <a href="https://curl.se/bug/?i=1531">timers: store internal time stamps as time_t instead of doubles</a>
+ <li> <a href="https://curl.se/bug/?i=1556">progress: let "current speed" be UL + DL speeds combined</a>
+ <li> <a href="https://curl.se/bug/?i=1547">http-proxy: do the HTTP CONNECT process entirely non-blocking</a>
+ <li> <a href="https://curl.se/bug/?i=1538">lib/curl_setup.h: remove CURL_WANTS_CA_BUNDLE_ENV</a>
+ <li> <a href="https://curl.se/bug/?i=1476">fuzz: bring oss-fuzz initial code converted to C89</a>
+ <li> configure: disable nghttp2 too if HTTP has been disabled
+ <li> <a href="https://curl.se/bug/?i=1577">mk-ca-bundle.pl: Check curl&#39;s exit code after certdata download</a>
+ <li> <a href="https://curl.se/bug/?i=1569">test1148: verify the -# progressbar</a>
+ <li> <a href="https://curl.se/bug/?i=1576">tests: stabilize test 2032 and 2033</a>
+ <li> <a href="https://curl.se/bug/?i=1546">HTTPS-Proxy: don&#39;t offer h2 for https proxy connections</a>
+ <li> <a href="https://curl.se/bug/?i=1505">http-proxy: only attempt FTP over HTTP proxy</a>
+ <li> <a href="https://curl.se/bug/?i=1578">curl-compilers.m4: enable vla warning for clang</a>
+ <li> <a href="https://curl.se/bug/?i=1578">curl-compilers.m4: enable double-promotion warning</a>
+ <li> <a href="https://curl.se/bug/?i=1578">curl-compilers.m4: enable missing-variable-declarations clang warning</a>
+ <li> <a href="https://curl.se/bug/?i=1578">curl-compilers.m4: enable comma clang warning</a>
+ <li> <a href="https://curl.se/bug/?i=1578">Makefile.m32: enable -W for MinGW32 build</a>
+ <li> <a href="https://curl.se/bug/?i=1514">CURLOPT_PREQUOTE: not supported for SFTP</a>
+ <li> http2: fix OOM crash
+ <li> <a href="https://curl.se/bug/?i=1584">PIPELINING_SERVER_BL: cleanup the internal list use</a>
+ <li> mkhelp.pl: fix script name in usage text
+ <li> lib1521: add curl_easy_getinfo calls to the test set
+ <li> travis: do the distcheck test build out-of-tree as well
+ <li> if2ip: fix compiler warning in ISO C90 mode
+ <li> <a href="https://github.com/curl/curl/commit/73a2fcea0b4adea6ba342cd7ed1149782c214ae3#commitcomment-22655993">lib: fix the djgpp build</a>
+ <li> <a href="https://curl.se/bug/?i=1592">typecheck-gcc: add support for CURLINFO_OFF_T</a>
+ <li> <a href="https://curl.se/bug/?i=1595">travis: enable typecheck-gcc warnings</a>
+ <li> <a href="https://curl.se/bug/?i=1604">maketgz: switch to xz instead of lzma</a>
+ <li> CURLINFO_REDIRECT_URL.3: mention the CURLOPT_MAXREDIRS case
+ <li> <a href="https://curl.se/bug/?i=1606">curl-compilers.m4: fix unknown-warning-option on Apple clang</a>
+ <li> <a href="https://curl.se/bug/?i=1610">winbuild: fix boringssl build</a>
+ <li> <a href="https://curl.se/bug/?i=1598">curl/system.h: add check for XTENSA for 32bit gcc</a>
+ <li> test1537: fixed memory leak on OOM
+ <li> <a href="https://curl.se/bug/?i=1611">test1521: fix compiler warnings</a>
+ <li> <a href="https://github.com/curl/curl/pull/1486#issuecomment-310926872">curl: fix memory leak on test 1147 OOM</a>
+ <li> <a href="https://curl.se/bug/?i=1614">libtest/make: generate lib1521.c dynamically at build-time</a>
+ <li> <a href="https://curl.se/bug/?i=1623">curl_strequal.3: fix typo in SYNOPSIS</a>
+ <li> <a href="https://curl.se/bug/?i=1616">progress: prevent resetting t_starttransfer</a>
+ <li> <a href="https://curl.se/bug/?i=1620">openssl: improve fallback seed of PRNG with a time based hash</a>
+ <li> <a href="https://curl.se/bug/?i=1521">http2: improved PING frame handling</a>
+ <li> <a href="https://curl.se/bug/?i=1615">test1450: add simple testing for DICT</a>
+ <li> <a href="https://curl.se/bug/?i=1591">make: build the docs subdir only from within src</a>
+ <li> <a href="https://curl.se/bug/?i=1621">cmake: Added compatibility options for older Windows versions</a>
+ <li> <a href="https://curl.se/bug/?i=1617">gtls: fix build when sizeof(long) &lt; sizeof(void *)</a>
+ <li> <a href="https://curl.se/bug/?i=1631">url: make the original string get used on subsequent transfers</a>
+ <li> <a href="https://curl.se/mail/lib-2017-07/0003.html">timeval.c: Use long long constant type for timeval assignment</a>
+ <li> tool_sleep: typecast to avoid macos compiler warning
+ <li> <a href="https://curl.se/bug/?i=1637">travis.yml: use --enable-werror on debug builds</a>
+ <li> <a href="https://curl.se/bug/?i=1630">test1451: add SMB support to the testbed</a>
+ <li> <a href="https://curl.se/bug/?i=1638">configure: remove checks for 5 functions never used</a>
+ <li> <a href="https://curl.se/bug/?i=1619">configure: try ldap/lber in reversed order first</a>
+ <li> <a href="https://curl.se/mail/lib-2017-07/0005.html">smb: fix build for djgpp/MSDOS</a>
+ <li> <a href="https://curl.se/bug/?i=1642">travis: install nghttp2 on linux builds</a>
+ <li> <a href="https://curl.se/mail/lib-2017-07/0005.html">smb: add support for CURLOPT_FILETIME</a>
+ <li> <a href="https://curl.se/bug/?i=1640">cmake: fix send/recv argument scanner for windows</a>
+ <li> <a href="https://curl.se/bug/?i=1639">inet_pton: fix include on windows to get prototype</a>
+ <li> select.h: avoid macro redefinition harder
+ <li> cmake: if inet_pton is used, bump _WIN32_WINNT
+ <li> asyn-thread.c: fix unused variable warnings on macOS
+ <li> runtests: support "threaded-resolver" as a feature
+ <li> test506: skip if threaded-resolver
+ <li> <a href="https://curl.se/bug/?i=1552">cmake: remove spurious "-l" from linker flags</a>
+ <li> cmake: add CURL_WERROR for enabling "warning as errors"
+ <li> <a href="https://github.com/curl/curl/issues/828#issuecomment-313475151">memdebug: don&#39;t setbuf() if the file open failed</a>
+ <li> <a href="https://curl.se/bug/?i=1612">curl_easy_escape.3: mention the (lack of) encoding</a>
+ <li> <a href="https://curl.se/bug/?i=1645">test1452: add telnet negotiation</a>
+ <li> CURLOPT_POSTFIELDS.3: explain the 100-continue magic better
+ <li> <a href="https://curl.se/bug/?i=1649">cmake: offer CMAKE_DEBUG_POSTFIX when building with MSVC</a>
+ <li> <a href="https://curl.se/bug/?i=1653">tests/valgrind.supp: suppress OpenSSL false positive seen on travis</a>
+ <li> <a href="https://curl.se/bug/?i=1589">curl_setup_once: Remove ERRNO/SET_ERRNO macros</a>
+ <li> <a href="https://curl.se/bug/?i=1665">curl-compilers.m4: disable warning spam with Cygwin&#39;s clang</a>
+ <li> <a href="https://curl.se/bug/?i=1664">ldap: fix MinGW compiler warning</a>
+ <li> <a href="https://curl.se/bug/?i=1591">make: fix docs build on OpenBSD</a>
+ <li> <a href="https://curl.se/bug/?i=1672">curl_setup: always define WIN32_LEAN_AND_MEAN on Windows</a>
+ <li> system.h: include winsock2.h before windows.h
+ <li> <a href="https://curl.se/bug/?i=1667">winbuild: build with warning level 4</a>
+ <li> rtspd: fix MSVC level 4 warning
+ <li> sockfilt: suppress conversion warning with explicit cast
+ <li> libtest: fix MSVC warning C4706
+ <li> <a href="https://github.com/curl/curl/commit/eb16305#commitcomment-23035670">darwinssl: fix pinnedpubkey build error</a>
+ <li> <a href="https://curl.se/bug/?i=1682">tests/server/resolve.c: fix deprecation warning</a>
+ <li> <a href="https://bugzilla.redhat.com/1436158">nss: fix a possible use-after-free in SelectClientCert()</a>
+ <li> checksrc: escape open brace in regex
+ <li> <a href="https://curl.se/bug/?i=1683">multi: mention integer overflow risk if using > 500 million sockets</a>
+ <li> <a href="https://curl.se/bug/?i=1703">darwinssl: fix --tlsv1.2 regression</a>
+ <li> <a href="https://curl.se/bug/?i=1693">timeval: struct curltime is a struct timeval replacement</a>
+ <li> <a href="https://curl.se/bug/?i=1652">curl_rtmp: fix a compiler warning</a>
+ <li> <a href="https://curl.se/bug/?i=1704">include.d: clarify that it concerns the response headers</a>
+ <li> <a href="https://curl.se/bug/?i=1674">cmake: support make uninstall</a>
+ <li> <a href="https://github.com/curl/curl/commit/de6de94#commitcomment-23370851">include.d: clarify --include is only for response headers</a>
+ <li> <a href="https://curl.se/bug/?i=1688">libcurl: Stop using error codes defined under CURL_NO_OLDIES</a>
+ <li> <a href="https://curl.se/bug/?i=1714">http: fix response code parser to avoid integer overflow</a>
+ <li> <a href="https://curl.se/bug/?i=1669">configure: fix the check for IdnToUnicode</a>
+ <li> <a href="https://curl.se/mail/lib-2017-07/0033.html">multi: fix request timer management</a>
+ <li> <a href="https://curl.se/bug/?i=1717">curl_threads: fix MSVC compiler warning</a>
+ <li> travis: build on osx with openssl
+ <li> travis: build on osx with libressl
+ <li> CURLOPT_NETRC.3: mention the filename on windows
+ <li> <a href="https://curl.se/bug/?i=1711">cmake: set MSVC warning level to 4</a>
+ <li> <a href="https://curl.se/mail/lib-2017-08/0008.html">netrc: skip lines starting with &#39;#&#39;</a>
+ <li> darwinssl: fix curlssl_sha256sum() compiler warnings on first argument
+ <li> BUILD.WINDOWS: mention buildconf.bat for builds off git
+ <li> <a href="https://curl.se/bug/?i=1722">darwinssl: silence compiler warnings</a>
+ <li> travis: build on osx with darwinssl
+ <li> <a href="https://curl.se/bug/?i=1718">FTP: skip unnecessary CWD when in nocwd mode</a>
+ <li> <a href="https://curl.se/bug/?i=1733">gssapi: fix memory leak of output token in multi round context</a>
+ <li> <a href="https://curl.se/bug/?i=1728">getparameter: avoid returning uninitialized &#39;usedarg&#39;</a>
+ <li> curl (debug build) easy_events: make event data static
+ <li> <a href="https://curl.se/bug/?i=1730">curl: detect and bail out early on parameter integer overflows</a>
+ <li> <a href="https://curl.se/bug/?i=1738">configure: fix recv/send/select detection on Android</a>
+</ul>
+<h2> Further </h2>
+The previous release was 7.54.1.
+The next release was 7.55.1.

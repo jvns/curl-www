@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head> <title>CURLOPT_COOKIELIST</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/manpage.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/c/libcurl.html" class="menuitem" title="Overview">API Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/libcurl-easy.html">API: easy</a>
+    <a href="/libcurl/c/libcurl-multi.html">API: multi</a>
+    <a href="/libcurl/c/libcurl-share.html">API: share</a>
+    <a href="/libcurl/c/libcurl-url.html">API: URL</a>
+    <a href="/libcurl/c/libcurl-ws.html">API: WebSocket</a>
+    <a href="/libcurl/c/libcurl-env.html">Environment vars</a>
+    <a href="/libcurl/c/libcurl-errors.html">Errors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <hr>
+    <a href="/libcurl/c/easy_setopt_options.html">easy setopt options</a>
+    <a href="/libcurl/c/easy_getinfo_options.html">easy getinfo options</a>
+    <a href="/libcurl/c/multi_setopt_options.html">multi setopt options</a>
+    <a href="/libcurl/c/tls-options.html">TLS options</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/c/">Functions</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/curl_easy_getinfo.html">curl_easy_getinfo</a>
+    <a href="/libcurl/c/curl_easy_init.html">curl_easy_init</a>
+    <a href="/libcurl/c/curl_easy_perform.html">curl_easy_perform</a>
+    <a href="/libcurl/c/curl_easy_reset.html">curl_easy_reset</a>
+    <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a>
+    <a href="/libcurl/c/curl_multi_add_handle.html">curl_multi_add_handle</a>
+    <a href="/libcurl/c/curl_multi_init.html">curl_multi_init</a>
+    <a href="/libcurl/c/curl_multi_perform.html">curl_multi_perform</a>
+    <a href="/libcurl/c/curl_multi_remove_handle.html">curl_multi_remove_handle</a>
+    <a href="/libcurl/c/curl_multi_setopt.html">curl_multi_setopt</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <a href="/libcurl/c/">API</a> / <a href="/libcurl/c/curl_easy_setopt.html">curl_easy_setopt</a> / <b>CURLOPT_COOKIELIST</b></div>
+<h1> CURLOPT_COOKIELIST explained </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="easy_setopt_options.html">easy options</a>
+<br><a href="easy_getinfo_options.html">getinfo options</a>
+<br><a href="multi_setopt_options.html">multi options</a>
+<br><a href="https://github.com/curl/curl/issues/new?title=CURLOPT_COOKIELIST%20manpage&amp;labels=documentation&amp;template=docs.yml&amp;source=libcurl/c/CURLOPT_COOKIELIST.html" target="_new">File a bug about this page</a>
+<br><a href="https://github.com/curl/curl/blob/master/docs/libcurl/opts/CURLOPT_COOKIELIST.md" target="_new">View manpage source</a>
+</div>
+<!-- generated with roffit -->
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">CURLOPT_COOKIELIST - add to or manipulate cookies held in memory </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2><pre class="level0">
+&#35;include &lt;curl/curl.h&gt;
+&nbsp;
+CURLcode <a href="curl_easy_setopt.html">curl_easy_setopt</a>(CURL &#x2a;handle, <a href="CURLOPT_COOKIELIST.html">CURLOPT_COOKIELIST</a>,
+&nbsp;                         char &#x2a;cookie);
+</pre>
+<a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0">Pass a char pointer to a <span Class="emphasis">cookie</span> string. </p>
+<p class="level0">Such a cookie can be either a single line in Netscape / Mozilla format or just regular HTTP-style header (<span Class="emphasis">Set-Cookie:</span>) format. This option also enables the cookie engine. This adds that single cookie to the internal cookie store. </p>
+<p class="level0">We strongly advice against loading cookies from an HTTP header file, as that is an inferior data exchange format. </p>
+<p class="level0">Exercise caution if you are using this option and multiple transfers may occur. If you use the <span Class="emphasis">Set-Cookie</span> format and the string does not specify a domain, then the cookie is sent for any domain (even after redirects are followed) and cannot be modified by a server-set cookie. If a server sets a cookie of the same name (or maybe you have imported one) then both are sent on future transfers to that server, likely not what you intended. To address these issues set a domain in <span Class="emphasis">Set-Cookie</span> (doing that includes subdomains) or much better: use the Netscape file format. </p>
+<p class="level0">Additionally, there are commands available that perform actions if you pass in these exact strings: </p>
+<p class="level0"><a name="ALL"></a><span class="nroffip">ALL</span> </p>
+<p class="level1">erases all cookies held in memory </p>
+<p class="level0"><a name="SESS"></a><span class="nroffip">SESS</span> </p>
+<p class="level1">erases all session cookies held in memory </p>
+<p class="level0"><a name="FLUSH"></a><span class="nroffip">FLUSH</span> </p>
+<p class="level1">writes all known cookies to the file specified by <a Class="emphasis" href="./CURLOPT_COOKIEJAR.html">CURLOPT_COOKIEJAR</a> </p>
+<p class="level0"><a name="RELOAD"></a><span class="nroffip">RELOAD</span> </p>
+<p class="level1">loads all cookies from the files specified by <a Class="emphasis" href="./CURLOPT_COOKIEFILE.html">CURLOPT_COOKIEFILE</a> </p><a name="DEFAULT"></a><h2 class="nroffsh">Default</h2>
+<p class="level0">NULL </p><a name="PROTOCOLS"></a><h2 class="nroffsh">Protocols</h2>
+<p class="level0">This functionality affects http only </p><a name="EXAMPLE"></a><h2 class="nroffsh">Example</h2><pre class="level0">
+/&#x2a; an inline import of a cookie in Netscape format. &#x2a;/
+&nbsp;
+&#35;define SEP  &quot;&bsol;t&quot;  /&#x2a; Tab separates the fields &#x2a;/
+&nbsp;
+int main(void)
+{
+&nbsp; const char &#x2a;my_cookie =
+&nbsp;   &quot;example.com&quot;    /&#x2a; Hostname &#x2a;/
+&nbsp;   SEP &quot;FALSE&quot;      /&#x2a; Include subdomains &#x2a;/
+&nbsp;   SEP &quot;/&quot;          /&#x2a; Path &#x2a;/
+&nbsp;   SEP &quot;FALSE&quot;      /&#x2a; Secure &#x2a;/
+&nbsp;   SEP &quot;0&quot;          /&#x2a; Expiry in epoch time format. 0 == Session &#x2a;/
+&nbsp;   SEP &quot;foo&quot;        /&#x2a; Name &#x2a;/
+&nbsp;   SEP &quot;bar&quot;;       /&#x2a; Value &#x2a;/
+&nbsp;
+&nbsp; CURL &#x2a;curl = <a href="curl_easy_init.html">curl_easy_init</a>();
+&nbsp; if(curl) {
+&nbsp;   /&#x2a; my_cookie is imported immediately via <a href="CURLOPT_COOKIELIST.html">CURLOPT_COOKIELIST</a>. &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_COOKIELIST.html">CURLOPT_COOKIELIST</a>, my_cookie);
+&nbsp;
+&nbsp;   /&#x2a; The list of cookies in cookies.txt are not be imported until right
+&nbsp;      before a transfer is performed. Cookies in the list that have the same
+&nbsp;      hostname, path and name as in my_cookie are skipped. That is because
+&nbsp;      libcurl has already imported my_cookie and it&#39;s considered a &quot;live&quot;
+&nbsp;      cookie. A live cookie is not replaced by one read from a file.
+&nbsp;   &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_COOKIEFILE.html">CURLOPT_COOKIEFILE</a>, &quot;cookies.txt&quot;);  /&#x2a; import &#x2a;/
+&nbsp;
+&nbsp;   /&#x2a; Cookies are exported after curl_easy_cleanup is called. The server
+&nbsp;      may have added, deleted or modified cookies by then. The cookies that
+&nbsp;      were skipped on import are not exported.
+&nbsp;   &#x2a;/
+&nbsp;   <a href="curl_easy_setopt.html">curl_easy_setopt</a>(curl, <a href="CURLOPT_COOKIEJAR.html">CURLOPT_COOKIEJAR</a>, &quot;cookies.txt&quot;);  /&#x2a; export &#x2a;/
+&nbsp;
+&nbsp;   <a href="curl_easy_perform.html">curl_easy_perform</a>(curl);  /&#x2a; cookies imported from cookies.txt &#x2a;/
+&nbsp;
+&nbsp;   <a href="curl_easy_cleanup.html">curl_easy_cleanup</a>(curl);  /&#x2a; cookies exported to cookies.txt &#x2a;/
+&nbsp; }
+}
+</pre>
+<a name="Cookie"></a><h2 class="nroffsh">Cookie file format</h2>
+<p class="level0">The cookie file format and general cookie concepts in curl are described online here: <a href="https://curl.se/docs/http-cookies.html">https://curl.se/docs/http-cookies.html</a> </p><a name="HISTORY"></a><h2 class="nroffsh">History</h2>
+<p class="level0"><a class="bold" href="#ALL">ALL</a> was added in <a href="/ch/7.14.1.html">7.14.1</a> </p>
+<p class="level0"><a class="bold" href="#SESS">SESS</a> was added in <a href="/ch/7.15.4.html">7.15.4</a> </p>
+<p class="level0"><a class="bold" href="#FLUSH">FLUSH</a> was added in <a href="/ch/7.17.1.html">7.17.1</a> </p>
+<p class="level0"><a class="bold" href="#RELOAD">RELOAD</a> was added in <a href="/ch/7.39.0.html">7.39.0</a> </p><a name="AVAILABILITY"></a><h2 class="nroffsh">Availability</h2>
+<p class="level0">Added in curl <a href="/ch/7.14.1.html">7.14.1</a> </p><a name="RETURN"></a><h2 class="nroffsh">Return value</h2>
+<p class="level0"><a Class="emphasis" href="./curl_easy_setopt.html">curl_easy_setopt</a> returns a CURLcode indicating success or error. </p>
+<p class="level0"><a href="libcurl-errors.html#CURLEOK">CURLE_OK</a> (0) means everything was OK, non-zero means an error occurred, see <a Class="emphasis" href="./libcurl-errors.html">libcurl-errors</a>. </p><a name="SEE"></a><h2 class="nroffsh">See also</h2>
+<p class="level0"><a Class="bold" href="./CURLINFO_COOKIELIST.html">CURLINFO_COOKIELIST</a>(3), <a Class="bold" href="./CURLOPT_COOKIE.html">CURLOPT_COOKIE</a>(3), <a Class="bold" href="./CURLOPT_COOKIEFILE.html">CURLOPT_COOKIEFILE</a>(3), <a Class="bold" href="./CURLOPT_COOKIEJAR.html">CURLOPT_COOKIEJAR</a>(3) </p><p class="roffit">
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+</div>
+</div>
+</body>
+</html>

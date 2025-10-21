@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head> <title>curl - CVEs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style type="text/css">
+.contents {
+  max-width: 70%;
+  overflow: auto;
+}
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/docs/" class="menuitem" title="Documentation Overview">Docs Overview</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/projdocs.html">Project</a>
+  <div class="dropdown-content">
+    <a href="/docs/bugbounty.html">Bug Bounty</a>
+    <a href="/docs/bugs.html">Bug Report</a>
+    <a href="/docs/code-of-conduct.html">Code of conduct</a>
+    <a href="/docs/libs.html">Dependencies</a>
+    <a href="/donation.html">Donate</a>
+    <a href="/docs/faq.html">FAQ</a>
+    <a href="/docs/features.html">Features</a>
+    <a href="/docs/governance.html">Governance</a>
+    <a href="/docs/history.html">History</a>
+    <a href="/docs/install.html">Install</a>
+    <a href="/docs/knownbugs.html">Known Bugs</a>
+    <a href="/logo/">Logo</a>
+    <a href="/docs/todo.html">TODO</a>
+    <a href="/about.html">website Info</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/protdocs.html">Protocols</a>
+  <div class="dropdown-content">
+    <a href="/docs/caextract.html">CA Extract</a>
+    <a href="/docs/http-cookies.html">HTTP cookies</a>
+    <a href="/docs/http3.html">HTTP/3</a>
+    <a href="/docs/mqtt.html">MQTT</a>
+    <a href="/docs/sslcerts.html">SSL certs</a>
+    <a href="/docs/ssl-compared.html">SSL libs compared</a>
+    <a href="/docs/url-syntax.html">URL syntax</a>
+    <a href="/docs/websocket.html">WebSocket</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/reldocs.html">Releases</a>
+  <div class="dropdown-content">
+    <a href="/ch/">Changelog</a>
+    <a href="/docs/security.html">curl CVEs</a>
+    <a href="/docs/releases.html">Release Table</a>
+    <a href="/docs/versions.html">Version Numbering</a>
+    <a href="/docs/vulnerabilities.html">Vulnerabilities</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/tooldocs.html">Tool</a>
+  <div class="dropdown-content">
+    <a href="/docs/comparison-table.html">Comparison Table</a>
+    <a href="/docs/manpage.html">curl man page</a>
+    <a href="/docs/httpscripting.html">HTTP Scripting</a>
+    <a href="/docs/mk-ca-bundle.html">mk-ca-bundle</a>
+    <a href="/docs/tutorial.html">Tutorial</a>
+    <a href="/docs/cheat-sheet.html">Cheat Sheet</a>
+    <a href="optionswhen.html">When options were added</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/whodocs.html">Who and Why</a>
+  <div class="dropdown-content">
+    <a href="/docs/companies.html">Companies</a>
+    <a href="/docs/copyright.html">Copyright</a>
+    <a href="/sponsors.html">Sponsors</a>
+    <a href="/docs/thanks.html">Thanks</a>
+    <a href="/docs/thename.html">The name</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>curl CVEs</b></div>
+<h1> curl CVEs </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="audits.html">Audits</a>
+<br><a href="/docs/bugbounty.html">Bug Bounty</a>
+<br><a href="/ch/">Changelog</a>
+<br><a href="security.html">curl CVEs</a>
+<br><a href="/dev/vuln-disclosure.html">Vulnerability Disclosure</a>
+<br><a href="vulnerabilities.html">Vulnerabilities Table</a>
+</div>
+<p>
+ If you find or simply suspect a security problem in curl or libcurl, please
+ file a detailed report on our <a href="https://hackerone.com/curl">hackerone
+ page</a> and tell.
+<p>
+ See also the <a href="vulnerabilities.html">Vulnerabilities Table</a> to see
+ what versions that are vulnerable to what flaws.
+<h2> Published vulnerabilities </h2>
+<a href="security.html">All</a> |
+<a href="security-m.html">Medium+</a> |
+<a href="security-h.html">High+</a> |
+<a href="security-c.html">Critical</a>
+<p>
+(The table below has been filtered to show High+ severity)
+<table>
+<tr class="tabletop">
+<th title="Vulnerability number">#</th>
+<th title="Severity: L=Low, M=Medium, H=High, C=Critical">S</th>
+<th title="Where: Tool-only, Lib-only, default means both">W</th>
+<th title="C mistake or not">C</th>
+<th>Vulnerability</th>
+<th title="Date publicly disclosed">Published</th>
+<th title="First curl version affected">First</th>
+<th title="Last curl version affected">Last</th>
+<th title="Bug-bounty award">Awarded</th>
+</tr>
+<tr>
+<td>147</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2023-38545.html">CVE-2023-38545: SOCKS5 heap buffer overflow</a></td>
+<td>2023-10-11</td>
+<td><a href="vuln-7.69.0.html">7.69.0</a></td>
+<td><a href="vuln-8.3.0.html">8.3.0</a></td>
+<td>4660 USD</td>
+</tr>
+<tr>
+<td>103</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: USE_AFTER_FREE"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2021-22901.html">CVE-2021-22901: TLS session caching disaster</a></td>
+<td>2021-05-26</td>
+<td><a href="vuln-7.75.0.html">7.75.0</a></td>
+<td><a href="vuln-7.76.1.html">7.76.1</a></td>
+<td>2000 USD</td>
+</tr>
+<tr>
+<td>90</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2019-5443.html">CVE-2019-5443: Windows OpenSSL engine code injection</a></td>
+<td>2019-06-24</td>
+<td><a href="vuln-7.44.0.html">7.44.0</a></td>
+<td><a href="vuln-7.65.1.html">7.65.1</a></td>
+<td>200 USD</td>
+</tr>
+<tr>
+<td>86</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2019-3822.html">CVE-2019-3822: NTLMv2 type-3 header stack buffer overflow</a></td>
+<td>2019-02-06</td>
+<td><a href="vuln-7.36.0.html">7.36.0</a></td>
+<td><a href="vuln-7.63.0.html">7.63.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>81</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2018-14618.html">CVE-2018-14618: NTLM password overflow via integer overflow</a></td>
+<td>2018-09-05</td>
+<td><a href="vuln-7.15.4.html">7.15.4</a></td>
+<td><a href="vuln-7.61.0.html">7.61.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>80</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2018-0500.html">CVE-2018-0500: SMTP send heap buffer overflow</a></td>
+<td>2018-07-11</td>
+<td><a href="vuln-7.54.1.html">7.54.1</a></td>
+<td><a href="vuln-7.60.0.html">7.60.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>79</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2018-1000300.html">CVE-2018-1000300: FTP shutdown response buffer overflow</a></td>
+<td>2018-05-16</td>
+<td><a href="vuln-7.54.1.html">7.54.1</a></td>
+<td><a href="vuln-7.59.0.html">7.59.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>75</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2018-1000120.html">CVE-2018-1000120: FTP path trickery leads to NIL byte out of bounds write</a></td>
+<td>2018-03-14</td>
+<td><a href="vuln-7.12.3.html">7.12.3</a></td>
+<td><a href="vuln-7.58.0.html">7.58.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>72</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERREAD"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2017-8818.html">CVE-2017-8818: SSL out of buffer access</a></td>
+<td>2017-11-29</td>
+<td><a href="vuln-7.56.0.html">7.56.0</a></td>
+<td><a href="vuln-7.56.1.html">7.56.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>66</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERREAD"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2017-1000100.html">CVE-2017-1000100: TFTP sends more than buffer size</a></td>
+<td>2017-08-09</td>
+<td><a href="vuln-7.15.0.html">7.15.0</a></td>
+<td><a href="vuln-7.54.1.html">7.54.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>64</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2017-9502.html">CVE-2017-9502: URL file scheme drive letter buffer overflow</a></td>
+<td>2017-06-14</td>
+<td><a href="vuln-7.53.0.html">7.53.0</a></td>
+<td><a href="vuln-7.54.0.html">7.54.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>63</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2017-7468.html">CVE-2017-7468: TLS session resumption client cert bypass (again)</a></td>
+<td>2017-04-19</td>
+<td><a href="vuln-7.52.0.html">7.52.0</a></td>
+<td><a href="vuln-7.53.1.html">7.53.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>60</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2016-9594.html">CVE-2016-9594: uninitialized random</a></td>
+<td>2016-12-23</td>
+<td><a href="vuln-7.52.0.html">7.52.0</a></td>
+<td><a href="vuln-7.52.0.html">7.52.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>56</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2016-8615.html">CVE-2016-8615: cookie injection for other servers</a></td>
+<td>2016-11-02</td>
+<td><a href="vuln-4.9.html">4.9</a></td>
+<td><a href="vuln-7.50.3.html">7.50.3</a></td>
+<td></td>
+</tr>
+<tr>
+<td>52</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: DOUBLE_FREE"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2016-8619.html">CVE-2016-8619: double free in krb5 code</a></td>
+<td>2016-11-02</td>
+<td><a href="vuln-7.3.html">7.3</a></td>
+<td><a href="vuln-7.50.3.html">7.50.3</a></td>
+<td></td>
+</tr>
+<tr>
+<td>48</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td title="libcurl only">lib</td>
+<td title="C mistake: USE_AFTER_FREE"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2016-8623.html">CVE-2016-8623: Use after free via shared cookies</a></td>
+<td>2016-11-02</td>
+<td><a href="vuln-7.10.7.html">7.10.7</a></td>
+<td><a href="vuln-7.50.3.html">7.50.3</a></td>
+<td></td>
+</tr>
+<tr>
+<td>46</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2016-8625.html">CVE-2016-8625: IDNA 2003 makes curl use wrong host</a></td>
+<td>2016-11-02</td>
+<td><a href="vuln-7.12.0.html">7.12.0</a></td>
+<td><a href="vuln-7.50.3.html">7.50.3</a></td>
+<td></td>
+</tr>
+<tr>
+<td>44</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2016-7141.html">CVE-2016-7141: Incorrect reuse of client certificates</a></td>
+<td>2016-09-07</td>
+<td><a href="vuln-7.19.6.html">7.19.6</a></td>
+<td><a href="vuln-7.50.1.html">7.50.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>43</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2016-5419.html">CVE-2016-5419: TLS session resumption client cert bypass</a></td>
+<td>2016-08-03</td>
+<td><a href="vuln-5.0.html">5.0</a></td>
+<td><a href="vuln-7.50.0.html">7.50.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>41</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td title="libcurl only">lib</td>
+<td title="C mistake: USE_AFTER_FREE"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2016-5421.html">CVE-2016-5421: use of connection struct after free</a></td>
+<td>2016-08-03</td>
+<td><a href="vuln-7.32.0.html">7.32.0</a></td>
+<td><a href="vuln-7.50.0.html">7.50.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>40</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2016-4802.html">CVE-2016-4802: Windows DLL hijacking</a></td>
+<td>2016-05-30</td>
+<td><a href="vuln-7.11.1.html">7.11.1</a></td>
+<td><a href="vuln-7.49.0.html">7.49.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>39</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2016-3739.html">CVE-2016-3739: TLS certificate check bypass with mbedTLS/PolarSSL</a></td>
+<td>2016-05-18</td>
+<td><a href="vuln-7.21.0.html">7.21.0</a></td>
+<td><a href="vuln-7.48.0.html">7.48.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>38</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td title="curl tool only">tool</td>
+<td></td>
+<td><a href="CVE-2016-0754.html">CVE-2016-0754: remote filename path traversal in curl tool for Windows</a></td>
+<td>2016-01-27</td>
+<td><a href="vuln-4.0.html">4.0</a></td>
+<td><a href="vuln-7.46.0.html">7.46.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>36</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERREAD"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2015-3237.html">CVE-2015-3237: SMB send off unrelated memory contents</a></td>
+<td>2015-06-17</td>
+<td><a href="vuln-7.40.0.html">7.40.0</a></td>
+<td><a href="vuln-7.42.1.html">7.42.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>35</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2015-3236.html">CVE-2015-3236: lingering HTTP credentials in connection re-use</a></td>
+<td>2015-06-17</td>
+<td><a href="vuln-7.40.0.html">7.40.0</a></td>
+<td><a href="vuln-7.42.1.html">7.42.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>34</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2015-3153.html">CVE-2015-3153: sensitive HTTP server headers also sent to proxies</a></td>
+<td>2015-04-29</td>
+<td><a href="vuln-4.0.html">4.0</a></td>
+<td><a href="vuln-7.42.0.html">7.42.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>28</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2014-8150.html">CVE-2014-8150: URL request injection</a></td>
+<td>2015-01-08</td>
+<td><a href="vuln-6.0.html">6.0</a></td>
+<td><a href="vuln-7.39.0.html">7.39.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2014-3620.html">CVE-2014-3620: cookie leak for TLDs</a></td>
+<td>2014-09-10</td>
+<td><a href="vuln-7.31.0.html">7.31.0</a></td>
+<td><a href="vuln-7.37.1.html">7.37.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td title="libcurl only">lib</td>
+<td title="C mistake: OVERREAD"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2013-2174.html">CVE-2013-2174: URL decode buffer boundary flaw</a></td>
+<td>2013-06-22</td>
+<td><a href="vuln-7.7.html">7.7</a></td>
+<td><a href="vuln-7.30.0.html">7.30.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2013-1944.html">CVE-2013-1944: cookie domain tailmatch</a></td>
+<td>2013-04-12</td>
+<td><a href="vuln-4.7.html">4.7</a></td>
+<td><a href="vuln-7.29.0.html">7.29.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td title="Severity Critical"><div style="color: black; border-radius: 8px; border: 2px black solid; text-align: center;">C</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2013-0249.html">CVE-2013-0249: SASL buffer overflow</a></td>
+<td>2013-02-06</td>
+<td><a href="vuln-7.26.0.html">7.26.0</a></td>
+<td><a href="vuln-7.28.1.html">7.28.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2011-3389.html">CVE-2011-3389: SSL CBC IV vulnerability</a></td>
+<td>2012-01-24</td>
+<td><a href="vuln-7.10.6.html">7.10.6</a></td>
+<td><a href="vuln-7.23.1.html">7.23.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2012-0036.html">CVE-2012-0036: URL sanitization vulnerability</a></td>
+<td>2012-01-24</td>
+<td><a href="vuln-7.20.0.html">7.20.0</a></td>
+<td><a href="vuln-7.23.1.html">7.23.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td title="curl tool only">tool</td>
+<td></td>
+<td><a href="CVE-2010-3842.html">CVE-2010-3842: local file overwrite</a></td>
+<td>2010-10-13</td>
+<td><a href="vuln-7.20.0.html">7.20.0</a></td>
+<td><a href="vuln-7.21.1.html">7.21.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td title="libcurl only">lib</td>
+<td></td>
+<td><a href="CVE-2010-0734.html">CVE-2010-0734: data callback excessive length</a></td>
+<td>2010-02-09</td>
+<td><a href="vuln-7.10.5.html">7.10.5</a></td>
+<td><a href="vuln-7.19.7.html">7.19.7</a></td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: NULL_MISTAKE"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2009-2417.html">CVE-2009-2417: embedded zero in cert name</a></td>
+<td>2009-08-12</td>
+<td><a href="vuln-7.4.html">7.4</a></td>
+<td><a href="vuln-7.19.5.html">7.19.5</a></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2006-1061.html">CVE-2006-1061: TFTP Packet Buffer Overflow</a></td>
+<td>2006-03-20</td>
+<td><a href="vuln-7.15.0.html">7.15.0</a></td>
+<td><a href="vuln-7.15.2.html">7.15.2</a></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2005-4077.html">CVE-2005-4077: URL Buffer Overflow</a></td>
+<td>2005-12-07</td>
+<td><a href="vuln-7.11.2.html">7.11.2</a></td>
+<td><a href="vuln-7.15.0.html">7.15.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2005-3185.html">CVE-2005-3185: NTLM Buffer Overflow</a></td>
+<td>2005-10-13</td>
+<td><a href="vuln-7.10.6.html">7.10.6</a></td>
+<td><a href="vuln-7.14.1.html">7.14.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2005-0490.html">CVE-2005-0490: Authentication Buffer Overflows</a></td>
+<td>2005-02-21</td>
+<td><a href="vuln-7.3.html">7.3</a></td>
+<td><a href="vuln-7.13.0.html">7.13.0</a></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td title="Severity High"><div style="color: red; border-radius: 8px; border: 2px red solid; text-align: center;">H</div></td>
+<td></td>
+<td></td>
+<td><a href="CVE-2003-1605.html">CVE-2003-1605: Proxy Authentication Header Information Leakage</a></td>
+<td>2003-08-03</td>
+<td><a href="vuln-4.5.html">4.5</a></td>
+<td><a href="vuln-7.10.6.html">7.10.6</a></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td title="Severity Critical"><div style="color: black; border-radius: 8px; border: 2px black solid; text-align: center;">C</div></td>
+<td></td>
+<td title="C mistake: OVERFLOW"><div style="color: ; border-radius: 12px; border: 2px black dotted; text-align: center;">C</div></td>
+<td><a href="CVE-2000-0973.html">CVE-2000-0973: FTP Server Response Buffer Overflow</a></td>
+<td>2000-10-13</td>
+<td><a href="vuln-6.0.html">6.0</a></td>
+<td><a href="vuln-7.4.html">7.4</a></td>
+<td></td>
+</tr>
+</table>
+<h2> C mistakes </h2>
+<p>
+ Flaws listed as "C mistakes" are vulnerabilities that we deem
+ are <i>likely</i> to not have happened should we have used a memory-safe
+ language rather than C. The C mistakes are divided into the following areas:
+ OVERFLOW, OVERREAD, DOUBLE_FREE, USE_AFTER_FREE, NULL_MISTAKE, UNINIT and
+ BAD_FREE.
+<h2> Retracted security vulnerabilities </h2>
+<p>
+  Issues no longer considered curl security problems:
+<ul>
+<li> <a href="CVE-2019-15601.html">CVE-2019-15601</a> - SMB access smuggling via FILE URL on Windows
+<li> <a href="CVE-2023-32001.html">CVE-2023-32001</a> - fopen race condition
+</ul>
+<h2> Bogus security vulnerabilities </h2>
+<p>
+  Issues filed by others that are plain lies:
+<ul>
+<li> <a href="CVE-2020-19909.html">CVE-2020-19909</a>
+<li> <a href="CVE-2023-52071.html">CVE-2023-52071</a>
+</ul>
+<h2> curl vulnerability data </h2>
+<p>
+ <a href="vuln.csv">vuln.csv</a> and <a href="vuln.json">vuln.json</a> provide
+ info about all vulnerabilities in machine friendly formats.
+<p>
+ Each vulnerability is also provided as a single JSON that you can access at
+ "https://curl.se/docs/$CVE.json" - replace $CVE with the actual curl CVE Id.
+<p>
+ The JSON output follows the <a href="https://ossf.github.io/osv-schema/">Open
+ Source Vulnerability format</a>
+</div>
+</div>
+</body> </html>

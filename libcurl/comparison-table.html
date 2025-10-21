@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head> <title>libcurl - Comparison Table</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<link rel="stylesheet" type="text/css" href="/docs/comparison.css">
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<a href="/libcurl/" class="menuitem" title="Front page of the libcurl section">libcurl</a>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">Docs</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/abi.html">ABI</a>
+    <a href="/libcurl/c/allfuncs.html">All functions</a>
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/bindings.html">Bindings</a>
+    <a href="/libcurl/competitors.html">Competitors</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/relatedlibs.html">Related libs</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/security.html">Security</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+    <a href="/libcurl/theysay.html">Testimonials</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/libcurl/">libcurl</a> / <b>libcurl Alternatives Comparison</b></div>
+<h1> Transfer Library Comparison Chart </h1>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="competitors.html">libcurl alternatives</a>
+<br><a href="relatedlibs.html">Related Libs</a>
+<br><a href="../docs/comparison-table.html">FTP+HTTP Tools comparison</a>
+</div>
+<p>
+ This comparison table is meant to show how libcurl compares with other
+ available FTP/HTTP libraries.
+<p>
+ There are likely to be errors in this, since the comparison involves many
+ libraries and many compared features. Please mail curl-web with updates if
+ you notice any flaws!
+<p>
+<table cellspacing="2" cellpadding="2" border="0">
+ <tr class="tabletop">
+  <th> Feature </th>
+  <th> <a href="#1">1</a> </th>
+  <th> <a href="#2">2</a> </th>
+  <th> <a href="#3">3</a> </th>
+  <th> <a href="#4">4</a> </th>
+  <th> <a href="#5">5</a> </th>
+  <th> <a href="#6">6</a> </th>
+  <th> <a href="#7">7</a> </th>
+  <th> <a href="#8">8</a> </th>
+  <th> <a href="#9">9</a> </th>
+  <th> <a href="#10">10</a> </th>
+  <th> <a href="#11">11</a> </th>
+  <th> <a href="#12">12</a> </th>
+  <th> <a href="#13">13</a> </th>
+  <th> <a href="#14">14</a> </th>
+  <th> <a href="#15">15</a> </th>
+  <th> <a href="#16">16</a> </th>
+ </tr>
+ <tr valign=top>
+  <td> HTTP </td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP Digest </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP NTLM </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP Negotiate </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP SPNEGO </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP POST </td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP multipart POST </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP 1.1 </td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP chunked encoding POSTs </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP Resume </td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP Ranges </td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP Follow Redirects </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP Proxy </td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP persistent connections </td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> Cookie Support </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTP deflate/gzip </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP Upload </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP SSL </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP Upload Resume </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP Download Resume </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP Ranges </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP Over HTTP Proxy </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP Kerberos </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> FTP Persistent Connections </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> IPv6 </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> SOCKS </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> .netrc support </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> Large File Support </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> Offers Non-blocking API </td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTTPS </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> SSL Client Certificates </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> SSL CA Certs </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="yes">yes</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> SSL Session-ID Caching </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> WebDav </td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> HTML Parser </td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> Very Portable <a href="#footnote1">[1]</a> </td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="yes">yes</td>
+  <td class="no">no</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+ <tr valign=top>
+  <td> License </td>
+  <td> MIT </td>
+  <td> LGPL </td>
+  <td> <a href="https://www.w3.org/Consortium/Legal/copyright-software.html">W3C</a> </td>
+  <td> GPL </td>
+  <td> LGPL </td>
+  <td> LGPL </td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+  <td class="unknown">?</td>
+ </tr>
+</table>
+<h2> The Compared Libraries </h2>
+<p>
+<ol>
+<a name="1"></a><li> <a href="//curl.se/libcurl/">libcurl</a> 7.11.1
+<a name="2"></a><li> <a href="https://ftp.gnome.org/pub/gnome/sources/libghttp/">libghttp</a> 1.0.9
+<a name="3"></a> <li> <a href="https://www.w3.org/Library/">libwww</a> 5.4.0
+<a name="4"></a> <li> <a href="https://web.archive.org/web/20050504155520/stu.westga.edu/~thendri2/projects/ferit.html">libferit</a> 0.0.8
+<a name="5"></a> <li> <a href="https://web.archive.org/web/20070925040920/www.webdav.org/neon/">neon</a> 0.24.4
+<a name="6"></a> <li> <a href="https://ftp.gnome.org/pub/GNOME/sources/libsoup/2.1/">libsoup</a> 2.1
+<a name="7"></a> <li> mozilla netlib
+<a name="8"></a> <li> mozilla libxpnet
+<a name="9"></a> <li> libhttpr
+<a name="10"></a> <li> libfetch
+<a name="11"></a> <li> libfxp
+<a name="12"></a> <li> HTTP Fetcher
+<a name="13"></a> <li> http-tiny
+<a name="14"></a> <li> XMLHTTP Object
+<a name="15"></a> <li> QHttp
+<a name="16"></a> <li> ftplib
+</ol>
+<h2> Footnotes </h2>
+<p>
+ <a name="footnote1"></a>
+ [1] = "Very Portable" means that it works at least on all major unix flavours
+ and Windows.
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <title>curl - Changes in 7.12.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="/curl.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/logo/curl-symbol.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="cURL Releases" href="https://github.com/curl/curl/releases.atom">
+<style>
+  .video:before {
+      content: "🎥 release video for";
+      padding: 5px 5px 5px 5px;
+  }
+  .video {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  .vulnbox:before {
+      content: "🐜 known vulnerabilities for";
+      padding: 5px 5px 5px 5px;
+  }
+  .vulnbox {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
+      width: fit-content;
+      float: left;
+  }
+  h1 {
+      margin-block-end: 0.3em;
+  }
+  h2 {
+      margin-block-end: 0.1em;
+  }
+  .thisver {
+      display: none;
+  }
+  .other {
+      background-color: #e0e0e0;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px 5px 5px 5px;
+      margin-right: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="main">
+<div class="menu">
+<div class="dropdown">
+  <a class="dropbtn" href="/download.html">Download</a>
+  <div class="dropdown-content">
+    <a href="https://github.com/curl/curl">Browse source</a>
+    <a href="/ch/">Changelog</a>
+    <a href="/rc/">Release candidates</a>
+    <a href="/docs/releases.html">Release log</a>
+    <a href="/tiny/">tiny-curl</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/docs/">Documentation</a>
+  <div class="dropdown-content">
+    <a href="/docs/projdocs.html">Project</a>
+      <small>
+      <a href="/docs/bugbounty.html">&nbsp; Bug Bounty</a>
+      <a href="/docs/faq.html">FAQ</a>
+      <a href="/docs/help-us.html">&nbsp; Help us</a>
+      <a href="/docs/knownbugs.html">&nbsp; Known bugs</a>
+      <a href="/docs/todo.html">&nbsp; TODO</a>
+      </small>
+    <a href="/docs/protdocs.html">Protocols</a>
+      <small>
+      <a href="/docs/caextract.html">&nbsp; CA bundle</a>
+      <a href="/docs/http-cookies.html">&nbsp; HTTP Cookies</a>
+      <a href="/docs/sslcerts.html">&nbsp; SSL Certs</a>
+      </small>
+    <a href="/docs/reldocs.html">Releases</a>
+      <small>
+      <a href="/docs/security.html">&nbsp; Security</a>
+      <a href="/docs/versions.html">&nbsp; Version numbers</a>
+      <a href="/docs/vulnerabilities.html">&nbsp; Vulnerabilities</a>
+      </small>
+    <a href="/docs/tooldocs.html">curl tool</a>
+      <small>
+      <a href="/docs/manpage.html">&nbsp; man page</a>
+      <a href="/docs/tutorial.html">&nbsp; Tutorial</a>
+      <a href="/docs/httpscripting.html">&nbsp; HTTP scripting</a>
+      </small>
+    <a href="/trurl/">trurl</a>
+    <a href="/wcurl/">wcurl</a>
+    <a href="/docs/videos/">Videos</a>
+    <a href="/docs/whodocs.html">Who and Why</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/libcurl/">libcurl</a>
+  <div class="dropdown-content">
+    <a href="/libcurl/c/">API</a>
+    <a href="/libcurl/c/example.html">Examples</a>
+    <a href="/libcurl/features.html">Features</a>
+    <a href="/mail/list.cgi?list=curl-library">Mailing list</a>
+    <a href="/libcurl/c/symbols-in-versions.html">Symbols</a>
+    <a href="/libcurl/using/">Using libcurl</a>
+    <a href="/libcurl/c/libcurl-tutorial.html">Tutorial</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/gethelp.html">Get Help</a>
+  <div class="dropdown-content">
+    <a href="https://lists.haxx.se/listinfo/curl-library">curl-library</a>
+    <a href="https://lists.haxx.se/listinfo/curl-users">curl-users</a>
+    <a href="/docs/irc.html">IRC / chat</a>
+    <a href="/mail/">Mailing lists</a>
+    <a href="/book.html">Everything curl [book]</a>
+    <a href="/docs/videos/">Video presentations</a>
+    <a href="https://github.com/curl/curl/issues">Report a bug</a>
+    <a href="https://hackerone.com/curl">Report security issue</a>
+    <a href="/support.html">Paid support</a>
+  </div>
+</div>
+<div class="dropdown">
+  <a class="dropbtn" href="/dev/">Development</a>
+  <div class="dropdown-content">
+    <a href="/dev/builds.html">Autobuilds</a>
+    <a href="/dev/code-review.html">Code review</a>
+    <a href="/dev/code-style.html">Code style</a>
+    <a href="/dev/contribute.html">Contribute</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/dev/deprecate.html">Deprecate</a>
+    <a href="/dev/internals.html">Internals</a>
+    <a href="/dev/release-notes.html">Release Notes</a>
+    <a href="/dev/release-procedure.html">Release Procedure</a>
+    <a href="/dev/roadmap.html">Roadmap</a>
+    <a href="/dev/runtests.html">Run Tests</a>
+    <a href="/rfc/">Specifications</a>
+    <a href="/dev/testcurl.html">Test curl</a>
+    <a href="/dev/tests-overview.html">Tests Overview</a>
+    <a href="/dev/vuln-disclosure.html">Vulnerability Disclosure Policy</a>
+  </div>
+</div>
+</div>
+<div class="contents">
+<div class="where"><a href="/">curl</a> / <a href="/docs/">Docs</a> / <a href="/docs/reldocs.html">Releases</a> / <b>Changes in 7.12.1</b></div>
+<p>
+<div class="relatedbox">
+<b>Related:</b>
+<br><a href="/snapshots/">Daily Snapshots</a>
+<br><a href="/source.html">Source repo</a>
+<br><a href="/docs/releases.html">Release log</a>
+<br><a href="/dev/release-notes.html">Pending Release</a>
+</div>
+<span class="other">
+<a href="7.12.0.html">🠰 7.12.0</a>
+</span>
+<span class="other">
+  <a href="/changes.html">all changes</a>
+</span>
+<span class="other">
+<a href="7.12.2.html">7.12.2 🠲</a>
+</span>
+<h1> Changes in 7.12.1 - August 10 2004 </h1>
+<div class="vulnbox"><a href=/docs/vuln-7.12.1.html>7.12.1</a></div> <div style="clear: both;">&nbsp;</div>
+<p>Changes:
+<ul class="changes">
+ <li> the version string now only contains info about (sub) package versions,
+   while for example krb4 and ipv6 now only are available as &#39;features&#39;
+ <li> added curl_easy_reset()
+ <li> socks proxy support even when libcurl is built ipv6-enabled
+ <li> read callbacks can stop the transfer by returning CURL_READFUNC_ABORT
+ <li> libcurl-tutorial.3 is the new manpage formerly known as libcurl-the-guide
+ <li> additional SSL trace data might be sent to the debug callback using two new
+   types: CURLINFO_SSL_DATA_IN and CURLINFO_SSL_DATA_OUT
+ <li> multipart formposts can upload files larger than system memory
+ <li> the curl tool continues with the next URL even if one transfer fails
+ <li> FTP 3rd party transfer support - seven new setopt() options
+</ul>
+<p> Bugfixes:
+<ul class="bugfixes">
+ <li> UTF-8 encoded certificate names can now be verified properly
+ <li> krb4 link problem
+ <li> HTTP Negotiate service name now provided in uppercase
+ <li> no longer accepts any cookies with domain set to just a TLD
+ <li> HTTP Digest properties without quotes in the header
+ <li> bad Host: header case on re-used connections over proxy
+ <li> duplicate Host: header case on re-used connections
+ <li> curl -o name#[num] now works when no globbing for [num] exists
+ <li> test suite runs fine with valgrind 2.1.x
+ <li> negative Content-Length is ignored
+ <li> test 505 runs fine on windows
+ <li> curl_share_cleanup() crash
+ <li> --trace files now get the final info lines too
+ <li> multi interface connects fine to multi-IP resolving hosts
+ <li> --limit-rate works on Mac OS X (and other systems with bad poll()s)
+ <li> cookies can now hold 4999 bytes of content
+ <li> HTTP POST/PUT with NTLM/Digest/Negotiate to a URL returning 3XX
+ <li> HTTPS POST/PUT over a proxy requiring NTLM/Digest/Negotiate
+ <li> less restrictive libidn requirements, 0.4.1 or later is fine
+ <li> HTTP POST or PUT with Digest/Negotiate/NTLM selected but the server
+   didn&#39;t require any authentication
+ <li> win32 file:// transfer free memory bug
+ <li> configure --disable-http builds a libcurl without HTTP support
+ <li> CURLOPT_FILETIME had wrong type in curl.h, it expects a long argument
+ <li> builds fine with Borland on Windows
+ <li> the msvc curllib.dsp now builds the libcurl.lib file
+ <li> builds fine on VMS
+ <li> builds fine on NetWare
+ <li> HTTP Digest authentication with proxies uses correct username + password
+ <li> builds fine with lcc-win32
+</ul>
+<p>
+<h2> Further </h2>
+The previous release was 7.12.0.
+The next release was 7.12.2.
