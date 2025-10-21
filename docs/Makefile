@@ -197,6 +197,7 @@ PAGES = \
  bugbounty.html \
  bugs.html \
  caextract.html \
+ cheat-sheet.html \
  code-of-conduct.html \
  companies.html \
  comparison-table.html \
@@ -315,6 +316,9 @@ bugs.html: _bugs.html $(MAINPARTS) bugs.gen
 bugs.gen: $(DOCROOT)/BUGS.md faqparse.pl
 	$(MARKDOWN) < $< > $@
 
+cheat-sheet.html: _cheat-sheet.html $(MAINPARTS)
+	$(ACTION)
+
 bugbounty.html: _bugbounty.html $(MAINPARTS) bugbounty.gen $(ADVBOX)
 	$(ACTION)
 bugbounty.gen: $(DOCROOT)/BUG-BOUNTY.md
@@ -362,7 +366,7 @@ faq.gen: $(DOCROOT)/FAQ faqparse.pl
 alt-svc.html: _alt-svc.html $(MAINPARTS) alt-svc.gen
 	$(ACTION)
 alt-svc.gen: $(DOCROOT)/ALTSVC.md
-	$(MARKDOWN) < $< >$@
+	$(MARKDOWN) < $< > $@
 
 hsts.html: _hsts.html $(MAINPARTS) hsts.gen
 	$(ACTION)

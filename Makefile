@@ -97,7 +97,7 @@ $(STAT): download.html Makefile
 	@echo "#define __CURR "`grep -c "^.tr.class=.latest" $<` >$(STAT)
 	@echo "#define __PACKS `grep -c \"^<tr c\" $<`" >>$(STAT)
 	mkdir -p .well-known
-	sed -e "s/%date/`date -d '9 months' -u +%Y-%m-%dT00:00:00Z/`" < security.txt.in > .well-known/security.txt
+	sed -e "s/%date/`date -v +9m -u +%Y-%m-%dT00:00:00Z`/" < security.txt.in > .well-known/security.txt
 
 download.html: _download.html $(MAINPARTS) $(RELEASE) dl/files.html
 	$(ACTION)
